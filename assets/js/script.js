@@ -200,19 +200,26 @@ const TOURS = {
   'scuba-diving': {
     id: 'scuba-diving',
     name: 'Scuba Diving Tours',
-    altPrefix: 'Mirissa Scuba Diving Tours',
+    altPrefix: 'Scuba Diving',
     location: 'Mirissa, Sri Lanka',
     shortDesc: 'Dive into Mirissa’s vibrant underwater world with pro instructors, a 1:2 ratio, and options for beginners or certified divers.',
     price: 75,
     duration: '2 Hours',
     timeSlots: '8:00 AM, 9:00 AM, 10:00 AM, 11:00 AM',
-    image: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?w=800&q=80',
-    heroImage: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?w=1600&q=80',
+    image: 'assets/images/scuba-diving/scuba_diving_two-divers.png',
+    imageAlt: 'Scuba Diving - Two divers exploring coral reefs in Mirissa',
+    heroImage: 'assets/images/scuba-diving/scuba_diving_diver-swimming.png',
     gallery: [
-      'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?w=600&q=80',
-      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80',
-      'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=600&q=80',
-      'https://images.unsplash.com/photo-1568430778127-9d0f010a2a1f?w=600&q=80'
+      'assets/images/scuba-diving/scuba_diving_diver-swimming.png',
+      'assets/images/scuba-diving/scuba_diving_two-divers.png',
+      'assets/images/scuba-diving/scuba_diving_diver-coral-reef.png',
+      'assets/images/scuba-diving/scuba_diving_starfish-reef.png'
+    ],
+    galleryAlt: [
+      'Scuba Diving - Diver swimming over coral reefs in Mirissa',
+      'Scuba Diving - Two divers with instructor in clear blue water',
+      'Scuba Diving - Diver exploring colorful coral reef marine life',
+      'Scuba Diving - Starfish and sea life on the coral reef'
     ],
     highlights: [
       'Dive into the vibrant underwater world of the Indian Ocean in Mirissa',
@@ -222,12 +229,16 @@ const TOURS = {
       'Relax with tasty snacks and a cup of authentic Ceylon tea after your dive'
     ],
     fullDesc: 'Embark on a scuba diving adventure in Mirissa, Sri Lanka. Choose from options for beginners or certified divers, and explore the vibrant underwater world of the Indian Ocean.\n\nFor beginners, no prior experience is needed. Receive step-by-step training from professional, certified local instructors, ensuring safety and comfort with a 1:2 instructor-to-guest ratio. Discover colorful coral reefs, tropical fish, and the beauty of the Indian Ocean.\n\nFor certified divers, dive into the underwater paradise of Mirissa on a fun dive. Explore stunning coral reefs, schools of tropical fish, and the vibrant marine life that makes Mirissa one of the best scuba diving spots in Sri Lanka. Dive in small groups with a professional local dive guide (1:2 ratio) for a safe and personalized experience.\n\nAfter your dive, relax with tasty snacks and a cup of authentic Ceylon tea. Enjoy the convenience of free pickup and drop-off within 3 km of Mirissa.',
+    packagesTitle: 'Dive Packages',
+    packagesDesc: 'Choose the package that fits your experience level. All dives include a 1:2 instructor-to-guest ratio.',
     packages: [
       {
         number: '01',
         title: 'Discover Scuba Diving',
         subtitle: 'For Beginners',
         price: 75,
+        image: 'assets/images/scuba-diving/scuba_diving_two-divers.png',
+        imageAlt: 'Scuba Diving - Discover scuba diving for beginners with instructor in Mirissa',
         desc: 'Learn the basics with a certified instructor and explore colorful coral reefs and tropical fish. No experience needed.',
         breakdown: [
           { label: 'Safety briefing & preparation', time: '15 min' },
@@ -240,6 +251,8 @@ const TOURS = {
         title: 'Fun Scuba Diving (One Tank)',
         subtitle: 'For Experienced Divers',
         price: 75,
+        image: 'assets/images/scuba-diving/scuba_diving_diver-swimming.png',
+        imageAlt: 'Scuba Diving - Fun dive one tank for experienced divers in Mirissa',
         desc: 'Dive the best local sites filled with colorful coral reefs and marine life.',
         breakdown: [
           { label: 'Safety briefing & preparation', time: '30 min' },
@@ -251,6 +264,8 @@ const TOURS = {
         title: 'Fun Scuba Diving (Two Tank)',
         subtitle: 'For Experienced Divers',
         price: 140,
+        image: 'assets/images/scuba-diving/scuba_diving_diver-coral-reef.png',
+        imageAlt: 'Scuba Diving - Two tank fun dive exploring coral reefs in Mirissa',
         desc: 'Two oxygen tanks included — more dive time with rest and lesson between tanks.',
         breakdown: [
           { label: 'Underwater diving (tank 1)', time: '45 min' },
@@ -264,6 +279,8 @@ const TOURS = {
         title: 'Fun Scuba Diving (Three Tank)',
         subtitle: 'For Experienced Divers',
         price: 200,
+        image: 'assets/images/scuba-diving/scuba_diving_starfish-reef.png',
+        imageAlt: 'Scuba Diving - Three tank fun dive at vibrant reef sites in Mirissa',
         desc: 'Three oxygen tanks included — explore the best local dive sites with colorful coral reefs and marine life.',
         breakdown: [
           { label: 'Underwater diving (tank 1)', time: '45 min' },
@@ -307,70 +324,219 @@ const TOURS = {
   'night-snorkeling': {
     id: 'night-snorkeling',
     name: 'Night Snorkeling',
-    shortDesc: 'Experience the magical bioluminescent reefs and nocturnal marine life under the stars.',
-    price: 75,
-    duration: '2.5 Hours',
-    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80',
-    heroImage: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1600&q=80',
+    altPrefix: 'Night Snorkeling',
+    location: 'Mirissa, Sri Lanka',
+    groupType: 'Private Group',
+    shortDesc: 'Guided day or night snorkeling in Mirissa — tropical fish, vibrant reefs, sea turtles, and an underwater flashlight experience.',
+    price: 40,
+    duration: '1.5 Hours',
+    image: 'assets/images/night-snorkeling/night_snorkeling_blue-spotted-rays.png',
+    imageAlt: 'Night Snorkeling - Blue-spotted rays on the reef in Mirissa',
+    heroImage: 'assets/images/night-snorkeling/night_snorkeling_nurse-shark.png',
     gallery: [
-      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80',
-      'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?w=600&q=80',
-      'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=600&q=80',
-      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80'
+      'assets/images/night-snorkeling/night_snorkeling_nurse-shark.png',
+      'assets/images/night-snorkeling/night_snorkeling_blue-spotted-rays.png',
+      'assets/images/night-snorkeling/night_snorkeling_octopus.png',
+      'assets/images/night-snorkeling/night_snorkeling_sea-turtle.png',
+      'assets/images/night-snorkeling/night_snorkeling_clownfish.png',
+      'assets/images/night-snorkeling/night_snorkeling_reef-fish-school.png',
+      'assets/images/night-snorkeling/night_snorkeling_tropical-fish.png'
     ],
-    fullDesc: 'When the sun sets, a whole new underwater world awakens. Our guided night snorkeling adventure reveals bioluminescent plankton, sleeping parrotfish, hunting octopus, and glowing coral formations. Includes underwater flashlights and warm post-dive beverages.',
+    galleryAlt: [
+      'Night Snorkeling - Nurse shark illuminated on the seabed at night',
+      'Night Snorkeling - Blue-spotted stingrays on sandy reef in Mirissa',
+      'Night Snorkeling - Octopus on the rocky seabed',
+      'Night Snorkeling - Sea turtle swimming in Mirissa waters',
+      'Night Snorkeling - Clownfish among coral reef anemones',
+      'Night Snorkeling - School of tropical fish over coral reef',
+      'Night Snorkeling - Colorful tropical fish near the surface'
+    ],
+    highlights: [
+      'Guided day or night snorkeling experience in Mirissa',
+      'Swim with colorful tropical fish and vibrant coral reef formations',
+      'High chance of spotting sea turtles, especially during daytime snorkeling',
+      'Free hotel pickup and drop-off in Mirissa (within 5 km)',
+      'Get all the necessary snorkeling gear and an underwater flashlight'
+    ],
+    fullDesc: 'Begin your experience with a free hotel pickup from Mirissa and travel comfortably to the snorkeling location. Meet your professional local guide and receive a clear safety briefing, followed by assistance in putting on high-quality snorkeling equipment.\n\nEnter the warm waters of the Indian Ocean and explore Mirissa’s vibrant coral reefs, home to colorful tropical fish such as parrotfish, angelfish, butterflyfish, and other reef species.\n\nExperience the magic of snorkeling after dark as marine life becomes more active. Using an underwater flashlight, illuminate coral formations and observe nocturnal sea creatures in their natural environment. There is an estimated 70% chance of spotting sea turtles, most commonly green turtles or hawksbill turtles, during night snorkeling sessions, depending on sea conditions.\n\nAll wildlife encounters are ethical and respectful. Sea turtles and marine life are never chased or disturbed, allowing natural behavior and better viewing opportunities while protecting the ecosystem.\n\nAfter the snorkeling session, enjoy optional Ceylon tea and light snacks to relax and warm up. A free drop-off back to your hotel in Mirissa (within 5 km) is included for a smooth and stress-free return.\n\nGoPro cameras are not included, but rental can be arranged upon request if you’d like to capture your underwater adventure.',
     itinerary: [
-      { time: '06:30 PM', title: 'Sunset Briefing', desc: 'Meet at beach, equipment check, safety overview.' },
-      { time: '07:00 PM', title: 'Enter the Water', desc: 'Guided night snorkel with underwater lights.' },
-      { time: '08:00 PM', title: 'Bioluminescence Zone', desc: 'Swim through glowing plankton fields.' },
-      { time: '08:30 PM', title: 'Beach Bonfire', desc: 'Warm drinks and stargazing on the beach.' },
-      { time: '09:00 PM', title: 'Tour Ends', desc: 'Return equipment and farewell.' }
+      { time: '', title: 'Hotel Pickup', desc: 'Free pickup from your hotel in Mirissa (within 5 km).' },
+      { time: '+10 min', title: 'Safety Briefing & Gear', desc: 'Meet your guide, receive a safety briefing, and get mask, snorkel, fins, and underwater flashlight.' },
+      { time: '+15 min', title: 'Snorkeling Session', desc: 'Explore coral reefs, tropical fish, and nocturnal marine life with your guide (day or night).' },
+      { time: '+1.5 hr', title: 'Refreshments', desc: 'Enjoy bottled water, tea, and snacks after the activity.' },
+      { time: 'End', title: 'Hotel Drop-off', desc: 'Free drop-off back to your hotel in Mirissa (within 5 km).' }
     ],
-    included: ['Snorkel gear', 'Underwater flashlight', 'Expert night guide', 'Warm beverages', 'Beach setup'],
-    excluded: ['Hotel transfer', 'Dinner', 'Wetsuit rental']
+    included: [
+      'Complimentary pickup and drop-off within the Mirissa area (5 km)',
+      'All necessary snorkeling gear (mask, snorkel, fins)',
+      'Professional guide with safety briefing',
+      'Underwater flashlight',
+      'Refreshments after the activity (bottled water, tea, and snacks)'
+    ],
+    excluded: [
+      'GoPro or underwater camera (available for rent upon request)',
+      'Pickup outside Mirissa area (Ahangama, Weligama, Thalpe, Unawatuna, Galle, Habaraduwa, Matara, Hiriketiya — available on request for additional charge)',
+      'Personal expenses',
+      'Gratuities (optional)'
+    ],
+    importantInfo: {
+      bring: ['Swimwear', 'Towel', 'Waterproof camera'],
+      notAllowed: ['Touching marine life'],
+      notSuitable: ['Pregnant women', 'People with respiratory issues'],
+      knowBeforeYouGo: [
+        'Please come at least 5 minutes before the location time',
+        'If you can share a reachable WhatsApp number, it will be easier for us to stay in touch'
+      ]
+    }
   },
   'deep-sea-fishing': {
     id: 'deep-sea-fishing',
-    name: 'Deep Sea Fishing',
-    shortDesc: 'Charter a premium fishing vessel for an exhilarating deep-sea angling adventure off the Sri Lankan coast.',
-    price: 150,
-    duration: '6 Hours',
-    image: 'https://images.unsplash.com/photo-1544551763-77ef1d934cfc?w=800&q=80',
-    heroImage: 'https://images.unsplash.com/photo-1544551763-77ef1d934cfc?w=1600&q=80',
+    name: 'Deep Sea Fishing Tours',
+    altPrefix: 'Deep Sea Fishing',
+    location: 'Mirissa, Sri Lanka',
+    groupType: 'Private Group (max 6 guests)',
+    shortDesc: '3–4 hour private deep sea fishing in Mirissa with certified skipper, fishing guide, and gear — beginner-friendly, max 6 guests.',
+    price: 100,
+    priceNote: 'From $100/person (2+ guests) · $150 solo',
+    duration: '3–4 Hours',
+    timeSlots: '6:00 AM, 2:00 PM',
+    maxGuests: 6,
+    image: 'assets/images/deep-sea-fishing/mirissa_deep_fishing_group-catch.png',
+    imageAlt: 'Deep Sea Fishing - Group with tuna and mahi-mahi catch in Mirissa',
+    heroImage: 'assets/images/deep-sea-fishing/mirissa_deep_fishing_two-anglers.png',
     gallery: [
-      'https://images.unsplash.com/photo-1544551763-77ef1d934cfc?w=600&q=80',
-      'https://images.unsplash.com/photo-1568430778127-9d0f010a2a1f?w=600&q=80',
-      'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&q=80',
-      'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?w=600&q=80'
+      'assets/images/deep-sea-fishing/mirissa_deep_fishing_two-anglers.png',
+      'assets/images/deep-sea-fishing/mirissa_deep_fishing_woman-catch.png',
+      'assets/images/deep-sea-fishing/mirissa_deep_fishing_group-catch.png',
+      'assets/images/deep-sea-fishing/mirissa_deep_fishing_couple-catch.png',
+      'assets/images/deep-sea-fishing/mirissa_deep_fishing_collage.png'
     ],
-    fullDesc: 'Join our experienced crew aboard a fully equipped sport fishing boat. Target marlin, sailfish, tuna, and mahi-mahi in the rich fishing grounds of the Indian Ocean. All tackle provided with optional catch-and-cook service at a partner restaurant.',
+    galleryAlt: [
+      'Deep Sea Fishing - Two anglers with catch on private boat in Mirissa',
+      'Deep Sea Fishing - Guest displaying fresh catch on the Indian Ocean',
+      'Deep Sea Fishing - Group celebrating tuna and mahi-mahi catch',
+      'Deep Sea Fishing - Couple with multiple fish on board',
+      'Deep Sea Fishing - Successful fishing moments in Mirissa'
+    ],
+    highlights: [
+      'Fishing gear & hands-on instruction (max 6 guests per group)',
+      'Enjoy a scenic fishing tour through Mirissa with a certified skipper',
+      'Learn fishing techniques from your guide and try your hand at fishing',
+      'Flexible fishing style suitable for basic or deeper offshore fishing',
+      'Beginner-friendly fishing with guidance throughout the tour'
+    ],
+    fullDesc: 'Begin your adventure with a concise safety briefing from the crew, followed by changing into flotation suits and preparation for your private boat tour (maximum 6 guests per group). Enjoy a comfortable and exclusive experience designed for both fishing and ocean exploration.\n\nSet sail with a two-person professional crew: a certified skipper responsible for safe navigation and boat handling, and a dedicated fishing guide focused on hands-on coaching, guest service, and hospitality. This setup is especially valuable in rougher conditions—while the skipper remains at the helm, your guide continues assisting guests, adjusting fishing gear, offering clear guidance, and serving hot drinks to ensure a relaxed and well-cared-for experience.\n\nHead further offshore for a 3–4 hour deep sea fishing experience in the Indian Ocean. Multiple fishing rods are used with guest rotation so everyone gets a fair chance to participate. A fish finder helps locate productive fishing areas, resulting in a very high chance of catching fish under normal sea conditions.\n\nThis tour also offers an estimated 50% chance of spotting dolphins and around a 30% chance of seeing sea turtles, depending on sea and weather conditions. Fishing techniques range from basic offshore methods for beginners to more extended deep-sea fishing, depending on sea conditions. While fishing success is very high, this remains a recreational fishing experience, and conditions may vary naturally.\n\nFree hotel pickup and drop-off is available within the Mirissa area (up to 5 km). For locations outside Mirissa, please contact the tour operator in advance to arrange pickup.\n\nThe operator works weather-smart. Rather than canceling unnecessarily, routes, fishing locations, or departure times may be adjusted to maximize comfort and safety. Wildlife is always observed responsibly and respectfully. Dolphins, turtles, and other marine life are never chased or disturbed.',
+    packagesTitle: 'Pricing Options',
+    packagesDesc: 'Private boat for up to 6 guests. Solo booking or group rates available.',
+    packages: [
+      {
+        number: '01',
+        title: 'Solo Fishing (1 Guest)',
+        subtitle: 'Private boat · max 6 capacity',
+        price: 150,
+        image: 'assets/images/deep-sea-fishing/mirissa_deep_fishing_woman-catch.png',
+        imageAlt: 'Deep Sea Fishing - Solo angler private fishing tour in Mirissa',
+        desc: 'Private boat for one guest with certified skipper and dedicated fishing guide.',
+        breakdown: [
+          { label: 'Duration', time: '3–4 hours' },
+          { label: 'Deep sea offshore fishing', time: 'Included' },
+          { label: 'Certified skipper & fishing guide', time: 'Included' },
+          { label: 'All fishing gear & safety equipment', time: 'Included' }
+        ]
+      },
+      {
+        number: '02',
+        title: 'Group Fishing (2–6 Guests)',
+        subtitle: 'Per person · private group',
+        price: 100,
+        image: 'assets/images/deep-sea-fishing/mirissa_deep_fishing_group-catch.png',
+        imageAlt: 'Deep Sea Fishing - Group deep sea fishing tour Mirissa',
+        desc: 'Share a private boat with your group — everyone gets hands-on fishing time with rod rotation.',
+        breakdown: [
+          { label: 'Duration', time: '3–4 hours' },
+          { label: 'Price', time: '$100 per person' },
+          { label: 'Max group size', time: '6 guests' },
+          { label: 'Dolphin spotting chance', time: '~50–70%' }
+        ]
+      }
+    ],
     itinerary: [
-      { time: '05:00 AM', title: 'Harbour Departure', desc: 'Board vessel and head to fishing grounds.' },
-      { time: '06:00 AM', title: 'Trolling Begins', desc: 'Deploy lines and start trolling for big game.' },
-      { time: '09:00 AM', title: 'Mid-Morning Break', desc: 'Light breakfast and refreshments onboard.' },
-      { time: '10:30 AM', title: 'Bottom Fishing', desc: 'Switch to reef fishing for variety.' },
-      { time: '11:00 AM', title: 'Return to Harbour', desc: 'Dock and optional catch cleaning service.' }
+      { time: '', title: 'Hotel Pickup', desc: 'Free pickup from your hotel in Mirissa (up to 5 km).' },
+      { time: '+15 min', title: 'Safety Briefing', desc: 'Safety briefing, flotation suits, and fishing gear preparation.' },
+      { time: '+30 min', title: 'Depart & Offshore Fishing', desc: 'Head offshore with certified skipper and fishing guide; multiple rods with guest rotation.' },
+      { time: '3–4 hr', title: 'Deep Sea Fishing', desc: 'Fish finder-assisted fishing with high success rate; chance to spot dolphins and turtles.' },
+      { time: 'During', title: 'Refreshments', desc: 'Water, snacks, and fruits served on board; seasick medicine available.' },
+      { time: 'End', title: 'Return & Drop-off', desc: 'Return to harbour and free drop-off in Mirissa area.' }
     ],
-    included: ['Sport fishing boat', 'All tackle & bait', 'Experienced captain', 'Breakfast & drinks', 'Fish cleaning'],
-    excluded: ['Fishing license fee', 'Catch-and-cook restaurant fee', 'Hotel transfer']
+    included: [
+      'Free hotel pickup & drop-off in Mirissa area (up to 5 km)',
+      'Free water, snacks, and fruits during the activity',
+      'Seasick medicine provided',
+      'Chance to spot dolphins (~50–70%) during the tour',
+      'Private boat (max 6 guests per group)',
+      'Private boat safari and sea fishing tour',
+      'Certified skipper and dedicated fishing guide',
+      'Safety briefing before departure',
+      'Flotation suits and safety equipment',
+      'Fishing rods and basic fishing gear',
+      'Guidance and assistance throughout the tour'
+    ],
+    excluded: [
+      'Personal expenses',
+      'Pickup outside Mirissa area (available on request at extra cost)',
+      'Gratuities (optional)'
+    ],
+    importantInfo: {
+      bring: ['Comfortable shoes', 'Sunglasses', 'Sun hat', 'Camera', 'Sunscreen', 'Comfortable clothes'],
+      notAllowed: ['Touching marine life'],
+      notSuitable: ['People prone to seasickness'],
+      knowBeforeYouGo: [
+        'Suitable for beginners and first-time anglers; full guidance is provided throughout the tour',
+        'Sea conditions can vary, and routes or departure times may be adjusted for comfort and safety',
+        'Early departure times are recommended for calmer seas (6:00 AM slot)',
+        'Not recommended for travelers with severe seasickness or serious medical conditions',
+        'Please inform the operator in advance of any special requirements or concerns',
+        'Wildlife is observed ethically and respectfully; animals are never chased or disturbed',
+        'Please come at least 5 minutes before the scheduled time'
+      ]
+    }
   },
   'cooking-class': {
     id: 'cooking-class',
     name: 'Authentic Sri Lankan Cooking Class',
-    altPrefix: 'Mirissa Cooking Class',
+    altPrefix: 'Cooking Class',
     location: 'Mirissa, Sri Lanka',
     groupType: 'Private Group',
-    shortDesc: 'Learn to cook authentic Sri Lankan dishes with a local chef. Hands-on experience with traditional spices in a small group setting.',
+    shortDesc: 'Learn authentic Sri Lankan dishes with a local chef — hands-on cooking, traditional spices, and a shared meal in Mirissa.',
     price: 30,
     duration: '2.5 Hours',
     timeSlots: '9:00 AM, 2:00 PM',
-    image: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80',
-    heroImage: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=1600&q=80',
+    image: 'assets/images/cooking-class/mirissa_cooking_class_spice-tray.png',
+    imageAlt: 'Cooking Class - Traditional Sri Lankan spices for cooking class in Mirissa',
+    heroImage: 'assets/images/cooking-class/mirissa_cooking_class_outdoor-kitchen.png',
     gallery: [
-      'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&q=80',
-      'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=600&q=80',
-      'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80',
-      'https://images.unsplash.com/photo-1547592180-85f173990554?w=600&q=80'
+      'assets/images/cooking-class/mirissa_cooking_class_outdoor-kitchen.png',
+      'assets/images/cooking-class/mirissa_cooking_class_cooking-session.png',
+      'assets/images/cooking-class/mirissa_cooking_class_guests.png',
+      'assets/images/cooking-class/mirissa_cooking_class_spice-tray.png',
+      'assets/images/cooking-class/mirissa_cooking_class_spice-table.png',
+      'assets/images/cooking-class/mirissa_cooking_class_ingredients.png',
+      'assets/images/cooking-class/mirissa_cooking_class_kitchen-prep.png',
+      'assets/images/cooking-class/mirissa_cooking_class_spice-heart-tray.png',
+      'assets/images/cooking-class/mirissa_cooking_class_dining-area.png',
+      'assets/images/cooking-class/mirissa_cooking_class_rustic-kitchen.png'
+    ],
+    galleryAlt: [
+      'Cooking Class - Outdoor traditional kitchen in Mirissa',
+      'Cooking Class - Hands-on cooking session with local chef',
+      'Cooking Class - Guests enjoying Sri Lankan cooking class',
+      'Cooking Class - Colorful spice tray with traditional ingredients',
+      'Cooking Class - Fresh ingredients and spices on the table',
+      'Cooking Class - Fresh vegetables, rice, and coconut for cooking',
+      'Cooking Class - Kitchen preparation with local ingredients',
+      'Cooking Class - Heart-shaped spice tray with Sri Lankan spices',
+      'Cooking Class - Rustic dining area for cooking class',
+      'Cooking Class - Traditional rustic kitchen setting'
     ],
     highlights: [
       'Learn to cook authentic Sri Lankan dishes with a local chef',
@@ -591,23 +757,30 @@ function initTourDetails() {
           <h2>About This Tour</h2>
           <p>${tour.fullDesc.replace(/\n\n/g, '</p><p>').replace(/\n/g, ' ')}</p>
           ${tour.packages ? `
-          <h2>Dive Packages</h2>
-          <p class="section-desc" style="margin-bottom:24px">Choose the package that fits your experience level. All dives include a 1:2 instructor-to-guest ratio.</p>
+          <h2>${tour.packagesTitle || 'Packages'}</h2>
+          <p class="section-desc" style="margin-bottom:24px">${tour.packagesDesc || 'Choose the option that fits your group.'}</p>
           <div class="tour-packages">
             ${tour.packages.map(pkg => `
               <div class="package-card">
-                <div class="package-card-header">
-                  <span class="package-number">Package ${pkg.number}</span>
-                  <span class="package-price">$${pkg.price}<small>/person</small></span>
+                ${pkg.image ? `
+                <div class="package-card-image">
+                  <img src="${resolveImg(pkg.image)}" alt="${pkg.imageAlt || `${tour.altPrefix || tour.name} - ${pkg.title}`}" loading="lazy">
                 </div>
-                <h3 class="package-title">${pkg.title}</h3>
-                <p class="package-subtitle">${pkg.subtitle}</p>
-                <p class="package-desc">${pkg.desc}</p>
-                <ul class="package-breakdown">
-                  ${pkg.breakdown.map(row => `
-                    <li><span class="package-breakdown-label">${row.label}</span><span class="package-breakdown-time">${row.time}</span></li>
-                  `).join('')}
-                </ul>
+                ` : ''}
+                <div class="package-card-body">
+                  <div class="package-card-header">
+                    <span class="package-number">Package ${pkg.number}</span>
+                    <span class="package-price">$${pkg.price}<small>/person</small></span>
+                  </div>
+                  <h3 class="package-title">${pkg.title}</h3>
+                  <p class="package-subtitle">${pkg.subtitle}</p>
+                  <p class="package-desc">${pkg.desc}</p>
+                  <ul class="package-breakdown">
+                    ${pkg.breakdown.map(row => `
+                      <li><span class="package-breakdown-label">${row.label}</span><span class="package-breakdown-time">${row.time}</span></li>
+                    `).join('')}
+                  </ul>
+                </div>
               </div>
             `).join('')}
           </div>
@@ -638,11 +811,16 @@ function initTourDetails() {
           ${tour.importantInfo ? `
           <h2>Important Information</h2>
           <div class="important-info-grid">
-            ${tour.importantInfo.bring ? `<div><h4>What to Bring</h4><ul class="info-list">${tour.importantInfo.bring.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
-            ${tour.importantInfo.notSuitable ? `<div><h4>Not Suitable For</h4><ul class="info-list not-suitable">${tour.importantInfo.notSuitable.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
-            ${tour.importantInfo.notAllowed ? `<div><h4>Not Allowed</h4><ul class="info-list not-allowed">${tour.importantInfo.notAllowed.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
-            ${tour.importantInfo.knowBeforeYouGo ? `<div><h4>Know Before You Go</h4><ul class="info-list">${tour.importantInfo.knowBeforeYouGo.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
+            ${tour.importantInfo.bring ? `<div class="important-info-col"><h4>What to Bring</h4><ul class="info-list">${tour.importantInfo.bring.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
+            ${tour.importantInfo.notSuitable ? `<div class="important-info-col"><h4>Not Suitable For</h4><ul class="info-list not-suitable">${tour.importantInfo.notSuitable.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
+            ${tour.importantInfo.notAllowed ? `<div class="important-info-col"><h4>Not Allowed</h4><ul class="info-list not-allowed">${tour.importantInfo.notAllowed.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
           </div>
+          ${tour.importantInfo.knowBeforeYouGo ? `
+          <div class="important-info-know">
+            <h4>Know Before You Go</h4>
+            <ul class="info-list info-list-know">${tour.importantInfo.knowBeforeYouGo.map(item => `<li>${item}</li>`).join('')}</ul>
+          </div>
+          ` : ''}
           ` : ''}
           <h2>Photo Gallery</h2>
           <div class="gallery-slider" data-gallery>
@@ -657,6 +835,7 @@ function initTourDetails() {
           <div class="booking-sidebar-card">
             <h3>${tour.name}</h3>
             <div class="sidebar-price">$${tour.price} <span>/ person</span></div>
+            ${tour.priceNote ? `<p class="sidebar-price-note">${tour.priceNote}</p>` : ''}
             <ul class="sidebar-features">
               <li>⏱ ${tour.duration}</li>
               <li>📍 ${tour.location || 'Mirissa, Sri Lanka'}</li>
