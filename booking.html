@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Book your luxury Sri Lanka ocean tour online.">
+  <title>Book Your Tour | Sea & Safari Tours</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="header scrolled">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Sea & Safari Tours" class="logo-img"> Sea & Safari Tours</a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="nav-dropdown">
+          <a href="tours.html" class="nav-link">Tours ▾</a>
+          <div class="dropdown-menu">
+            <a href="tours/whale-dolphin.html">Whale & Dolphin Watching</a>
+            <a href="tours/turtle-snorkeling.html">Turtle Snorkeling</a>
+            <a href="tours/crocodile-safari.html">Crocodile Safari</a>
+            <a href="tours/river-kayak.html">River Kayak Tours</a>
+            <a href="tours/scuba-diving.html">Scuba Diving</a>
+            <a href="tours/night-snorkeling.html">Night Snorkeling</a>
+            <a href="tours/deep-sea-fishing.html">Deep Sea Fishing</a>
+            <a href="tours/cooking-class.html">Cooking Class</a>
+            <a href="tours.html" class="dropdown-all">View All Tours →</a>
+          </div>
+        </div>
+        <a href="booking.html" class="nav-link active">Book Now</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <a href="booking.html" class="btn btn-primary btn-sm nav-cta">Reserve Tour</a>
+      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <nav class="mobile-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="tours.html" class="nav-link">All Tours</a>
+    <a href="tours/whale-dolphin.html" class="nav-link nav-sub">Whale & Dolphin Watching</a>
+    <a href="tours/turtle-snorkeling.html" class="nav-link nav-sub">Turtle Snorkeling</a>
+    <a href="tours/river-kayak.html" class="nav-link nav-sub">River Kayak Tours</a>
+    <a href="tours/cooking-class.html" class="nav-link nav-sub">Cooking Class</a>
+    <a href="booking.html" class="nav-link">Book Now</a>
+    <a href="index.html#about" class="nav-link">About</a>
+    <a href="index.html#contact" class="nav-link">Contact</a>
+    <a href="booking.html" class="btn btn-primary">Reserve Tour</a>
+  </nav>
+
+  <section class="page-hero" style="background-image:url('https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=1600&q=80')">
+    <div class="page-hero-overlay"></div>
+    <div class="container page-hero-content">
+      <nav class="breadcrumb"><a href="index.html">Home</a> / <span>Book Now</span></nav>
+      <h1>Book Your Adventure</h1>
+      <p>Complete the form below to reserve your premium tour experience</p>
+    </div>
+  </section>
+  <section class="section"><div class="container booking-layout">
+    <div class="form-card">
+      <h2>Booking Details</h2>
+      <p>Fill in your information and we will confirm your reservation promptly.</p>
+      <form id="booking-form" novalidate>
+        <div class="form-row">
+          <div class="form-group"><label for="full-name">Full Name <span class="required">*</span></label><input type="text" id="full-name" class="form-control" placeholder="John Doe"><div class="form-error"></div></div>
+          <div class="form-group"><label for="email">Email Address <span class="required">*</span></label><input type="email" id="email" class="form-control" placeholder="john@email.com"><div class="form-error"></div></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label for="whatsapp">WhatsApp Number <span class="required">*</span></label><input type="tel" id="whatsapp" class="form-control" placeholder="+94 78 709 7430"><div class="form-error"></div></div>
+          <div class="form-group"><label for="guests">Number of Guests <span class="required">*</span></label><input type="number" id="guests" class="form-control" min="1" max="20" value="2"><div class="form-error"></div></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label for="tour-select">Select Tour <span class="required">*</span></label><select id="tour-select" class="form-control"><option value="">Choose a tour...</option></select><div class="form-error"></div></div>
+          <div class="form-group"><label for="tour-date">Select Date <span class="required">*</span></label><input type="date" id="tour-date" class="form-control"><div class="form-error"></div></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group" id="timeslot-group" style="display:none"><label for="time-slot">Preferred Time Slot <span class="required">*</span></label><select id="time-slot" class="form-control"><option value="">Select a time...</option></select><div class="form-error"></div></div>
+        </div>
+        <div class="form-group"><label>Hotel Pickup Option</label><div class="radio-group"><label class="radio-label"><input type="radio" name="pickup" value="yes"> Yes (+$15)</label><label class="radio-label"><input type="radio" name="pickup" value="no" checked> No</label></div></div>
+        <div class="form-group"><label for="special-requests">Special Requests</label><textarea id="special-requests" class="form-control" placeholder="Dietary requirements, accessibility needs, etc."></textarea></div>
+      </form>
+    </div>
+    <aside class="summary-card">
+      <h3>Booking Summary</h3>
+      <div id="booking-summary"><p style="opacity:0.7">Select a tour to see summary</p></div>
+      <div class="summary-total"><span>Estimated Total</span><span id="summary-total">$0</span></div>
+      <div class="whatsapp-preview" id="whatsapp-preview">WhatsApp message preview will appear here...</div>
+      <div class="summary-actions">
+        <button type="button" id="whatsapp-send" class="btn btn-whatsapp btn-block">Send via WhatsApp</button>
+        <button type="button" id="email-send" class="btn btn-outline btn-block" style="color:var(--white);border-color:rgba(255,255,255,0.4)">Send via Email</button>
+        <button type="button" id="proceed-payment" class="btn btn-primary btn-block">Proceed to Payment</button>
+      </div>
+    </aside>
+  </div></section>
+
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Sea & Safari Tours" class="logo-img"> Sea & Safari Tours</a>
+          <p>Premium marine and wildlife adventures across Sri Lanka.</p>
+          <div class="footer-social"><a href="#">📘</a><a href="#">📷</a><a href="https://wa.me/94787097430">💬</a></div>
+        </div>
+        <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="tours.html">All Tours</a></li><li><a href="booking.html">Book Now</a></li></ul></div>
+        <div class="footer-col"><h4>Popular Tours</h4><ul><li><a href="tours/whale-dolphin.html">Whale Watching</a></li><li><a href="tours/scuba-diving.html">Scuba Diving</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li>📍 Mirissa, Sri Lanka</li><li>📞 +94 78 709 7430</li><li>✉️ seaandsafaritours@gmail.com</li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>&copy; 2026 Sea & Safari Tours</span><span>Crafted with 🌊 in Sri Lanka</span></div>
+    </div>
+  </footer>
+  <a href="https://wa.me/94787097430" class="floating-whatsapp" aria-label="WhatsApp">💬</a>
+<script src="assets/js/script.js"></script>
+</body>
+</html>

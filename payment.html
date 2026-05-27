@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Secure payment for your Sea & Safari Tours booking.">
+  <title>Payment | Sea & Safari Tours</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <header class="header scrolled">
+    <div class="container header-inner">
+      <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Sea & Safari Tours" class="logo-img"> Sea & Safari Tours</a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <div class="nav-dropdown">
+          <a href="tours.html" class="nav-link">Tours ▾</a>
+          <div class="dropdown-menu">
+            <a href="tours/whale-dolphin.html">Whale & Dolphin Watching</a>
+            <a href="tours/turtle-snorkeling.html">Turtle Snorkeling</a>
+            <a href="tours/crocodile-safari.html">Crocodile Safari</a>
+            <a href="tours/river-kayak.html">River Kayak Tours</a>
+            <a href="tours/scuba-diving.html">Scuba Diving</a>
+            <a href="tours/night-snorkeling.html">Night Snorkeling</a>
+            <a href="tours/deep-sea-fishing.html">Deep Sea Fishing</a>
+            <a href="tours/cooking-class.html">Cooking Class</a>
+            <a href="tours.html" class="dropdown-all">View All Tours →</a>
+          </div>
+        </div>
+        <a href="booking.html" class="nav-link active">Book Now</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <a href="booking.html" class="btn btn-primary btn-sm nav-cta">Reserve Tour</a>
+      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <nav class="mobile-nav">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="tours.html" class="nav-link">All Tours</a>
+    <a href="tours/whale-dolphin.html" class="nav-link nav-sub">Whale & Dolphin Watching</a>
+    <a href="tours/turtle-snorkeling.html" class="nav-link nav-sub">Turtle Snorkeling</a>
+    <a href="tours/river-kayak.html" class="nav-link nav-sub">River Kayak Tours</a>
+    <a href="tours/cooking-class.html" class="nav-link nav-sub">Cooking Class</a>
+    <a href="booking.html" class="nav-link">Book Now</a>
+    <a href="index.html#about" class="nav-link">About</a>
+    <a href="index.html#contact" class="nav-link">Contact</a>
+    <a href="booking.html" class="btn btn-primary">Reserve Tour</a>
+  </nav>
+
+  <section class="page-hero" style="background-image:url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600&q=80')">
+    <div class="page-hero-overlay"></div>
+    <div class="container page-hero-content">
+      <nav class="breadcrumb"><a href="index.html">Home</a> / <a href="booking.html">Booking</a> / <span>Payment</span></nav>
+      <h1>Secure Checkout</h1>
+      <p>Complete your booking with our secure payment system</p>
+    </div>
+  </section>
+  <section class="section"><div class="container payment-layout">
+    <div class="form-card" id="payment-form">
+      <h2>Payment Method</h2>
+      <p>Select your preferred payment option.</p>
+      <div class="payment-methods">
+        <label class="payment-method active" data-panel="panel-card"><input type="radio" name="payment" value="card" checked><span class="payment-method-icon">💳</span><div class="payment-method-info"><h4>Card Payment</h4><p>Visa, Mastercard, Amex</p></div></label>
+        <label class="payment-method" data-panel="panel-payhere"><input type="radio" name="payment" value="payhere"><span class="payment-method-icon">🇱🇰</span><div class="payment-method-info"><h4>PayHere Sri Lanka</h4><p>Local payment gateway</p></div></label>
+        <label class="payment-method" data-panel="panel-bank"><input type="radio" name="payment" value="bank"><span class="payment-method-icon">🏦</span><div class="payment-method-info"><h4>Bank Transfer</h4><p>Direct bank deposit</p></div></label>
+      </div>
+      <div class="payment-form-panel active" id="panel-card">
+        <div class="form-group"><label for="card-name">Name on Card</label><input type="text" id="card-name" class="form-control" placeholder="John Doe"></div>
+        <div class="form-group"><label for="card-number">Card Number</label><div class="card-input-group"><input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19"><span class="card-icons">💳</span></div></div>
+        <div class="form-row">
+          <div class="form-group"><label for="card-expiry">Expiry</label><input type="text" id="card-expiry" class="form-control" placeholder="MM/YY" maxlength="5"></div>
+          <div class="form-group"><label for="card-cvc">CVC</label><input type="text" id="card-cvc" class="form-control" placeholder="123" maxlength="4"></div>
+        </div>
+      </div>
+      <div class="payment-form-panel" id="panel-payhere">
+        <div class="bank-details"><p style="margin-bottom:16px;color:var(--text-muted)">You will be redirected to PayHere secure payment gateway.</p><dl><dt>Merchant</dt><dd>Sea & Safari Tours (Pvt) Ltd</dd><dt>Currency</dt><dd>USD / LKR</dd></dl></div>
+      </div>
+      <div class="payment-form-panel" id="panel-bank">
+        <div class="bank-details"><dl><dt>Bank Name</dt><dd>Commercial Bank of Ceylon</dd><dt>Account Name</dt><dd>Sea & Safari Tours (Pvt) Ltd</dd><dt>Account Number</dt><dd>1234567890</dd><dt>Branch</dt><dd>Mirissa Branch</dd><dt>SWIFT Code</dt><dd>CCEYLKLX</dd></dl></div>
+      </div>
+      <button type="button" id="pay-now" class="btn btn-primary btn-block" style="margin-top:24px">Pay Now</button>
+    </div>
+    <aside class="order-summary">
+      <h3>Order Summary</h3>
+      <div id="payment-summary"></div>
+      <div class="summary-total" style="color:var(--ocean-deep);border-top:2px solid rgba(10,61,98,0.1);padding-top:16px;margin-top:16px"><span>Total</span><span id="payment-total">$0</span></div>
+    </aside>
+  </div></section>
+  <div class="modal-overlay" id="success-modal">
+    <div class="modal">
+      <div class="success-icon">✓</div>
+      <h2>Booking Confirmed!</h2>
+      <p>Your payment has been processed successfully.</p>
+      <p>A confirmation email will be sent shortly.</p>
+      <div class="receipt-id" id="receipt-id">SST-XXXXXX</div>
+      <button type="button" id="modal-close" class="btn btn-ocean">Back to Home</button>
+    </div>
+  </div>
+
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Sea & Safari Tours" class="logo-img"> Sea & Safari Tours</a>
+          <p>Premium marine and wildlife adventures across Sri Lanka.</p>
+          <div class="footer-social"><a href="#">📘</a><a href="#">📷</a><a href="https://wa.me/94787097430">💬</a></div>
+        </div>
+        <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="tours.html">All Tours</a></li><li><a href="booking.html">Book Now</a></li></ul></div>
+        <div class="footer-col"><h4>Popular Tours</h4><ul><li><a href="tours/whale-dolphin.html">Whale Watching</a></li><li><a href="tours/scuba-diving.html">Scuba Diving</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li>📍 Mirissa, Sri Lanka</li><li>📞 +94 78 709 7430</li><li>✉️ seaandsafaritours@gmail.com</li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>&copy; 2026 Sea & Safari Tours</span><span>Crafted with 🌊 in Sri Lanka</span></div>
+    </div>
+  </footer>
+  <a href="https://wa.me/94787097430" class="floating-whatsapp" aria-label="WhatsApp">💬</a>
+<script src="assets/js/script.js"></script>
+</body>
+</html>
