@@ -564,8 +564,8 @@ const TOURS = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  initHeader();
   initMobileNav();
+  initHeader();
   initScrollAnimations();
   initFloatingWhatsApp();
   initHeroCarousel();
@@ -652,23 +652,172 @@ function initHeader() {
   });
 }
 
+function setMobileMenuOpen(isOpen) {
+  const hamburger = document.querySelector('.hamburger');
+  const mobileNav = document.querySelector('.mobile-nav');
+  if (!hamburger || !mobileNav) return;
+
+  hamburger.classList.toggle('active', isOpen);
+  mobileNav.classList.toggle('open', isOpen);
+  document.body.classList.toggle('mobile-menu-open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+  hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+
+const MOBILE_NAV_ICONS = {
+  home: '🏠',
+  tours: '🧭',
+  book: '📅',
+  about: 'ℹ️',
+  contact: '✉️'
+};
+
+function getMobileNavIcon(link) {
+  const href = (link.getAttribute('href') || '').toLowerCase();
+  const text = link.textContent.trim().toLowerCase();
+  if (href.includes('index') && !href.includes('#')) return MOBILE_NAV_ICONS.home;
+  if (href.includes('tours.html') || text === 'all tours') return MOBILE_NAV_ICONS.tours;
+  if (href.includes('booking')) return MOBILE_NAV_ICONS.book;
+  if (href.includes('#about') || text === 'about') return MOBILE_NAV_ICONS.about;
+  if (href.includes('#contact') || text === 'contact') return MOBILE_NAV_ICONS.contact;
+  return '•';
+}
+
+function enhanceMobileNavLink(link, isTour) {
+  if (link.querySelector('.mobile-nav-text')) return;
+
+  if (!isTour) {
+    const icon = document.createElement('span');
+    icon.className = 'mobile-nav-icon';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = getMobileNavIcon(link);
+
+    const text = document.createElement('span');
+    text.className = 'mobile-nav-text';
+    text.textContent = link.textContent.trim();
+
+    link.textContent = '';
+    link.append(icon, text);
+  }
+}
+
+function buildMobileNavStructure() {
+  const mobileNav = document.querySelector('.mobile-nav');
+  if (!mobileNav || mobileNav.dataset.enhanced === 'true') return;
+
+  const links = [...mobileNav.querySelectorAll(':scope > .nav-link, :scope > .btn.btn-primary')];
+  if (!links.length) return;
+
+  const mainLinks = links.filter(l => !l.classList.contains('nav-sub') && !l.classList.contains('btn'));
+  const tourLinks = links.filter(l => l.classList.contains('nav-sub'));
+  const ctaBtn = links.find(l => l.classList.contains('btn'));
+  const toursPath = links.find(l => (l.getAttribute('href') || '').includes('tours.html'))?.getAttribute('href')
+    || (window.location.pathname.includes('/tours/') ? '../tours.html' : 'tours.html');
+
+  const panel = document.createElement('div');
+  panel.className = 'mobile-nav-panel';
+
+  const navHeader = document.createElement('div');
+  navHeader.className = 'mobile-nav-header';
+
+  const headerLogo = document.querySelector('.header .logo');
+  if (headerLogo) {
+    const brand = headerLogo.cloneNode(true);
+    brand.classList.add('mobile-nav-brand');
+    brand.addEventListener('click', () => setMobileMenuOpen(false));
+    navHeader.appendChild(brand);
+  }
+
+  const closeBtn = document.createElement('button');
+  closeBtn.type = 'button';
+  closeBtn.className = 'mobile-nav-close';
+  closeBtn.setAttribute('aria-label', 'Close menu');
+  navHeader.appendChild(closeBtn);
+
+  const scroll = document.createElement('div');
+  scroll.className = 'mobile-nav-scroll';
+
+  const menuSection = document.createElement('div');
+  menuSection.className = 'mobile-nav-section';
+  menuSection.innerHTML = '<p class="mobile-nav-label">Menu</p>';
+  const mainList = document.createElement('div');
+  mainList.className = 'mobile-nav-list';
+  mainLinks.forEach(link => {
+    enhanceMobileNavLink(link, false);
+    mainList.appendChild(link);
+  });
+  menuSection.appendChild(mainList);
+  scroll.appendChild(menuSection);
+
+  if (tourLinks.length) {
+    const toursSection = document.createElement('div');
+    toursSection.className = 'mobile-nav-section';
+    toursSection.innerHTML = '<p class="mobile-nav-label">Popular Tours</p>';
+    const toursList = document.createElement('div');
+    toursList.className = 'mobile-nav-tours';
+    tourLinks.forEach(link => toursList.appendChild(link));
+
+    const viewAll = document.createElement('a');
+    viewAll.href = toursPath;
+    viewAll.className = 'mobile-nav-view-all';
+    viewAll.textContent = 'View all tours →';
+
+    toursSection.append(toursList, viewAll);
+    scroll.appendChild(toursSection);
+  }
+
+  panel.append(navHeader, scroll);
+
+  const footer = document.createElement('div');
+  footer.className = 'mobile-nav-footer';
+  if (ctaBtn) footer.appendChild(ctaBtn);
+
+  const waLink = document.createElement('a');
+  waLink.href = `https://wa.me/${WHATSAPP_NUMBER}`;
+  waLink.className = 'mobile-nav-wa';
+  waLink.target = '_blank';
+  waLink.rel = 'noopener noreferrer';
+  waLink.innerHTML = '<span class="mobile-nav-wa-icon" aria-hidden="true">💬</span> Chat on WhatsApp';
+  footer.appendChild(waLink);
+
+  panel.appendChild(footer);
+  mobileNav.appendChild(panel);
+  mobileNav.dataset.enhanced = 'true';
+}
+
 function initMobileNav() {
+  buildMobileNavStructure();
+
   const hamburger = document.querySelector('.hamburger');
   const mobileNav = document.querySelector('.mobile-nav');
   if (!hamburger || !mobileNav) return;
 
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    mobileNav.classList.toggle('open');
-    document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    setMobileMenuOpen(!mobileNav.classList.contains('open'));
   });
 
-  mobileNav.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      mobileNav.classList.remove('open');
-      document.body.style.overflow = '';
-    });
+  mobileNav.querySelector('.mobile-nav-close')?.addEventListener('click', () => {
+    setMobileMenuOpen(false);
+  });
+
+  mobileNav.addEventListener('click', e => {
+    if (e.target === mobileNav) setMobileMenuOpen(false);
+  });
+
+  mobileNav.querySelectorAll('.nav-link, .btn, .mobile-nav-view-all, .mobile-nav-wa').forEach(link => {
+    link.addEventListener('click', () => setMobileMenuOpen(false));
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+      setMobileMenuOpen(false);
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && mobileNav.classList.contains('open')) {
+      setMobileMenuOpen(false);
+    }
   });
 }
 
@@ -850,12 +999,16 @@ function initTourDetails() {
         </aside>
       </div>
       <div class="tour-nav-buttons">
-        <a href="${ROOT_PATH}tours.html" class="btn btn-ocean">← All Tours</a>
+        <a href="${ROOT_PATH}tours.html" class="btn btn-ocean tour-nav-prev">← All Tours</a>
         ${(() => {
           const ids = Object.keys(TOURS);
           const idx = ids.indexOf(tour.id);
           const nextId = ids[(idx + 1) % ids.length];
-          return `<a href="${TOURS_PATH}${nextId}.html" class="btn btn-primary">Next: ${TOURS[nextId].name} →</a>`;
+          const nextTour = TOURS[nextId];
+          return `<a href="${TOURS_PATH}${nextId}.html" class="btn btn-primary tour-nav-next" aria-label="Next tour: ${nextTour.name}">
+            <span class="tour-nav-next-short">Next Tour →</span>
+            <span class="tour-nav-next-full">Next: ${nextTour.name} →</span>
+          </a>`;
         })()}
       </div>
     </div>
