@@ -575,6 +575,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('tour-detail-content')) initTourDetails();
   if (document.getElementById('booking-form')) initBookingForm();
   if (document.getElementById('payment-form')) initPaymentPage();
+  if (document.getElementById('contact-form')) initContactForm();
 });
 
 function initHeroCarousel() {
@@ -645,8 +646,9 @@ function initHeader() {
 
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-link').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPath || (currentPath === '' && href === 'index.html')) {
+    const href = link.getAttribute('href') || '';
+    const linkPath = href.split('/').pop().split('#')[0] || '';
+    if (linkPath === currentPath) {
       link.classList.add('active');
     }
   });
@@ -678,8 +680,8 @@ function getMobileNavIcon(link) {
   if (href.includes('index') && !href.includes('#')) return MOBILE_NAV_ICONS.home;
   if (href.includes('tours.html') || text === 'all tours') return MOBILE_NAV_ICONS.tours;
   if (href.includes('booking')) return MOBILE_NAV_ICONS.book;
-  if (href.includes('#about') || text === 'about') return MOBILE_NAV_ICONS.about;
-  if (href.includes('#contact') || text === 'contact') return MOBILE_NAV_ICONS.contact;
+  if (href.includes('about.html') || text === 'about') return MOBILE_NAV_ICONS.about;
+  if (href.includes('contact.html') || text === 'contact') return MOBILE_NAV_ICONS.contact;
   return '•';
 }
 
@@ -760,7 +762,7 @@ function buildMobileNavStructure() {
     const viewAll = document.createElement('a');
     viewAll.href = toursPath;
     viewAll.className = 'mobile-nav-view-all';
-    viewAll.textContent = 'View all tours →';
+    viewAll.innerHTML = 'View all tours <span class="link-arrow" aria-hidden="true">&rarr;</span>';
 
     toursSection.append(toursList, viewAll);
     scroll.appendChild(toursSection);
@@ -777,7 +779,7 @@ function buildMobileNavStructure() {
   waLink.className = 'mobile-nav-wa';
   waLink.target = '_blank';
   waLink.rel = 'noopener noreferrer';
-  waLink.innerHTML = '<span class="mobile-nav-wa-icon" aria-hidden="true">💬</span> Chat on WhatsApp';
+  waLink.innerHTML = '<span class="mobile-nav-wa-icon" aria-hidden="true"></span> Chat on WhatsApp';
   footer.appendChild(waLink);
 
   panel.appendChild(footer);
@@ -898,7 +900,7 @@ function initTourDetails() {
     <div class="container">
       <div class="tour-detail-grid">
         <div class="tour-detail-main">
-          ${tour.location ? `<p class="tour-location"><span>📍</span> ${tour.location}</p>` : ''}
+          ${tour.location ? `<p class="tour-location"><span class="tour-meta-icon tour-meta-icon-pin" aria-hidden="true"></span> ${tour.location}</p>` : ''}
           ${tour.highlights ? `
           <h2>Highlights</h2>
           <ul class="highlights-list">${tour.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
@@ -986,12 +988,12 @@ function initTourDetails() {
             <div class="sidebar-price">$${tour.price} <span>/ person</span></div>
             ${tour.priceNote ? `<p class="sidebar-price-note">${tour.priceNote}</p>` : ''}
             <ul class="sidebar-features">
-              <li>⏱ ${tour.duration}</li>
-              <li>📍 ${tour.location || 'Mirissa, Sri Lanka'}</li>
-              <li>👥 ${tour.groupType || 'Small group experience'}</li>
-              <li>🛡 Fully insured</li>
-              <li>⭐ Expert local guides</li>
-              ${tour.timeSlots ? `<li>🕐 Slots: ${tour.timeSlots}</li>` : ''}
+              <li><span class="sidebar-icon sidebar-icon-time" aria-hidden="true"></span><span>${tour.duration}</span></li>
+              <li><span class="sidebar-icon sidebar-icon-pin" aria-hidden="true"></span><span>${tour.location || 'Mirissa, Sri Lanka'}</span></li>
+              <li><span class="sidebar-icon sidebar-icon-group" aria-hidden="true"></span><span>${tour.groupType || 'Small group experience'}</span></li>
+              <li><span class="sidebar-icon sidebar-icon-shield" aria-hidden="true"></span><span>Fully insured</span></li>
+              <li><span class="sidebar-icon sidebar-icon-star" aria-hidden="true"></span><span>Expert local guides</span></li>
+              ${tour.timeSlots ? `<li><span class="sidebar-icon sidebar-icon-clock" aria-hidden="true"></span><span>Slots: ${tour.timeSlots}</span></li>` : ''}
             </ul>
             <a href="${ROOT_PATH}booking.html?tour=${tour.id}" class="btn btn-primary btn-block" style="margin-top:24px">Book This Tour</a>
             <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello! I'm interested in booking: ${tour.name}`)}" class="btn btn-whatsapp btn-block" style="margin-top:12px" target="_blank" rel="noopener">WhatsApp Inquiry</a>
@@ -999,15 +1001,15 @@ function initTourDetails() {
         </aside>
       </div>
       <div class="tour-nav-buttons">
-        <a href="${ROOT_PATH}tours.html" class="btn btn-ocean tour-nav-prev">← All Tours</a>
+        <a href="${ROOT_PATH}tours.html" class="btn btn-ocean tour-nav-prev">&larr; All Tours</a>
         ${(() => {
           const ids = Object.keys(TOURS);
           const idx = ids.indexOf(tour.id);
           const nextId = ids[(idx + 1) % ids.length];
           const nextTour = TOURS[nextId];
           return `<a href="${TOURS_PATH}${nextId}.html" class="btn btn-primary tour-nav-next" aria-label="Next tour: ${nextTour.name}">
-            <span class="tour-nav-next-short">Next Tour →</span>
-            <span class="tour-nav-next-full">Next: ${nextTour.name} →</span>
+            <span class="tour-nav-next-short">Next Tour &rarr;</span>
+            <span class="tour-nav-next-full">Next: ${nextTour.name} &rarr;</span>
           </a>`;
         })()}
       </div>
@@ -1019,9 +1021,9 @@ function initTourDetails() {
   if (heroTitle) heroTitle.textContent = tour.name;
   if (heroMeta) {
     heroMeta.innerHTML = `
-      <span>⏱ ${tour.duration}</span>
-      <span>💰 From $${tour.price}/person</span>
-      <span>📍 ${tour.location || 'Mirissa, Sri Lanka'}</span>
+      <span><span class="tour-meta-icon tour-meta-icon-time" aria-hidden="true"></span> ${tour.duration}</span>
+      <span><span class="tour-meta-icon sidebar-icon-price" aria-hidden="true"></span> From $${tour.price}/person</span>
+      <span><span class="tour-meta-icon tour-meta-icon-pin" aria-hidden="true"></span> ${tour.location || 'Mirissa, Sri Lanka'}</span>
     `;
   }
 
@@ -1354,5 +1356,72 @@ function initPaymentPage() {
   document.getElementById('modal-close')?.addEventListener('click', () => {
     modal.classList.remove('active');
     window.location.href = 'index.html';
+  });
+}
+
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  const emailBtn = document.getElementById('contact-email-btn');
+  if (!form) return;
+
+  function getContactData() {
+    return {
+      name: document.getElementById('contact-name').value.trim(),
+      email: document.getElementById('contact-email').value.trim(),
+      phone: document.getElementById('contact-phone').value.trim(),
+      subject: document.getElementById('contact-subject').value,
+      message: document.getElementById('contact-message').value.trim()
+    };
+  }
+
+  function validateContactForm() {
+    let valid = true;
+    const fields = [
+      { id: 'contact-name', validate: v => v.length >= 2, message: 'Please enter your name' },
+      { id: 'contact-email', validate: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), message: 'Please enter a valid email' },
+      { id: 'contact-message', validate: v => v.length >= 10, message: 'Please enter a message (at least 10 characters)' }
+    ];
+
+    fields.forEach(({ id, validate, message }) => {
+      const input = document.getElementById(id);
+      const error = input.closest('.form-group')?.querySelector('.form-error');
+      if (!validate(input.value.trim())) {
+        if (error) error.textContent = message;
+        input.classList.add('error');
+        valid = false;
+      } else {
+        if (error) error.textContent = '';
+        input.classList.remove('error');
+      }
+    });
+    return valid;
+  }
+
+  function buildContactMessage(data) {
+    return `Hello Sea & Safari Tours,
+
+Subject: ${data.subject}
+Name: ${data.name}
+Email: ${data.email}
+${data.phone ? `Phone: ${data.phone}` : ''}
+
+Message:
+${data.message}`;
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!validateContactForm()) return;
+    const data = getContactData();
+    const text = encodeURIComponent(buildContactMessage(data));
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank');
+  });
+
+  emailBtn?.addEventListener('click', () => {
+    if (!validateContactForm()) return;
+    const data = getContactData();
+    const subject = encodeURIComponent(`Sea & Safari Tours - ${data.subject}`);
+    const body = encodeURIComponent(buildContactMessage(data));
+    window.location.href = `mailto:${COMPANY_EMAIL}?subject=${subject}&body=${body}`;
   });
 }
