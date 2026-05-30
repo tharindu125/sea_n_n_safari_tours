@@ -1785,36 +1785,193 @@ function initFAQPage() {
   initScrollAnimations();
 }
 
-function getSiteGalleryImages() {
-  const items = [];
-  Object.values(TOURS).forEach(tour => {
-    (tour.gallery || []).slice(0, 4).forEach((img, i) => {
-      items.push({
-        src: img,
-        alt: (tour.galleryAlt && tour.galleryAlt[i]) || `${tour.altPrefix || tour.name} - photo ${i + 1}`,
-        tour: tour.name,
-        tourId: tour.id
-      });
-    });
-  });
-  return items;
+const GALLERY_CHIP_LABELS = {
+  'whale-dolphin': 'Whale Watching',
+  'turtle-snorkeling': 'Turtle Snorkel',
+  'crocodile-safari': 'Crocodile Safari',
+  'river-kayak': 'River Kayak',
+  'scuba-diving': 'Scuba Diving',
+  'night-snorkeling': 'Night Snorkel',
+  'deep-sea-fishing': 'Deep Sea Fishing',
+  'cooking-class': 'Cooking Class'
+};
+
+function getGalleryChipLabel(tourId) {
+  return GALLERY_CHIP_LABELS[tourId] || TOURS[tourId]?.name || tourId;
+}
+
+function buildGalleryPhotoButton(tour, img, photoIndex, globalIndex) {
+  const alt = (tour.galleryAlt && tour.galleryAlt[photoIndex])
+    || `${tour.altPrefix || tour.name} - photo ${photoIndex + 1}`;
+  return `
+    <button type="button" class="site-gallery-item fade-in" data-index="${globalIndex}" data-tour-id="${tour.id}" aria-label="View ${tour.name} photo ${photoIndex + 1}">
+      <img src="${resolveImg(img)}" alt="${alt}" loading="lazy">
+      <span class="site-gallery-item-overlay" aria-hidden="true">
+        <span class="site-gallery-zoom-icon"></span>
+      </span>
+    </button>
+  `;
 }
 
 function initSiteGallery() {
-  const grid = document.getElementById('site-gallery');
-  if (!grid) return;
+  const container = document.getElementById('site-gallery');
+  if (!container) return;
 
-  const images = getSiteGalleryImages();
-  grid.innerHTML = images.map((item, i) => `
-    <button type="button" class="site-gallery-item fade-in" data-index="${i}" aria-label="View ${item.tour} photo">
-      <img src="${resolveImg(item.src)}" alt="${item.alt}" loading="lazy">
-      <span class="site-gallery-label">${item.tour}</span>
+  const toursWithGallery = Object.values(TOURS).filter(tour => (tour.gallery || []).length);
+  const allImages = [];
+  let globalIndex = 0;
+
+  const sectionsHtml = toursWithGallery.map(tour => {
+    const photosHtml = (tour.gallery || []).map((img, i) => {
+      const item = {
+        src: resolveImg(img),
+        alt: (tour.galleryAlt && tour.galleryAlt[i]) || `${tour.altPrefix || tour.name} - photo ${i + 1}`,
+        tour: tour.name,
+        tourId: tour.id
+      };
+      const html = buildGalleryPhotoButton(tour, img, i, globalIndex);
+      allImages.push(item);
+      globalIndex += 1;
+      return html;
+    }).join('');
+
+    const photoCount = tour.gallery.length;
+    const location = tour.location || SITE_LOCATION;
+    const heroImg = resolveImg(tour.heroImage || tour.image);
+
+    return `
+      <section class="gallery-tour-block fade-in" id="gallery-${tour.id}" data-tour-id="${tour.id}" aria-labelledby="gallery-title-${tour.id}">
+        <div class="gallery-tour-header">
+          <a href="${TOURS_PATH}${tour.id}.html" class="gallery-tour-thumb" tabindex="-1" aria-hidden="true">
+            <img src="${heroImg}" alt="" loading="lazy">
+          </a>
+          <div class="gallery-tour-header-body">
+            <div class="gallery-tour-header-top">
+              <span class="gallery-tour-location">${LOCATION_PIN_ICON}<span>${location}</span></span>
+              <span class="gallery-tour-count">${photoCount} photo${photoCount === 1 ? '' : 's'}</span>
+            </div>
+            <h3 class="gallery-tour-title" id="gallery-title-${tour.id}">${tour.name}</h3>
+            <p class="gallery-tour-meta">
+              <span>${tour.duration}</span>
+              <span class="gallery-tour-meta-dot" aria-hidden="true"></span>
+              <span>From $${tour.price}/person</span>
+            </p>
+            <div class="gallery-tour-actions">
+              <a href="${TOURS_PATH}${tour.id}.html" class="btn btn-ocean btn-sm">View Tour</a>
+              <a href="${ROOT_PATH}booking.html?tour=${tour.id}" class="btn btn-primary btn-sm">Book Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-tour-grid">${photosHtml}</div>
+      </section>
+    `;
+  }).join('');
+
+  const filtersHtml = toursWithGallery.map(tour => `
+    <button type="button" class="gallery-filter" data-filter="${tour.id}" role="tab" aria-selected="false" aria-controls="gallery-${tour.id}">
+      ${getGalleryChipLabel(tour.id)}
     </button>
   `).join('');
 
-  const urls = images.map(item => resolveImg(item.src));
-  const alts = images.map(item => item.alt);
+  container.innerHTML = `
+    <div class="gallery-toolbar fade-in">
+      <div class="gallery-toolbar-row">
+        <p class="gallery-toolbar-label">Filter by tour</p>
+        <span class="gallery-toolbar-count">${allImages.length} photos</span>
+      </div>
+      <div class="gallery-filters-wrap">
+        <button type="button" class="gallery-filters-nav gallery-filters-prev" aria-label="Scroll tour filters left" disabled>
+          <span aria-hidden="true">&lsaquo;</span>
+        </button>
+        <div class="gallery-filters" role="tablist" aria-label="Filter gallery by tour">
+          <button type="button" class="gallery-filter active" data-filter="all" role="tab" aria-selected="true">All Tours</button>
+          ${filtersHtml}
+        </div>
+        <button type="button" class="gallery-filters-nav gallery-filters-next" aria-label="Scroll tour filters right">
+          <span aria-hidden="true">&rsaquo;</span>
+        </button>
+      </div>
+    </div>
+    <div class="gallery-tour-sections">${sectionsHtml}</div>
+  `;
+
+  const sectionEl = container.closest('.gallery-page-section');
+  let activeFilter = 'all';
   let currentIndex = 0;
+
+  function getVisibleImages() {
+    if (activeFilter === 'all') return allImages;
+    return allImages.filter(item => item.tourId === activeFilter);
+  }
+
+  function setActiveFilter(filter, scrollToSection) {
+    activeFilter = filter;
+    container.dataset.activeFilter = filter;
+
+    container.querySelectorAll('.gallery-filter').forEach(btn => {
+      const isActive = btn.dataset.filter === filter;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    container.querySelectorAll('.gallery-tour-block').forEach(block => {
+      const show = filter === 'all' || block.dataset.tourId === filter;
+      block.classList.toggle('is-hidden', !show);
+      block.setAttribute('aria-hidden', show ? 'false' : 'true');
+    });
+
+    if (sectionEl) {
+      sectionEl.classList.toggle('is-filtered', filter !== 'all');
+    }
+
+    const hash = filter === 'all' ? '' : `#gallery-${filter}`;
+    history.replaceState(null, '', `${window.location.pathname}${window.location.search}${hash}`);
+
+    if (scrollToSection && filter !== 'all') {
+      document.getElementById(`gallery-${filter}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  container.querySelectorAll('.gallery-filter').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      setActiveFilter(filter, filter !== 'all');
+    });
+  });
+
+  const filtersScroll = container.querySelector('.gallery-filters');
+  const filtersPrev = container.querySelector('.gallery-filters-prev');
+  const filtersNext = container.querySelector('.gallery-filters-next');
+
+  function updateFiltersScrollState() {
+    if (!filtersScroll || !filtersPrev || !filtersNext) return;
+    const maxScroll = filtersScroll.scrollWidth - filtersScroll.clientWidth;
+    const atStart = filtersScroll.scrollLeft <= 4;
+    const atEnd = filtersScroll.scrollLeft >= maxScroll - 4;
+    filtersPrev.disabled = atStart;
+    filtersNext.disabled = atEnd || maxScroll <= 0;
+    container.querySelector('.gallery-filters-wrap')?.classList.toggle('can-scroll-left', !atStart);
+    container.querySelector('.gallery-filters-wrap')?.classList.toggle('can-scroll-right', !atEnd && maxScroll > 0);
+  }
+
+  function scrollFilters(direction) {
+    if (!filtersScroll) return;
+    filtersScroll.scrollBy({ left: direction * 220, behavior: 'smooth' });
+  }
+
+  filtersPrev?.addEventListener('click', () => scrollFilters(-1));
+  filtersNext?.addEventListener('click', () => scrollFilters(1));
+  filtersScroll?.addEventListener('scroll', updateFiltersScrollState, { passive: true });
+  window.addEventListener('resize', updateFiltersScrollState);
+  updateFiltersScrollState();
+
+  const initialHash = window.location.hash.replace('#', '');
+  if (initialHash.startsWith('gallery-')) {
+    const tourId = initialHash.replace('gallery-', '');
+    if (TOURS[tourId]?.gallery?.length) {
+      setActiveFilter(tourId, false);
+    }
+  }
 
   let lightbox = document.querySelector('.lightbox');
   if (!lightbox) {
@@ -1823,18 +1980,38 @@ function initSiteGallery() {
     lightbox.innerHTML = `
       <button class="lightbox-close" aria-label="Close">&times;</button>
       <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>
-      <img src="" alt="">
+      <div class="lightbox-stage">
+        <img src="" alt="">
+        <div class="lightbox-caption">
+          <span class="lightbox-tour-name"></span>
+          <span class="lightbox-counter"></span>
+        </div>
+      </div>
       <button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>
     `;
     document.body.appendChild(lightbox);
   }
 
-  const lightboxImg = lightbox.querySelector('img');
+  const lightboxImg = lightbox.querySelector('.lightbox-stage img');
+  const lightboxTourName = lightbox.querySelector('.lightbox-tour-name');
+  const lightboxCounter = lightbox.querySelector('.lightbox-counter');
 
-  function openLightbox(index) {
+  function updateLightboxView(items, index) {
+    const item = items[index];
+    if (!item) return;
     currentIndex = index;
-    lightboxImg.src = urls[currentIndex];
-    lightboxImg.alt = alts[currentIndex];
+    lightboxImg.src = item.src;
+    lightboxImg.alt = item.alt;
+    if (lightboxTourName) lightboxTourName.textContent = item.tour;
+    if (lightboxCounter) lightboxCounter.textContent = `${index + 1} / ${items.length}`;
+  }
+
+  function openLightbox(globalIdx) {
+    const items = getVisibleImages();
+    const clicked = allImages[globalIdx];
+    if (!clicked) return;
+    const localIndex = items.findIndex(item => item.src === clicked.src && item.tourId === clicked.tourId);
+    updateLightboxView(items, localIndex >= 0 ? localIndex : 0);
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -1844,27 +2021,26 @@ function initSiteGallery() {
     document.body.style.overflow = '';
   }
 
-  grid.querySelectorAll('.site-gallery-item').forEach(btn => {
+  function stepLightbox(delta) {
+    const items = getVisibleImages();
+    if (!items.length) return;
+    const next = (currentIndex + delta + items.length) % items.length;
+    updateLightboxView(items, next);
+  }
+
+  container.querySelectorAll('.site-gallery-item').forEach(btn => {
     btn.addEventListener('click', () => openLightbox(Number(btn.dataset.index)));
   });
 
   lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-  lightbox.querySelector('.lightbox-prev').addEventListener('click', () => {
-    currentIndex = (currentIndex - 1 + urls.length) % urls.length;
-    lightboxImg.src = urls[currentIndex];
-    lightboxImg.alt = alts[currentIndex];
-  });
-  lightbox.querySelector('.lightbox-next').addEventListener('click', () => {
-    currentIndex = (currentIndex + 1) % urls.length;
-    lightboxImg.src = urls[currentIndex];
-    lightboxImg.alt = alts[currentIndex];
-  });
+  lightbox.querySelector('.lightbox-prev').addEventListener('click', () => stepLightbox(-1));
+  lightbox.querySelector('.lightbox-next').addEventListener('click', () => stepLightbox(1));
   lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', e => {
     if (!lightbox.classList.contains('active')) return;
     if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') lightbox.querySelector('.lightbox-prev').click();
-    if (e.key === 'ArrowRight') lightbox.querySelector('.lightbox-next').click();
+    if (e.key === 'ArrowLeft') stepLightbox(-1);
+    if (e.key === 'ArrowRight') stepLightbox(1);
   });
 
   initScrollAnimations();
