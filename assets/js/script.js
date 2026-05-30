@@ -8,6 +8,13 @@ const SITE_URL = 'https://sea-n-n-safari-tours.vercel.app';
 const GOOGLE_GA_ID = '';
 const GOOGLE_REVIEW_URL = 'https://www.google.com/search?q=Sea+%26+Safari+Tours+Mirissa+reviews';
 const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Search?q=Sea+Safari+Tours+Mirissa';
+const GETYOURGUIDE_SUPPLIER_URL = 'https://www.getyourguide.com/-s700688';
+const GETYOURGUIDE_MIRISSA_URL = 'https://www.getyourguide.com/en-au/mirissa-l97533/';
+const GETYOURGUIDE_BADGES = [
+  { src: 'https://gyg.me/DFO5LFuz', alt: 'GetYourGuide | Sea & Safari Tours' },
+  { src: 'https://gyg.me/kUtga42u', alt: 'GetYourGuide | Sea & Safari Tours' }
+];
+const GETYOURGUIDE_PRODUCT_BADGE = 'https://gyg.me/pQw3KK9K';
 const OFFICE_HOURS = { start: 6, end: 20 };
 
 const COMBO_PACKAGES = [
@@ -20,7 +27,12 @@ const COMBO_PACKAGES = [
     originalPrice: 70,
     desc: 'Our best-selling combo — morning whale cruise, then snorkel with turtles. Free hotel pickup included.',
     image: 'assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png',
-    waText: 'Hello! I would like to book the Whale & Dolphin Watching + Turtle Snorkeling combo.'
+    waText: 'Hello! I would like to book the Whale & Dolphin Watching + Turtle Snorkeling combo.',
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/kamburugamuwa-l257091/mirissa-blue-whale-watching-turtle-snorkeling-combo-tour-t1201886/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'Mirissa: Blue Whale Watching & Turtle Snorkeling Combo Tour'
+    }
   },
   {
     id: 'kayak-cooking',
@@ -42,7 +54,12 @@ const COMBO_PACKAGES = [
     originalPrice: 70,
     desc: 'Combine an early-morning ocean safari with a peaceful river kayak through rainforest and mangroves.',
     image: 'assets/images/river-kayak/mirissa_kayak_sunset-kayak.png',
-    waText: 'Hello! I would like to book the Whale & Dolphin Watching + River Kayak combo.'
+    waText: 'Hello! I would like to book the Whale & Dolphin Watching + River Kayak combo.',
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/kamburugamuwa-l257091/mirissa-blue-whale-watching-river-kayaking-combo-tour-t1233283/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'Mirissa: Blue Whale Watching & River Kayaking Combo Tour'
+    }
   },
   {
     id: 'whale-crocodile',
@@ -53,7 +70,12 @@ const COMBO_PACKAGES = [
     originalPrice: 75,
     desc: 'Ocean giants in the morning and crocodile river safari in the afternoon — two unforgettable wildlife experiences.',
     image: 'assets/images/crocodile-safari/crocodile_watching_close-up.png',
-    waText: 'Hello! I would like to book the Whale & Dolphin Watching + Crocodile Watching combo.'
+    waText: 'Hello! I would like to book the Whale & Dolphin Watching + Crocodile Watching combo.',
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/kamburugamuwa-l257091/mirissa-whale-watching-crocodile-watching-combo-tour-t1328775/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'Mirissa: Blue Whale Watching & Crocodile Watching Combo Tour'
+    }
   }
 ];
 
@@ -138,7 +160,12 @@ const TOURS = {
       { time: '10:30 AM', title: 'Return to Harbor', desc: 'Cruise back to Mirissa Harbor and transfer to your hotel.' }
     ],
     included: ['Free hotel pickup from Mirissa area', 'Experienced skipper and guide', 'Live guidance and marine commentary', 'Safety briefing before departure', 'Life jackets and safety equipment', 'Bottled water', 'Sandwiches, cake, fresh fruits, tea/coffee', 'Whale & Dolphin Watching Cruise', 'Seasick tablets & medicines', 'Boat insurance'],
-    excluded: ['Personal expenses', 'Tips for crew', 'Underwater camera rental']
+    excluded: ['Personal expenses', 'Tips for crew', 'Underwater camera rental'],
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/mirissa-l97533/mirissa-whale-watching-tours-with-blue-whales-dolphins-t1177026/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'Mirissa: Whale Watching Cruise With Blue Whales & Dolphins'
+    }
   },
   'turtle-snorkeling': {
     id: 'turtle-snorkeling',
@@ -176,7 +203,12 @@ const TOURS = {
       { time: 'End', title: 'Drop-off', desc: 'Free drop-off back to your hotel in Mirissa area.' }
     ],
     included: ['Free pickup and drop-off within Mirissa area', '1.5 hours guaranteed snorkeling time', '100% turtle sighting guarantee', 'Safety briefing before snorkeling', 'Snorkeling mask and fins', 'In-water guide at all times', 'Light snacks and bottled water'],
-    excluded: ['Underwater GoPro camera rental (available on request)', 'Personal expenses', 'Tips for guide']
+    excluded: ['Underwater GoPro camera rental (available on request)', 'Personal expenses', 'Tips for guide'],
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/mirissa-l97533/mirissa-the-best-snorkeling-experience-with-turtles-t1174003/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'Mirissa: Guided Turtle Snorkeling Experience with Coral Reef'
+    }
   },
   'crocodile-safari': {
     id: 'crocodile-safari',
@@ -231,6 +263,11 @@ const TOURS = {
         'Please follow guide instructions for safety',
         'Wear comfortable clothes and sun protection'
       ]
+    },
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/matara-l143169/matara-nilwala-river-crocodile-watching-with-boat-safari-t1173193/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'From Mirissa: Crocodile Watching River Boat Safari'
     }
   },
   'river-kayak': {
@@ -283,6 +320,11 @@ const TOURS = {
         'No prior kayaking experience required',
         'Suitable for beginners'
       ]
+    },
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/kamburugamuwa-l257091/mirissa-guided-mangrove-kayaking-adventure-river-safari-t1329414/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'Mirissa: Guided Mangrove Kayaking Adventure & River Safari'
     }
   },
   'scuba-diving': {
@@ -407,6 +449,11 @@ const TOURS = {
         'Please come at least 5 minutes before the location time',
         'If you can share a reachable WhatsApp number, it will be easier for us to stay in touch'
       ]
+    },
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/mirissa-l97533/mirissa-unforgettable-scuba-diving-experience-with-coral-t1175987/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'Mirissa: Guided Scuba Diving Experience with Coral'
     }
   },
   'night-snorkeling': {
@@ -475,6 +522,11 @@ const TOURS = {
         'Please come at least 5 minutes before the location time',
         'If you can share a reachable WhatsApp number, it will be easier for us to stay in touch'
       ]
+    },
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/mirissa-l97533/mirissa-night-snorkeling-experience-with-pickup-gear-t1173966/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'Mirissa: Night Snorkeling with Sea Turtles & Coral Reefs'
     }
   },
   'deep-sea-fishing': {
@@ -587,6 +639,11 @@ const TOURS = {
         'Wildlife is observed ethically and respectfully; animals are never chased or disturbed',
         'Please come at least 5 minutes before the scheduled time'
       ]
+    },
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/mirissa-l97533/mirissa-unforgettable-boat-safari-and-sea-fishing-tour-t1174794/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'Mirissa: Private Deep Sea Fishing Boat Tour with Local Guide'
     }
   },
   'cooking-class': {
@@ -647,6 +704,11 @@ const TOURS = {
       bring: ['Comfortable clothes', 'Clothes that can get dirty'],
       notAllowed: ['Alcohol and drugs'],
       knowBeforeYouGo: ['Wear comfortable clothing suitable for cooking', 'No prior cooking experience is required', 'All skill levels are welcome', 'Please inform us in advance of any food allergies or dietary restrictions']
+    },
+    getYourGuide: {
+      url: 'https://www.getyourguide.com/mirissa-l97533/mirissa-authentic-sri-lankan-cooking-class-experience-t1175959/',
+      badge: GETYOURGUIDE_PRODUCT_BADGE,
+      title: 'Mirissa: Authentic Sri Lankan Cooking Class Experience'
     }
   }
 };
@@ -656,6 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPageMeta();
   initLocalBusinessSchema();
   injectNavExtras();
+  injectGetYourGuideBadges();
   initMobileNav();
   initHeader();
   initScrollAnimations();
@@ -800,6 +863,9 @@ function getMobileNavIcon(link) {
   return '•';
 }
 
+const NAV_ICON_FAQ = '<svg class="nav-pill-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9a2.5 2.5 0 0 1 4.5 1.2c0 1.8-2.5 1.8-2.5 3.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>';
+const NAV_ICON_GALLERY = '<svg class="nav-pill-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.75" fill="currentColor"/><path d="M21 15l-5-5L5 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+
 function injectNavExtras() {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   const faqHref = `${ROOT_PATH}faq.html`;
@@ -812,11 +878,11 @@ function injectNavExtras() {
     extra.className = 'nav-extra';
     extra.innerHTML = `
       <a href="${faqHref}" class="nav-pill nav-pill-faq${currentPath === 'faq.html' ? ' active' : ''}">
-        <span class="nav-pill-icon nav-pill-icon-faq" aria-hidden="true"></span>
+        ${NAV_ICON_FAQ}
         <span>FAQ</span>
       </a>
       <a href="${galleryHref}" class="nav-pill nav-pill-gallery${currentPath === 'gallery.html' ? ' active' : ''}">
-        <span class="nav-pill-icon nav-pill-icon-gallery" aria-hidden="true"></span>
+        ${NAV_ICON_GALLERY}
         <span>Gallery</span>
       </a>
     `;
@@ -826,20 +892,62 @@ function injectNavExtras() {
   const mobileNav = document.querySelector('.mobile-nav');
   if (mobileNav && !mobileNav.querySelector('.nav-extra-link')) {
     const ctaBtn = mobileNav.querySelector('.btn.btn-primary');
+
     const galleryLink = document.createElement('a');
     galleryLink.href = galleryHref;
     galleryLink.className = 'nav-link nav-extra-link';
-    galleryLink.textContent = 'Gallery';
+    galleryLink.innerHTML = `${NAV_ICON_GALLERY}<span>Gallery</span>`;
     if (currentPath === 'gallery.html') galleryLink.classList.add('active');
 
     const faqLink = document.createElement('a');
     faqLink.href = faqHref;
     faqLink.className = 'nav-link nav-extra-link';
-    faqLink.textContent = 'FAQ';
+    faqLink.innerHTML = `${NAV_ICON_FAQ}<span>FAQ</span>`;
     if (currentPath === 'faq.html') faqLink.classList.add('active');
 
     mobileNav.insertBefore(galleryLink, ctaBtn);
     mobileNav.insertBefore(faqLink, galleryLink);
+  }
+}
+
+function buildGetYourGuideBadgesHtml(compact) {
+  const badges = GETYOURGUIDE_BADGES.map(badge => `
+    <a href="${GETYOURGUIDE_SUPPLIER_URL}" class="gyg-badge-link" target="_blank" rel="noopener noreferrer" title="Book Sea &amp; Safari Tours on GetYourGuide">
+      <img src="${badge.src}" class="gyg-badge-img" width="160" height="auto" alt="${badge.alt}" loading="lazy">
+    </a>
+  `).join('');
+
+  if (compact) {
+    return `<div class="gyg-badges gyg-badges-compact">${badges}</div>`;
+  }
+
+  return `
+    <div class="gyg-badges">
+      <p class="gyg-badges-label">Official partner on <a href="${GETYOURGUIDE_MIRISSA_URL}" target="_blank" rel="noopener noreferrer">GetYourGuide</a></p>
+      <div class="gyg-badges-row">${badges}</div>
+    </div>
+  `;
+}
+
+function injectGetYourGuideBadges() {
+  document.querySelectorAll('.footer-brand').forEach(brand => {
+    if (brand.querySelector('.gyg-badges')) return;
+    brand.insertAdjacentHTML('beforeend', buildGetYourGuideBadgesHtml(false));
+  });
+
+  const trustBar = document.querySelector('.reviews-trust-bar');
+  if (trustBar && !trustBar.querySelector('.gyg-badges-compact')) {
+    trustBar.insertAdjacentHTML('beforeend', buildGetYourGuideBadgesHtml(true));
+  }
+
+  const bookingSidebar = document.querySelector('.summary-card');
+  if (bookingSidebar && !bookingSidebar.querySelector('.gyg-badges-compact')) {
+    bookingSidebar.insertAdjacentHTML('beforeend', `
+      <div class="gyg-booking-badges">
+        <p class="gyg-booking-label">Also book on GetYourGuide</p>
+        ${buildGetYourGuideBadgesHtml(true)}
+      </div>
+    `);
   }
 }
 
@@ -1202,6 +1310,7 @@ function renderComboPackages() {
           <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(pkg.waText)}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener">Book via WhatsApp</a>
           <a href="${ROOT_PATH}booking.html" class="btn btn-ocean btn-sm">Online Booking</a>
         </div>
+        ${renderGygBlock(pkg.getYourGuide, 'combo-gyg-block')}
       </div>
     </article>
   `).join('');
@@ -1380,6 +1489,24 @@ function renderFeaturedTours() {
   initScrollAnimations();
 }
 
+function renderGygBlock(gyg, blockClass = 'tour-gyg-block') {
+  if (!gyg) return '';
+  const badge = gyg.badge || GETYOURGUIDE_PRODUCT_BADGE;
+  return `
+    <div class="${blockClass}">
+      <p class="tour-gyg-label">Also available on GetYourGuide</p>
+      <a href="${gyg.url}" class="tour-gyg-badge-link" target="_blank" rel="noopener noreferrer" title="${gyg.title}">
+        <img src="${badge}" class="gyg-badge-img tour-gyg-badge" width="160" height="auto" alt="GetYourGuide | ${gyg.title}" loading="lazy">
+      </a>
+      <p class="tour-gyg-title">${gyg.title}</p>
+    </div>
+  `;
+}
+
+function renderTourGetYourGuideBlock(tour) {
+  return renderGygBlock(tour.getYourGuide);
+}
+
 function initTourDetails() {
   const params = new URLSearchParams(window.location.search);
   const pageAttr = document.getElementById('tour-detail-content')?.dataset.tourId;
@@ -1500,6 +1627,7 @@ function initTourDetails() {
             </ul>
             <a href="${ROOT_PATH}booking.html?tour=${tour.id}" class="btn btn-primary btn-block" style="margin-top:24px">Book This Tour</a>
             <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello! I'm interested in booking: ${tour.name}`)}" class="btn btn-whatsapp btn-block" style="margin-top:12px" target="_blank" rel="noopener">WhatsApp Inquiry</a>
+            ${renderTourGetYourGuideBlock(tour)}
           </div>
         </aside>
       </div>
