@@ -838,6 +838,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeader();
   initScrollAnimations();
   initFloatingWhatsApp();
+  initScrollToTop();
   initHeroCarousel();
 
   if (document.querySelector('.tours-grid[data-render="all"]')) renderAllTours();
@@ -1255,6 +1256,28 @@ function initFloatingWhatsApp() {
     const message = encodeURIComponent('Hello Sea & Safari Tours! I would like to inquire about your tours.');
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
   });
+}
+
+function initScrollToTop() {
+  if (document.querySelector('.scroll-to-top')) return;
+
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'scroll-to-top';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.innerHTML = '<svg class="scroll-to-top-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 4l-7 7h4v9h6v-9h4z"/></svg>';
+  document.body.appendChild(btn);
+
+  const toggle = () => {
+    btn.classList.toggle('is-visible', window.scrollY > 400);
+  };
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle();
 }
 
 function isWithinOfficeHours() {
