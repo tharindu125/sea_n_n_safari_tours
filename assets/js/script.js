@@ -1018,6 +1018,19 @@ function initHeroCarousel() {
     ctaPrimary.textContent = label;
   }
 
+  function scrollActiveTabIntoView(activeTab) {
+    if (!tabsContainer || !activeTab) return;
+    if (tabsContainer.scrollWidth <= tabsContainer.clientWidth) return;
+
+    const tabLeft = activeTab.offsetLeft;
+    const tabWidth = activeTab.offsetWidth;
+    const targetLeft = tabLeft - (tabsContainer.clientWidth / 2) + (tabWidth / 2);
+    tabsContainer.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: 'smooth'
+    });
+  }
+
   function syncUi(index) {
     if (counterCurrent) counterCurrent.textContent = padSlideNum(index);
 
@@ -1029,9 +1042,7 @@ function initHeroCarousel() {
     tabs.forEach((btn, i) => {
       const isActive = i === index;
       btn.classList.toggle('active', isActive);
-      if (isActive) {
-        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      }
+      if (isActive) scrollActiveTabIntoView(btn);
     });
 
     updateSlideCta(slides[index]);
