@@ -2279,6 +2279,7 @@ body.mobile-menu-open .hamburger {
 /* ========== Site Gallery ========== */
 .gallery-page-section {
   background: var(--off-white);
+  padding-bottom: 64px;
 }
 
 .site-gallery {
@@ -3024,6 +3025,12 @@ body.mobile-menu-open .hamburger {
   flex-wrap: wrap;
   gap: 16px;
   justify-content: center;
+  align-items: center;
+}
+
+.gallery-page-actions {
+  margin-top: 48px;
+  text-align: center;
 }
 
 /* ========== Page Hero (inner pages) – European ========== */
@@ -4712,6 +4719,29 @@ body.mobile-menu-open .hamburger {
     padding: 20px 16px 16px;
   }
 
+  .gallery-page-section .section-header {
+    margin-bottom: 32px;
+  }
+
+  .gallery-page-actions {
+    margin-top: 28px;
+    margin-bottom: 0;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    width: 100%;
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+    margin: 0;
+  }
+
   .reviews-trust-bar {
     flex-direction: column;
     text-align: center;
@@ -4755,15 +4785,23 @@ body.mobile-menu-open .hamburger {
   }
 
   .floating-wa-wrap {
-    bottom: 78px;
+    bottom: 18px;
     right: 16px;
   }
 
   .scroll-to-top {
-    bottom: 78px;
+    bottom: 18px;
     left: 16px;
     width: 46px;
     height: 46px;
+  }
+
+  body:has(.mobile-book-bar) .floating-wa-wrap {
+    bottom: 78px;
+  }
+
+  body:has(.mobile-book-bar) .scroll-to-top {
+    bottom: 78px;
   }
 
   .nav,
@@ -4819,6 +4857,11 @@ body.mobile-menu-open .hamburger {
 
   .section {
     padding: 70px 0;
+  }
+
+  .section.gallery-page-section {
+    padding-top: 48px;
+    padding-bottom: 16px;
   }
 
   .about-grid {
