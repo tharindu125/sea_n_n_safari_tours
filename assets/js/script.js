@@ -8,6 +8,9 @@ const SITE_URL = 'https://sea-n-n-safari-tours.vercel.app';
 const SITE_NAME = 'Sea & Safari Tours';
 const SITE_LOCALE = 'en_US';
 const GOOGLE_GA_ID = '';
+const TWITTER_HANDLE = '';
+const SITE_COPYRIGHT = `\u00A9 ${new Date().getFullYear()} Sea & Safari Tours`;
+const SITE_ALTERNATE_NAME = 'Sea Safari Tours Mirissa';
 const GOOGLE_REVIEW_URL = 'https://www.google.com/search?q=Sea+%26+Safari+Tours+Mirissa+reviews';
 const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Search?q=Sea+Safari+Tours+Mirissa';
 const GETYOURGUIDE_SUPPLIER_URL = 'https://www.getyourguide.com/-s700688';
@@ -21,21 +24,41 @@ const OFFICE_HOURS = { start: 6, end: 20 };
 
 const SEO_DEFAULTS = {
   author: 'Sea & Safari Tours',
-  robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+  copyright: SITE_COPYRIGHT,
+  robots: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+  googlebot: 'index, follow',
   themeColor: '#0f2832',
+  referrer: 'no-referrer',
   geo: {
     region: 'LK-3',
     placename: 'Mirissa, Sri Lanka',
     position: '5.9483;80.4719',
     icbm: '5.9483, 80.4719'
+  },
+  business: {
+    streetAddress: 'Mirissa, Southern Province',
+    locality: 'Mirissa',
+    region: 'Southern Province',
+    postalCode: '81740',
+    country: 'Sri Lanka'
+  },
+  dc: {
+    publisher: 'Sea & Safari Tours',
+    contributor: 'Sea & Safari Tours',
+    type: 'Text',
+    format: 'text/html',
+    language: 'en',
+    coverage: 'Mirissa, Sri Lanka',
+    rights: `${SITE_COPYRIGHT}. All rights reserved.`
   }
 };
 
 const PAGE_SEO = {
   'index.html': {
     title: 'Sea & Safari Tours | Mirissa Whale Watching & Ocean Adventures Sri Lanka',
-    description: 'Book Mirissa whale watching, turtle snorkeling, scuba diving & wildlife tours. Free hotel pickup, expert local guides, 4.9★ rated. WhatsApp & online booking.',
-    keywords: 'mirissa whale watching, sri lanka tours, turtle snorkeling mirissa, sea safari tours, mirissa boat tours, whale watching sri lanka',
+    description: 'Join Sea & Safari Tours for unforgettable ocean adventures — whale watching, turtle snorkeling, scuba diving, river kayak, fishing & wildlife tours in Mirissa. Expert guides, free hotel pickup, 4.9★ rated.',
+    keywords: 'Sea & Safari Tours, Mirissa whale watching, Mirissa snorkeling, whale watching Mirissa, scuba diving Mirissa, turtle snorkeling Mirissa, river kayak Mirissa, crocodile safari Mirissa, deep sea fishing Mirissa, Sri Lanka tours, things to do in Mirissa, Mirissa ocean adventures, cooking class Mirissa, dolphin watching Mirissa',
+    dcSubject: 'Whale Watching, Turtle Snorkeling, Scuba Diving, River Kayak, Crocodile Safari, Deep Sea Fishing, Cooking Class, Ocean Adventures, Mirissa Tours',
     image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
     path: '/'
   },
@@ -88,6 +111,14 @@ const PAGE_SEO = {
     keywords: 'mirissa tour photos, whale watching pictures, mirissa snorkeling gallery',
     image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_boat-guests-1.png`,
     path: '/gallery.html'
+  },
+  'tour-details.html': {
+    title: 'Tour Details | Sea & Safari Tours',
+    description: 'Detailed Mirissa tour information, itinerary, pricing, and online booking for Sea & Safari Tours.',
+    keywords: 'mirissa tour details, sea safari tours',
+    image: `${SITE_URL}/assets/images/logo.png`,
+    path: '/tour-details.html',
+    robots: 'noindex, nofollow'
   }
 };
 
@@ -1312,38 +1343,73 @@ function applyPageMeta(meta, canonicalPath) {
 
   const url = getCanonicalUrl(canonicalPath || meta.path);
   const image = meta.image || `${SITE_URL}/assets/images/logo.png`;
+  const robots = meta.robots || SEO_DEFAULTS.robots;
+  const isNoIndex = robots.includes('noindex');
+  const googlebot = meta.googlebot || (isNoIndex ? robots : SEO_DEFAULTS.googlebot);
+  const otherBots = isNoIndex ? robots : SEO_DEFAULTS.googlebot;
+  const pageName = meta.dcTitle || meta.title;
 
   document.title = meta.title;
   setMetaTag('name', 'description', meta.description);
   if (meta.keywords) setMetaTag('name', 'keywords', meta.keywords);
   setMetaTag('name', 'author', SEO_DEFAULTS.author);
-  const robots = meta.robots || SEO_DEFAULTS.robots;
+  setMetaTag('name', 'copyright', SEO_DEFAULTS.copyright);
   setMetaTag('name', 'robots', robots);
-  setMetaTag('name', 'googlebot', robots);
+  setMetaTag('name', 'googlebot', googlebot);
+  setMetaTag('name', 'bingbot', otherBots);
+  setMetaTag('name', 'slurp', otherBots);
+  setMetaTag('name', 'referrer', SEO_DEFAULTS.referrer);
   setMetaTag('name', 'geo.region', SEO_DEFAULTS.geo.region);
   setMetaTag('name', 'geo.placename', SEO_DEFAULTS.geo.placename);
   setMetaTag('name', 'geo.position', SEO_DEFAULTS.geo.position);
   setMetaTag('name', 'ICBM', SEO_DEFAULTS.geo.icbm);
   setMetaTag('name', 'theme-color', SEO_DEFAULTS.themeColor);
+  setMetaTag('name', 'apple-mobile-web-app-capable', 'yes');
+  setMetaTag('name', 'mobile-web-app-capable', 'yes');
+  setMetaTag('name', 'apple-mobile-web-app-status-bar-style', 'black-translucent');
+  setMetaTag('name', 'apple-mobile-web-app-title', SITE_NAME);
+  setMetaTag('name', 'application-name', SITE_NAME);
+
+  setMetaTag('name', 'DC.title', pageName);
+  setMetaTag('name', 'DC.creator', SEO_DEFAULTS.author);
+  setMetaTag('name', 'DC.subject', meta.dcSubject || meta.keywords || SITE_NAME);
+  setMetaTag('name', 'DC.description', meta.description);
+  setMetaTag('name', 'DC.publisher', SEO_DEFAULTS.dc.publisher);
+  setMetaTag('name', 'DC.contributor', SEO_DEFAULTS.dc.contributor);
+  setMetaTag('name', 'DC.date', new Date().toISOString().split('T')[0]);
+  setMetaTag('name', 'DC.type', SEO_DEFAULTS.dc.type);
+  setMetaTag('name', 'DC.format', SEO_DEFAULTS.dc.format);
+  setMetaTag('name', 'DC.identifier', url);
+  setMetaTag('name', 'DC.language', SEO_DEFAULTS.dc.language);
+  setMetaTag('name', 'DC.coverage', SEO_DEFAULTS.dc.coverage);
+  setMetaTag('name', 'DC.rights', SEO_DEFAULTS.dc.rights);
 
   setLinkTag('canonical', url);
   setLinkTag('alternate', url, { hreflang: 'en' });
   setLinkTag('alternate', url, { hreflang: 'x-default' });
-  if (!document.querySelector('link[rel="sitemap"]')) {
-    const sitemap = document.createElement('link');
+  setLinkTag('icon', `${SITE_URL}/assets/images/logo.png`);
+  setLinkTag('apple-touch-icon', `${SITE_URL}/assets/images/logo.png`);
+
+  let sitemap = document.querySelector('link[rel="sitemap"]');
+  if (!sitemap) {
+    sitemap = document.createElement('link');
     sitemap.rel = 'sitemap';
-    sitemap.type = 'application/xml';
-    sitemap.href = `${SITE_URL}/sitemap.xml`;
     document.head.appendChild(sitemap);
   }
+  sitemap.type = 'application/xml';
+  sitemap.title = 'Sitemap';
+  sitemap.href = `${SITE_URL}/sitemap.xml`;
 
   setMetaTag('property', 'og:type', meta.type || 'website');
   setMetaTag('property', 'og:site_name', SITE_NAME);
   setMetaTag('property', 'og:locale', SITE_LOCALE);
+  setMetaTag('property', 'og:locale:alternate', 'en_GB');
   setMetaTag('property', 'og:title', meta.title);
   setMetaTag('property', 'og:description', meta.description);
   setMetaTag('property', 'og:image', image);
   setMetaTag('property', 'og:image:alt', meta.imageAlt || meta.title);
+  setMetaTag('property', 'og:image:width', '1200');
+  setMetaTag('property', 'og:image:height', '630');
   setMetaTag('property', 'og:url', url);
 
   setMetaTag('name', 'twitter:card', 'summary_large_image');
@@ -1351,6 +1417,10 @@ function applyPageMeta(meta, canonicalPath) {
   setMetaTag('name', 'twitter:description', meta.description);
   setMetaTag('name', 'twitter:image', image);
   setMetaTag('name', 'twitter:image:alt', meta.imageAlt || meta.title);
+  if (TWITTER_HANDLE) {
+    setMetaTag('name', 'twitter:site', TWITTER_HANDLE);
+    setMetaTag('name', 'twitter:creator', TWITTER_HANDLE);
+  }
 }
 
 function initSeo() {
@@ -1366,52 +1436,115 @@ function initSeo() {
   initGlobalStructuredData(page);
 }
 
-function initGlobalStructuredData(page) {
-  injectJsonLd({
-    '@context': 'https://schema.org',
-    '@type': 'TravelAgency',
-    name: SITE_NAME,
-    url: SITE_URL,
-    logo: `${SITE_URL}/assets/images/logo.png`,
-    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
-    telephone: '+94787097430',
-    email: COMPANY_EMAIL,
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Mirissa',
-      addressRegion: 'Southern Province',
-      addressCountry: 'LK'
-    },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: 5.9483,
-      longitude: 80.4719
-    },
-    areaServed: {
-      '@type': 'City',
-      name: 'Mirissa'
-    },
-    sameAs: [
-      GETYOURGUIDE_MIRISSA_URL,
-      GOOGLE_REVIEW_URL
-    ],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '500',
-      bestRating: '5'
-    },
-    priceRange: '$$'
+function getStaticJsonLdTypes() {
+  const types = new Set();
+  document.querySelectorAll('script[type="application/ld+json"]').forEach(script => {
+    try {
+      const data = JSON.parse(script.textContent);
+      if (data['@type']) types.add(data['@type']);
+    } catch (_) { /* ignore invalid JSON-LD blocks */ }
   });
+  return types;
+}
 
-  if (page === 'index.html') {
+function injectBusinessSchemas(skipTypes = new Set()) {
+  if (!skipTypes.has('TravelAgency')) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'TravelAgency',
+      name: SITE_NAME,
+      alternateName: SITE_ALTERNATE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/assets/images/logo.png`,
+      image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
+      telephone: '+94787097430',
+      email: COMPANY_EMAIL,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: SEO_DEFAULTS.business.streetAddress,
+        addressLocality: SEO_DEFAULTS.business.locality,
+        addressRegion: SEO_DEFAULTS.business.region,
+        postalCode: SEO_DEFAULTS.business.postalCode,
+        addressCountry: SEO_DEFAULTS.business.country
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 5.9483,
+        longitude: 80.4719
+      },
+      areaServed: {
+        '@type': 'City',
+        name: 'Mirissa'
+      },
+      sameAs: [
+        GETYOURGUIDE_MIRISSA_URL,
+        GETYOURGUIDE_SUPPLIER_URL,
+        GOOGLE_REVIEW_URL
+      ],
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        reviewCount: '500',
+        bestRating: '5'
+      },
+      priceRange: '$$'
+    });
+  }
+
+  if (!skipTypes.has('LocalBusiness')) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: SITE_NAME,
+      alternateName: SITE_ALTERNATE_NAME,
+      image: `${SITE_URL}/assets/images/logo.png`,
+      url: SITE_URL,
+      telephone: '+94787097430',
+      email: COMPANY_EMAIL,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: SEO_DEFAULTS.business.streetAddress,
+        addressLocality: SEO_DEFAULTS.business.locality,
+        addressRegion: SEO_DEFAULTS.business.region,
+        postalCode: SEO_DEFAULTS.business.postalCode,
+        addressCountry: SEO_DEFAULTS.business.country
+      }
+    });
+  }
+}
+
+function initGlobalStructuredData(page) {
+  const staticTypes = getStaticJsonLdTypes();
+  const pageMeta = PAGE_SEO[page];
+  const pageUrl = pageMeta ? getCanonicalUrl(pageMeta.path) : getCanonicalUrl();
+
+  injectBusinessSchemas(staticTypes);
+
+  if (pageMeta && !staticTypes.has('WebPage')) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: pageMeta.title,
+      description: pageMeta.description,
+      url: pageUrl,
+      inLanguage: 'en',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: SITE_NAME,
+        url: SITE_URL
+      }
+    });
+  }
+
+  if (page === 'index.html' && !staticTypes.has('WebSite')) {
     injectJsonLd({
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: SITE_NAME,
+      alternateName: SITE_ALTERNATE_NAME,
       url: SITE_URL,
       inLanguage: 'en',
-      publisher: { '@type': 'Organization', name: SITE_NAME }
+      publisher: { '@type': 'Organization', name: SITE_NAME, logo: `${SITE_URL}/assets/images/logo.png` }
     });
   }
 
@@ -1444,6 +1577,52 @@ function initGlobalStructuredData(page) {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
       mainEntity: faqEntities
+    });
+  }
+
+  if (page === 'contact.html') {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: pageMeta?.title || 'Contact Sea & Safari Tours',
+      url: pageUrl,
+      description: pageMeta?.description,
+      mainEntity: {
+        '@type': 'TravelAgency',
+        name: SITE_NAME,
+        telephone: '+94787097430',
+        email: COMPANY_EMAIL,
+        url: SITE_URL
+      }
+    });
+  }
+
+  if (page === 'about.html') {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: pageMeta?.title || `About ${SITE_NAME}`,
+      url: pageUrl,
+      description: pageMeta?.description,
+      mainEntity: {
+        '@type': 'TravelAgency',
+        name: SITE_NAME,
+        url: SITE_URL
+      }
+    });
+  }
+
+  if (page === 'gallery.html') {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: pageMeta?.title || 'Photo Gallery',
+      url: pageUrl,
+      description: pageMeta?.description,
+      about: {
+        '@type': 'TravelAgency',
+        name: SITE_NAME
+      }
     });
   }
 }
@@ -1599,15 +1778,32 @@ function injectTourMeta(tour) {
   const canonicalPath = `/tours/${tour.id}.html`;
   const keywords = TOUR_SEO[tour.id] || `${tour.name.toLowerCase()} mirissa, sri lanka tours, sea safari tours`;
 
+  injectBusinessSchemas(getStaticJsonLdTypes());
+
   applyPageMeta({
     title,
     description,
     keywords,
+    dcSubject: keywords,
     image,
     imageAlt: tour.imageAlt || `${tour.altPrefix || tour.name} - Mirissa Sri Lanka`,
     type: 'product',
     path: canonicalPath
   }, canonicalPath);
+
+  injectJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    url: getCanonicalUrl(canonicalPath),
+    inLanguage: 'en',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: SITE_NAME,
+      url: SITE_URL
+    }
+  });
 
   injectJsonLd({
     '@context': 'https://schema.org',
