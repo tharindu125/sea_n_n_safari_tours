@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const root = path.join(__dirname, '..');
-const SITE = 'https://sea-n-n-safari-tours.vercel.app';
+const SITE = 'https://www.ceylonseasafaritours.com';
 
 const tourTitles = {
   'whale-dolphin.html': 'Whale & Dolphin Watching',

@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const SITE = 'https://sea-n-n-safari-tours.vercel.app';
+const SITE = 'https://www.ceylonseasafaritours.com';
 const SITE_NAME = 'Sea & Safari Tours';
 const DC_DATE = '2026-05-27';
 const COPYRIGHT = '© 2026 Sea & Safari Tours';

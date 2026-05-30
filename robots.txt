@@ -3,4 +3,4 @@ Allow: /
 Disallow: /payment.html
 Disallow: /tour-details.html
 
-Sitemap: https://sea-n-n-safari-tours.vercel.app/sitemap.xml
+Sitemap: https://www.ceylonseasafaritours.com/sitemap.xml

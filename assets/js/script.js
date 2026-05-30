@@ -4,8 +4,10 @@
 
 const WHATSAPP_NUMBER = '94787097430';
 const COMPANY_EMAIL = 'seaandsafaritours@gmail.com';
-const SITE_URL = 'https://sea-n-n-safari-tours.vercel.app';
+const SITE_URL = 'https://www.ceylonseasafaritours.com';
 const SITE_NAME = 'Sea & Safari Tours';
+const SITE_LOCATION = 'Mirissa, Sri Lanka';
+const SITE_LOCATION_SHORT = 'Mirissa';
 const SITE_LOCALE = 'en_US';
 const GOOGLE_GA_ID = '';
 const TWITTER_HANDLE = '';
@@ -236,6 +238,79 @@ const TOURS_PATH = IS_IN_TOURS_DIR ? '' : 'tours/';
 const ROOT_PATH = IS_IN_TOURS_DIR ? '../' : '';
 const IMG_PATH = IS_IN_TOURS_DIR ? '../' : '';
 function resolveImg(src) { return src.startsWith('http') ? src : IMG_PATH + src; }
+
+function getTourIdFromHref(href) {
+  if (!href) return null;
+  const file = href.split('/').pop();
+  return file?.replace('.html', '') || null;
+}
+
+function getTourLocationShort(tourId) {
+  const tour = tourId ? TOURS[tourId] : null;
+  if (!tour?.location) return SITE_LOCATION_SHORT;
+  if (tour.location.includes('Matara')) return 'Matara';
+  return SITE_LOCATION_SHORT;
+}
+
+const LOCATION_PIN_ICON = '<svg class="location-pin-icon" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>';
+
+function injectMirissaBranding() {
+  document.querySelectorAll('.logo').forEach(logo => {
+    if (logo.querySelector('.logo-text-wrap')) return;
+
+    const img = logo.querySelector('.logo-img');
+    [...logo.childNodes].forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) node.remove();
+    });
+
+    const wrap = document.createElement('span');
+    wrap.className = 'logo-text-wrap';
+    wrap.innerHTML = `<span class="logo-name">${SITE_NAME}</span><span class="logo-location">${LOCATION_PIN_ICON}${SITE_LOCATION}</span>`;
+    logo.appendChild(wrap);
+
+    if (img && img.nextSibling !== wrap) {
+      logo.insertBefore(img, wrap);
+    }
+  });
+
+  document.querySelectorAll('.nav-link-caret').forEach(link => {
+    if (link.querySelector('.nav-tours-loc')) return;
+    link.setAttribute('title', `Tours in ${SITE_LOCATION}`);
+    link.setAttribute('aria-label', `Tours in ${SITE_LOCATION}`);
+    link.innerHTML = `Tours <span class="nav-tours-loc">${SITE_LOCATION_SHORT}</span>`;
+  });
+
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    if (menu.querySelector('.dropdown-location-header')) return;
+
+    const header = document.createElement('div');
+    header.className = 'dropdown-location-header';
+    header.innerHTML = `${LOCATION_PIN_ICON}<span>All tours in ${SITE_LOCATION}</span>`;
+    menu.insertBefore(header, menu.firstChild);
+
+    menu.querySelectorAll('a:not(.dropdown-all)').forEach(link => {
+      if (link.querySelector('.dropdown-tour-loc')) return;
+      const tourName = link.textContent.trim();
+      const tourId = getTourIdFromHref(link.getAttribute('href'));
+      const loc = getTourLocationShort(tourId);
+
+      link.textContent = '';
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'dropdown-tour-name';
+      nameSpan.textContent = tourName;
+      const locSpan = document.createElement('span');
+      locSpan.className = 'dropdown-tour-loc';
+      locSpan.textContent = loc;
+      link.append(nameSpan, locSpan);
+    });
+  });
+
+  document.querySelectorAll('.mobile-nav-label').forEach(label => {
+    if (label.textContent.trim() === 'Popular Tours') {
+      label.textContent = `Popular Tours in ${SITE_LOCATION_SHORT}`;
+    }
+  });
+}
 
 const TOURS = {
   'whale-dolphin': {
@@ -832,6 +907,7 @@ const TOURS = {
 document.addEventListener('DOMContentLoaded', () => {
   initAnalytics();
   initSeo();
+  injectMirissaBranding();
   injectNavExtras();
   injectGetYourGuideBadges();
   initMobileNav();
@@ -1137,7 +1213,7 @@ function buildMobileNavStructure() {
   if (tourLinks.length) {
     const toursSection = document.createElement('div');
     toursSection.className = 'mobile-nav-section';
-    toursSection.innerHTML = '<p class="mobile-nav-label">Popular Tours</p>';
+    toursSection.innerHTML = `<p class="mobile-nav-label">Popular Tours in ${SITE_LOCATION_SHORT}</p>`;
     const toursList = document.createElement('div');
     toursList.className = 'mobile-nav-tours';
     tourLinks.forEach(link => toursList.appendChild(link));
@@ -1910,6 +1986,7 @@ function createTourCard(tour, index) {
       </div>
       <div class="tour-card-body">
         <h3 class="tour-card-title">${tour.name}</h3>
+        <p class="tour-card-location">${LOCATION_PIN_ICON}<span>${tour.location || SITE_LOCATION}</span></p>
         <p class="tour-card-desc">${tour.shortDesc}</p>
         <div class="tour-card-footer">
           <div class="tour-price">$${tour.price} <span>/ person</span></div>

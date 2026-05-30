@@ -292,6 +292,119 @@ ul {
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
+  flex-shrink: 0;
+}
+
+.logo-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.15;
+}
+
+.logo-name {
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.logo-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.logo-location .location-pin-icon {
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.header.nav-solid .logo-location,
+.header.scrolled .logo-location {
+  color: rgba(255, 180, 120, 0.95);
+}
+
+.nav-tours-loc {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 2px 6px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.header.nav-solid .nav-tours-loc,
+.header.scrolled .nav-tours-loc {
+  background: rgba(232, 93, 4, 0.18);
+  color: rgba(255, 210, 170, 0.98);
+}
+
+.location-pin-icon {
+  display: inline-block;
+  vertical-align: -2px;
+  flex-shrink: 0;
+}
+
+.dropdown-location-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--ocean-deep);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: 4px;
+}
+
+.dropdown-location-header .location-pin-icon {
+  color: var(--sunset-warm);
+}
+
+.dropdown-menu a:not(.dropdown-all) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dropdown-tour-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.dropdown-tour-loc {
+  flex-shrink: 0;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0.85;
+}
+
+.dropdown-menu a:not(.dropdown-all):hover .dropdown-tour-loc {
+  color: var(--sunset-warm);
+  opacity: 1;
+}
+
+.mobile-nav-brand .logo-location {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.mobile-nav-brand .logo-name {
+  font-size: 1rem;
 }
 
 .nav {
@@ -442,7 +555,7 @@ ul {
   background: var(--white);
   border-radius: 12px;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.04);
-  min-width: 260px;
+  min-width: 300px;
   padding: 8px 0;
   opacity: 0;
   visibility: hidden;
@@ -1247,8 +1360,24 @@ body.mobile-menu-open .hamburger {
 .tour-card-title {
   font-size: 1.3rem;
   color: var(--dark);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   font-weight: 600;
+}
+
+.tour-card-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 12px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--sunset-warm);
+}
+
+.tour-card-location .location-pin-icon {
+  color: var(--sunset);
 }
 
 .tour-card-desc {
