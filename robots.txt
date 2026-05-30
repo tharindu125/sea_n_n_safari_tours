@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sea-n-n-safari-tours.vercel.app/sitemap.xml

@@ -5,6 +5,8 @@
 const WHATSAPP_NUMBER = '94787097430';
 const COMPANY_EMAIL = 'seaandsafaritours@gmail.com';
 const SITE_URL = 'https://sea-n-n-safari-tours.vercel.app';
+const SITE_NAME = 'Sea & Safari Tours';
+const SITE_LOCALE = 'en_US';
 const GOOGLE_GA_ID = '';
 const GOOGLE_REVIEW_URL = 'https://www.google.com/search?q=Sea+%26+Safari+Tours+Mirissa+reviews';
 const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Search?q=Sea+Safari+Tours+Mirissa';
@@ -16,6 +18,89 @@ const GETYOURGUIDE_BADGES = [
 ];
 const GETYOURGUIDE_PRODUCT_BADGE = 'https://gyg.me/pQw3KK9K';
 const OFFICE_HOURS = { start: 6, end: 20 };
+
+const SEO_DEFAULTS = {
+  author: 'Sea & Safari Tours',
+  robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+  themeColor: '#0f2832',
+  geo: {
+    region: 'LK-3',
+    placename: 'Mirissa, Sri Lanka',
+    position: '5.9483;80.4719',
+    icbm: '5.9483, 80.4719'
+  }
+};
+
+const PAGE_SEO = {
+  'index.html': {
+    title: 'Sea & Safari Tours | Mirissa Whale Watching & Ocean Adventures Sri Lanka',
+    description: 'Book Mirissa whale watching, turtle snorkeling, scuba diving & wildlife tours. Free hotel pickup, expert local guides, 4.9★ rated. WhatsApp & online booking.',
+    keywords: 'mirissa whale watching, sri lanka tours, turtle snorkeling mirissa, sea safari tours, mirissa boat tours, whale watching sri lanka',
+    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
+    path: '/'
+  },
+  'tours.html': {
+    title: 'All Tours in Mirissa | Whale Watching, Snorkeling & Safari | Sea & Safari Tours',
+    description: 'Browse 8 Mirissa ocean and wildlife tours — whale watching from $45, turtle snorkeling, river kayak, scuba diving, cooking class & combo packages.',
+    keywords: 'mirissa tours, sri lanka adventure tours, whale watching mirissa, snorkeling mirissa, river kayak sri lanka',
+    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png`,
+    path: '/tours.html'
+  },
+  'booking.html': {
+    title: 'Book a Tour Online | Sea & Safari Tours Mirissa',
+    description: 'Reserve your Mirissa whale watching or snorkeling tour online. Choose your tour, date & guests — instant WhatsApp confirmation & free hotel pickup.',
+    keywords: 'book mirissa tour, whale watching booking, mirissa tour reservation',
+    image: `${SITE_URL}/assets/images/logo.png`,
+    path: '/booking.html'
+  },
+  'payment.html': {
+    title: 'Complete Payment | Sea & Safari Tours',
+    description: 'Secure your Sea & Safari Tours booking in Mirissa. Complete payment details for your whale watching or ocean adventure tour.',
+    keywords: 'mirissa tour payment, sea safari tours booking',
+    image: `${SITE_URL}/assets/images/logo.png`,
+    path: '/payment.html',
+    robots: 'noindex, nofollow'
+  },
+  'about.html': {
+    title: 'About Us | Mirissa Tour Company | Sea & Safari Tours',
+    description: 'Mirissa\'s trusted marine adventure company — 5+ years experience, 10,000+ happy travelers, expert local guides & ethical wildlife tours.',
+    keywords: 'sea safari tours mirissa, about mirissa tour company, sri lanka tour operator',
+    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_tour-boat.png`,
+    path: '/about.html'
+  },
+  'contact.html': {
+    title: 'Contact Us | Sea & Safari Tours Mirissa Sri Lanka',
+    description: 'Contact Sea & Safari Tours via WhatsApp +94 78 709 7430, phone, or email. Based in Mirissa — we reply within 1 hour. Book your tour today.',
+    keywords: 'contact sea safari tours, mirissa tour phone, whale watching whatsapp mirissa',
+    image: `${SITE_URL}/assets/images/turtle-snorkeling/mirissa_turtle_snorkeling_group-dive.png`,
+    path: '/contact.html'
+  },
+  'faq.html': {
+    title: 'FAQ | Mirissa Tours Booking & Whale Watching | Sea & Safari Tours',
+    description: 'Frequently asked questions about Mirissa whale watching, booking, safety, payment, cancellation policy, and what to bring on your tour.',
+    keywords: 'mirissa whale watching faq, mirissa tour questions, sri lanka tour booking help',
+    image: `${SITE_URL}/assets/images/logo.png`,
+    path: '/faq.html'
+  },
+  'gallery.html': {
+    title: 'Photo Gallery | Mirissa Whale Watching & Tours | Sea & Safari Tours',
+    description: 'Real guest photos from Mirissa whale watching, turtle snorkeling, river kayaking, scuba diving, and Sri Lankan cooking class tours.',
+    keywords: 'mirissa tour photos, whale watching pictures, mirissa snorkeling gallery',
+    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_boat-guests-1.png`,
+    path: '/gallery.html'
+  }
+};
+
+const TOUR_SEO = {
+  'whale-dolphin': 'mirissa whale watching, blue whale sri lanka, dolphin watching mirissa, whale watching tour mirissa, whale watching price mirissa',
+  'turtle-snorkeling': 'turtle snorkeling mirissa, mirissa snorkeling, sea turtle tour sri lanka, snorkeling mirissa beach',
+  'crocodile-safari': 'crocodile watching sri lanka, nilwala river safari, matara crocodile tour, mirissa crocodile watching',
+  'river-kayak': 'river kayak mirissa, mangrove kayaking sri lanka, mirissa kayak tour, river safari mirissa',
+  'scuba-diving': 'scuba diving mirissa, mirissa diving tour, coral reef diving sri lanka, beginner scuba mirissa',
+  'night-snorkeling': 'night snorkeling mirissa, mirissa night dive, snorkeling sri lanka night tour',
+  'deep-sea-fishing': 'deep sea fishing mirissa, fishing tour sri lanka, mirissa boat fishing, private fishing mirissa',
+  'cooking-class': 'sri lankan cooking class mirissa, mirissa cooking tour, authentic cooking experience sri lanka'
+};
 
 const COMBO_PACKAGES = [
   {
@@ -715,8 +800,7 @@ const TOURS = {
 
 document.addEventListener('DOMContentLoaded', () => {
   initAnalytics();
-  initPageMeta();
-  initLocalBusinessSchema();
+  initSeo();
   injectNavExtras();
   injectGetYourGuideBadges();
   initMobileNav();
@@ -1186,73 +1270,110 @@ function setMetaTag(attr, key, content) {
   el.setAttribute('content', content);
 }
 
-function initPageMeta() {
-  const path = window.location.pathname.split('/').pop() || 'index.html';
-  const metaMap = {
-    'index.html': {
-      title: 'Sea & Safari Tours | Mirissa Whale Watching & Ocean Adventures',
-      description: 'Book Mirissa whale watching, turtle snorkeling, scuba diving & safari tours. Free hotel pickup, expert guides, 4.9★ rated. WhatsApp booking available.',
-      image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`
-    },
-    'tours.html': {
-      title: 'All Tours | Sea & Safari Tours Mirissa',
-      description: 'Browse 8 ocean and wildlife tours in Mirissa — whale watching from $45, turtle snorkeling, river kayak, cooking class & more.',
-      image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png`
-    },
-    'booking.html': {
-      title: 'Book a Tour | Sea & Safari Tours',
-      description: 'Book your Mirissa adventure online. Choose your tour, date, and guests — instant WhatsApp confirmation.',
-      image: `${SITE_URL}/assets/images/logo.png`
-    },
-    'about.html': {
-      title: 'About Us | Sea & Safari Tours Mirissa',
-      description: 'Mirissa\'s trusted marine adventure company — 5+ years experience, 10K+ happy travelers, expert local guides.',
-      image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_tour-boat.png`
-    },
-    'contact.html': {
-      title: 'Contact Us | Sea & Safari Tours Mirissa',
-      description: 'Contact Sea & Safari Tours via WhatsApp, phone +94 78 709 7430, or email. Based in Mirissa, Sri Lanka.',
-      image: `${SITE_URL}/assets/images/turtle-snorkeling/mirissa_turtle_snorkeling_group-dive.png`
-    },
-    'faq.html': {
-      title: 'FAQ | Sea & Safari Tours Mirissa',
-      description: 'Answers about booking, whale watching season, safety, payment, cancellation, and what to bring on Mirissa tours.',
-      image: `${SITE_URL}/assets/images/logo.png`
-    },
-    'gallery.html': {
-      title: 'Photo Gallery | Sea & Safari Tours Mirissa',
-      description: 'Real guest moments from whale watching, turtle snorkeling, river kayaking, and cooking classes in Mirissa.',
-      image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_boat-guests-1.png`
-    }
-  };
+function setLinkTag(rel, href, extra = {}) {
+  if (!href) return;
+  let el;
+  if (extra.hreflang) {
+    el = document.querySelector(`link[rel="${rel}"][hreflang="${extra.hreflang}"]`);
+  } else {
+    el = document.querySelector(`link[rel="${rel}"]:not([hreflang])`);
+  }
+  if (!el) {
+    el = document.createElement('link');
+    el.rel = rel;
+    if (extra.hreflang) el.hreflang = extra.hreflang;
+    document.head.appendChild(el);
+  }
+  el.href = href;
+}
 
-  const meta = metaMap[path];
+function getCurrentPageFile() {
+  return window.location.pathname.split('/').pop() || 'index.html';
+}
+
+function getCanonicalUrl(customPath) {
+  if (customPath) return `${SITE_URL}${customPath.startsWith('/') ? customPath : `/${customPath}`}`;
+  const parts = window.location.pathname.split('/').filter(Boolean);
+  const file = parts.pop() || 'index.html';
+  if (file === 'index.html' && parts.length === 0) return `${SITE_URL}/`;
+  if (parts[parts.length - 1] === 'tours') return `${SITE_URL}/tours/${file}`;
+  return `${SITE_URL}/${file}`;
+}
+
+function injectJsonLd(data) {
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify(data);
+  document.head.appendChild(script);
+}
+
+function applyPageMeta(meta, canonicalPath) {
   if (!meta) return;
+
+  const url = getCanonicalUrl(canonicalPath || meta.path);
+  const image = meta.image || `${SITE_URL}/assets/images/logo.png`;
 
   document.title = meta.title;
   setMetaTag('name', 'description', meta.description);
-  setMetaTag('property', 'og:type', 'website');
-  setMetaTag('property', 'og:site_name', 'Sea & Safari Tours');
+  if (meta.keywords) setMetaTag('name', 'keywords', meta.keywords);
+  setMetaTag('name', 'author', SEO_DEFAULTS.author);
+  const robots = meta.robots || SEO_DEFAULTS.robots;
+  setMetaTag('name', 'robots', robots);
+  setMetaTag('name', 'googlebot', robots);
+  setMetaTag('name', 'geo.region', SEO_DEFAULTS.geo.region);
+  setMetaTag('name', 'geo.placename', SEO_DEFAULTS.geo.placename);
+  setMetaTag('name', 'geo.position', SEO_DEFAULTS.geo.position);
+  setMetaTag('name', 'ICBM', SEO_DEFAULTS.geo.icbm);
+  setMetaTag('name', 'theme-color', SEO_DEFAULTS.themeColor);
+
+  setLinkTag('canonical', url);
+  setLinkTag('alternate', url, { hreflang: 'en' });
+  setLinkTag('alternate', url, { hreflang: 'x-default' });
+  if (!document.querySelector('link[rel="sitemap"]')) {
+    const sitemap = document.createElement('link');
+    sitemap.rel = 'sitemap';
+    sitemap.type = 'application/xml';
+    sitemap.href = `${SITE_URL}/sitemap.xml`;
+    document.head.appendChild(sitemap);
+  }
+
+  setMetaTag('property', 'og:type', meta.type || 'website');
+  setMetaTag('property', 'og:site_name', SITE_NAME);
+  setMetaTag('property', 'og:locale', SITE_LOCALE);
   setMetaTag('property', 'og:title', meta.title);
   setMetaTag('property', 'og:description', meta.description);
-  setMetaTag('property', 'og:image', meta.image);
-  setMetaTag('property', 'og:url', `${SITE_URL}/${path === 'index.html' ? '' : path}`);
+  setMetaTag('property', 'og:image', image);
+  setMetaTag('property', 'og:image:alt', meta.imageAlt || meta.title);
+  setMetaTag('property', 'og:url', url);
+
   setMetaTag('name', 'twitter:card', 'summary_large_image');
   setMetaTag('name', 'twitter:title', meta.title);
   setMetaTag('name', 'twitter:description', meta.description);
-  setMetaTag('name', 'twitter:image', meta.image);
+  setMetaTag('name', 'twitter:image', image);
+  setMetaTag('name', 'twitter:image:alt', meta.imageAlt || meta.title);
 }
 
-function initLocalBusinessSchema() {
-  const page = window.location.pathname.split('/').pop() || 'index.html';
-  if (!['index.html', 'contact.html', 'about.html'].includes(page)) return;
+function initSeo() {
+  const page = getCurrentPageFile();
+  const inToursDir = window.location.pathname.includes('/tours/');
+  const tourId = document.getElementById('tour-detail-content')?.dataset.tourId;
 
-  const schema = {
+  if (inToursDir && tourId) {
+    return;
+  }
+
+  applyPageMeta(PAGE_SEO[page], PAGE_SEO[page]?.path);
+  initGlobalStructuredData(page);
+}
+
+function initGlobalStructuredData(page) {
+  injectJsonLd({
     '@context': 'https://schema.org',
-    '@type': 'TouristInformationCenter',
-    name: 'Sea & Safari Tours',
-    description: 'Premium whale watching, snorkeling, diving and wildlife tours in Mirissa, Sri Lanka.',
+    '@type': 'TravelAgency',
+    name: SITE_NAME,
     url: SITE_URL,
+    logo: `${SITE_URL}/assets/images/logo.png`,
+    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
     telephone: '+94787097430',
     email: COMPANY_EMAIL,
     address: {
@@ -1266,12 +1387,14 @@ function initLocalBusinessSchema() {
       latitude: 5.9483,
       longitude: 80.4719
     },
-    openingHoursSpecification: {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '06:00',
-      closes: '20:00'
+    areaServed: {
+      '@type': 'City',
+      name: 'Mirissa'
     },
+    sameAs: [
+      GETYOURGUIDE_MIRISSA_URL,
+      GOOGLE_REVIEW_URL
+    ],
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '4.9',
@@ -1279,12 +1402,54 @@ function initLocalBusinessSchema() {
       bestRating: '5'
     },
     priceRange: '$$'
-  };
+  });
 
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.textContent = JSON.stringify(schema);
-  document.head.appendChild(script);
+  if (page === 'index.html') {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE_NAME,
+      url: SITE_URL,
+      inLanguage: 'en',
+      publisher: { '@type': 'Organization', name: SITE_NAME }
+    });
+  }
+
+  if (page === 'tours.html') {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Mirissa Tours by Sea & Safari Tours',
+      itemListElement: Object.values(TOURS).map((tour, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: tour.name,
+        url: `${SITE_URL}/tours/${tour.id}.html`
+      }))
+    });
+  }
+
+  if (page === 'faq.html') {
+    const faqEntities = FAQ_ITEMS.flatMap(section =>
+      section.questions.map(item => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.a.replace(/<[^>]+>/g, '')
+        }
+      }))
+    );
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqEntities
+    });
+  }
+}
+
+function initPageMeta() {
+  applyPageMeta(PAGE_SEO[getCurrentPageFile()]);
 }
 
 function renderComboPackages() {
@@ -1428,17 +1593,77 @@ function initSiteGallery() {
 }
 
 function injectTourMeta(tour) {
-  const title = `${tour.name} | Sea & Safari Tours Mirissa`;
-  const description = `${tour.shortDesc} From $${tour.price}/person. Book via WhatsApp with free Mirissa hotel pickup.`;
+  const title = `${tour.name} Mirissa | Book Online | Sea & Safari Tours`;
+  const description = `${tour.shortDesc} From $${tour.price}/person with free Mirissa hotel pickup. Book via WhatsApp or online — ${tour.duration}.`;
   const image = `${SITE_URL}/${tour.heroImage || tour.image}`;
+  const canonicalPath = `/tours/${tour.id}.html`;
+  const keywords = TOUR_SEO[tour.id] || `${tour.name.toLowerCase()} mirissa, sri lanka tours, sea safari tours`;
 
-  document.title = title;
-  setMetaTag('name', 'description', description);
-  setMetaTag('property', 'og:title', title);
-  setMetaTag('property', 'og:description', description);
-  setMetaTag('property', 'og:image', image);
-  setMetaTag('property', 'og:type', 'product');
-  setMetaTag('name', 'twitter:card', 'summary_large_image');
+  applyPageMeta({
+    title,
+    description,
+    keywords,
+    image,
+    imageAlt: tour.imageAlt || `${tour.altPrefix || tour.name} - Mirissa Sri Lanka`,
+    type: 'product',
+    path: canonicalPath
+  }, canonicalPath);
+
+  injectJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: tour.name,
+    description: tour.shortDesc,
+    image,
+    sku: tour.id,
+    brand: { '@type': 'Brand', name: SITE_NAME },
+    offers: {
+      '@type': 'Offer',
+      url: getCanonicalUrl(canonicalPath),
+      priceCurrency: 'USD',
+      price: tour.price,
+      availability: 'https://schema.org/InStock',
+      validFrom: new Date().toISOString().split('T')[0]
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '500',
+      bestRating: '5'
+    }
+  });
+
+  injectJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'TouristTrip',
+    name: tour.name,
+    description: tour.shortDesc,
+    touristType: 'Leisure travelers',
+    itinerary: {
+      '@type': 'ItemList',
+      itemListElement: (tour.itinerary || []).map((step, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: step.title,
+        description: step.desc
+      }))
+    },
+    provider: {
+      '@type': 'TravelAgency',
+      name: SITE_NAME,
+      url: SITE_URL
+    }
+  });
+
+  injectJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Tours', item: `${SITE_URL}/tours.html` },
+      { '@type': 'ListItem', position: 3, name: tour.name, item: getCanonicalUrl(canonicalPath) }
+    ]
+  });
 }
 
 function initStickyTourBar(tour) {
@@ -1519,7 +1744,6 @@ function initTourDetails() {
     return;
   }
 
-  document.title = `${tour.name} | Sea & Safari Tours`;
   injectTourMeta(tour);
   initStickyTourBar(tour);
 
