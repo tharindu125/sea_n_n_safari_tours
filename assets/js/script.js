@@ -4,6 +4,94 @@
 
 const WHATSAPP_NUMBER = '94787097430';
 const COMPANY_EMAIL = 'seaandsafaritours@gmail.com';
+const SITE_URL = 'https://sea-n-n-safari-tours.vercel.app';
+const GOOGLE_GA_ID = '';
+const GOOGLE_REVIEW_URL = 'https://www.google.com/search?q=Sea+%26+Safari+Tours+Mirissa+reviews';
+const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Search?q=Sea+Safari+Tours+Mirissa';
+const OFFICE_HOURS = { start: 6, end: 20 };
+
+const COMBO_PACKAGES = [
+  {
+    id: 'whale-turtle',
+    name: 'Whale & Dolphin Watching + Turtle Snorkeling',
+    badge: 'Most Popular',
+    tours: ['Whale & Dolphin Watching', 'Turtle Snorkeling'],
+    price: 65,
+    originalPrice: 70,
+    desc: 'Our best-selling combo — morning whale cruise, then snorkel with turtles. Free hotel pickup included.',
+    image: 'assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png',
+    waText: 'Hello! I would like to book the Whale & Dolphin Watching + Turtle Snorkeling combo.'
+  },
+  {
+    id: 'kayak-cooking',
+    name: 'River Kayak + Cooking Class',
+    badge: 'Culture & Nature',
+    tours: ['River Kayak Tours', 'Cooking Class'],
+    price: 50,
+    originalPrice: 55,
+    desc: 'Paddle through mangroves in the morning, then learn authentic Sri Lankan cooking in the afternoon.',
+    image: 'assets/images/river-kayak/mirissa_kayak_mangrove-roots.png',
+    waText: 'Hello! I would like to book the River Kayak + Cooking Class combo.'
+  },
+  {
+    id: 'whale-kayak',
+    name: 'Whale & Dolphin Watching + River Kayak',
+    badge: 'Land & Sea',
+    tours: ['Whale & Dolphin Watching', 'River Kayak Tours'],
+    price: 65,
+    originalPrice: 70,
+    desc: 'Combine an early-morning ocean safari with a peaceful river kayak through rainforest and mangroves.',
+    image: 'assets/images/river-kayak/mirissa_kayak_sunset-kayak.png',
+    waText: 'Hello! I would like to book the Whale & Dolphin Watching + River Kayak combo.'
+  },
+  {
+    id: 'whale-crocodile',
+    name: 'Whale & Dolphin Watching + Crocodile Watching',
+    badge: 'Wildlife Combo',
+    tours: ['Whale & Dolphin Watching', 'Crocodile Watching'],
+    price: 70,
+    originalPrice: 75,
+    desc: 'Ocean giants in the morning and crocodile river safari in the afternoon — two unforgettable wildlife experiences.',
+    image: 'assets/images/crocodile-safari/crocodile_watching_close-up.png',
+    waText: 'Hello! I would like to book the Whale & Dolphin Watching + Crocodile Watching combo.'
+  }
+];
+
+const FAQ_ITEMS = [
+  {
+    category: 'Booking',
+    questions: [
+      { q: 'How do I book a tour?', a: 'The fastest way is WhatsApp — message us with your preferred tour and date. You can also use our <a href="booking.html">online booking form</a> or call +94 78 709 7430.' },
+      { q: 'How quickly will you confirm my booking?', a: 'We usually reply within 1 hour during office hours (6:00 AM – 8:00 PM). For early-morning whale tours, we recommend booking at least one day ahead.' },
+      { q: 'Can I book a private tour?', a: 'Yes! Most tours are available as private experiences. Message us on WhatsApp with your group size and preferred date for a custom quote.' },
+      { q: 'Do you offer hotel pickup?', a: 'Free pickup and drop-off is included for most tours in the Mirissa area. Let us know your hotel name when booking.' }
+    ]
+  },
+  {
+    category: 'Whale Watching',
+    questions: [
+      { q: 'When is the best time for whale watching in Mirissa?', a: 'Peak season is November to April when blue whales and sperm whales are most frequently spotted. Tours depart early morning (around 6:30 AM) for the best conditions.' },
+      { q: 'What if we don\'t see any whales?', a: 'Mirissa has one of the highest sighting rates in the world. While wildlife can never be 100% guaranteed, our experienced crew maximizes your chances by monitoring whale movements.' },
+      { q: 'What should I bring on a whale tour?', a: 'Sunscreen, hat, sunglasses, light jacket, camera, and motion sickness tablets if needed (we also provide free seasick tablets onboard).' }
+    ]
+  },
+  {
+    category: 'Safety & Comfort',
+    questions: [
+      { q: 'Are your boats safe and insured?', a: 'Yes. All boats carry life jackets, first-aid supplies, and insurance. Our skippers have 5+ years of experience in Mirissa waters.' },
+      { q: 'I get seasick easily — can I still join?', a: 'We provide free seasickness tablets before departure. Early-morning departures also mean calmer seas. Sit at the back of the boat for the smoothest ride.' },
+      { q: 'Is snorkeling suitable for beginners?', a: 'Absolutely. Our turtle snorkeling tour is beginner-friendly with full in-water guidance. We provide all equipment and a 100% turtle sighting guarantee.' }
+    ]
+  },
+  {
+    category: 'Payment & Cancellation',
+    questions: [
+      { q: 'What payment methods do you accept?', a: 'We accept cash (USD/LKR), bank transfer, and online payment. A small deposit may be requested for group bookings.' },
+      { q: 'What is your cancellation policy?', a: 'Cancel at least 24 hours before your tour for a full refund. Weather-related cancellations by us are fully refunded or rescheduled at no extra cost.' },
+      { q: 'Are there hidden fees?', a: 'No hidden costs. Tour prices include pickup, equipment, guides, and listed inclusions. Personal expenses and tips are extra.' }
+    ]
+  }
+];
 
 const IS_IN_TOURS_DIR = window.location.pathname.includes('/tours/');
 const TOURS_PATH = IS_IN_TOURS_DIR ? '' : 'tours/';
@@ -564,6 +652,10 @@ const TOURS = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  initAnalytics();
+  initPageMeta();
+  initLocalBusinessSchema();
+  injectNavExtras();
   initMobileNav();
   initHeader();
   initScrollAnimations();
@@ -572,6 +664,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (document.querySelector('.tours-grid[data-render="all"]')) renderAllTours();
   if (document.querySelector('.tours-grid[data-render="featured"]')) renderFeaturedTours();
+  if (document.querySelector('[data-render="combos"]')) renderComboPackages();
+  if (document.getElementById('faq-accordion')) initFAQPage();
+  if (document.getElementById('site-gallery')) initSiteGallery();
   if (document.getElementById('tour-detail-content')) initTourDetails();
   if (document.getElementById('booking-form')) initBookingForm();
   if (document.getElementById('payment-form')) initPaymentPage();
@@ -640,12 +735,30 @@ function initHeader() {
   const header = document.querySelector('.header');
   if (!header) return;
 
-  window.addEventListener('scroll', () => {
+  const hasHero = document.querySelector('.hero-carousel, .page-hero, .tour-detail-hero');
+  if (!hasHero) header.classList.add('nav-solid');
+
+  function updateHeaderScroll() {
+    if (header.classList.contains('nav-solid')) {
+      header.classList.add('scrolled');
+      return;
+    }
     header.classList.toggle('scrolled', window.scrollY > 50);
-  });
+  }
+
+  updateHeaderScroll();
+  window.addEventListener('scroll', updateHeaderScroll);
 
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href') || '';
+    const linkPath = href.split('/').pop().split('#')[0] || '';
+    if (linkPath === currentPath) {
+      link.classList.add('active');
+    }
+  });
+
+  document.querySelectorAll('.nav-pill').forEach(link => {
     const href = link.getAttribute('href') || '';
     const linkPath = href.split('/').pop().split('#')[0] || '';
     if (linkPath === currentPath) {
@@ -682,7 +795,52 @@ function getMobileNavIcon(link) {
   if (href.includes('booking')) return MOBILE_NAV_ICONS.book;
   if (href.includes('about.html') || text === 'about') return MOBILE_NAV_ICONS.about;
   if (href.includes('contact.html') || text === 'contact') return MOBILE_NAV_ICONS.contact;
+  if (href.includes('faq.html') || text === 'faq') return '?';
+  if (href.includes('gallery.html') || text === 'gallery') return '+';
   return '•';
+}
+
+function injectNavExtras() {
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  const faqHref = `${ROOT_PATH}faq.html`;
+  const galleryHref = `${ROOT_PATH}gallery.html`;
+
+  document.querySelectorAll('header .nav').forEach(nav => {
+    if (nav.querySelector('.nav-extra')) return;
+
+    const extra = document.createElement('div');
+    extra.className = 'nav-extra';
+    extra.innerHTML = `
+      <a href="${faqHref}" class="nav-pill nav-pill-faq${currentPath === 'faq.html' ? ' active' : ''}">
+        <span class="nav-pill-icon nav-pill-icon-faq" aria-hidden="true"></span>
+        <span>FAQ</span>
+      </a>
+      <a href="${galleryHref}" class="nav-pill nav-pill-gallery${currentPath === 'gallery.html' ? ' active' : ''}">
+        <span class="nav-pill-icon nav-pill-icon-gallery" aria-hidden="true"></span>
+        <span>Gallery</span>
+      </a>
+    `;
+    nav.appendChild(extra);
+  });
+
+  const mobileNav = document.querySelector('.mobile-nav');
+  if (mobileNav && !mobileNav.querySelector('.nav-extra-link')) {
+    const ctaBtn = mobileNav.querySelector('.btn.btn-primary');
+    const galleryLink = document.createElement('a');
+    galleryLink.href = galleryHref;
+    galleryLink.className = 'nav-link nav-extra-link';
+    galleryLink.textContent = 'Gallery';
+    if (currentPath === 'gallery.html') galleryLink.classList.add('active');
+
+    const faqLink = document.createElement('a');
+    faqLink.href = faqHref;
+    faqLink.className = 'nav-link nav-extra-link';
+    faqLink.textContent = 'FAQ';
+    if (currentPath === 'faq.html') faqLink.classList.add('active');
+
+    mobileNav.insertBefore(galleryLink, ctaBtn);
+    mobileNav.insertBefore(faqLink, galleryLink);
+  }
 }
 
 function enhanceMobileNavLink(link, isTour) {
@@ -710,7 +868,8 @@ function buildMobileNavStructure() {
   const links = [...mobileNav.querySelectorAll(':scope > .nav-link, :scope > .btn.btn-primary')];
   if (!links.length) return;
 
-  const mainLinks = links.filter(l => !l.classList.contains('nav-sub') && !l.classList.contains('btn'));
+  const mainLinks = links.filter(l => !l.classList.contains('nav-sub') && !l.classList.contains('btn') && !l.classList.contains('nav-extra-link'));
+  const extraLinks = links.filter(l => l.classList.contains('nav-extra-link'));
   const tourLinks = links.filter(l => l.classList.contains('nav-sub'));
   const ctaBtn = links.find(l => l.classList.contains('btn'));
   const toursPath = links.find(l => (l.getAttribute('href') || '').includes('tours.html'))?.getAttribute('href')
@@ -766,6 +925,20 @@ function buildMobileNavStructure() {
 
     toursSection.append(toursList, viewAll);
     scroll.appendChild(toursSection);
+  }
+
+  if (extraLinks.length) {
+    const discoverSection = document.createElement('div');
+    discoverSection.className = 'mobile-nav-section mobile-nav-discover';
+    discoverSection.innerHTML = '<p class="mobile-nav-label">Discover</p>';
+    const discoverGrid = document.createElement('div');
+    discoverGrid.className = 'mobile-nav-discover-grid';
+    extraLinks.forEach(link => {
+      link.classList.add('nav-pill-mobile');
+      discoverGrid.appendChild(link);
+    });
+    discoverSection.appendChild(discoverGrid);
+    scroll.appendChild(discoverSection);
   }
 
   panel.append(navHeader, scroll);
@@ -840,11 +1013,339 @@ function initFloatingWhatsApp() {
   const btn = document.querySelector('.floating-whatsapp');
   if (!btn) return;
 
+  if (!btn.closest('.floating-wa-wrap')) {
+    const wrap = document.createElement('div');
+    wrap.className = 'floating-wa-wrap';
+    btn.parentNode.insertBefore(wrap, btn);
+    wrap.appendChild(btn);
+
+    const badge = document.createElement('span');
+    badge.className = 'wa-online-badge';
+    badge.setAttribute('aria-hidden', 'true');
+    wrap.insertBefore(badge, btn);
+    updateOnlineBadge(badge);
+    setInterval(() => updateOnlineBadge(badge), 60000);
+  }
+
   btn.addEventListener('click', e => {
     e.preventDefault();
     const message = encodeURIComponent('Hello Sea & Safari Tours! I would like to inquire about your tours.');
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
   });
+}
+
+function isWithinOfficeHours() {
+  const now = new Date();
+  const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+  const slTime = new Date(utc + 5.5 * 3600000);
+  const hour = slTime.getHours();
+  return hour >= OFFICE_HOURS.start && hour < OFFICE_HOURS.end;
+}
+
+function updateOnlineBadge(badge) {
+  if (!badge) return;
+  if (isWithinOfficeHours()) {
+    badge.textContent = 'Online now';
+    badge.classList.add('is-online');
+    badge.classList.remove('is-offline');
+  } else {
+    badge.textContent = 'We reply fast';
+    badge.classList.add('is-offline');
+    badge.classList.remove('is-online');
+  }
+}
+
+function initAnalytics() {
+  if (!GOOGLE_GA_ID) return;
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_GA_ID}`;
+  document.head.appendChild(script);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', GOOGLE_GA_ID);
+}
+
+function setMetaTag(attr, key, content) {
+  if (!content) return;
+  let el = document.querySelector(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
+
+function initPageMeta() {
+  const path = window.location.pathname.split('/').pop() || 'index.html';
+  const metaMap = {
+    'index.html': {
+      title: 'Sea & Safari Tours | Mirissa Whale Watching & Ocean Adventures',
+      description: 'Book Mirissa whale watching, turtle snorkeling, scuba diving & safari tours. Free hotel pickup, expert guides, 4.9★ rated. WhatsApp booking available.',
+      image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`
+    },
+    'tours.html': {
+      title: 'All Tours | Sea & Safari Tours Mirissa',
+      description: 'Browse 8 ocean and wildlife tours in Mirissa — whale watching from $45, turtle snorkeling, river kayak, cooking class & more.',
+      image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png`
+    },
+    'booking.html': {
+      title: 'Book a Tour | Sea & Safari Tours',
+      description: 'Book your Mirissa adventure online. Choose your tour, date, and guests — instant WhatsApp confirmation.',
+      image: `${SITE_URL}/assets/images/logo.png`
+    },
+    'about.html': {
+      title: 'About Us | Sea & Safari Tours Mirissa',
+      description: 'Mirissa\'s trusted marine adventure company — 5+ years experience, 10K+ happy travelers, expert local guides.',
+      image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_tour-boat.png`
+    },
+    'contact.html': {
+      title: 'Contact Us | Sea & Safari Tours Mirissa',
+      description: 'Contact Sea & Safari Tours via WhatsApp, phone +94 78 709 7430, or email. Based in Mirissa, Sri Lanka.',
+      image: `${SITE_URL}/assets/images/turtle-snorkeling/mirissa_turtle_snorkeling_group-dive.png`
+    },
+    'faq.html': {
+      title: 'FAQ | Sea & Safari Tours Mirissa',
+      description: 'Answers about booking, whale watching season, safety, payment, cancellation, and what to bring on Mirissa tours.',
+      image: `${SITE_URL}/assets/images/logo.png`
+    },
+    'gallery.html': {
+      title: 'Photo Gallery | Sea & Safari Tours Mirissa',
+      description: 'Real guest moments from whale watching, turtle snorkeling, river kayaking, and cooking classes in Mirissa.',
+      image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_boat-guests-1.png`
+    }
+  };
+
+  const meta = metaMap[path];
+  if (!meta) return;
+
+  document.title = meta.title;
+  setMetaTag('name', 'description', meta.description);
+  setMetaTag('property', 'og:type', 'website');
+  setMetaTag('property', 'og:site_name', 'Sea & Safari Tours');
+  setMetaTag('property', 'og:title', meta.title);
+  setMetaTag('property', 'og:description', meta.description);
+  setMetaTag('property', 'og:image', meta.image);
+  setMetaTag('property', 'og:url', `${SITE_URL}/${path === 'index.html' ? '' : path}`);
+  setMetaTag('name', 'twitter:card', 'summary_large_image');
+  setMetaTag('name', 'twitter:title', meta.title);
+  setMetaTag('name', 'twitter:description', meta.description);
+  setMetaTag('name', 'twitter:image', meta.image);
+}
+
+function initLocalBusinessSchema() {
+  const page = window.location.pathname.split('/').pop() || 'index.html';
+  if (!['index.html', 'contact.html', 'about.html'].includes(page)) return;
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'TouristInformationCenter',
+    name: 'Sea & Safari Tours',
+    description: 'Premium whale watching, snorkeling, diving and wildlife tours in Mirissa, Sri Lanka.',
+    url: SITE_URL,
+    telephone: '+94787097430',
+    email: COMPANY_EMAIL,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Mirissa',
+      addressRegion: 'Southern Province',
+      addressCountry: 'LK'
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 5.9483,
+      longitude: 80.4719
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '06:00',
+      closes: '20:00'
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '500',
+      bestRating: '5'
+    },
+    priceRange: '$$'
+  };
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify(schema);
+  document.head.appendChild(script);
+}
+
+function renderComboPackages() {
+  const grid = document.querySelector('[data-render="combos"]');
+  if (!grid) return;
+
+  grid.innerHTML = COMBO_PACKAGES.map((pkg, i) => `
+    <article class="combo-card fade-in" style="transition-delay:${i * 0.1}s">
+      <div class="combo-card-image">
+        <img src="${resolveImg(pkg.image)}" alt="${pkg.name} package" loading="lazy">
+        <span class="combo-badge">${pkg.badge}</span>
+      </div>
+      <div class="combo-card-body">
+        <h3>${pkg.name}</h3>
+        <ul class="combo-tours">${pkg.tours.map(t => `<li>${t}</li>`).join('')}</ul>
+        <p class="combo-desc">${pkg.desc}</p>
+        <div class="combo-pricing">
+          <span class="combo-price">$${pkg.price}</span>
+          <span class="combo-original">$${pkg.originalPrice}</span>
+          <span class="combo-save">Save $${pkg.originalPrice - pkg.price}</span>
+        </div>
+        <div class="combo-actions">
+          <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(pkg.waText)}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener">Book via WhatsApp</a>
+          <a href="${ROOT_PATH}booking.html" class="btn btn-ocean btn-sm">Online Booking</a>
+        </div>
+      </div>
+    </article>
+  `).join('');
+  initScrollAnimations();
+}
+
+function initFAQPage() {
+  const container = document.getElementById('faq-accordion');
+  if (!container) return;
+
+  container.innerHTML = FAQ_ITEMS.map(section => `
+    <div class="faq-category fade-in">
+      <h3 class="faq-category-title">${section.category}</h3>
+      <div class="faq-list">
+        ${section.questions.map((item, i) => `
+          <details class="faq-item" ${section.category === 'Booking' && i === 0 ? 'open' : ''}>
+            <summary>${item.q}</summary>
+            <div class="faq-answer"><p>${item.a}</p></div>
+          </details>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  const rootPath = window.location.pathname.includes('/tours/') ? '../' : '';
+  container.querySelectorAll('a[href="booking.html"]').forEach(link => {
+    link.setAttribute('href', `${rootPath}booking.html`);
+  });
+  initScrollAnimations();
+}
+
+function getSiteGalleryImages() {
+  const items = [];
+  Object.values(TOURS).forEach(tour => {
+    (tour.gallery || []).slice(0, 4).forEach((img, i) => {
+      items.push({
+        src: img,
+        alt: (tour.galleryAlt && tour.galleryAlt[i]) || `${tour.altPrefix || tour.name} - photo ${i + 1}`,
+        tour: tour.name,
+        tourId: tour.id
+      });
+    });
+  });
+  return items;
+}
+
+function initSiteGallery() {
+  const grid = document.getElementById('site-gallery');
+  if (!grid) return;
+
+  const images = getSiteGalleryImages();
+  grid.innerHTML = images.map((item, i) => `
+    <button type="button" class="site-gallery-item fade-in" data-index="${i}" aria-label="View ${item.tour} photo">
+      <img src="${resolveImg(item.src)}" alt="${item.alt}" loading="lazy">
+      <span class="site-gallery-label">${item.tour}</span>
+    </button>
+  `).join('');
+
+  const urls = images.map(item => resolveImg(item.src));
+  const alts = images.map(item => item.alt);
+  let currentIndex = 0;
+
+  let lightbox = document.querySelector('.lightbox');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    lightbox.innerHTML = `
+      <button class="lightbox-close" aria-label="Close">&times;</button>
+      <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>
+      <img src="" alt="">
+      <button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>
+    `;
+    document.body.appendChild(lightbox);
+  }
+
+  const lightboxImg = lightbox.querySelector('img');
+
+  function openLightbox(index) {
+    currentIndex = index;
+    lightboxImg.src = urls[currentIndex];
+    lightboxImg.alt = alts[currentIndex];
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  grid.querySelectorAll('.site-gallery-item').forEach(btn => {
+    btn.addEventListener('click', () => openLightbox(Number(btn.dataset.index)));
+  });
+
+  lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+  lightbox.querySelector('.lightbox-prev').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + urls.length) % urls.length;
+    lightboxImg.src = urls[currentIndex];
+    lightboxImg.alt = alts[currentIndex];
+  });
+  lightbox.querySelector('.lightbox-next').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % urls.length;
+    lightboxImg.src = urls[currentIndex];
+    lightboxImg.alt = alts[currentIndex];
+  });
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lightbox.querySelector('.lightbox-prev').click();
+    if (e.key === 'ArrowRight') lightbox.querySelector('.lightbox-next').click();
+  });
+
+  initScrollAnimations();
+}
+
+function injectTourMeta(tour) {
+  const title = `${tour.name} | Sea & Safari Tours Mirissa`;
+  const description = `${tour.shortDesc} From $${tour.price}/person. Book via WhatsApp with free Mirissa hotel pickup.`;
+  const image = `${SITE_URL}/${tour.heroImage || tour.image}`;
+
+  document.title = title;
+  setMetaTag('name', 'description', description);
+  setMetaTag('property', 'og:title', title);
+  setMetaTag('property', 'og:description', description);
+  setMetaTag('property', 'og:image', image);
+  setMetaTag('property', 'og:type', 'product');
+  setMetaTag('name', 'twitter:card', 'summary_large_image');
+}
+
+function initStickyTourBar(tour) {
+  if (document.querySelector('.mobile-book-bar')) return;
+
+  const bar = document.createElement('div');
+  bar.className = 'mobile-book-bar';
+  bar.innerHTML = `
+    <div class="mobile-book-info">
+      <span class="mobile-book-label">From</span>
+      <span class="mobile-book-price">$${tour.price}</span>
+    </div>
+    <a href="${ROOT_PATH}booking.html?tour=${tour.id}" class="btn btn-primary btn-sm">Book Now</a>
+    <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello! I'm interested in booking: ${tour.name}`)}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener">WhatsApp</a>
+  `;
+  document.body.appendChild(bar);
 }
 
 function createTourCard(tour, index) {
@@ -892,6 +1393,8 @@ function initTourDetails() {
   }
 
   document.title = `${tour.name} | Sea & Safari Tours`;
+  injectTourMeta(tour);
+  initStickyTourBar(tour);
 
   const hero = document.querySelector('.tour-detail-hero');
   if (hero) hero.style.backgroundImage = `url('${resolveImg(tour.heroImage)}')`;
