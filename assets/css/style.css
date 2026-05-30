@@ -4669,9 +4669,24 @@ body.mobile-menu-open .hamburger {
     height: 200px;
   }
 
-  .combo-grid,
-  .gallery-tour-grid {
+  .combo-grid {
     grid-template-columns: 1fr;
+  }
+
+  .gallery-tour-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: 12px;
+  }
+
+  .site-gallery-item {
+    border-radius: 8px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .site-gallery-zoom-icon {
+    width: 28px;
+    height: 28px;
   }
 
   .gallery-toolbar {
@@ -4691,10 +4706,6 @@ body.mobile-menu-open .hamburger {
 
   .gallery-filters::-webkit-scrollbar-track {
     margin-top: 12px;
-  }
-
-  .gallery-tour-grid {
-    padding: 16px;
   }
 
   .gallery-tour-header {
