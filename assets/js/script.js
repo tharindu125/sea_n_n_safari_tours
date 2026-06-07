@@ -239,6 +239,38 @@ const ROOT_PATH = IS_IN_TOURS_DIR ? '../' : '';
 const IMG_PATH = IS_IN_TOURS_DIR ? '../' : '';
 function resolveImg(src) { return src.startsWith('http') ? src : IMG_PATH + src; }
 
+function t(key, vars) {
+  return window.I18n?.t(key, vars) ?? key;
+}
+
+function getLocalizedTour(tourId) {
+  const tour = TOURS[tourId];
+  if (!tour) return null;
+  return window.I18n?.getTour(tourId, tour) ?? tour;
+}
+
+function restoreMobileNavIcons() {
+  document.querySelectorAll('.mobile-nav a.nav-link:not(.nav-sub):not(.nav-extra-link)').forEach(link => {
+    const icon = link.querySelector('.mobile-nav-icon');
+    if (!icon) return;
+    const expected = getMobileNavIcon(link);
+    if (icon.textContent.trim() !== expected) icon.textContent = expected;
+  });
+}
+
+function refreshPageContent() {
+  restoreMobileNavIcons();
+  window.I18n?.applyTranslations();
+  if (document.querySelector('.tours-grid[data-render="all"]')) renderAllTours();
+  if (document.querySelector('.tours-grid[data-render="featured"]')) renderFeaturedTours();
+  if (document.querySelector('[data-render="combos"]')) renderComboPackages();
+  if (document.getElementById('faq-accordion')) initFAQPage();
+  if (document.getElementById('tour-detail-content')) initTourDetails();
+  if (document.getElementById('booking-form')) refreshBookingFormTours();
+  const carousel = document.querySelector('.hero-carousel');
+  if (carousel?._heroRefresh) carousel._heroRefresh();
+}
+
 function getTourIdFromHref(href) {
   if (!href) return null;
   const file = href.split('/').pop();
@@ -274,10 +306,19 @@ function injectMirissaBranding() {
   });
 
   document.querySelectorAll('.nav-link-caret').forEach(link => {
-    if (link.querySelector('.nav-tours-loc')) return;
+    if (link.querySelector('.nav-tours-wrap')) return;
+
+    const existingLoc = link.querySelector('.nav-tours-loc');
+    const locationLabel = existingLoc?.textContent.trim() || SITE_LOCATION_SHORT;
+
     link.setAttribute('title', `Tours in ${SITE_LOCATION}`);
     link.setAttribute('aria-label', `Tours in ${SITE_LOCATION}`);
-    link.innerHTML = `Tours <span class="nav-tours-loc">${SITE_LOCATION_SHORT}</span>`;
+    link.innerHTML = `
+      <span class="nav-tours-wrap">
+        <span class="nav-tours-label">Tours</span>
+        <span class="nav-tours-loc">${locationLabel}</span>
+      </span>
+    `;
   });
 
   document.querySelectorAll('.dropdown-menu').forEach(menu => {
@@ -905,6 +946,10 @@ const TOURS = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.I18n) {
+    window.I18n.onLanguageChange(() => refreshPageContent());
+  }
+
   initAnalytics();
   initSeo();
   injectMirissaBranding();
@@ -926,9 +971,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('booking-form')) initBookingForm();
   if (document.getElementById('payment-form')) initPaymentPage();
   if (document.getElementById('contact-form')) initContactForm();
+
+  if (window.I18n) {
+    window.I18n.init();
+    restoreMobileNavIcons();
+    window.I18n.applyTranslations();
+  }
+
+  initHeaderLayout();
 });
 
 const HERO_SLIDE_DURATION = 6500;
+
+function getHeroTabLocation(slide, index) {
+  if (index === 0) return SITE_LOCATION_SHORT;
+  const tourId = getTourIdFromHref(slide.dataset.link || '');
+  return getTourLocationShort(tourId);
+}
 
 function initHeroCarousel() {
   const carousel = document.querySelector('.hero-carousel');
@@ -974,7 +1033,13 @@ function initHeroCarousel() {
       tab.type = 'button';
       tab.className = `hero-tour-tab${index === 0 ? ' active' : ''}`;
       tab.dataset.index = String(index);
-      tab.innerHTML = `<span class="hero-tour-tab-num">${String(index + 1).padStart(2, '0')}</span><span class="hero-tour-tab-label">${label}</span>`;
+      tab.innerHTML = `
+        <span class="hero-tour-tab-num">${String(index + 1).padStart(2, '0')}</span>
+        <span class="hero-tour-tab-text">
+          <span class="hero-tour-tab-label">${label}</span>
+          <span class="hero-tour-tab-loc">${getHeroTabLocation(slide, index)}</span>
+        </span>
+      `;
       tabsContainer.appendChild(tab);
     }
   });
@@ -1151,9 +1216,56 @@ function initHeroCarousel() {
     if (e.key === 'ArrowLeft') { prev(); resetAutoPlay(); }
     if (e.key === 'ArrowRight') { next(); resetAutoPlay(); }
   });
+
+  carousel._heroRefresh = () => {
+    slides.forEach((slide, index) => {
+      const label = slide.dataset.tab || `Slide ${index + 1}`;
+      if (indicators[index]) indicators[index].setAttribute('aria-label', label);
+      if (tabs[index]) {
+        const num = tabs[index].querySelector('.hero-tour-tab-num');
+        const labelEl = tabs[index].querySelector('.hero-tour-tab-label');
+        const locEl = tabs[index].querySelector('.hero-tour-tab-loc');
+        if (labelEl) labelEl.textContent = label;
+        if (locEl) locEl.textContent = getHeroTabLocation(slides[index], index);
+        if (num) num.textContent = String(index + 1).padStart(2, '0');
+      }
+    });
+    updateSlideCta(slides[current]);
+    const ctaBook = carousel.querySelector('.hero-slide-cta-book');
+    if (ctaBook) ctaBook.textContent = t('hero.bookTour');
+  };
+}
+
+function initHeaderLayout() {
+  document.querySelectorAll('.header-inner').forEach(headerInner => {
+    if (headerInner.dataset.layoutReady === 'true') return;
+
+    let actions = headerInner.querySelector('.header-actions');
+    if (!actions) {
+      actions = document.createElement('div');
+      actions.className = 'header-actions';
+      headerInner.appendChild(actions);
+    }
+
+    const navExtra = headerInner.querySelector('.nav-extra');
+    const navCta = headerInner.querySelector('.nav-cta');
+    const hamburger = headerInner.querySelector('.hamburger');
+
+    if (navExtra && navExtra.parentElement !== actions) actions.appendChild(navExtra);
+    if (navCta && navCta.parentElement !== actions) actions.appendChild(navCta);
+
+    const langSwitcher = headerInner.querySelector('.lang-switcher');
+    if (langSwitcher && langSwitcher.parentElement !== actions) actions.appendChild(langSwitcher);
+
+    if (hamburger && hamburger.parentElement !== actions) actions.appendChild(hamburger);
+
+    headerInner.dataset.layoutReady = 'true';
+  });
 }
 
 function initHeader() {
+  initHeaderLayout();
+
   const header = document.querySelector('.header');
   if (!header) return;
 
@@ -1238,11 +1350,11 @@ function injectNavExtras() {
     extra.innerHTML = `
       <a href="${faqHref}" class="nav-pill nav-pill-faq${currentPath === 'faq.html' ? ' active' : ''}">
         ${NAV_ICON_FAQ}
-        <span>FAQ</span>
+        <span data-i18n="nav.faq">FAQ</span>
       </a>
       <a href="${galleryHref}" class="nav-pill nav-pill-gallery${currentPath === 'gallery.html' ? ' active' : ''}">
         ${NAV_ICON_GALLERY}
-        <span>Gallery</span>
+        <span data-i18n="nav.gallery">Gallery</span>
       </a>
     `;
     nav.appendChild(extra);
@@ -1255,13 +1367,13 @@ function injectNavExtras() {
     const galleryLink = document.createElement('a');
     galleryLink.href = galleryHref;
     galleryLink.className = 'nav-link nav-extra-link';
-    galleryLink.innerHTML = `${NAV_ICON_GALLERY}<span>Gallery</span>`;
+    galleryLink.innerHTML = `${NAV_ICON_GALLERY}<span data-i18n="nav.gallery">Gallery</span>`;
     if (currentPath === 'gallery.html') galleryLink.classList.add('active');
 
     const faqLink = document.createElement('a');
     faqLink.href = faqHref;
     faqLink.className = 'nav-link nav-extra-link';
-    faqLink.innerHTML = `${NAV_ICON_FAQ}<span>FAQ</span>`;
+    faqLink.innerHTML = `${NAV_ICON_FAQ}<span data-i18n="nav.faq">FAQ</span>`;
     if (currentPath === 'faq.html') faqLink.classList.add('active');
 
     mobileNav.insertBefore(galleryLink, ctaBtn);
@@ -1367,7 +1479,7 @@ function buildMobileNavStructure() {
 
   const menuSection = document.createElement('div');
   menuSection.className = 'mobile-nav-section';
-  menuSection.innerHTML = '<p class="mobile-nav-label">Menu</p>';
+  menuSection.innerHTML = `<p class="mobile-nav-label" data-i18n="nav.menu">Menu</p>`;
   const mainList = document.createElement('div');
   mainList.className = 'mobile-nav-list';
   mainLinks.forEach(link => {
@@ -1380,7 +1492,7 @@ function buildMobileNavStructure() {
   if (tourLinks.length) {
     const toursSection = document.createElement('div');
     toursSection.className = 'mobile-nav-section';
-    toursSection.innerHTML = `<p class="mobile-nav-label">Popular Tours in ${SITE_LOCATION_SHORT}</p>`;
+    toursSection.innerHTML = `<p class="mobile-nav-label" data-i18n="nav.popularTours" data-i18n-vars='{"location":"Mirissa"}'>Popular Tours in ${SITE_LOCATION_SHORT}</p>`;
     const toursList = document.createElement('div');
     toursList.className = 'mobile-nav-tours';
     tourLinks.forEach(link => toursList.appendChild(link));
@@ -1388,7 +1500,7 @@ function buildMobileNavStructure() {
     const viewAll = document.createElement('a');
     viewAll.href = toursPath;
     viewAll.className = 'mobile-nav-view-all';
-    viewAll.innerHTML = 'View all tours <span class="link-arrow" aria-hidden="true">&rarr;</span>';
+    viewAll.innerHTML = `<span data-i18n="nav.viewAllTours">View all tours</span> <span class="link-arrow" aria-hidden="true">&rarr;</span>`;
 
     toursSection.append(toursList, viewAll);
     scroll.appendChild(toursSection);
@@ -1397,7 +1509,7 @@ function buildMobileNavStructure() {
   if (extraLinks.length) {
     const discoverSection = document.createElement('div');
     discoverSection.className = 'mobile-nav-section mobile-nav-discover';
-    discoverSection.innerHTML = '<p class="mobile-nav-label">Discover</p>';
+    discoverSection.innerHTML = '<p class="mobile-nav-label" data-i18n="nav.discover">Discover</p>';
     const discoverGrid = document.createElement('div');
     discoverGrid.className = 'mobile-nav-discover-grid';
     extraLinks.forEach(link => {
@@ -1419,7 +1531,7 @@ function buildMobileNavStructure() {
   waLink.className = 'mobile-nav-wa';
   waLink.target = '_blank';
   waLink.rel = 'noopener noreferrer';
-  waLink.innerHTML = '<span class="mobile-nav-wa-icon" aria-hidden="true"></span> Chat on WhatsApp';
+  waLink.innerHTML = '<span class="mobile-nav-wa-icon" aria-hidden="true"></span> <span data-i18n="common.chatWhatsApp">Chat on WhatsApp</span>';
   footer.appendChild(waLink);
 
   panel.appendChild(footer);
@@ -1901,29 +2013,32 @@ function renderComboPackages() {
   const grid = document.querySelector('[data-render="combos"]');
   if (!grid) return;
 
-  grid.innerHTML = COMBO_PACKAGES.map((pkg, i) => `
+  grid.innerHTML = COMBO_PACKAGES.map((pkg, i) => {
+    const localized = window.I18n?.getCombo(pkg.id, pkg) ?? pkg;
+    return `
     <article class="combo-card fade-in" style="transition-delay:${i * 0.1}s">
       <div class="combo-card-image">
-        <img src="${resolveImg(pkg.image)}" alt="${pkg.name} package" loading="lazy">
-        <span class="combo-badge">${pkg.badge}</span>
+        <img src="${resolveImg(localized.image)}" alt="${localized.name} package" loading="lazy">
+        <span class="combo-badge">${localized.badge}</span>
       </div>
       <div class="combo-card-body">
-        <h3>${pkg.name}</h3>
-        <ul class="combo-tours">${pkg.tours.map(t => `<li>${t}</li>`).join('')}</ul>
-        <p class="combo-desc">${pkg.desc}</p>
+        <h3>${localized.name}</h3>
+        <ul class="combo-tours">${localized.tours.map(tourName => `<li>${tourName}</li>`).join('')}</ul>
+        <p class="combo-desc">${localized.desc}</p>
         <div class="combo-pricing">
-          <span class="combo-price">$${pkg.price}</span>
-          <span class="combo-original">$${pkg.originalPrice}</span>
-          <span class="combo-save">Save $${pkg.originalPrice - pkg.price}</span>
+          <span class="combo-price">$${localized.price}</span>
+          <span class="combo-original">$${localized.originalPrice}</span>
+          <span class="combo-save">${t('common.save')} $${localized.originalPrice - localized.price}</span>
         </div>
         <div class="combo-actions">
-          <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(pkg.waText)}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener">Book via WhatsApp</a>
-          <a href="${ROOT_PATH}booking.html" class="btn btn-ocean btn-sm">Online Booking</a>
+          <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(localized.waText)}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener">${t('common.bookViaWhatsApp')}</a>
+          <a href="${ROOT_PATH}booking.html" class="btn btn-ocean btn-sm">${t('common.onlineBooking')}</a>
         </div>
-        ${renderGygBlock(pkg.getYourGuide, 'combo-gyg-block')}
+        ${renderGygBlock(localized.getYourGuide, 'combo-gyg-block')}
       </div>
     </article>
-  `).join('');
+  `;
+  }).join('');
   initScrollAnimations();
 }
 
@@ -1931,7 +2046,8 @@ function initFAQPage() {
   const container = document.getElementById('faq-accordion');
   if (!container) return;
 
-  container.innerHTML = FAQ_ITEMS.map(section => `
+  const faqItems = window.I18n?.getFaqItems(FAQ_ITEMS) ?? FAQ_ITEMS;
+  container.innerHTML = faqItems.map(section => `
     <div class="faq-category fade-in">
       <h3 class="faq-category-title">${section.category}</h3>
       <div class="faq-list">
@@ -1964,6 +2080,8 @@ const GALLERY_CHIP_LABELS = {
 };
 
 function getGalleryChipLabel(tourId) {
+  const translated = t(`tours.${tourId}.name`);
+  if (translated !== `tours.${tourId}.name`) return translated;
   return GALLERY_CHIP_LABELS[tourId] || TOURS[tourId]?.name || tourId;
 }
 
@@ -2321,19 +2439,20 @@ function initStickyTourBar(tour) {
 }
 
 function createTourCard(tour, index) {
+  const localized = window.I18n?.getTour(tour.id, tour) ?? tour;
   return `
     <article class="tour-card fade-in" style="transition-delay: ${index * 0.1}s">
       <div class="tour-card-image">
-        <a href="${TOURS_PATH}${tour.id}.html"><img src="${resolveImg(tour.image)}" alt="${tour.imageAlt || tour.altPrefix || tour.name}" loading="lazy"></a>
-        <span class="tour-card-badge">${tour.duration}</span>
+        <a href="${TOURS_PATH}${localized.id}.html"><img src="${resolveImg(localized.image)}" alt="${localized.imageAlt || localized.altPrefix || localized.name}" loading="lazy"></a>
+        <span class="tour-card-badge">${localized.duration}</span>
       </div>
       <div class="tour-card-body">
-        <h3 class="tour-card-title">${tour.name}</h3>
-        <p class="tour-card-location">${LOCATION_PIN_ICON}<span>${tour.location || SITE_LOCATION}</span></p>
-        <p class="tour-card-desc">${tour.shortDesc}</p>
+        <h3 class="tour-card-title">${localized.name}</h3>
+        <p class="tour-card-location">${LOCATION_PIN_ICON}<span>${localized.location || SITE_LOCATION}</span></p>
+        <p class="tour-card-desc">${localized.shortDesc}</p>
         <div class="tour-card-footer">
-          <div class="tour-price">$${tour.price} <span>/ person</span></div>
-          <a href="${TOURS_PATH}${tour.id}.html" class="btn btn-ocean btn-sm">View Details</a>
+          <div class="tour-price">$${localized.price} <span>${t('common.perPerson')}</span></div>
+          <a href="${TOURS_PATH}${localized.id}.html" class="btn btn-ocean btn-sm">${t('common.viewDetails')}</a>
         </div>
       </div>
     </article>
@@ -2358,7 +2477,7 @@ function renderGygBlock(gyg, blockClass = 'tour-gyg-block') {
   const badge = gyg.badge || GETYOURGUIDE_PRODUCT_BADGE;
   return `
     <div class="${blockClass}">
-      <p class="tour-gyg-label">Also available on GetYourGuide</p>
+      <p class="tour-gyg-label">${t('common.alsoOnGyg')}</p>
       <a href="${gyg.url}" class="tour-gyg-badge-link" target="_blank" rel="noopener noreferrer" title="${gyg.title}">
         <img src="${badge}" class="gyg-badge-img tour-gyg-badge" width="160" height="auto" alt="GetYourGuide | ${gyg.title}" loading="lazy">
       </a>
@@ -2375,11 +2494,11 @@ function initTourDetails() {
   const params = new URLSearchParams(window.location.search);
   const pageAttr = document.getElementById('tour-detail-content')?.dataset.tourId;
   const tourId = pageAttr || params.get('tour') || 'whale-dolphin';
-  const tour = TOURS[tourId];
+  const tour = getLocalizedTour(tourId);
 
   if (!tour) {
     document.getElementById('tour-detail-content').innerHTML =
-      `<div class="container" style="padding:100px 0;text-align:center"><h2>Tour not found</h2><a href="${ROOT_PATH}tours.html" class="btn btn-ocean">View All Tours</a></div>`;
+      `<div class="container" style="padding:100px 0;text-align:center"><h2>${t('common.tourNotFound')}</h2><a href="${ROOT_PATH}tours.html" class="btn btn-ocean">${t('nav.viewAllTours')}</a></div>`;
     return;
   }
 
@@ -2395,14 +2514,14 @@ function initTourDetails() {
         <div class="tour-detail-main">
           ${tour.location ? `<p class="tour-location"><span class="tour-meta-icon tour-meta-icon-pin" aria-hidden="true"></span> ${tour.location}</p>` : ''}
           ${tour.highlights ? `
-          <h2>Highlights</h2>
+          <h2>${t('tourUi.highlights')}</h2>
           <ul class="highlights-list">${tour.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
           ` : ''}
-          <h2>About This Tour</h2>
+          <h2>${t('tourUi.aboutTour')}</h2>
           <p>${tour.fullDesc.replace(/\n\n/g, '</p><p>').replace(/\n/g, ' ')}</p>
           ${tour.packages ? `
-          <h2>${tour.packagesTitle || 'Packages'}</h2>
-          <p class="section-desc" style="margin-bottom:24px">${tour.packagesDesc || 'Choose the option that fits your group.'}</p>
+          <h2>${tour.packagesTitle || t('tourUi.packages')}</h2>
+          <p class="section-desc" style="margin-bottom:24px">${tour.packagesDesc || ''}</p>
           <div class="tour-packages">
             ${tour.packages.map(pkg => `
               <div class="package-card">
@@ -2413,8 +2532,8 @@ function initTourDetails() {
                 ` : ''}
                 <div class="package-card-body">
                   <div class="package-card-header">
-                    <span class="package-number">Package ${pkg.number}</span>
-                    <span class="package-price">$${pkg.price}<small>/person</small></span>
+                    <span class="package-number">${t('tourUi.package')} ${pkg.number}</span>
+                    <span class="package-price">$${pkg.price}<small>${t('common.perPerson')}</small></span>
                   </div>
                   <h3 class="package-title">${pkg.title}</h3>
                   <p class="package-subtitle">${pkg.subtitle}</p>
@@ -2429,7 +2548,7 @@ function initTourDetails() {
             `).join('')}
           </div>
           ` : ''}
-          <h2>Itinerary</h2>
+          <h2>${t('tourUi.itinerary')}</h2>
           <div class="itinerary-list">
             ${tour.itinerary.map(item => `
               <div class="itinerary-item">
@@ -2441,32 +2560,32 @@ function initTourDetails() {
               </div>
             `).join('')}
           </div>
-          <h2>What's Included & Excluded</h2>
+          <h2>${t('tourUi.includedExcluded')}</h2>
           <div class="included-grid">
             <div>
-              <h4 style="color:var(--ocean-deep);margin-bottom:12px">Included</h4>
+              <h4 style="color:var(--ocean-deep);margin-bottom:12px">${t('tourUi.included')}</h4>
               <ul class="included-list">${tour.included.map(item => `<li>${item}</li>`).join('')}</ul>
             </div>
             <div>
-              <h4 style="color:var(--ocean-deep);margin-bottom:12px">Excluded</h4>
+              <h4 style="color:var(--ocean-deep);margin-bottom:12px">${t('tourUi.excluded')}</h4>
               <ul class="included-list excluded-list">${tour.excluded.map(item => `<li>${item}</li>`).join('')}</ul>
             </div>
           </div>
           ${tour.importantInfo ? `
-          <h2>Important Information</h2>
+          <h2>${t('tourUi.importantInfo')}</h2>
           <div class="important-info-grid">
-            ${tour.importantInfo.bring ? `<div class="important-info-col"><h4>What to Bring</h4><ul class="info-list">${tour.importantInfo.bring.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
-            ${tour.importantInfo.notSuitable ? `<div class="important-info-col"><h4>Not Suitable For</h4><ul class="info-list not-suitable">${tour.importantInfo.notSuitable.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
-            ${tour.importantInfo.notAllowed ? `<div class="important-info-col"><h4>Not Allowed</h4><ul class="info-list not-allowed">${tour.importantInfo.notAllowed.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
+            ${tour.importantInfo.bring ? `<div class="important-info-col"><h4>${t('tourUi.whatToBring')}</h4><ul class="info-list">${tour.importantInfo.bring.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
+            ${tour.importantInfo.notSuitable ? `<div class="important-info-col"><h4>${t('tourUi.notSuitable')}</h4><ul class="info-list not-suitable">${tour.importantInfo.notSuitable.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
+            ${tour.importantInfo.notAllowed ? `<div class="important-info-col"><h4>${t('tourUi.notAllowed')}</h4><ul class="info-list not-allowed">${tour.importantInfo.notAllowed.map(item => `<li>${item}</li>`).join('')}</ul></div>` : ''}
           </div>
           ${tour.importantInfo.knowBeforeYouGo ? `
           <div class="important-info-know">
-            <h4>Know Before You Go</h4>
+            <h4>${t('tourUi.knowBefore')}</h4>
             <ul class="info-list info-list-know">${tour.importantInfo.knowBeforeYouGo.map(item => `<li>${item}</li>`).join('')}</ul>
           </div>
           ` : ''}
           ` : ''}
-          <h2>Photo Gallery</h2>
+          <h2>${t('tourUi.photoGallery')}</h2>
           <div class="gallery-slider" data-gallery>
             ${tour.gallery.map((img, i) => `
               <div class="gallery-item" data-index="${i}">
@@ -2478,32 +2597,32 @@ function initTourDetails() {
         <aside class="tour-sidebar">
           <div class="booking-sidebar-card">
             <h3>${tour.name}</h3>
-            <div class="sidebar-price">$${tour.price} <span>/ person</span></div>
+            <div class="sidebar-price">$${tour.price} <span>${t('common.perPerson')}</span></div>
             ${tour.priceNote ? `<p class="sidebar-price-note">${tour.priceNote}</p>` : ''}
             <ul class="sidebar-features">
               <li><span class="sidebar-icon sidebar-icon-time" aria-hidden="true"></span><span>${tour.duration}</span></li>
               <li><span class="sidebar-icon sidebar-icon-pin" aria-hidden="true"></span><span>${tour.location || 'Mirissa, Sri Lanka'}</span></li>
-              <li><span class="sidebar-icon sidebar-icon-group" aria-hidden="true"></span><span>${tour.groupType || 'Small group experience'}</span></li>
-              <li><span class="sidebar-icon sidebar-icon-shield" aria-hidden="true"></span><span>Fully insured</span></li>
-              <li><span class="sidebar-icon sidebar-icon-star" aria-hidden="true"></span><span>Expert local guides</span></li>
-              ${tour.timeSlots ? `<li><span class="sidebar-icon sidebar-icon-clock" aria-hidden="true"></span><span>Slots: ${tour.timeSlots}</span></li>` : ''}
+              <li><span class="sidebar-icon sidebar-icon-group" aria-hidden="true"></span><span>${tour.groupType || t('common.smallGroup')}</span></li>
+              <li><span class="sidebar-icon sidebar-icon-shield" aria-hidden="true"></span><span>${t('common.fullyInsured')}</span></li>
+              <li><span class="sidebar-icon sidebar-icon-star" aria-hidden="true"></span><span>${t('common.expertGuides')}</span></li>
+              ${tour.timeSlots ? `<li><span class="sidebar-icon sidebar-icon-clock" aria-hidden="true"></span><span>${t('tourUi.slots')}: ${tour.timeSlots}</span></li>` : ''}
             </ul>
-            <a href="${ROOT_PATH}booking.html?tour=${tour.id}" class="btn btn-primary btn-block" style="margin-top:24px">Book This Tour</a>
-            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello! I'm interested in booking: ${tour.name}`)}" class="btn btn-whatsapp btn-block" style="margin-top:12px" target="_blank" rel="noopener">WhatsApp Inquiry</a>
+            <a href="${ROOT_PATH}booking.html?tour=${tour.id}" class="btn btn-primary btn-block" style="margin-top:24px">${t('common.bookThisTour')}</a>
+            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello! I'm interested in booking: ${tour.name}`)}" class="btn btn-whatsapp btn-block" style="margin-top:12px" target="_blank" rel="noopener">${t('common.whatsappInquiry')}</a>
             ${renderTourGetYourGuideBlock(tour)}
           </div>
         </aside>
       </div>
       <div class="tour-nav-buttons">
-        <a href="${ROOT_PATH}tours.html" class="btn btn-ocean tour-nav-prev">&larr; All Tours</a>
+        <a href="${ROOT_PATH}tours.html" class="btn btn-ocean tour-nav-prev">&larr; ${t('common.allToursNav')}</a>
         ${(() => {
           const ids = Object.keys(TOURS);
           const idx = ids.indexOf(tour.id);
           const nextId = ids[(idx + 1) % ids.length];
-          const nextTour = TOURS[nextId];
-          return `<a href="${TOURS_PATH}${nextId}.html" class="btn btn-primary tour-nav-next" aria-label="Next tour: ${nextTour.name}">
-            <span class="tour-nav-next-short">Next Tour &rarr;</span>
-            <span class="tour-nav-next-full">Next: ${nextTour.name} &rarr;</span>
+          const nextTour = getLocalizedTour(nextId);
+          return `<a href="${TOURS_PATH}${nextId}.html" class="btn btn-primary tour-nav-next" aria-label="${t('common.nextTour')}: ${nextTour.name}">
+            <span class="tour-nav-next-short">${t('common.nextTour')} &rarr;</span>
+            <span class="tour-nav-next-full">${t('common.nextTour')}: ${nextTour.name} &rarr;</span>
           </a>`;
         })()}
       </div>
@@ -2512,11 +2631,13 @@ function initTourDetails() {
 
   const heroTitle = document.getElementById('tour-hero-title');
   const heroMeta = document.getElementById('tour-hero-meta');
+  const breadcrumbCurrent = document.querySelector('.breadcrumb span:last-child');
   if (heroTitle) heroTitle.textContent = tour.name;
+  if (breadcrumbCurrent) breadcrumbCurrent.textContent = tour.name;
   if (heroMeta) {
     heroMeta.innerHTML = `
       <span><span class="tour-meta-icon tour-meta-icon-time" aria-hidden="true"></span> ${tour.duration}</span>
-      <span><span class="tour-meta-icon sidebar-icon-price" aria-hidden="true"></span> From $${tour.price}/person</span>
+      <span><span class="tour-meta-icon sidebar-icon-price" aria-hidden="true"></span> ${t('common.from')} $${tour.price}${t('common.perPerson')}</span>
       <span><span class="tour-meta-icon tour-meta-icon-pin" aria-hidden="true"></span> ${tour.location || 'Mirissa, Sri Lanka'}</span>
     `;
   }
@@ -2584,6 +2705,18 @@ function initGallery() {
   });
 }
 
+function refreshBookingFormTours() {
+  const tourSelect = document.getElementById('tour-select');
+  if (!tourSelect || tourSelect.options.length <= 1) return;
+  const selected = tourSelect.value;
+  [...tourSelect.options].forEach((option, i) => {
+    if (i === 0 || !option.value) return;
+    const tour = getLocalizedTour(option.value);
+    if (tour) option.textContent = `${tour.name} — $${tour.price}${t('common.perPerson')}`;
+  });
+  if (selected) tourSelect.value = selected;
+}
+
 function initBookingForm() {
   const form = document.getElementById('booking-form');
   const tourSelect = document.getElementById('tour-select');
@@ -2597,9 +2730,10 @@ function initBookingForm() {
   const proceedBtn = document.getElementById('proceed-payment');
 
   Object.values(TOURS).forEach(tour => {
+    const localized = getLocalizedTour(tour.id);
     const option = document.createElement('option');
     option.value = tour.id;
-    option.textContent = `${tour.name} — $${tour.price}/person`;
+    option.textContent = `${localized.name} — $${localized.price}${t('common.perPerson')}`;
     tourSelect.appendChild(option);
   });
 
