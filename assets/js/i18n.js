@@ -108,7 +108,8 @@
     'about.html': 'nav.about',
     'contact.html': 'nav.contact',
     'faq.html': 'nav.faq',
-    'gallery.html': 'nav.gallery'
+    'gallery.html': 'nav.gallery',
+    'blog.html': 'nav.blog'
   };
 
   function translateNavLinks() {
@@ -225,7 +226,8 @@
       'about.html': 'footer.aboutUs',
       'contact.html': 'nav.contact',
       'faq.html': 'nav.faq',
-      'gallery.html': 'nav.gallery'
+      'gallery.html': 'nav.gallery',
+      'blog.html': 'nav.blog'
     };
 
     document.querySelectorAll('.footer-col ul a').forEach(link => {

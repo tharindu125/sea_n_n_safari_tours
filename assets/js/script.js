@@ -114,6 +114,14 @@ const PAGE_SEO = {
     image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_boat-guests-1.png`,
     path: '/gallery.html'
   },
+  'blog.html': {
+    title: 'Mirissa Travel Blog | Whale Watching Tips & Sri Lanka Guides | Sea & Safari Tours',
+    description: 'Expert guides on Mirissa whale watching seasons, turtle snorkeling, south coast travel, packing tips & ethical ocean tours in Sri Lanka.',
+    keywords: 'mirissa blog, whale watching tips mirissa, things to do mirissa, sri lanka travel guide, mirissa travel blog',
+    dcSubject: 'Mirissa Travel Blog, Whale Watching Guides, Sri Lanka Tourism',
+    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
+    path: '/blog.html'
+  },
   'tour-details.html': {
     title: 'Tour Details | Sea & Safari Tours',
     description: 'Detailed Mirissa tour information, itinerary, pricing, and online booking for Sea & Safari Tours.',
@@ -234,9 +242,97 @@ const FAQ_ITEMS = [
 ];
 
 const IS_IN_TOURS_DIR = window.location.pathname.includes('/tours/');
+const IS_IN_BLOG_DIR = window.location.pathname.includes('/blog/');
+const IS_IN_SUBDIR = IS_IN_TOURS_DIR || IS_IN_BLOG_DIR;
 const TOURS_PATH = IS_IN_TOURS_DIR ? '' : 'tours/';
-const ROOT_PATH = IS_IN_TOURS_DIR ? '../' : '';
-const IMG_PATH = IS_IN_TOURS_DIR ? '../' : '';
+const BLOG_PATH = IS_IN_BLOG_DIR ? '' : 'blog/';
+const ROOT_PATH = IS_IN_SUBDIR ? '../' : '';
+const IMG_PATH = IS_IN_SUBDIR ? '../' : '';
+
+const BLOG_CATEGORIES = [
+  { id: 'all', label: 'All Articles' },
+  { id: 'whale-watching', label: 'Whale Watching' },
+  { id: 'snorkeling', label: 'Snorkeling' },
+  { id: 'travel-tips', label: 'Travel Tips' },
+  { id: 'wildlife', label: 'Wildlife' },
+  { id: 'culture', label: 'Culture' }
+];
+
+const BLOG_POSTS = [
+  {
+    id: 'best-time-whale-watching-mirissa',
+    title: 'Best Time for Whale Watching in Mirissa',
+    excerpt: 'When to visit, seasonal sightings, morning departures, and how to maximise your chances of seeing blue whales and dolphins off Mirissa.',
+    category: 'whale-watching',
+    categoryLabel: 'Whale Watching',
+    date: '2026-05-12',
+    readTime: '6 min read',
+    image: 'assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png',
+    featured: true,
+    tourLink: 'tours/whale-dolphin.html',
+    tourLabel: 'Whale Watching Tour'
+  },
+  {
+    id: 'turtle-snorkeling-guide-mirissa',
+    title: 'Mirissa Turtle Snorkeling: A Complete Guide',
+    excerpt: 'Everything you need to know about swimming with sea turtles — sighting guarantee, beginner tips, and what to bring.',
+    category: 'snorkeling',
+    categoryLabel: 'Snorkeling',
+    date: '2026-05-08',
+    readTime: '5 min read',
+    image: 'assets/images/turtle-snorkeling/mirissa_turtle_snorkeling_swim-with-turtle.png',
+    tourLink: 'tours/turtle-snorkeling.html',
+    tourLabel: 'Turtle Snorkeling'
+  },
+  {
+    id: 'things-to-do-mirissa-sri-lanka',
+    title: '10 Best Things to Do in Mirissa, Sri Lanka',
+    excerpt: 'From blue whale cruises to river kayaking and cooking classes — the top Mirissa experiences for every type of traveller.',
+    category: 'travel-tips',
+    categoryLabel: 'Travel Tips',
+    date: '2026-05-05',
+    readTime: '8 min read',
+    image: 'assets/images/river-kayak/mirissa_kayak_sunset-kayak.png',
+    tourLink: 'tours.html',
+    tourLabel: 'All Tours'
+  },
+  {
+    id: 'mirissa-south-coast-travel-guide',
+    title: 'Mirissa South Coast Travel Guide',
+    excerpt: 'How to get to Mirissa, where to stay, local food, and the best season for ocean adventures on Sri Lanka\'s southern coast.',
+    category: 'travel-tips',
+    categoryLabel: 'Travel Tips',
+    date: '2026-04-28',
+    readTime: '7 min read',
+    image: 'assets/images/whale-dolphin/mirissa_whale_watching_tour-boat.png',
+    tourLink: 'about.html',
+    tourLabel: 'About Us'
+  },
+  {
+    id: 'what-to-pack-mirissa-ocean-tours',
+    title: 'What to Pack for Mirissa Ocean Tours',
+    excerpt: 'A practical packing checklist for whale watching, snorkeling, diving, and fishing — so you stay comfortable on the water.',
+    category: 'travel-tips',
+    categoryLabel: 'Travel Tips',
+    date: '2026-04-20',
+    readTime: '4 min read',
+    image: 'assets/images/whale-dolphin/mirissa_whale_watching_boat-guests-1.png',
+    tourLink: 'faq.html',
+    tourLabel: 'FAQ'
+  },
+  {
+    id: 'ethical-whale-watching-sri-lanka',
+    title: 'Ethical Whale Watching in Sri Lanka',
+    excerpt: 'How responsible operators protect marine life, maintain safe distances, and deliver unforgettable encounters without harm.',
+    category: 'wildlife',
+    categoryLabel: 'Wildlife',
+    date: '2026-04-15',
+    readTime: '5 min read',
+    image: 'assets/images/whale-dolphin/mirissa_whale_watching_dolphins-surface.png',
+    tourLink: 'tours/whale-dolphin.html',
+    tourLabel: 'Book a Whale Tour'
+  }
+];
 function resolveImg(src) { return src.startsWith('http') ? src : IMG_PATH + src; }
 
 function t(key, vars) {
@@ -265,6 +361,8 @@ function refreshPageContent() {
   if (document.querySelector('.tours-grid[data-render="featured"]')) renderFeaturedTours();
   if (document.querySelector('[data-render="combos"]')) renderComboPackages();
   if (document.getElementById('faq-accordion')) initFAQPage();
+  if (document.getElementById('blog-grid')) initBlogPage();
+  if (document.getElementById('blog-related')) initBlogPost();
   if (document.getElementById('tour-detail-content')) initTourDetails();
   if (document.getElementById('booking-form')) refreshBookingFormTours();
   const carousel = document.querySelector('.hero-carousel');
@@ -971,6 +1069,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('booking-form')) initBookingForm();
   if (document.getElementById('payment-form')) initPaymentPage();
   if (document.getElementById('contact-form')) initContactForm();
+  if (document.getElementById('blog-grid')) initBlogPage();
+  if (document.getElementById('blog-related')) initBlogPost();
+
+  injectFooterBlogLink();
 
   if (window.I18n) {
     window.I18n.init();
@@ -1337,10 +1439,13 @@ function getMobileNavIcon(link) {
 const NAV_ICON_FAQ = '<svg class="nav-pill-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9a2.5 2.5 0 0 1 4.5 1.2c0 1.8-2.5 1.8-2.5 3.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1" fill="currentColor"/></svg>';
 const NAV_ICON_GALLERY = '<svg class="nav-pill-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.75" fill="currentColor"/><path d="M21 15l-5-5L5 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
 
+const NAV_ICON_BLOG = '<svg class="nav-pill-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 4h12v16H6z"/><path fill="none" stroke="currentColor" stroke-width="2" d="M9 8h6M9 12h6M9 16h4"/></svg>';
+
 function injectNavExtras() {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   const faqHref = `${ROOT_PATH}faq.html`;
   const galleryHref = `${ROOT_PATH}gallery.html`;
+  const blogHref = `${ROOT_PATH}blog.html`;
 
   document.querySelectorAll('header .nav').forEach(nav => {
     if (nav.querySelector('.nav-extra')) return;
@@ -1348,6 +1453,10 @@ function injectNavExtras() {
     const extra = document.createElement('div');
     extra.className = 'nav-extra';
     extra.innerHTML = `
+      <a href="${blogHref}" class="nav-pill nav-pill-blog${currentPath === 'blog.html' ? ' active' : ''}">
+        ${NAV_ICON_BLOG}
+        <span data-i18n="nav.blog">Blog</span>
+      </a>
       <a href="${faqHref}" class="nav-pill nav-pill-faq${currentPath === 'faq.html' ? ' active' : ''}">
         ${NAV_ICON_FAQ}
         <span data-i18n="nav.faq">FAQ</span>
@@ -1706,6 +1815,7 @@ function getCanonicalUrl(customPath) {
   const file = parts.pop() || 'index.html';
   if (file === 'index.html' && parts.length === 0) return `${SITE_URL}/`;
   if (parts[parts.length - 1] === 'tours') return `${SITE_URL}/tours/${file}`;
+  if (parts[parts.length - 1] === 'blog') return `${SITE_URL}/blog/${file}`;
   return `${SITE_URL}/${file}`;
 }
 
@@ -2984,6 +3094,153 @@ function initPaymentPage() {
   document.getElementById('modal-close')?.addEventListener('click', () => {
     modal.classList.remove('active');
     window.location.href = 'index.html';
+  });
+}
+
+function formatBlogDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function buildBlogCard(post, options = {}) {
+  const { featured = false, delay = 0 } = options;
+  const href = `${BLOG_PATH}${post.id}.html`;
+  return `
+    <article class="blog-card${featured ? ' blog-card-featured' : ''} fade-in" data-category="${post.category}" data-title="${post.title.toLowerCase()}" style="transition-delay:${delay}s">
+      <a href="${href}" class="blog-card-image" tabindex="-1" aria-hidden="true">
+        <img src="${resolveImg(post.image)}" alt="${post.title}" loading="lazy">
+        <span class="blog-card-category">${post.categoryLabel}</span>
+      </a>
+      <div class="blog-card-body">
+        <div class="blog-card-meta">
+          <time datetime="${post.date}">${formatBlogDate(post.date)}</time>
+          <span class="blog-card-dot" aria-hidden="true"></span>
+          <span>${post.readTime}</span>
+        </div>
+        <h3 class="blog-card-title"><a href="${href}">${post.title}</a></h3>
+        <p class="blog-card-excerpt">${post.excerpt}</p>
+        <div class="blog-card-footer">
+          <a href="${href}" class="blog-read-link">Read article <span class="link-arrow" aria-hidden="true">&rarr;</span></a>
+          ${post.tourLink ? `<a href="${ROOT_PATH}${post.tourLink}" class="blog-tour-link">${post.tourLabel}</a>` : ''}
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function initBlogPage() {
+  const grid = document.getElementById('blog-grid');
+  const featuredEl = document.getElementById('blog-featured');
+  const filtersEl = document.getElementById('blog-filters');
+  const searchInput = document.getElementById('blog-search');
+  if (!grid) return;
+
+  const featured = BLOG_POSTS.find(p => p.featured) || BLOG_POSTS[0];
+  const rest = BLOG_POSTS.filter(p => p.id !== featured.id);
+
+  if (featuredEl && featured) {
+    featuredEl.innerHTML = buildBlogCard(featured, { featured: true });
+  }
+
+  function renderGrid(posts) {
+    grid.innerHTML = posts.map((post, i) => buildBlogCard(post, { delay: i * 0.06 })).join('');
+    initScrollAnimations();
+  }
+
+  renderGrid(rest);
+
+  if (filtersEl) {
+    filtersEl.innerHTML = BLOG_CATEGORIES.map((cat, i) => `
+      <button type="button" class="blog-filter${i === 0 ? ' active' : ''}" data-filter="${cat.id}">${cat.label}</button>
+    `).join('');
+
+    filtersEl.addEventListener('click', e => {
+      const btn = e.target.closest('.blog-filter');
+      if (!btn) return;
+      filtersEl.querySelectorAll('.blog-filter').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    });
+  }
+
+  function applyFilters() {
+    const active = filtersEl?.querySelector('.blog-filter.active')?.dataset.filter || 'all';
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    const filtered = BLOG_POSTS.filter(post => {
+      if (post.featured && featured) return false;
+      if (active !== 'all' && post.category !== active) return false;
+      if (query && !post.title.toLowerCase().includes(query) && !post.excerpt.toLowerCase().includes(query)) return false;
+      return true;
+    });
+    renderGrid(filtered);
+    const empty = document.getElementById('blog-empty');
+    if (empty) empty.hidden = filtered.length > 0;
+  }
+
+  searchInput?.addEventListener('input', applyFilters);
+
+  injectJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Sea & Safari Tours Mirissa Travel Blog',
+    description: 'Travel guides, whale watching tips, and Mirissa adventure articles from Sea & Safari Tours.',
+    url: `${SITE_URL}/blog.html`,
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/images/logo.png` }
+    },
+    blogPost: BLOG_POSTS.map(post => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      url: `${SITE_URL}/blog/${post.id}.html`,
+      image: `${SITE_URL}/${post.image.replace(/^\//, '')}`
+    }))
+  });
+}
+
+function initBlogPost() {
+  const container = document.getElementById('blog-related');
+  const postId = document.body.dataset.blogPost;
+  if (!container || !postId) return;
+
+  const related = BLOG_POSTS.filter(p => p.id !== postId).slice(0, 3);
+  container.innerHTML = `
+    <div class="blog-sidebar-card">
+      <h3>Related Articles</h3>
+      <ul class="blog-related-list">
+        ${related.map(post => `
+          <li>
+            <a href="${BLOG_PATH}${post.id}.html">
+              <span class="blog-related-title">${post.title}</span>
+              <span class="blog-related-meta">${formatBlogDate(post.date)}</span>
+            </a>
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+    <div class="blog-sidebar-card blog-sidebar-cta">
+      <h3>Ready to Explore?</h3>
+      <p>Book your Mirissa adventure with free hotel pickup and expert local guides.</p>
+      <a href="${ROOT_PATH}booking.html" class="btn btn-primary btn-block btn-sm">Book a Tour</a>
+      <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hello!%20I%20read%20your%20blog%20and%20would%20like%20to%20book%20a%20tour." class="btn btn-whatsapp btn-block btn-sm" target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+  `;
+}
+
+function injectFooterBlogLink() {
+  document.querySelectorAll('.footer-col').forEach(col => {
+    const heading = col.querySelector('h4');
+    if (!heading || heading.textContent.trim().toLowerCase() !== 'explore') return;
+    const ul = col.querySelector('ul');
+    if (!ul || ul.querySelector('a[href*="blog.html"]')) return;
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = `${ROOT_PATH}blog.html`;
+    a.textContent = 'Blog';
+    li.appendChild(a);
+    ul.appendChild(li);
   });
 }
 

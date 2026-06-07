@@ -5,7 +5,7 @@ window.SST_TRANSLATIONS = {
     nav: {
       home: 'Home', tours: 'Tours', bookNow: 'Book Now', about: 'About', contact: 'Contact',
       reserveTour: 'Reserve Tour', viewAllTours: 'View All Tours', allTours: 'All Tours',
-      faq: 'FAQ', gallery: 'Gallery', menu: 'Menu', popularTours: 'Popular Tours in {location}', discover: 'Discover'
+      faq: 'FAQ', gallery: 'Gallery', blog: 'Blog', menu: 'Menu', popularTours: 'Popular Tours in {location}', discover: 'Discover'
     },
     common: {
       whatsapp: 'WhatsApp', chatWhatsApp: 'Chat on WhatsApp', bookTour: 'Book a Tour', bookYourTour: 'Book Your Tour',
@@ -94,7 +94,7 @@ window.SST_TRANSLATIONS = {
     nav: {
       home: 'Startseite', tours: 'Touren', bookNow: 'Jetzt buchen', about: 'Über uns', contact: 'Kontakt',
       reserveTour: 'Tour reservieren', viewAllTours: 'Alle Touren anzeigen', allTours: 'Alle Touren',
-      faq: 'FAQ', gallery: 'Galerie', menu: 'Menü', popularTours: 'Beliebte Touren in {location}', discover: 'Entdecken'
+      faq: 'FAQ', gallery: 'Galerie', blog: 'Blog', menu: 'Menü', popularTours: 'Beliebte Touren in {location}', discover: 'Entdecken'
     },
     common: {
       whatsapp: 'WhatsApp', chatWhatsApp: 'Per WhatsApp chatten', bookTour: 'Tour buchen', bookYourTour: 'Tour buchen',
@@ -258,7 +258,7 @@ window.SST_TRANSLATIONS = {
     nav: {
       home: 'Accueil', tours: 'Circuits', bookNow: 'Réserver', about: 'À propos', contact: 'Contact',
       reserveTour: 'Réserver un circuit', viewAllTours: 'Voir tous les circuits', allTours: 'Tous les circuits',
-      faq: 'FAQ', gallery: 'Galerie', menu: 'Menu', popularTours: 'Circuits populaires à {location}', discover: 'Découvrir'
+      faq: 'FAQ', gallery: 'Galerie', blog: 'Blog', menu: 'Menu', popularTours: 'Circuits populaires à {location}', discover: 'Découvrir'
     },
     common: {
       whatsapp: 'WhatsApp', chatWhatsApp: 'Discuter sur WhatsApp', bookTour: 'Réserver un circuit', bookYourTour: 'Réserver votre circuit',
