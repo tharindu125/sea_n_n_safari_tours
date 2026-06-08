@@ -2,6 +2,125 @@ const fs = require('fs');
 const path = require('path');
 
 const SITE_URL = 'https://www.ceylonseasafaritours.com';
+const DC_DATE = '2026-06-07';
+
+const LOCAL_BUSINESS_JSON = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Sea & Safari Tours',
+  alternateName: 'Sea Safari Tours Mirissa',
+  image: `${SITE_URL}/assets/images/logo.png`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Mirissa, Southern Province',
+    addressLocality: 'Mirissa',
+    addressRegion: 'Southern Province',
+    postalCode: '81740',
+    addressCountry: 'Sri Lanka'
+  },
+  url: `${SITE_URL}/`,
+  telephone: '+94787097430',
+  email: 'seaandsafaritours@gmail.com'
+};
+
+function buildHead({
+  title,
+  description,
+  keywords,
+  url,
+  dcSubject,
+  image,
+  ogType = 'website',
+  articleMeta = '',
+  jsonLdBlocks = [],
+  assetPrefix = '../'
+}) {
+  const jsonLdScripts = [
+    LOCAL_BUSINESS_JSON,
+    ...jsonLdBlocks
+  ].map(data => `  <script type="application/ld+json">${JSON.stringify(data, null, 2)}</script>`).join('\n');
+
+  return `  <!-- Main -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0">
+
+  <!-- Title -->
+  <title>${title}</title>
+
+  <!-- Structured Data (JSON-LD) -->
+${jsonLdScripts}
+
+  <!-- SEO Meta -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="bingbot" content="index, follow">
+  <meta name="slurp" content="index, follow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="${description}">
+  <meta name="keywords" content="${keywords}">
+  <meta name="author" content="Sea & Safari Tours">
+  <meta name="copyright" content="© 2026 Sea & Safari Tours">
+  <link rel="canonical" href="${url}">
+  <link rel="alternate" hreflang="en" href="${url}">
+  <link rel="alternate" hreflang="de" href="${url}">
+  <link rel="alternate" hreflang="fr" href="${url}">
+  <link rel="alternate" hreflang="x-default" href="${url}">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="${SITE_URL}/sitemap.xml">
+
+  <!-- Geo -->
+  <meta name="geo.region" content="LK-3">
+  <meta name="geo.placename" content="Mirissa, Sri Lanka">
+  <meta name="geo.position" content="5.9483;80.4719">
+  <meta name="ICBM" content="5.9483, 80.4719">
+
+  <!-- Mobile -->
+  <meta name="theme-color" content="#0f2832">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Sea & Safari Tours">
+  <meta name="application-name" content="Sea & Safari Tours">
+
+  <!-- Dublin Core -->
+  <meta name="DC.title" content="${title}">
+  <meta name="DC.creator" content="Sea & Safari Tours">
+  <meta name="DC.subject" content="${dcSubject}">
+  <meta name="DC.description" content="${description}">
+  <meta name="DC.publisher" content="Sea & Safari Tours">
+  <meta name="DC.contributor" content="Sea & Safari Tours">
+  <meta name="DC.date" content="${DC_DATE}">
+  <meta name="DC.type" content="Text">
+  <meta name="DC.format" content="text/html">
+  <meta name="DC.identifier" content="${url}">
+  <meta name="DC.language" content="en">
+  <meta name="DC.coverage" content="Mirissa, Sri Lanka">
+  <meta name="DC.rights" content="© 2026 Sea & Safari Tours. All rights reserved.">
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:type" content="${ogType}">
+  <meta property="og:title" content="${title.replace(' | Sea &amp; Safari Tours Mirissa Blog', '')}">
+  <meta property="og:description" content="${description}">
+  <meta property="og:image" content="${image}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="${url}">
+  <meta property="og:site_name" content="Sea &amp; Safari Tours">
+${articleMeta}
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title.replace(' | Sea &amp; Safari Tours Mirissa Blog', '')}">
+  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="${image}">
+
+  <!-- Favicons -->
+  <link rel="icon" href="${assetPrefix}assets/images/logo.png">
+  <link rel="apple-touch-icon" href="${assetPrefix}assets/images/logo.png">
+
+  <link rel="stylesheet" href="${assetPrefix}assets/css/style.css">`;
+}
 
 const posts = [
   {
@@ -211,35 +330,62 @@ const posts = [
 function shell(post) {
   const url = `${SITE_URL}/blog/${post.id}.html`;
   const imgUrl = post.image.replace('../', `${SITE_URL}/`);
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${post.title} | Sea &amp; Safari Tours Mirissa Blog</title>
-  <meta name="description" content="${post.description}">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="${url}">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="${post.title}">
-  <meta property="og:description" content="${post.description}">
-  <meta property="og:image" content="${imgUrl}">
-  <meta property="og:url" content="${url}">
-  <meta name="twitter:card" content="summary_large_image">
-  <script type="application/ld+json">${JSON.stringify({
+  const pageTitle = `${post.title} | Sea &amp; Safari Tours Mirissa Blog`;
+  const keywords = `${post.category}, mirissa travel, sri lanka tours, ${post.title.toLowerCase()}`;
+  const blogPostingSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
+    '@id': url,
     headline: post.title,
     description: post.description,
     datePublished: post.date,
-    author: { '@type': 'Organization', name: 'Sea & Safari Tours' },
-    publisher: { '@type': 'Organization', name: 'Sea & Safari Tours', logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/images/logo.png` } },
-    image: imgUrl,
+    dateModified: post.date,
+    inLanguage: 'en',
+    author: { '@type': 'Organization', name: 'Sea & Safari Tours', url: SITE_URL },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Sea & Safari Tours',
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/images/logo.png` }
+    },
+    image: { '@type': 'ImageObject', url: imgUrl, width: 1200, height: 630 },
     url,
-    mainEntityOfPage: url
-  }, null, 2)}</script>
-  <link rel="icon" href="../assets/images/logo.png">
-  <link rel="stylesheet" href="../assets/css/style.css">
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url }
+  };
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: pageTitle.replace(/&amp;/g, '&'),
+    url,
+    description: post.description
+  };
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog.html` },
+      { '@type': 'ListItem', position: 3, name: post.title, item: url }
+    ]
+  };
+  const articleMeta = `  <meta property="article:published_time" content="${post.date}T08:00:00+05:30">
+  <meta property="article:section" content="${post.category}">
+`;
+  const head = buildHead({
+    title: pageTitle,
+    description: post.description,
+    keywords,
+    url,
+    dcSubject: `${post.category}, Mirissa Travel Blog, Sri Lanka Tourism`,
+    image: imgUrl,
+    ogType: 'article',
+    articleMeta,
+    jsonLdBlocks: [webPageSchema, blogPostingSchema, breadcrumbSchema]
+  });
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+${head}
 </head>
 <body data-blog-post="${post.id}">
 

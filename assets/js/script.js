@@ -1886,6 +1886,8 @@ function applyPageMeta(meta, canonicalPath) {
 
   setLinkTag('canonical', url);
   setLinkTag('alternate', url, { hreflang: 'en' });
+  setLinkTag('alternate', url, { hreflang: 'de' });
+  setLinkTag('alternate', url, { hreflang: 'fr' });
   setLinkTag('alternate', url, { hreflang: 'x-default' });
   setLinkTag('icon', `${SITE_URL}/assets/images/logo.png`);
   setLinkTag('apple-touch-icon', `${SITE_URL}/assets/images/logo.png`);
@@ -1912,6 +1914,13 @@ function applyPageMeta(meta, canonicalPath) {
   setMetaTag('property', 'og:image:height', '630');
   setMetaTag('property', 'og:url', url);
 
+  if (meta.type === 'article' && meta.publishedTime) {
+    setMetaTag('property', 'article:published_time', meta.publishedTime);
+    setMetaTag('property', 'article:modified_time', meta.modifiedTime || meta.publishedTime);
+    setMetaTag('property', 'article:author', SEO_DEFAULTS.author);
+    setMetaTag('property', 'article:section', meta.section || 'Travel');
+  }
+
   setMetaTag('name', 'twitter:card', 'summary_large_image');
   setMetaTag('name', 'twitter:title', meta.title);
   setMetaTag('name', 'twitter:description', meta.description);
@@ -1923,12 +1932,68 @@ function applyPageMeta(meta, canonicalPath) {
   }
 }
 
+function initBlogPostSeo(postId) {
+  const post = BLOG_POSTS.find(p => p.id === postId);
+  if (!post) return;
+
+  const path = `/blog/${post.id}.html`;
+  const image = `${SITE_URL}/${post.image.replace(/^\//, '')}`;
+  const description = document.querySelector('meta[name="description"]')?.getAttribute('content') || post.excerpt;
+  const title = `${post.title} | Sea & Safari Tours Mirissa Blog`;
+
+  applyPageMeta({
+    title,
+    description,
+    keywords: `${post.categoryLabel}, mirissa travel guide, sri lanka tours, ${post.title.toLowerCase()}`,
+    image,
+    imageAlt: post.title,
+    path,
+    type: 'article',
+    publishedTime: `${post.date}T08:00:00+05:30`,
+    modifiedTime: `${post.date}T08:00:00+05:30`,
+    section: post.categoryLabel
+  }, path);
+
+  const staticTypes = getStaticJsonLdTypes();
+  const url = getCanonicalUrl(path);
+
+  if (!staticTypes.has('BreadcrumbList')) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog.html` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: url }
+      ]
+    });
+  }
+
+  if (!staticTypes.has('WebPage')) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url,
+      inLanguage: 'en',
+      isPartOf: { '@type': 'Blog', name: 'Sea & Safari Tours Mirissa Travel Blog', url: `${SITE_URL}/blog.html` }
+    });
+  }
+}
+
 function initSeo() {
   const page = getCurrentPageFile();
   const inToursDir = window.location.pathname.includes('/tours/');
   const tourId = document.getElementById('tour-detail-content')?.dataset.tourId;
+  const blogPostId = document.body.dataset.blogPost;
 
   if (inToursDir && tourId) {
+    return;
+  }
+
+  if (blogPostId) {
+    initBlogPostSeo(blogPostId);
     return;
   }
 
