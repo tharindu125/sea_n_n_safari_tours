@@ -4,8 +4,9 @@ window.SST_TRANSLATIONS = {
     lang: { select: 'Select language' },
     nav: {
       home: 'Home', tours: 'Tours', bookNow: 'Book Now', about: 'About', contact: 'Contact',
+      individualTours: 'Individual Tours', comboTours: 'Combo Packages', viewAllCombos: 'View All Combos',
       reserveTour: 'Reserve Tour', viewAllTours: 'View All Tours', allTours: 'All Tours',
-      faq: 'FAQ', gallery: 'Gallery', blog: 'Blog', menu: 'Menu', popularTours: 'Popular Tours in {location}', discover: 'Discover'
+      faq: 'FAQ', gallery: 'Gallery', blog: 'Blog', combos: 'Combos', menu: 'Menu', popularTours: 'Popular Tours in {location}', discover: 'Discover'
     },
     common: {
       whatsapp: 'WhatsApp', chatWhatsApp: 'Chat on WhatsApp', bookTour: 'Book a Tour', bookYourTour: 'Book Your Tour',
@@ -41,7 +42,7 @@ window.SST_TRANSLATIONS = {
       whyChoose: 'Why Choose Us', adventurePriority: 'Your Adventure, Our Priority',
       whyDesc: 'Trusted local operators in Mirissa — safe boats, expert guides, and hassle-free booking from start to finish.',
       saveMore: 'Save More', comboPackages: 'Combo Packages',
-      comboDesc: 'Four bundled Mirissa experiences — save when you book two tours together. Free hotel pickup on all combos.',
+      comboDesc: 'Six bundled Mirissa experiences — save when you book two tours together. Free hotel pickup on all combos.',
       aboutUs: 'About Us', trustedPartner: 'Your Trusted Tour Partner in Mirissa',
       aboutText: "Sea & Safari Tours is Mirissa's trusted marine adventure company. From blue whale encounters to serene river kayaking, we deliver world-class experiences with unmatched safety, local expertise, and genuine Sri Lankan hospitality.",
       yearsExcellence: 'Years of<br>Excellence',
@@ -71,6 +72,18 @@ window.SST_TRANSLATIONS = {
       notAllowed: 'Not Allowed', knowBefore: 'Know Before You Go', photoGallery: 'Photo Gallery',
       packages: 'Packages', package: 'Package', slots: 'Slots'
     },
+    comboUi: {
+      viewPackage: 'View Package',
+      aboutPackage: 'About This Package',
+      includedTours: 'Tours Included',
+      allCombos: 'All Combo Packages',
+      nextCombo: 'Next Package',
+      notFound: 'Package not found',
+      pageTitle: 'Mirissa Combo Packages',
+      pageSubtitle: 'Bundle two tours and save — free hotel pickup on every combo package.',
+      breadcrumb: 'Combo Packages',
+      viewAllCombos: 'View All Combo Packages'
+    },
     tours: {
       'whale-dolphin': { name: 'Whale & Dolphin Watching' },
       'turtle-snorkeling': { name: 'Turtle Snorkeling' },
@@ -85,7 +98,9 @@ window.SST_TRANSLATIONS = {
       'whale-turtle': { name: 'Whale & Dolphin Watching + Turtle Snorkeling', badge: 'Most Popular' },
       'kayak-cooking': { name: 'River Kayak + Cooking Class', badge: 'Culture & Nature' },
       'whale-kayak': { name: 'Whale & Dolphin Watching + River Kayak', badge: 'Land & Sea' },
-      'whale-crocodile': { name: 'Whale & Dolphin Watching + Crocodile Watching', badge: 'Wildlife Combo' }
+      'whale-crocodile': { name: 'Whale & Dolphin Watching + Crocodile Watching', badge: 'Wildlife Combo' },
+      'turtle-kayak': { name: 'Turtle Snorkeling + River Kayak', badge: 'Ocean & River' },
+      'turtle-crocodile': { name: 'Turtle Snorkeling + Crocodile Watching', badge: 'Wildlife Duo' }
     },
     blog: {
       pageTitle: 'Mirissa Travel Blog | Whale Watching Tips & Sri Lanka Guides | Sea & Safari Tours',
@@ -120,8 +135,9 @@ window.SST_TRANSLATIONS = {
     lang: { select: 'Sprache wählen' },
     nav: {
       home: 'Startseite', tours: 'Touren', bookNow: 'Jetzt buchen', about: 'Über uns', contact: 'Kontakt',
+      individualTours: 'Einzeltouren', comboTours: 'Kombi-Pakete', viewAllCombos: 'Alle Kombis anzeigen',
       reserveTour: 'Tour reservieren', viewAllTours: 'Alle Touren anzeigen', allTours: 'Alle Touren',
-      faq: 'FAQ', gallery: 'Galerie', blog: 'Blog', menu: 'Menü', popularTours: 'Beliebte Touren in {location}', discover: 'Entdecken'
+      faq: 'FAQ', gallery: 'Galerie', blog: 'Blog', combos: 'Kombis', menu: 'Menü', popularTours: 'Beliebte Touren in {location}', discover: 'Entdecken'
     },
     common: {
       whatsapp: 'WhatsApp', chatWhatsApp: 'Per WhatsApp chatten', bookTour: 'Tour buchen', bookYourTour: 'Tour buchen',
@@ -157,7 +173,7 @@ window.SST_TRANSLATIONS = {
       whyChoose: 'Warum wir', adventurePriority: 'Ihr Abenteuer, unsere Priorität',
       whyDesc: 'Vertrauenswürdige lokale Anbieter in Mirissa — sichere Boote, erfahrene Guides und stressfreie Buchung von Anfang bis Ende.',
       saveMore: 'Mehr sparen', comboPackages: 'Kombi-Pakete',
-      comboDesc: 'Vier gebündelte Mirissa-Erlebnisse — sparen Sie bei der Buchung von zwei Touren. Kostenlose Hotelabholung bei allen Kombis.',
+      comboDesc: 'Sechs gebündelte Mirissa-Erlebnisse — sparen Sie bei der Buchung von zwei Touren. Kostenlose Hotelabholung bei allen Kombis.',
       aboutUs: 'Über uns', trustedPartner: 'Ihr vertrauenswürdiger Tourpartner in Mirissa',
       aboutText: 'Sea & Safari Tours ist Mirissas vertrauenswürdiges Meeresabenteuer-Unternehmen. Von Blauwal-Begegnungen bis zu ruhigem Flusskajakfahren bieten wir erstklassige Erlebnisse mit höchster Sicherheit, lokaler Expertise und echter srilankischer Gastfreundschaft.',
       yearsExcellence: 'Jahre<br>Exzellenz',
@@ -186,6 +202,18 @@ window.SST_TRANSLATIONS = {
       importantInfo: 'Wichtige Informationen', whatToBring: 'Was mitbringen', notSuitable: 'Nicht geeignet für',
       notAllowed: 'Nicht erlaubt', knowBefore: 'Wissenswertes', photoGallery: 'Fotogalerie',
       packages: 'Pakete', package: 'Paket', slots: 'Zeitfenster'
+    },
+    comboUi: {
+      viewPackage: 'Paket ansehen',
+      aboutPackage: 'Über dieses Paket',
+      includedTours: 'Enthaltene Touren',
+      allCombos: 'Alle Kombi-Pakete',
+      nextCombo: 'Nächstes Paket',
+      notFound: 'Paket nicht gefunden',
+      pageTitle: 'Mirissa Kombi-Pakete',
+      pageSubtitle: 'Zwei Touren bündeln und sparen — kostenlose Hotelabholung bei jedem Kombi-Paket.',
+      breadcrumb: 'Kombi-Pakete',
+      viewAllCombos: 'Alle Kombi-Pakete anzeigen'
     },
     tours: {
       'whale-dolphin': {
@@ -241,6 +269,18 @@ window.SST_TRANSLATIONS = {
         desc: 'Ozeanriesen am Morgen und Krokodil-Flusssafari am Nachmittag — zwei unvergessliche Wildtiererlebnisse.',
         tours: ['Wal- & Delfinbeobachtung', 'Krokodilbeobachtung'],
         waText: 'Hallo! Ich möchte das Kombi-Paket Walbeobachtung + Krokodilbeobachtung buchen.'
+      },
+      'turtle-kayak': {
+        name: 'Schildkröten-Schnorcheln + Flusskajak', badge: 'Ozean & Fluss',
+        desc: 'Mit Meeresschildkröten schwimmen, dann durch ruhige Mangrovenflüsse paddeln — zwei sanfte Abenteuer an einem Vormittag.',
+        tours: ['Schildkröten-Schnorcheln', 'Flusskajak-Touren'],
+        waText: 'Hallo! Ich möchte das Kombi-Paket Schildkröten-Schnorcheln + Flusskajak buchen.'
+      },
+      'turtle-crocodile': {
+        name: 'Schildkröten-Schnorcheln + Krokodilbeobachtung', badge: 'Wildlife-Duo',
+        desc: 'Riffschildkröten am Morgen und Krokodil-Flusssafari am Nachmittag — zwei einzigartige Wildtierbegegnungen an einem Tag.',
+        tours: ['Schildkröten-Schnorcheln', 'Krokodilbeobachtung'],
+        waText: 'Hallo! Ich möchte das Kombi-Paket Schildkröten-Schnorcheln + Krokodilbeobachtung buchen.'
       }
     },
     blog: {
@@ -311,8 +351,9 @@ window.SST_TRANSLATIONS = {
     lang: { select: 'Choisir la langue' },
     nav: {
       home: 'Accueil', tours: 'Circuits', bookNow: 'Réserver', about: 'À propos', contact: 'Contact',
+      individualTours: 'Circuits individuels', comboTours: 'Forfaits combo', viewAllCombos: 'Voir tous les combos',
       reserveTour: 'Réserver un circuit', viewAllTours: 'Voir tous les circuits', allTours: 'Tous les circuits',
-      faq: 'FAQ', gallery: 'Galerie', blog: 'Blog', menu: 'Menu', popularTours: 'Circuits populaires à {location}', discover: 'Découvrir'
+      faq: 'FAQ', gallery: 'Galerie', blog: 'Blog', combos: 'Combos', menu: 'Menu', popularTours: 'Circuits populaires à {location}', discover: 'Découvrir'
     },
     common: {
       whatsapp: 'WhatsApp', chatWhatsApp: 'Discuter sur WhatsApp', bookTour: 'Réserver un circuit', bookYourTour: 'Réserver votre circuit',
@@ -348,7 +389,7 @@ window.SST_TRANSLATIONS = {
       whyChoose: 'Pourquoi nous choisir', adventurePriority: 'Votre aventure, notre priorité',
       whyDesc: 'Opérateurs locaux de confiance à Mirissa — bateaux sûrs, guides experts et réservation sans tracas du début à la fin.',
       saveMore: 'Économisez plus', comboPackages: 'Forfaits combinés',
-      comboDesc: 'Quatre expériences Mirissa groupées — économisez en réservant deux circuits ensemble. Prise en charge hôtel gratuite sur tous les combos.',
+      comboDesc: 'Six expériences Mirissa groupées — économisez en réservant deux circuits ensemble. Prise en charge hôtel gratuite sur tous les combos.',
       aboutUs: 'À propos', trustedPartner: 'Votre partenaire de circuits de confiance à Mirissa',
       aboutText: "Sea & Safari Tours est l'entreprise d'aventures marines de confiance de Mirissa. Des rencontres avec les baleines bleues au kayak fluvial paisible, nous offrons des expériences de classe mondiale avec une sécurité inégalée, une expertise locale et une hospitalité sri-lankaise authentique.",
       yearsExcellence: "Ans<br>d'excellence",
@@ -377,6 +418,18 @@ window.SST_TRANSLATIONS = {
       importantInfo: 'Informations importantes', whatToBring: 'Quoi apporter', notSuitable: 'Non adapté pour',
       notAllowed: 'Non autorisé', knowBefore: 'À savoir avant de partir', photoGallery: 'Galerie photos',
       packages: 'Forfaits', package: 'Forfait', slots: 'Créneaux'
+    },
+    comboUi: {
+      viewPackage: 'Voir le forfait',
+      aboutPackage: 'À propos de ce forfait',
+      includedTours: 'Circuits inclus',
+      allCombos: 'Tous les forfaits combo',
+      nextCombo: 'Forfait suivant',
+      notFound: 'Forfait introuvable',
+      pageTitle: 'Forfaits combo Mirissa',
+      pageSubtitle: 'Combinez deux circuits et économisez — prise en charge hôtel gratuite sur chaque forfait.',
+      breadcrumb: 'Forfaits combo',
+      viewAllCombos: 'Voir tous les forfaits combo'
     },
     tours: {
       'whale-dolphin': {
@@ -432,6 +485,18 @@ window.SST_TRANSLATIONS = {
         desc: 'Géants de l\'océan le matin et safari crocodiles l\'après-midi — deux expériences animalières inoubliables.',
         tours: ['Observation baleines & dauphins', 'Observation des crocodiles'],
         waText: 'Bonjour ! Je souhaite réserver le combo Observation baleines + Crocodiles.'
+      },
+      'turtle-kayak': {
+        name: 'Snorkeling tortues + Kayak fluvial', badge: 'Océan & Rivière',
+        desc: 'Nagez avec les tortues de mer, puis pagayez dans les rivières calmes des mangroves — deux aventures douces en une matinée.',
+        tours: ['Snorkeling avec les tortues', 'Circuits kayak fluvial'],
+        waText: 'Bonjour ! Je souhaite réserver le combo Snorkeling tortues + Kayak fluvial.'
+      },
+      'turtle-crocodile': {
+        name: 'Snorkeling tortues + Observation crocodiles', badge: 'Duo faune',
+        desc: 'Tortues de récif le matin et safari crocodiles l\'après-midi — deux rencontres animalières uniques en une journée.',
+        tours: ['Snorkeling avec les tortues', 'Observation des crocodiles'],
+        waText: 'Bonjour ! Je souhaite réserver le combo Snorkeling tortues + Observation crocodiles.'
       }
     },
     blog: {

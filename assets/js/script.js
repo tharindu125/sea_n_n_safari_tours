@@ -122,6 +122,14 @@ const PAGE_SEO = {
     image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
     path: '/blog.html'
   },
+  'combos.html': {
+    title: 'Mirissa Combo Packages | Whale Watching & Tour Bundles | Sea & Safari Tours',
+    description: 'Save on Mirissa combo packages — whale watching + turtle snorkeling, river kayak + cooking class & more. Bundled tours from $50/person with free hotel pickup.',
+    keywords: 'mirissa combo packages, whale watching turtle snorkeling combo, mirissa tour bundles, sri lanka package tours mirissa',
+    dcSubject: 'Mirissa Combo Packages, Tour Bundles, Whale Watching Packages',
+    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png`,
+    path: '/combos.html'
+  },
   'tour-details.html': {
     title: 'Tour Details | Sea & Safari Tours',
     description: 'Detailed Mirissa tour information, itinerary, pricing, and online booking for Sea & Safari Tours.',
@@ -143,15 +151,48 @@ const TOUR_SEO = {
   'cooking-class': 'sri lankan cooking class mirissa, mirissa cooking tour, authentic cooking experience sri lanka'
 };
 
+const COMBO_SEO = {
+  'whale-turtle': 'mirissa whale and turtle combo, whale watching turtle snorkeling package mirissa, mirissa combo tour, blue whale snorkeling bundle sri lanka',
+  'kayak-cooking': 'mirissa kayak cooking class combo, river kayak cooking package mirissa, sri lanka culture nature tour',
+  'whale-kayak': 'mirissa whale watching kayak combo, blue whale river kayak package, land and sea mirissa tour',
+  'whale-crocodile': 'mirissa whale crocodile combo, whale watching crocodile safari package, wildlife combo tour sri lanka',
+  'turtle-kayak': 'turtle snorkeling kayak combo mirissa, mirissa turtle and kayak package, ocean and river combo sri lanka',
+  'turtle-crocodile': 'turtle snorkeling crocodile combo mirissa, mirissa turtle crocodile package, wildlife snorkeling safari sri lanka'
+};
+
 const COMBO_PACKAGES = [
   {
     id: 'whale-turtle',
+    tourIds: ['whale-dolphin', 'turtle-snorkeling'],
     name: 'Whale & Dolphin Watching + Turtle Snorkeling',
     badge: 'Most Popular',
     tours: ['Whale & Dolphin Watching', 'Turtle Snorkeling'],
     price: 65,
     originalPrice: 70,
+    duration: 'Full Day (~6 hours)',
+    location: 'Mirissa, Sri Lanka',
     desc: 'Our best-selling combo — morning whale cruise, then snorkel with turtles. Free hotel pickup included.',
+    fullDesc: 'Experience the best of Mirissa\'s ocean in one unforgettable day. Start with an early-morning whale and dolphin watching cruise on the Indian Ocean, then snorkel with sea turtles in calm reef waters. This bundled package saves you money compared to booking separately — with free hotel pickup and one simple WhatsApp booking.',
+    highlights: [
+      'Two top Mirissa experiences in a single day',
+      'Morning blue whale & dolphin cruise from Mirissa Harbor',
+      'Afternoon turtle snorkeling with 100% sighting guarantee',
+      'Save $5 vs booking tours separately',
+      'Free hotel pickup and drop-off in Mirissa'
+    ],
+    itinerary: [
+      { time: '6:30 AM', title: 'Whale & Dolphin Watching', desc: 'Depart Mirissa Harbor for a 3–4 hour ocean cruise. Spot blue whales, sperm whales, dolphins, and sea turtles with expert crew and breakfast on board.' },
+      { time: '11:00 AM', title: 'Return & Break', desc: 'Return to harbor, light refreshment break. Transfer to turtle snorkeling departure point.' },
+      { time: '1:00 PM', title: 'Turtle Snorkeling', desc: 'Guided 1.5-hour snorkeling session with guaranteed turtle sightings. Equipment, guide, and safety briefing included.' },
+      { time: '3:00 PM', title: 'Hotel Drop-off', desc: 'Return to your Mirissa hotel after an action-packed ocean day.' }
+    ],
+    included: [
+      'Whale watching cruise with breakfast & life jackets',
+      'Turtle snorkeling with mask, fins & in-water guide',
+      'Free Mirissa hotel pickup and drop-off',
+      'Bottled water and light snacks',
+      'Experienced English-speaking guides'
+    ],
     image: 'assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png',
     waText: 'Hello! I would like to book the Whale & Dolphin Watching + Turtle Snorkeling combo.',
     getYourGuide: {
@@ -162,23 +203,71 @@ const COMBO_PACKAGES = [
   },
   {
     id: 'kayak-cooking',
+    tourIds: ['river-kayak', 'cooking-class'],
     name: 'River Kayak + Cooking Class',
     badge: 'Culture & Nature',
     tours: ['River Kayak Tours', 'Cooking Class'],
     price: 50,
     originalPrice: 55,
+    duration: 'Half Day (~4 hours)',
+    location: 'Mirissa, Sri Lanka',
     desc: 'Paddle through mangroves in the morning, then learn authentic Sri Lankan cooking in the afternoon.',
+    fullDesc: 'Blend nature and culture in one relaxed Mirissa day. Paddle through calm mangrove waterways spotting kingfishers and water monitors, then join a local chef for a hands-on Sri Lankan cooking class. Perfect for travelers who want variety without rushing — with free pickup and a bundled discount.',
+    highlights: [
+      'Peaceful river kayak through mangroves & rainforest',
+      'Authentic hands-on Sri Lankan cooking class',
+      'Save $5 vs booking tours separately',
+      'Suitable for beginners — no experience needed',
+      'Free hotel pickup in Mirissa'
+    ],
+    itinerary: [
+      { time: '8:00 AM', title: 'River Kayak Tour', desc: '1.5-hour guided kayak through calm waterways. Spot wildlife, learn about local ecosystems, and enjoy serene paddling.' },
+      { time: '10:00 AM', title: 'Transfer & Break', desc: 'Short break before heading to the cooking class venue.' },
+      { time: '11:00 AM', title: 'Sri Lankan Cooking Class', desc: '2.5-hour hands-on class with a local chef. Prepare traditional dishes using fresh spices, then enjoy your meal together.' },
+      { time: '2:00 PM', title: 'Hotel Drop-off', desc: 'Return to your hotel after a delicious cultural experience.' }
+    ],
+    included: [
+      'River kayak with equipment and guide',
+      'Cooking class ingredients, recipes & shared meal',
+      'Free Mirissa hotel pickup and drop-off',
+      'Bottled water during activities',
+      'English-speaking local guides'
+    ],
     image: 'assets/images/river-kayak/mirissa_kayak_mangrove-roots.png',
     waText: 'Hello! I would like to book the River Kayak + Cooking Class combo.'
   },
   {
     id: 'whale-kayak',
+    tourIds: ['whale-dolphin', 'river-kayak'],
     name: 'Whale & Dolphin Watching + River Kayak',
     badge: 'Land & Sea',
     tours: ['Whale & Dolphin Watching', 'River Kayak Tours'],
     price: 65,
     originalPrice: 70,
+    duration: 'Full Day (~6 hours)',
+    location: 'Mirissa, Sri Lanka',
     desc: 'Combine an early-morning ocean safari with a peaceful river kayak through rainforest and mangroves.',
+    fullDesc: 'The ultimate land-and-sea Mirissa adventure. Witness blue whales and dolphins on a sunrise ocean cruise, then explore tranquil inland waterways by kayak. Two completely different ecosystems in one day — ocean giants and mangrove wildlife — at a bundled price with free hotel transfers.',
+    highlights: [
+      'Ocean whale safari plus inland river kayak',
+      'Early-morning departure for best whale sightings',
+      'Peaceful mangrove paddling in the afternoon',
+      'Save $5 vs booking tours separately',
+      'Free hotel pickup and drop-off'
+    ],
+    itinerary: [
+      { time: '6:30 AM', title: 'Whale & Dolphin Watching', desc: '3–4 hour morning cruise from Mirissa Harbor. Search for blue whales, sperm whales, and playful dolphins.' },
+      { time: '11:00 AM', title: 'Return & Break', desc: 'Return to harbor and enjoy a short break before the kayak tour.' },
+      { time: '1:00 PM', title: 'River Kayak Tour', desc: '1.5-hour guided paddle through calm rivers and mangroves. Spot kingfishers, herons, and water monitors.' },
+      { time: '3:00 PM', title: 'Hotel Drop-off', desc: 'Transfer back to your Mirissa accommodation.' }
+    ],
+    included: [
+      'Whale watching cruise with breakfast & safety gear',
+      'River kayak with equipment and guide',
+      'Free Mirissa hotel pickup and drop-off',
+      'Bottled water and light snacks',
+      'Experienced local guides'
+    ],
     image: 'assets/images/river-kayak/mirissa_kayak_sunset-kayak.png',
     waText: 'Hello! I would like to book the Whale & Dolphin Watching + River Kayak combo.',
     getYourGuide: {
@@ -189,12 +278,36 @@ const COMBO_PACKAGES = [
   },
   {
     id: 'whale-crocodile',
+    tourIds: ['whale-dolphin', 'crocodile-safari'],
     name: 'Whale & Dolphin Watching + Crocodile Watching',
     badge: 'Wildlife Combo',
     tours: ['Whale & Dolphin Watching', 'Crocodile Watching'],
     price: 70,
     originalPrice: 75,
+    duration: 'Full Day (~7 hours)',
+    location: 'Mirissa & Matara, Sri Lanka',
     desc: 'Ocean giants in the morning and crocodile river safari in the afternoon — two unforgettable wildlife experiences.',
+    fullDesc: 'A full day of Sri Lankan wildlife at its finest. Begin with a sunrise whale watching cruise off Mirissa, then head to the Nilwala River near Matara for a crocodile and mangrove safari. Spot saltwater crocodiles, kingfishers, monkeys, and more — two iconic wildlife experiences bundled with free transfers.',
+    highlights: [
+      'Blue whales in the morning, crocodiles in the afternoon',
+      'Nilwala River mangrove safari near Matara',
+      'Save $5 vs booking tours separately',
+      'Expert wildlife guides on both experiences',
+      'Free hotel pickup from Mirissa area'
+    ],
+    itinerary: [
+      { time: '6:30 AM', title: 'Whale & Dolphin Watching', desc: 'Early-morning 3–4 hour ocean cruise from Mirissa Harbor. Watch for blue whales, dolphins, and sea turtles.' },
+      { time: '11:00 AM', title: 'Return & Transfer', desc: 'Return to harbor, break, then transfer to Nilwala River departure point near Matara.' },
+      { time: '1:30 PM', title: 'Crocodile Watching Safari', desc: '2-hour boat safari through mangroves. Spot crocodiles, kingfishers, monkeys, and river wildlife.' },
+      { time: '4:00 PM', title: 'Hotel Drop-off', desc: 'Return to your Mirissa hotel after an incredible wildlife day.' }
+    ],
+    included: [
+      'Whale watching cruise with breakfast & life jackets',
+      'Crocodile river safari boat with guide',
+      'Free Mirissa hotel pickup and drop-off',
+      'Transfers between tour locations',
+      'Bottled water and experienced guides'
+    ],
     image: 'assets/images/crocodile-safari/crocodile_watching_close-up.png',
     waText: 'Hello! I would like to book the Whale & Dolphin Watching + Crocodile Watching combo.',
     getYourGuide: {
@@ -202,6 +315,76 @@ const COMBO_PACKAGES = [
       badge: GETYOURGUIDE_PRODUCT_BADGE,
       title: 'Mirissa: Blue Whale Watching & Crocodile Watching Combo Tour'
     }
+  },
+  {
+    id: 'turtle-kayak',
+    tourIds: ['turtle-snorkeling', 'river-kayak'],
+    name: 'Turtle Snorkeling + River Kayak',
+    badge: 'Ocean & River',
+    tours: ['Turtle Snorkeling', 'River Kayak Tours'],
+    price: 45,
+    originalPrice: 50,
+    duration: 'Half Day (~3.5 hours)',
+    location: 'Mirissa, Sri Lanka',
+    desc: 'Swim with sea turtles, then paddle through calm mangrove rivers — two gentle adventures in one morning.',
+    fullDesc: 'Perfect for travelers who want ocean and inland nature without an early start. Snorkel with sea turtles on Mirissa\'s reef, then glide through peaceful mangrove waterways by kayak. Beginner-friendly, small groups, and a bundled discount with free hotel pickup.',
+    highlights: [
+      '100% turtle sighting guarantee on snorkeling tour',
+      'Peaceful river kayak through mangroves & rainforest',
+      'Save $5 vs booking tours separately',
+      'No early-morning departure — ideal for relaxed travelers',
+      'Free hotel pickup and drop-off in Mirissa'
+    ],
+    itinerary: [
+      { time: '8:00 AM', title: 'Turtle Snorkeling', desc: '1.5-hour guided snorkeling with guaranteed turtle sightings. Equipment, in-water guide, and safety briefing included.' },
+      { time: '10:00 AM', title: 'Break & Transfer', desc: 'Short refreshment break before heading to the river kayak departure point.' },
+      { time: '11:00 AM', title: 'River Kayak Tour', desc: '1.5-hour guided paddle through calm waterways. Spot kingfishers, herons, water monitors, and monkeys.' },
+      { time: '1:00 PM', title: 'Hotel Drop-off', desc: 'Return to your Mirissa hotel after a refreshing half-day adventure.' }
+    ],
+    included: [
+      'Turtle snorkeling with mask, fins & in-water guide',
+      'River kayak with equipment and guide',
+      'Free Mirissa hotel pickup and drop-off',
+      'Bottled water and light snacks',
+      'English-speaking local guides'
+    ],
+    image: 'assets/images/turtle-snorkeling/mirissa_turtle_snorkeling_swim-with-turtle.png',
+    waText: 'Hello! I would like to book the Turtle Snorkeling + River Kayak combo.'
+  },
+  {
+    id: 'turtle-crocodile',
+    tourIds: ['turtle-snorkeling', 'crocodile-safari'],
+    name: 'Turtle Snorkeling + Crocodile Watching',
+    badge: 'Wildlife Duo',
+    tours: ['Turtle Snorkeling', 'Crocodile Watching'],
+    price: 50,
+    originalPrice: 55,
+    duration: 'Half Day (~5 hours)',
+    location: 'Mirissa & Matara, Sri Lanka',
+    desc: 'Reef turtles in the morning and crocodile river safari in the afternoon — two unique wildlife encounters in one day.',
+    fullDesc: 'Discover Sri Lanka\'s diverse wildlife from ocean reef to mangrove river. Swim with sea turtles in Mirissa\'s crystal-clear waters, then cruise the Nilwala River near Matara for crocodiles, kingfishers, and monkeys. Bundled pricing with transfers and free pickup from Mirissa hotels.',
+    highlights: [
+      'Guaranteed turtle sightings on snorkeling tour',
+      'Nilwala River crocodile safari near Matara',
+      'Save $5 vs booking tours separately',
+      'Two ecosystems — reef and mangrove — in one package',
+      'Free hotel pickup from Mirissa area'
+    ],
+    itinerary: [
+      { time: '8:00 AM', title: 'Turtle Snorkeling', desc: '1.5-hour guided snorkeling session with guaranteed turtle sightings. All equipment and in-water guide included.' },
+      { time: '10:00 AM', title: 'Break & Transfer', desc: 'Short break, then transfer to Nilwala River departure point near Matara.' },
+      { time: '11:30 AM', title: 'Crocodile Watching Safari', desc: '2-hour boat safari through mangroves. Spot saltwater crocodiles, kingfishers, monkeys, and river wildlife.' },
+      { time: '2:00 PM', title: 'Hotel Drop-off', desc: 'Return to your Mirissa hotel after an unforgettable wildlife day.' }
+    ],
+    included: [
+      'Turtle snorkeling with mask, fins & in-water guide',
+      'Crocodile river safari boat with guide',
+      'Free Mirissa hotel pickup and drop-off',
+      'Transfers between tour locations',
+      'Bottled water and experienced guides'
+    ],
+    image: 'assets/images/turtle-snorkeling/mirissa_turtle_snorkeling_group-dive.png',
+    waText: 'Hello! I would like to book the Turtle Snorkeling + Crocodile Watching combo.'
   }
 ];
 
@@ -243,10 +426,12 @@ const FAQ_ITEMS = [
 
 const IS_IN_TOURS_DIR = window.location.pathname.includes('/tours/');
 const IS_IN_BLOG_DIR = window.location.pathname.includes('/blog/');
-const IS_IN_SUBDIR = IS_IN_TOURS_DIR || IS_IN_BLOG_DIR;
-const TOURS_PATH = IS_IN_TOURS_DIR ? '' : 'tours/';
-const BLOG_PATH = IS_IN_BLOG_DIR ? '' : 'blog/';
+const IS_IN_COMBOS_DIR = window.location.pathname.includes('/combos/');
+const IS_IN_SUBDIR = IS_IN_TOURS_DIR || IS_IN_BLOG_DIR || IS_IN_COMBOS_DIR;
 const ROOT_PATH = IS_IN_SUBDIR ? '../' : '';
+const TOURS_PATH = IS_IN_TOURS_DIR ? '' : `${ROOT_PATH}tours/`;
+const BLOG_PATH = IS_IN_BLOG_DIR ? '' : `${ROOT_PATH}blog/`;
+const COMBOS_PATH = IS_IN_COMBOS_DIR ? '' : `${ROOT_PATH}combos/`;
 const IMG_PATH = IS_IN_SUBDIR ? '../' : '';
 
 const BLOG_CATEGORIES = [
@@ -371,6 +556,9 @@ function refreshPageContent() {
   if (document.querySelector('.tours-grid[data-render="all"]')) renderAllTours();
   if (document.querySelector('.tours-grid[data-render="featured"]')) renderFeaturedTours();
   if (document.querySelector('[data-render="combos"]')) renderComboPackages();
+  upgradeComboDropdownLinks();
+  refreshComboDropdownLabels();
+  refreshMobileNavToursCombos();
   if (document.getElementById('faq-accordion')) initFAQPage();
   if (document.getElementById('blog-grid')) {
     initBlogPage();
@@ -390,6 +578,7 @@ function refreshPageContent() {
   }
   if (document.getElementById('blog-related')) initBlogPost();
   if (document.getElementById('tour-detail-content')) initTourDetails();
+  if (document.getElementById('combo-detail-content')) initComboDetails();
   if (document.getElementById('booking-form')) refreshBookingFormTours();
   const carousel = document.querySelector('.hero-carousel');
   if (carousel?._heroRefresh) carousel._heroRefresh();
@@ -453,10 +642,11 @@ function injectMirissaBranding() {
     header.innerHTML = `${LOCATION_PIN_ICON}<span>All tours in ${SITE_LOCATION}</span>`;
     menu.insertBefore(header, menu.firstChild);
 
-    menu.querySelectorAll('a:not(.dropdown-all)').forEach(link => {
+    menu.querySelectorAll('a:not(.dropdown-all):not(.dropdown-combo-link)').forEach(link => {
       if (link.querySelector('.dropdown-tour-loc')) return;
-      const tourName = link.textContent.trim();
       const tourId = getTourIdFromHref(link.getAttribute('href'));
+      if (!tourId) return;
+      const tourName = link.textContent.trim();
       const loc = getTourLocationShort(tourId);
 
       link.textContent = '';
@@ -470,11 +660,137 @@ function injectMirissaBranding() {
     });
   });
 
+  enhanceToursDropdown();
+  upgradeComboDropdownLinks();
+
   document.querySelectorAll('.mobile-nav-label').forEach(label => {
     if (label.textContent.trim() === 'Popular Tours') {
       label.textContent = `Popular Tours in ${SITE_LOCATION_SHORT}`;
     }
   });
+}
+
+function getComboDropdownLabel(combo) {
+  const localized = getLocalizedCombo(combo.id);
+  return localized.tours.join(' + ');
+}
+
+function enhanceToursDropdown() {
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    if (menu.querySelector('.dropdown-mega-grid')) return;
+
+    menu.querySelectorAll('.dropdown-section-label, .dropdown-combo-link, .dropdown-all-combos').forEach(el => el.remove());
+
+    const header = menu.querySelector('.dropdown-location-header');
+    const tourLinks = [...menu.querySelectorAll('a[href*="tours/"]')];
+    const viewAllTours = menu.querySelector('.dropdown-all:not(.dropdown-all-combos)');
+    if (!tourLinks.length) return;
+
+    const grid = document.createElement('div');
+    grid.className = 'dropdown-mega-grid';
+
+    const toursCol = document.createElement('div');
+    toursCol.className = 'dropdown-mega-col dropdown-mega-col-tours';
+
+    const individualLabel = document.createElement('div');
+    individualLabel.className = 'dropdown-section-label';
+    individualLabel.setAttribute('data-i18n', 'nav.individualTours');
+    individualLabel.textContent = t('nav.individualTours');
+    toursCol.append(individualLabel, ...tourLinks);
+    if (viewAllTours) toursCol.appendChild(viewAllTours);
+
+    const combosCol = document.createElement('div');
+    combosCol.className = 'dropdown-mega-col dropdown-mega-col-combos';
+
+    const comboLabel = document.createElement('div');
+    comboLabel.className = 'dropdown-section-label dropdown-section-label-combos';
+    comboLabel.setAttribute('data-i18n', 'nav.comboTours');
+    comboLabel.textContent = t('nav.comboTours');
+    combosCol.appendChild(comboLabel);
+
+    COMBO_PACKAGES.forEach(combo => {
+      const localized = getLocalizedCombo(combo.id);
+      const savings = combo.originalPrice - combo.price;
+      const link = document.createElement('a');
+      link.href = `${COMBOS_PATH}${combo.id}.html`;
+      link.className = 'dropdown-combo-link';
+      link.dataset.comboId = combo.id;
+      link.innerHTML = `
+        <span class="dropdown-combo-content">
+          <span class="dropdown-tour-name">${getComboDropdownLabel(combo)}</span>
+          <span class="dropdown-combo-save">${t('common.save')} $${savings}</span>
+        </span>
+        <span class="dropdown-combo-price">$${localized.price}</span>
+      `;
+      combosCol.appendChild(link);
+    });
+
+    const viewAllCombos = document.createElement('a');
+    viewAllCombos.href = `${ROOT_PATH}combos.html`;
+    viewAllCombos.className = 'dropdown-all dropdown-all-combos';
+    viewAllCombos.setAttribute('data-i18n', 'nav.viewAllCombos');
+    viewAllCombos.innerHTML = `${t('nav.viewAllCombos')} <span class="link-arrow" aria-hidden="true">&rarr;</span>`;
+    combosCol.appendChild(viewAllCombos);
+
+    grid.append(toursCol, combosCol);
+
+    if (header) header.after(grid);
+    else menu.appendChild(grid);
+
+    menu.classList.add('dropdown-menu-mega');
+    menu.dataset.comboEnhanced = 'true';
+  });
+}
+
+function upgradeComboDropdownLinks() {
+  document.querySelectorAll('.dropdown-combo-link').forEach(link => {
+    if (link.querySelector('.dropdown-combo-save')) return;
+    const comboId = link.dataset.comboId || link.getAttribute('href')?.split('/').pop()?.replace('.html', '');
+    const combo = COMBO_PACKAGES.find(c => c.id === comboId);
+    if (!combo) return;
+    const localized = getLocalizedCombo(combo.id);
+    const nameEl = link.querySelector('.dropdown-tour-name');
+    const name = nameEl?.textContent.trim() || getComboDropdownLabel(combo);
+    const savings = combo.originalPrice - combo.price;
+    link.innerHTML = `
+      <span class="dropdown-combo-content">
+        <span class="dropdown-tour-name">${name}</span>
+        <span class="dropdown-combo-save">${t('common.save')} $${savings}</span>
+      </span>
+      <span class="dropdown-combo-price">$${localized.price}</span>
+    `;
+  });
+}
+
+function refreshComboDropdownLabels() {
+  document.querySelectorAll('.dropdown-combo-link').forEach(link => {
+    const comboId = link.dataset.comboId || link.getAttribute('href')?.split('/').pop()?.replace('.html', '');
+    const combo = COMBO_PACKAGES.find(c => c.id === comboId);
+    if (!combo) return;
+    const localized = getLocalizedCombo(combo.id);
+    const nameEl = link.querySelector('.dropdown-tour-name');
+    const priceEl = link.querySelector('.dropdown-combo-price');
+    if (nameEl) nameEl.textContent = getComboDropdownLabel(combo);
+    if (priceEl) priceEl.textContent = `$${localized.price}`;
+    const saveEl = link.querySelector('.dropdown-combo-save');
+    if (saveEl) saveEl.textContent = `${t('common.save')} $${combo.originalPrice - combo.price}`;
+  });
+
+  document.querySelectorAll('.dropdown-section-label[data-i18n]').forEach(label => {
+    const key = label.getAttribute('data-i18n');
+    const text = t(key);
+    if (text !== key) label.textContent = text;
+  });
+
+  document.querySelectorAll('.dropdown-all-combos').forEach(link => {
+    const arrow = link.querySelector('.link-arrow');
+    link.textContent = '';
+    link.append(document.createTextNode(`${t('nav.viewAllCombos')} `));
+    if (arrow) link.appendChild(arrow);
+    else link.insertAdjacentHTML('beforeend', '<span class="link-arrow" aria-hidden="true">&rarr;</span>');
+  });
+
+  refreshMobileNavToursCombos();
 }
 
 const TOURS = {
@@ -1092,6 +1408,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('faq-accordion')) initFAQPage();
   if (document.getElementById('site-gallery')) initSiteGallery();
   if (document.getElementById('tour-detail-content')) initTourDetails();
+  if (document.getElementById('combo-detail-content')) initComboDetails();
   if (document.getElementById('booking-form')) initBookingForm();
   if (document.getElementById('payment-form')) initPaymentPage();
   if (document.getElementById('contact-form')) initContactForm();
@@ -1604,19 +1921,53 @@ function enhanceMobileNavLink(link, isTour) {
   }
 }
 
+function buildMobileTourNavLink(tourId) {
+  const tour = getLocalizedTour(tourId);
+  if (!tour) return null;
+  const link = document.createElement('a');
+  link.href = `${TOURS_PATH}${tourId}.html`;
+  link.className = 'nav-link nav-sub mobile-nav-tour-link';
+  link.dataset.tourId = tourId;
+  link.innerHTML = `
+    <span class="mobile-nav-tour-name">${tour.name}</span>
+    <span class="mobile-nav-tour-price">$${tour.price}</span>
+  `;
+  return link;
+}
+
+function buildMobileComboNavLink(combo) {
+  const localized = getLocalizedCombo(combo.id);
+  const savings = combo.originalPrice - combo.price;
+  const link = document.createElement('a');
+  link.href = `${COMBOS_PATH}${combo.id}.html`;
+  link.className = 'nav-link nav-sub mobile-nav-combo-link';
+  link.dataset.comboId = combo.id;
+  link.innerHTML = `
+    <span class="mobile-nav-combo-name">${getComboDropdownLabel(combo)}</span>
+    <span class="mobile-nav-combo-meta">
+      <span class="mobile-nav-combo-save">${t('common.save')} $${savings}</span>
+      <span class="mobile-nav-combo-price">$${localized.price}</span>
+    </span>
+  `;
+  return link;
+}
+
 function buildMobileNavStructure() {
   const mobileNav = document.querySelector('.mobile-nav');
-  if (!mobileNav || mobileNav.dataset.enhanced === 'true') return;
+  if (!mobileNav || mobileNav.dataset.navBuilt === '2') return;
 
   const links = [...mobileNav.querySelectorAll(':scope > .nav-link, :scope > .btn.btn-primary')];
   if (!links.length) return;
 
-  const mainLinks = links.filter(l => !l.classList.contains('nav-sub') && !l.classList.contains('btn') && !l.classList.contains('nav-extra-link'));
+  mobileNav.querySelectorAll(':scope > .nav-sub').forEach(link => link.remove());
+
+  const mainLinks = links.filter(l => {
+    if (l.classList.contains('nav-sub') || l.classList.contains('btn') || l.classList.contains('nav-extra-link')) return false;
+    const href = l.getAttribute('href') || '';
+    return !href.includes('tours.html');
+  });
   const extraLinks = links.filter(l => l.classList.contains('nav-extra-link'));
-  const tourLinks = links.filter(l => l.classList.contains('nav-sub'));
   const ctaBtn = links.find(l => l.classList.contains('btn'));
-  const toursPath = links.find(l => (l.getAttribute('href') || '').includes('tours.html'))?.getAttribute('href')
-    || (window.location.pathname.includes('/tours/') ? '../tours.html' : 'tours.html');
 
   const panel = document.createElement('div');
   panel.className = 'mobile-nav-panel';
@@ -1653,22 +2004,37 @@ function buildMobileNavStructure() {
   menuSection.appendChild(mainList);
   scroll.appendChild(menuSection);
 
-  if (tourLinks.length) {
-    const toursSection = document.createElement('div');
-    toursSection.className = 'mobile-nav-section';
-    toursSection.innerHTML = `<p class="mobile-nav-label" data-i18n="nav.popularTours" data-i18n-vars='{"location":"Mirissa"}'>Popular Tours in ${SITE_LOCATION_SHORT}</p>`;
-    const toursList = document.createElement('div');
-    toursList.className = 'mobile-nav-tours';
-    tourLinks.forEach(link => toursList.appendChild(link));
+  const toursSection = document.createElement('div');
+  toursSection.className = 'mobile-nav-section mobile-nav-tours-section';
+  toursSection.innerHTML = `<p class="mobile-nav-label mobile-nav-label-primary" data-i18n="nav.individualTours">Individual Tours</p>`;
+  const toursList = document.createElement('div');
+  toursList.className = 'mobile-nav-tours mobile-nav-tours-grid';
+  Object.keys(TOURS).forEach(tourId => {
+    const link = buildMobileTourNavLink(tourId);
+    if (link) toursList.appendChild(link);
+  });
 
-    const viewAll = document.createElement('a');
-    viewAll.href = toursPath;
-    viewAll.className = 'mobile-nav-view-all';
-    viewAll.innerHTML = `<span data-i18n="nav.viewAllTours">View all tours</span> <span class="link-arrow" aria-hidden="true">&rarr;</span>`;
+  const viewAllTours = document.createElement('a');
+  viewAllTours.href = `${ROOT_PATH}tours.html`;
+  viewAllTours.className = 'mobile-nav-view-all mobile-nav-view-all-tours';
+  viewAllTours.innerHTML = `<span data-i18n="nav.viewAllTours">View All Tours</span> <span class="link-arrow" aria-hidden="true">&rarr;</span>`;
+  toursSection.append(toursList, viewAllTours);
+  scroll.appendChild(toursSection);
 
-    toursSection.append(toursList, viewAll);
-    scroll.appendChild(toursSection);
-  }
+  const combosSection = document.createElement('div');
+  combosSection.className = 'mobile-nav-section mobile-nav-combos';
+  combosSection.innerHTML = `<p class="mobile-nav-label" data-i18n="nav.comboTours">Combo Packages</p>`;
+  const combosList = document.createElement('div');
+  combosList.className = 'mobile-nav-tours';
+  COMBO_PACKAGES.forEach(combo => {
+    combosList.appendChild(buildMobileComboNavLink(combo));
+  });
+  const viewAllCombos = document.createElement('a');
+  viewAllCombos.href = `${ROOT_PATH}combos.html`;
+  viewAllCombos.className = 'mobile-nav-view-all mobile-nav-view-all-combos';
+  viewAllCombos.innerHTML = `<span data-i18n="nav.viewAllCombos">View All Combos</span> <span class="link-arrow" aria-hidden="true">&rarr;</span>`;
+  combosSection.append(combosList, viewAllCombos);
+  scroll.appendChild(combosSection);
 
   if (extraLinks.length) {
     const discoverSection = document.createElement('div');
@@ -1700,7 +2066,36 @@ function buildMobileNavStructure() {
 
   panel.appendChild(footer);
   mobileNav.appendChild(panel);
-  mobileNav.dataset.enhanced = 'true';
+  mobileNav.dataset.navBuilt = '2';
+}
+
+function refreshMobileNavToursCombos() {
+  document.querySelectorAll('.mobile-nav-tour-link').forEach(link => {
+    const tour = getLocalizedTour(link.dataset.tourId);
+    if (!tour) return;
+    const nameEl = link.querySelector('.mobile-nav-tour-name');
+    const priceEl = link.querySelector('.mobile-nav-tour-price');
+    if (nameEl) nameEl.textContent = tour.name;
+    if (priceEl) priceEl.textContent = `$${tour.price}`;
+  });
+
+  document.querySelectorAll('.mobile-nav-combo-link').forEach(link => {
+    const combo = COMBO_PACKAGES.find(c => c.id === link.dataset.comboId);
+    if (!combo) return;
+    const localized = getLocalizedCombo(combo.id);
+    const nameEl = link.querySelector('.mobile-nav-combo-name');
+    const saveEl = link.querySelector('.mobile-nav-combo-save');
+    const priceEl = link.querySelector('.mobile-nav-combo-price');
+    if (nameEl) nameEl.textContent = getComboDropdownLabel(combo);
+    if (saveEl) saveEl.textContent = `${t('common.save')} $${combo.originalPrice - combo.price}`;
+    if (priceEl) priceEl.textContent = `$${localized.price}`;
+  });
+
+  const toursLabel = document.querySelector('.mobile-nav-tours-section .mobile-nav-label');
+  if (toursLabel) toursLabel.textContent = t('nav.individualTours');
+
+  const comboLabel = document.querySelector('.mobile-nav-combos > .mobile-nav-label');
+  if (comboLabel) comboLabel.textContent = t('nav.comboTours');
 }
 
 function initMobileNav() {
@@ -1871,6 +2266,7 @@ function getCanonicalUrl(customPath) {
   if (file === 'index.html' && parts.length === 0) return `${SITE_URL}/`;
   if (parts[parts.length - 1] === 'tours') return `${SITE_URL}/tours/${file}`;
   if (parts[parts.length - 1] === 'blog') return `${SITE_URL}/blog/${file}`;
+  if (parts[parts.length - 1] === 'combos') return `${SITE_URL}/combos/${file}`;
   return `${SITE_URL}/${file}`;
 }
 
@@ -2028,10 +2424,16 @@ function initBlogPostSeo(postId) {
 function initSeo() {
   const page = getCurrentPageFile();
   const inToursDir = window.location.pathname.includes('/tours/');
+  const inCombosDir = window.location.pathname.includes('/combos/');
   const tourId = document.getElementById('tour-detail-content')?.dataset.tourId;
+  const comboId = document.getElementById('combo-detail-content')?.dataset.comboId;
   const blogPostId = document.body.dataset.blogPost;
 
   if (inToursDir && tourId) {
+    return;
+  }
+
+  if (inCombosDir && comboId) {
     return;
   }
 
@@ -2239,20 +2641,27 @@ function initPageMeta() {
   applyPageMeta(PAGE_SEO[getCurrentPageFile()]);
 }
 
+function getLocalizedCombo(comboId) {
+  const base = COMBO_PACKAGES.find(c => c.id === comboId);
+  if (!base) return null;
+  return window.I18n?.getCombo(comboId, base) ?? base;
+}
+
 function renderComboPackages() {
   const grid = document.querySelector('[data-render="combos"]');
   if (!grid) return;
 
   grid.innerHTML = COMBO_PACKAGES.map((pkg, i) => {
-    const localized = window.I18n?.getCombo(pkg.id, pkg) ?? pkg;
+    const localized = getLocalizedCombo(pkg.id);
+    const comboUrl = `${COMBOS_PATH}${pkg.id}.html`;
     return `
     <article class="combo-card fade-in" style="transition-delay:${i * 0.1}s">
       <div class="combo-card-image">
-        <img src="${resolveImg(localized.image)}" alt="${localized.name} package" loading="lazy">
+        <a href="${comboUrl}"><img src="${resolveImg(localized.image)}" alt="${localized.name} package" loading="lazy"></a>
         <span class="combo-badge">${localized.badge}</span>
       </div>
       <div class="combo-card-body">
-        <h3>${localized.name}</h3>
+        <h3><a href="${comboUrl}">${localized.name}</a></h3>
         <ul class="combo-tours">${localized.tours.map(tourName => `<li>${tourName}</li>`).join('')}</ul>
         <p class="combo-desc">${localized.desc}</p>
         <div class="combo-pricing">
@@ -2261,8 +2670,8 @@ function renderComboPackages() {
           <span class="combo-save">${t('common.save')} $${localized.originalPrice - localized.price}</span>
         </div>
         <div class="combo-actions">
+          <a href="${comboUrl}" class="btn btn-ocean btn-sm">${t('comboUi.viewPackage')}</a>
           <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(localized.waText)}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener">${t('common.bookViaWhatsApp')}</a>
-          <a href="${ROOT_PATH}booking.html" class="btn btn-ocean btn-sm">${t('common.onlineBooking')}</a>
         </div>
         ${renderGygBlock(localized.getYourGuide, 'combo-gyg-block')}
       </div>
@@ -2875,6 +3284,232 @@ function initTourDetails() {
   initGallery();
 }
 
+function injectComboMeta(combo) {
+  const savings = combo.originalPrice - combo.price;
+  const title = `${combo.name} Mirissa | Combo Package | Sea & Safari Tours`;
+  const description = `${combo.desc} Bundle price $${combo.price}/person (save $${savings}). Free Mirissa hotel pickup — ${combo.duration}.`;
+  const image = `${SITE_URL}/${combo.image}`;
+  const canonicalPath = `/combos/${combo.id}.html`;
+  const keywords = COMBO_SEO[combo.id] || `${combo.name.toLowerCase()} mirissa combo, mirissa package tours`;
+
+  injectBusinessSchemas(getStaticJsonLdTypes());
+
+  applyPageMeta({
+    title,
+    description,
+    keywords,
+    dcSubject: keywords,
+    image,
+    imageAlt: `${combo.name} - Mirissa combo package`,
+    type: 'product',
+    path: canonicalPath
+  }, canonicalPath);
+
+  injectJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    url: getCanonicalUrl(canonicalPath),
+    inLanguage: 'en',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: SITE_NAME,
+      url: SITE_URL
+    }
+  });
+
+  injectJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: combo.name,
+    description: combo.desc,
+    image,
+    sku: combo.id,
+    brand: { '@type': 'Brand', name: SITE_NAME },
+    offers: {
+      '@type': 'Offer',
+      url: getCanonicalUrl(canonicalPath),
+      priceCurrency: 'USD',
+      price: combo.price,
+      availability: 'https://schema.org/InStock',
+      validFrom: new Date().toISOString().split('T')[0]
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '500',
+      bestRating: '5'
+    }
+  });
+
+  if (combo.itinerary?.length) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'TouristTrip',
+      name: combo.name,
+      description: combo.desc,
+      touristType: 'Leisure travelers',
+      itinerary: {
+        '@type': 'ItemList',
+        itemListElement: combo.itinerary.map((step, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: step.title,
+          description: step.desc
+        }))
+      },
+      provider: {
+        '@type': 'TravelAgency',
+        name: SITE_NAME,
+        url: SITE_URL
+      }
+    });
+  }
+
+  injectJsonLd({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Combo Packages', item: `${SITE_URL}/combos.html` },
+      { '@type': 'ListItem', position: 3, name: combo.name, item: getCanonicalUrl(canonicalPath) }
+    ]
+  });
+}
+
+function initStickyComboBar(combo) {
+  if (document.querySelector('.mobile-book-bar')) return;
+
+  const bar = document.createElement('div');
+  bar.className = 'mobile-book-bar';
+  bar.innerHTML = `
+    <div class="mobile-book-info">
+      <span class="mobile-book-label">${t('common.from')}</span>
+      <span class="mobile-book-price">$${combo.price}</span>
+    </div>
+    <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(combo.waText)}" class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="${ROOT_PATH}booking.html" class="btn btn-primary btn-sm">${t('common.bookTour')}</a>
+  `;
+  document.body.appendChild(bar);
+}
+
+function initComboDetails() {
+  const pageAttr = document.getElementById('combo-detail-content')?.dataset.comboId;
+  const comboId = pageAttr || 'whale-turtle';
+  const combo = getLocalizedCombo(comboId);
+
+  if (!combo) {
+    document.getElementById('combo-detail-content').innerHTML =
+      `<div class="container" style="padding:100px 0;text-align:center"><h2>${t('comboUi.notFound')}</h2><a href="${ROOT_PATH}combos.html" class="btn btn-ocean">${t('comboUi.allCombos')}</a></div>`;
+    return;
+  }
+
+  injectComboMeta(combo);
+  initStickyComboBar(combo);
+
+  const hero = document.querySelector('.tour-detail-hero');
+  if (hero) hero.style.backgroundImage = `url('${resolveImg(combo.image)}')`;
+
+  const savings = combo.originalPrice - combo.price;
+  const tourCards = (combo.tourIds || []).map(tourId => {
+    const tour = getLocalizedTour(tourId);
+    if (!tour) return '';
+    return `
+      <a href="${TOURS_PATH}${tourId}.html" class="combo-tour-link-card">
+        <img src="${resolveImg(tour.image || tour.heroImage)}" alt="${tour.name}" loading="lazy">
+        <div>
+          <h4>${tour.name}</h4>
+          <p>${tour.shortDesc}</p>
+          <span class="combo-tour-link-label">${t('common.viewDetails')} &rarr;</span>
+        </div>
+      </a>
+    `;
+  }).join('');
+
+  document.getElementById('combo-detail-content').innerHTML = `
+    <div class="container">
+      <div class="tour-detail-grid">
+        <div class="tour-detail-main">
+          ${combo.location ? `<p class="tour-location"><span class="tour-meta-icon tour-meta-icon-pin" aria-hidden="true"></span> ${combo.location}</p>` : ''}
+          ${combo.highlights ? `
+          <h2>${t('tourUi.highlights')}</h2>
+          <ul class="highlights-list">${combo.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+          ` : ''}
+          <h2>${t('comboUi.aboutPackage')}</h2>
+          <p>${combo.fullDesc || combo.desc}</p>
+          ${tourCards ? `
+          <h2>${t('comboUi.includedTours')}</h2>
+          <div class="combo-tour-links">${tourCards}</div>
+          ` : ''}
+          ${combo.itinerary ? `
+          <h2>${t('tourUi.itinerary')}</h2>
+          <div class="itinerary-list">
+            ${combo.itinerary.map(item => `
+              <div class="itinerary-item">
+                <div class="itinerary-time">${item.time}</div>
+                <div class="itinerary-content">
+                  <h4>${item.title}</h4>
+                  <p>${item.desc}</p>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          ` : ''}
+          ${combo.included ? `
+          <h2>${t('tourUi.included')}</h2>
+          <ul class="included-list">${combo.included.map(item => `<li>${item}</li>`).join('')}</ul>
+          ` : ''}
+        </div>
+        <aside class="tour-sidebar">
+          <div class="booking-sidebar-card">
+            <span class="combo-sidebar-badge">${combo.badge}</span>
+            <h3>${combo.name}</h3>
+            <div class="sidebar-price">$${combo.price} <span>${t('common.perPerson')}</span></div>
+            <p class="combo-sidebar-savings">${t('common.save')} $${savings} &middot; <s>$${combo.originalPrice}</s></p>
+            <ul class="sidebar-features">
+              <li><span class="sidebar-icon sidebar-icon-time" aria-hidden="true"></span><span>${combo.duration}</span></li>
+              <li><span class="sidebar-icon sidebar-icon-pin" aria-hidden="true"></span><span>${combo.location || SITE_LOCATION}</span></li>
+              <li><span class="sidebar-icon sidebar-icon-group" aria-hidden="true"></span><span>${t('common.smallGroup')}</span></li>
+              <li><span class="sidebar-icon sidebar-icon-shield" aria-hidden="true"></span><span>${t('common.fullyInsured')}</span></li>
+              <li><span class="sidebar-icon sidebar-icon-star" aria-hidden="true"></span><span>${t('common.expertGuides')}</span></li>
+            </ul>
+            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(combo.waText)}" class="btn btn-whatsapp btn-block" style="margin-top:24px" target="_blank" rel="noopener">${t('common.bookViaWhatsApp')}</a>
+            <a href="${ROOT_PATH}booking.html" class="btn btn-primary btn-block" style="margin-top:12px">${t('common.onlineBooking')}</a>
+            ${renderGygBlock(combo.getYourGuide)}
+          </div>
+        </aside>
+      </div>
+      <div class="tour-nav-buttons">
+        <a href="${ROOT_PATH}combos.html" class="btn btn-ocean tour-nav-prev">&larr; ${t('comboUi.allCombos')}</a>
+        ${(() => {
+          const ids = COMBO_PACKAGES.map(c => c.id);
+          const idx = ids.indexOf(combo.id);
+          const nextId = ids[(idx + 1) % ids.length];
+          const nextCombo = getLocalizedCombo(nextId);
+          return `<a href="${COMBOS_PATH}${nextId}.html" class="btn btn-primary tour-nav-next" aria-label="${t('comboUi.nextCombo')}: ${nextCombo.name}">
+            <span class="tour-nav-next-short">${t('comboUi.nextCombo')} &rarr;</span>
+            <span class="tour-nav-next-full">${t('comboUi.nextCombo')}: ${nextCombo.name} &rarr;</span>
+          </a>`;
+        })()}
+      </div>
+    </div>
+  `;
+
+  const heroTitle = document.getElementById('combo-hero-title');
+  const heroMeta = document.getElementById('combo-hero-meta');
+  const breadcrumbCurrent = document.querySelector('.breadcrumb span:last-child');
+  if (heroTitle) heroTitle.textContent = combo.name;
+  if (breadcrumbCurrent) breadcrumbCurrent.textContent = combo.name;
+  if (heroMeta) {
+    heroMeta.innerHTML = `
+      <span><span class="tour-meta-icon tour-meta-icon-time" aria-hidden="true"></span> ${combo.duration}</span>
+      <span><span class="tour-meta-icon sidebar-icon-price" aria-hidden="true"></span> $${combo.price}${t('common.perPerson')} <small>(${t('common.save')} $${savings})</small></span>
+      <span><span class="tour-meta-icon tour-meta-icon-pin" aria-hidden="true"></span> ${combo.location || SITE_LOCATION}</span>
+    `;
+  }
+}
+
 function initGallery() {
   const gallery = document.querySelector('[data-gallery]');
   if (!gallery) return;
@@ -3426,13 +4061,28 @@ function injectFooterBlogLink() {
     const heading = col.querySelector('h4');
     if (!heading || heading.textContent.trim().toLowerCase() !== 'explore') return;
     const ul = col.querySelector('ul');
-    if (!ul || ul.querySelector('a[href*="blog.html"]')) return;
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.href = `${ROOT_PATH}blog.html`;
-    a.textContent = 'Blog';
-    li.appendChild(a);
-    ul.appendChild(li);
+    if (!ul) return;
+
+    if (!ul.querySelector('a[href*="combos.html"]')) {
+      const comboLi = document.createElement('li');
+      const comboA = document.createElement('a');
+      comboA.href = `${ROOT_PATH}combos.html`;
+      comboA.setAttribute('data-i18n', 'comboUi.breadcrumb');
+      comboA.textContent = 'Combo Packages';
+      comboLi.appendChild(comboA);
+      const toursLink = ul.querySelector('a[href*="tours.html"]');
+      if (toursLink?.parentElement) toursLink.parentElement.after(comboLi);
+      else ul.appendChild(comboLi);
+    }
+
+    if (!ul.querySelector('a[href*="blog.html"]')) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `${ROOT_PATH}blog.html`;
+      a.textContent = 'Blog';
+      li.appendChild(a);
+      ul.appendChild(li);
+    }
   });
 }
 

@@ -169,13 +169,15 @@
       else link.textContent = translated;
     });
 
-    document.querySelectorAll('.dropdown-all').forEach(link => {
+    document.querySelectorAll('.dropdown-all:not(.dropdown-all-combos)').forEach(link => {
       const arrow = link.querySelector('.link-arrow');
       link.textContent = '';
       link.append(document.createTextNode(t('nav.viewAllTours') + ' '));
       if (arrow) link.appendChild(arrow);
       else link.insertAdjacentHTML('beforeend', '<span class="link-arrow" aria-hidden="true">&rarr;</span>');
     });
+
+    if (typeof refreshComboDropdownLabels === 'function') refreshComboDropdownLabels();
 
     document.querySelectorAll('.nav-cta, .mobile-nav .btn.btn-primary').forEach(btn => {
       if (!btn.querySelector('svg')) btn.textContent = t('nav.reserveTour');
@@ -353,7 +355,11 @@
       name: tr.name || baseCombo.name,
       badge: tr.badge || baseCombo.badge,
       desc: tr.desc || baseCombo.desc,
+      fullDesc: tr.fullDesc || baseCombo.fullDesc,
       tours: tr.tours || baseCombo.tours,
+      highlights: tr.highlights || baseCombo.highlights,
+      itinerary: tr.itinerary || baseCombo.itinerary,
+      included: tr.included || baseCombo.included,
       waText: tr.waText || baseCombo.waText
     };
   }
