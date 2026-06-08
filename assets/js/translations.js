@@ -12,7 +12,8 @@ window.SST_TRANSLATIONS = {
       whatsapp: 'WhatsApp', chatWhatsApp: 'Chat on WhatsApp', bookTour: 'Book a Tour', bookYourTour: 'Book Your Tour',
       viewDetails: 'View Details', perPerson: '/ person', exploreAllTours: 'Explore All Tours',
       onlineBooking: 'Online Booking', bookViaWhatsApp: 'Book via WhatsApp', learnMore: 'Learn More About Us',
-      googleReviews: 'Google Reviews', tripAdvisor: 'TripAdvisor', getYourGuide: 'GetYourGuide',
+      googleReviews: 'Google Reviews', leaveReview: 'Leave a Review', googleBusiness: 'Google Business Profile',
+      tripAdvisor: 'TripAdvisor', getYourGuide: 'GetYourGuide',
       save: 'Save', alsoOnGyg: 'Also available on GetYourGuide', viewAllTours: 'View All 8 Tours',
       from: 'From', fullyInsured: 'Fully insured', expertGuides: 'Expert local guides',
       smallGroup: 'Small group experience', bookThisTour: 'Book This Tour', whatsappInquiry: 'WhatsApp Inquiry',
@@ -70,7 +71,10 @@ window.SST_TRANSLATIONS = {
       includedExcluded: "What's Included & Excluded", included: 'Included', excluded: 'Excluded',
       importantInfo: 'Important Information', whatToBring: 'What to Bring', notSuitable: 'Not Suitable For',
       notAllowed: 'Not Allowed', knowBefore: 'Know Before You Go', photoGallery: 'Photo Gallery',
-      packages: 'Packages', package: 'Package', slots: 'Slots'
+      packages: 'Packages', package: 'Package', slots: 'Slots',
+      faqTitle: 'Frequently Asked Questions', faqIntro: 'Quick answers about this tour. For general booking questions, see our full FAQ.',
+      moreFaq: 'View all FAQs →',
+      relatedLabel: 'You May Also Like', relatedTitle: 'Related Tours', relatedDesc: 'Popular Mirissa adventures that pair well with this experience.'
     },
     comboUi: {
       viewPackage: 'View Package',
@@ -143,7 +147,8 @@ window.SST_TRANSLATIONS = {
       whatsapp: 'WhatsApp', chatWhatsApp: 'Per WhatsApp chatten', bookTour: 'Tour buchen', bookYourTour: 'Tour buchen',
       viewDetails: 'Details ansehen', perPerson: '/ Person', exploreAllTours: 'Alle Touren entdecken',
       onlineBooking: 'Online-Buchung', bookViaWhatsApp: 'Per WhatsApp buchen', learnMore: 'Mehr über uns erfahren',
-      googleReviews: 'Google Bewertungen', tripAdvisor: 'TripAdvisor', getYourGuide: 'GetYourGuide',
+      googleReviews: 'Google Bewertungen', leaveReview: 'Bewertung abgeben', googleBusiness: 'Google Unternehmensprofil',
+      tripAdvisor: 'TripAdvisor', getYourGuide: 'GetYourGuide',
       save: 'Sparen', alsoOnGyg: 'Auch auf GetYourGuide verfügbar', viewAllTours: 'Alle 8 Touren anzeigen',
       from: 'Ab', fullyInsured: 'Voll versichert', expertGuides: 'Erfahrene lokale Guides',
       smallGroup: 'Kleine Gruppe', bookThisTour: 'Diese Tour buchen', whatsappInquiry: 'WhatsApp-Anfrage',
@@ -201,7 +206,10 @@ window.SST_TRANSLATIONS = {
       includedExcluded: 'Inklusive & Exklusive', included: 'Inklusive', excluded: 'Nicht inklusive',
       importantInfo: 'Wichtige Informationen', whatToBring: 'Was mitbringen', notSuitable: 'Nicht geeignet für',
       notAllowed: 'Nicht erlaubt', knowBefore: 'Wissenswertes', photoGallery: 'Fotogalerie',
-      packages: 'Pakete', package: 'Paket', slots: 'Zeitfenster'
+      packages: 'Pakete', package: 'Paket', slots: 'Zeitfenster',
+      faqTitle: 'Häufig gestellte Fragen', faqIntro: 'Kurze Antworten zu dieser Tour. Allgemeine Buchungsfragen finden Sie in unseren FAQs.',
+      moreFaq: 'Alle FAQs ansehen →',
+      relatedLabel: 'Das könnte Ihnen auch gefallen', relatedTitle: 'Ähnliche Touren', relatedDesc: 'Beliebte Mirissa-Abenteuer, die gut zu dieser Erfahrung passen.'
     },
     comboUi: {
       viewPackage: 'Paket ansehen',
@@ -359,7 +367,8 @@ window.SST_TRANSLATIONS = {
       whatsapp: 'WhatsApp', chatWhatsApp: 'Discuter sur WhatsApp', bookTour: 'Réserver un circuit', bookYourTour: 'Réserver votre circuit',
       viewDetails: 'Voir les détails', perPerson: '/ personne', exploreAllTours: 'Explorer tous les circuits',
       onlineBooking: 'Réservation en ligne', bookViaWhatsApp: 'Réserver via WhatsApp', learnMore: 'En savoir plus sur nous',
-      googleReviews: 'Avis Google', tripAdvisor: 'TripAdvisor', getYourGuide: 'GetYourGuide',
+      googleReviews: 'Avis Google', leaveReview: 'Laisser un avis', googleBusiness: 'Profil Google Business',
+      tripAdvisor: 'TripAdvisor', getYourGuide: 'GetYourGuide',
       save: 'Économisez', alsoOnGyg: 'Également disponible sur GetYourGuide', viewAllTours: 'Voir les 8 circuits',
       from: 'À partir de', fullyInsured: 'Entièrement assuré', expertGuides: 'Guides locaux experts',
       smallGroup: 'Petit groupe', bookThisTour: 'Réserver ce circuit', whatsappInquiry: 'Demande WhatsApp',
@@ -417,7 +426,10 @@ window.SST_TRANSLATIONS = {
       includedExcluded: 'Inclus et non inclus', included: 'Inclus', excluded: 'Non inclus',
       importantInfo: 'Informations importantes', whatToBring: 'Quoi apporter', notSuitable: 'Non adapté pour',
       notAllowed: 'Non autorisé', knowBefore: 'À savoir avant de partir', photoGallery: 'Galerie photos',
-      packages: 'Forfaits', package: 'Forfait', slots: 'Créneaux'
+      packages: 'Forfaits', package: 'Forfait', slots: 'Créneaux',
+      faqTitle: 'Questions fréquentes', faqIntro: 'Réponses rapides sur ce circuit. Pour les questions générales de réservation, consultez notre FAQ complète.',
+      moreFaq: 'Voir toutes les FAQ →',
+      relatedLabel: 'Vous aimerez aussi', relatedTitle: 'Circuits associés', relatedDesc: 'Aventures populaires à Mirissa qui complètent bien cette expérience.'
     },
     comboUi: {
       viewPackage: 'Voir le forfait',

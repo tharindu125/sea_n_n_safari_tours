@@ -9,7 +9,15 @@ const SITE_NAME = 'Sea & Safari Tours';
 const SITE_LOCATION = 'Mirissa, Sri Lanka';
 const SITE_LOCATION_SHORT = 'Mirissa';
 const SITE_LOCALE = 'en_US';
-const GOOGLE_GA_ID = '';
+/** Fill in values from Google Analytics, Search Console, Bing Webmaster Tools & Google Business Profile */
+const SEO_CONFIG = {
+  ga4Id: '', // e.g. G-XXXXXXXXXX
+  googleSiteVerification: '', // meta content from Search Console
+  bingSiteVerification: '', // meta content from Bing Webmaster Tools (msvalidate.01)
+  googleBusinessProfileUrl: '', // e.g. https://maps.app.goo.gl/... or Google Maps place URL
+  googleBusinessReviewUrl: '' // e.g. https://search.google.com/local/writereview?placeid=ChIJ...
+};
+const GOOGLE_GA_ID = SEO_CONFIG.ga4Id;
 const TWITTER_HANDLE = '';
 const SITE_COPYRIGHT = `\u00A9 ${new Date().getFullYear()} Sea & Safari Tours`;
 const SITE_ALTERNATE_NAME = 'Sea Safari Tours Mirissa';
@@ -388,6 +396,86 @@ const COMBO_PACKAGES = [
   }
 ];
 
+const SITE_REVIEWS = [
+  { author: 'Sarah Mitchell', country: 'United Kingdom', rating: 5, tourId: 'whale-dolphin', date: '2025-03-12', body: 'An absolutely magical whale watching experience! We saw blue whales and pods of dolphins. The crew was amazing and the breakfast on board was a lovely touch.' },
+  { author: 'James Koh', country: 'Singapore', rating: 5, tourId: 'turtle-snorkeling', date: '2025-02-08', body: 'The turtle snorkeling tour was the highlight of our Sri Lanka trip. Our guide stayed with us the whole time and we saw 5 turtles! Totally worth it.' },
+  { author: 'Anna Larsson', country: 'Sweden', rating: 5, tourId: 'river-kayak', date: '2025-01-19', body: 'Booked via WhatsApp and everything was arranged perfectly. Free pickup, friendly guide, incredible river kayaking through mangroves. Highly recommend!' }
+];
+
+const TOUR_RELATED = {
+  'whale-dolphin': ['turtle-snorkeling', 'deep-sea-fishing', 'river-kayak'],
+  'turtle-snorkeling': ['whale-dolphin', 'scuba-diving', 'night-snorkeling'],
+  'crocodile-safari': ['river-kayak', 'cooking-class', 'turtle-snorkeling'],
+  'river-kayak': ['crocodile-safari', 'cooking-class', 'turtle-snorkeling'],
+  'scuba-diving': ['turtle-snorkeling', 'night-snorkeling', 'whale-dolphin'],
+  'night-snorkeling': ['turtle-snorkeling', 'scuba-diving', 'whale-dolphin'],
+  'deep-sea-fishing': ['whale-dolphin', 'river-kayak', 'crocodile-safari'],
+  'cooking-class': ['river-kayak', 'crocodile-safari', 'turtle-snorkeling']
+};
+
+const TOUR_SEASONS = {
+  'whale-dolphin': {
+    name: 'Mirissa Whale Watching Season',
+    description: 'Peak blue whale and sperm whale sightings from Mirissa Harbor, November through April.',
+    monthStart: 11,
+    dayStart: 1,
+    monthEnd: 4,
+    dayEnd: 30,
+    locationName: 'Mirissa Harbor'
+  }
+};
+
+const TOUR_FAQ = {
+  'whale-dolphin': [
+    { q: 'When is the best time for whale watching in Mirissa?', a: 'Peak season is November to April when blue whales and sperm whales are most frequently spotted. Early-morning departures (around 6:30 AM) offer the calmest seas.' },
+    { q: 'What is included in the whale watching tour price?', a: 'Your $45/person fare includes free Mirissa hotel pickup, life jackets, seasick tablets, breakfast, tea, fruits, bottled water, boat insurance, and an experienced skipper with live commentary.' },
+    { q: 'What if we don\'t see whales?', a: 'Mirissa has one of the highest sighting rates in the world. While wildlife can never be 100% guaranteed, our crew monitors whale movements to maximize your chances.' },
+    { q: 'Is the tour suitable if I get seasick?', a: 'Yes. We provide free seasickness tablets before departure and recommend the early-morning slot for calmer waters. Sitting toward the back of the boat helps too.' }
+  ],
+  'turtle-snorkeling': [
+    { q: 'Is turtle snorkeling suitable for beginners?', a: 'Absolutely. The tour is beginner-friendly with full in-water guidance, mask and fins provided, and calm shallow reef areas ideal for first-time snorkelers.' },
+    { q: 'What does the 100% turtle sighting guarantee mean?', a: 'Our guides take you to reef zones where sea turtles are seen daily. If no turtle is spotted — which is extremely rare — contact us and we will arrange a complimentary return visit.' },
+    { q: 'What time slots are available?', a: 'Turtle snorkeling runs from 7:00 AM to 1:30 PM with departures every 30 minutes. Morning slots often have the clearest water.' },
+    { q: 'What should I bring?', a: 'Swimwear, towel, sunscreen, and a waterproof phone pouch if you want photos. We provide mask, fins, snacks, and bottled water.' }
+  ],
+  'crocodile-safari': [
+    { q: 'Where does the crocodile safari take place?', a: 'The boat safari runs on the Nilwala River near Matara, about 30 minutes from Mirissa. Free pickup is included from Mirissa, Matara, Polhena, and Kamburugamuwa.' },
+    { q: 'Are crocodile sightings guaranteed?', a: 'Our local boat operators know the river intimately and sightings are very common. You may also see kingfishers, monkeys, and water monitors along the mangrove banks.' },
+    { q: 'Is the tour safe for children?', a: 'Yes. The boat ride is calm, life jackets are available, and the tour is suitable for all ages when accompanied by an adult.' },
+    { q: 'How long is the boat experience?', a: 'Total on-boat time is 2 hours including a safety briefing, river cruise, and wildlife spotting with fresh fruit and water provided.' }
+  ],
+  'river-kayak': [
+    { q: 'Do I need kayaking experience?', a: 'No prior experience is required. Your guide provides a safety briefing, life jacket, and paddling tips. The waterways are calm and beginner-friendly.' },
+    { q: 'What wildlife might I see while kayaking?', a: 'Common sightings include water monitors, kingfishers, herons, monkeys, and tropical birds among the mangrove roots and riverbanks.' },
+    { q: 'Is hotel pickup included?', a: 'Yes — free pickup and drop-off within the Mirissa area is included in the $25/person price.' },
+    { q: 'What is the best time of day to kayak?', a: 'Morning and late afternoon slots are coolest and best for wildlife. Sunset paddles are available and popular for photography.' }
+  ],
+  'scuba-diving': [
+    { q: 'Can non-certified divers join?', a: 'Yes. We offer discover scuba experiences for beginners with full instructor supervision. Certified divers can enjoy reef dives at appropriate depths.' },
+    { q: 'What equipment is provided?', a: 'All scuba gear — BCD, regulator, wetsuit, mask, fins, and tanks — is included. Just bring swimwear and a towel.' },
+    { q: 'How deep will we dive?', a: 'Beginner discover dives stay within 6–12 metres under direct instructor control. Certified divers can explore deeper reef sites based on certification level.' },
+    { q: 'Is scuba diving safe in Mirissa?', a: 'All dives are led by PADI-affiliated instructors with safety briefings, equipment checks, and small group sizes for personal attention.' }
+  ],
+  'night-snorkeling': [
+    { q: 'What makes night snorkeling different?', a: 'At night the reef comes alive with bioluminescence, sleeping turtles, octopus, and nocturnal fish. Your guide carries underwater lights for safe exploration.' },
+    { q: 'Do I need prior snorkeling experience?', a: 'Basic swimming ability is recommended. If you have done daytime snorkeling before, night snorkeling is a natural next step with full in-water guidance.' },
+    { q: 'What time does the night tour start?', a: 'Departures are after sunset, typically around 6:30–7:00 PM depending on season. Exact time is confirmed when you book.' },
+    { q: 'What should I bring?', a: 'Swimwear, towel, and warm light layer for after the tour. All snorkeling equipment and underwater lights are provided.' }
+  ],
+  'deep-sea-fishing': [
+    { q: 'What fish can we catch off Mirissa?', a: 'Indian Ocean waters yield sailfish, yellowfin tuna, mahi-mahi, wahoo, and barracuda depending on season. Your crew targets the best spots of the day.' },
+    { q: 'Is equipment included?', a: 'Yes — rods, reels, bait, tackle, and life jackets are provided. The boat has shade and refreshments for a comfortable full-day charter.' },
+    { q: 'Can we keep or cook our catch?', a: 'Catch-and-release or keep policies depend on species and local regulations. Ask your captain — many guests arrange a beach BBQ with their catch.' },
+    { q: 'Is this a private charter?', a: 'The tour operates as a private group charter. Contact us on WhatsApp with your group size for the best rate.' }
+  ],
+  'cooking-class': [
+    { q: 'What dishes will I learn to cook?', a: 'You will prepare authentic Sri Lankan staples such as dhal curry, coconut sambol, rice, and a seasonal vegetable or seafood dish using fresh local ingredients.' },
+    { q: 'Is the class suitable for vegetarians?', a: 'Yes. Let us know dietary preferences when booking and we will adapt recipes — many traditional Sri Lankan dishes are naturally vegetarian.' },
+    { q: 'How long is the cooking class?', a: 'The experience lasts approximately 3 hours including market visit or ingredient prep, hands-on cooking, and sitting down to enjoy the meal you prepared.' },
+    { q: 'Is pickup included?', a: 'Free pickup and drop-off from Mirissa area hotels is included in the tour price.' }
+  ]
+};
+
 const FAQ_ITEMS = [
   {
     category: 'Booking',
@@ -579,6 +667,7 @@ function refreshPageContent() {
   if (document.getElementById('blog-related')) initBlogPost();
   if (document.getElementById('tour-detail-content')) initTourDetails();
   if (document.getElementById('combo-detail-content')) initComboDetails();
+  initBusinessReviewLinks();
   if (document.getElementById('booking-form')) refreshBookingFormTours();
   const carousel = document.querySelector('.hero-carousel');
   if (carousel?._heroRefresh) carousel._heroRefresh();
@@ -815,6 +904,17 @@ const TOURS = {
       'assets/images/whale-dolphin/mirissa_whale_watching_turtles.png',
       'assets/images/whale-dolphin/mirissa_whale_watching_collage.png'
     ],
+    galleryAlt: [
+      'Mirissa whale watching — blue whale breaching in the Indian Ocean',
+      'Mirissa whale watching — dolphins swimming alongside the tour boat',
+      'Mirissa whale watching — aerial view of dolphins near Mirissa coast',
+      'Mirissa whale watching — tour boat departing Mirissa Harbor at sunrise',
+      'Mirissa whale watching — guests on deck watching marine life',
+      'Mirissa whale watching — travelers enjoying the ocean safari cruise',
+      'Mirissa whale watching — seabird flying over the Indian Ocean',
+      'Mirissa whale watching — sea turtles spotted during the cruise',
+      'Mirissa whale watching — collage of whale and dolphin sightings Mirissa Sri Lanka'
+    ],
     highlights: [
       'Enjoy a 3\u20134 hour cruise to spot blue whales, sperm whales, turtles and dolphins',
       'Early-morning departure for calmer seas and better sightings',
@@ -857,6 +957,13 @@ const TOURS = {
       'assets/images/turtle-snorkeling/mirissa_turtle_snorkeling_close-encounter.png',
       'assets/images/turtle-snorkeling/mirissa_turtle_snorkeling_selfie.png',
       'assets/images/turtle-snorkeling/mirissa_turtle_snorkeling_face-to-face.png'
+    ],
+    galleryAlt: [
+      'Mirissa turtle snorkeling — guest swimming alongside a green sea turtle',
+      'Mirissa turtle snorkeling — small group guided reef snorkeling tour',
+      'Mirissa turtle snorkeling — close encounter with a hawksbill turtle',
+      'Mirissa turtle snorkeling — guest selfie with sea turtle in clear water',
+      'Mirissa turtle snorkeling — face-to-face with a sea turtle on the reef'
     ],
     highlights: [
       'Swim alongside turtles in their natural habitat with a 100% sighting guarantee',
@@ -966,6 +1073,19 @@ const TOURS = {
       'assets/images/river-kayak/mirissa_kayak_sunrise-silhouette.png',
       'assets/images/river-kayak/mirissa_kayak_river-sunset.png',
       'assets/images/river-kayak/mirissa_kayak_mangrove-roots.png'
+    ],
+    galleryAlt: [
+      'Mirissa river kayak — group paddling through calm mangrove waterways',
+      'Mirissa river kayak — kayaks on a serene lake near Mirissa',
+      'Mirissa river kayak — paddling through mangrove forest channels',
+      'Mirissa river kayak — group launching kayaks for a river safari',
+      'Mirissa river kayak — sunset kayaking on the river',
+      'Mirissa river kayak — swimming in a freshwater lake after kayaking',
+      'Mirissa river kayak — family kayaking adventure for kids and adults',
+      'Mirissa river kayak — couple kayaking through mangrove roots',
+      'Mirissa river kayak — sunrise silhouette on the water',
+      'Mirissa river kayak — golden sunset over the river near Mirissa',
+      'Mirissa river kayak — close-up of mangrove roots along the kayak route'
     ],
     highlights: [
       'Glide through calm waterways surrounded by lush greenery and wildlife',
@@ -1431,6 +1551,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('blog-related')) initBlogPost();
 
   injectFooterBlogLink();
+  injectFooterReviewLinks();
+  initBusinessReviewLinks();
 
   if (window.I18n) {
     window.I18n.init();
@@ -2215,6 +2337,161 @@ function updateOnlineBadge(badge) {
   }
 }
 
+function getGoogleBusinessProfileUrl() {
+  return SEO_CONFIG.googleBusinessProfileUrl
+    || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${SITE_NAME} ${SITE_LOCATION}`)}`;
+}
+
+function getGoogleReviewWriteUrl() {
+  return SEO_CONFIG.googleBusinessReviewUrl || GOOGLE_REVIEW_URL;
+}
+
+function getGoogleReviewsBrowseUrl() {
+  return SEO_CONFIG.googleBusinessProfileUrl || GOOGLE_REVIEW_URL;
+}
+
+function getOfferPriceValidUntil() {
+  return `${new Date().getFullYear()}-12-31`;
+}
+
+function getSeasonDateWindow(season) {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = now.getMonth();
+  const inSeason = m >= (season.monthStart - 1) || m <= (season.monthEnd - 1);
+  const startY = inSeason && m <= (season.monthEnd - 1) ? y - 1 : y;
+  const pad = n => String(n).padStart(2, '0');
+  return {
+    startDate: `${startY}-${pad(season.monthStart)}-${pad(season.dayStart)}`,
+    endDate: `${startY + 1}-${pad(season.monthEnd)}-${pad(season.dayEnd)}`
+  };
+}
+
+function buildTourOfferSchema(tour, pageUrl) {
+  return {
+    '@type': 'Offer',
+    url: pageUrl,
+    priceCurrency: 'USD',
+    price: String(tour.price),
+    priceValidUntil: getOfferPriceValidUntil(),
+    availability: 'https://schema.org/InStock',
+    validFrom: new Date().toISOString().split('T')[0],
+    seller: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    eligibleRegion: { '@type': 'Country', name: 'Sri Lanka' },
+    ...(tour.priceNote ? { description: tour.priceNote } : {})
+  };
+}
+
+function buildProductReviewSchemas(tourId) {
+  const reviews = SITE_REVIEWS.filter(r => r.tourId === tourId);
+  return reviews.map(r => ({
+    '@type': 'Review',
+    reviewRating: { '@type': 'Rating', ratingValue: String(r.rating), bestRating: '5' },
+    author: { '@type': 'Person', name: r.author },
+    reviewBody: r.body,
+    datePublished: r.date
+  }));
+}
+
+function buildSeasonalEventSchema(tour) {
+  const season = TOUR_SEASONS[tour.id];
+  if (!season) return null;
+  const { startDate, endDate } = getSeasonDateWindow(season);
+  const pageUrl = getCanonicalUrl(`/tours/${tour.id}.html`);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: season.name,
+    description: season.description,
+    startDate,
+    endDate,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    location: {
+      '@type': 'Place',
+      name: season.locationName || tour.location || SITE_LOCATION,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: SEO_DEFAULTS.business.locality,
+        addressRegion: SEO_DEFAULTS.business.region,
+        addressCountry: 'LK'
+      }
+    },
+    image: `${SITE_URL}/${tour.heroImage || tour.image}`,
+    offers: buildTourOfferSchema(tour, pageUrl),
+    organizer: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL }
+  };
+}
+
+function injectSiteVerification() {
+  if (SEO_CONFIG.googleSiteVerification) {
+    setMetaTag('name', 'google-site-verification', SEO_CONFIG.googleSiteVerification);
+  }
+  if (SEO_CONFIG.bingSiteVerification) {
+    setMetaTag('name', 'msvalidate.01', SEO_CONFIG.bingSiteVerification);
+  }
+}
+
+function initBusinessReviewLinks() {
+  document.querySelectorAll('[data-review-link="google"]').forEach(el => {
+    el.href = getGoogleReviewsBrowseUrl();
+  });
+  document.querySelectorAll('[data-review-link="write"]').forEach(el => {
+    el.href = getGoogleReviewWriteUrl();
+  });
+  document.querySelectorAll('[data-gbp-link]').forEach(el => {
+    el.href = getGoogleBusinessProfileUrl();
+  });
+}
+
+function renderTourFaqSection(tourId) {
+  const items = TOUR_FAQ[tourId];
+  if (!items?.length) return '';
+  return `
+    <section class="tour-faq-section" aria-labelledby="tour-faq-heading">
+      <h2 id="tour-faq-heading">${t('tourUi.faqTitle')}</h2>
+      <p class="tour-faq-intro">${t('tourUi.faqIntro')}</p>
+      <div class="tour-faq-list">
+        ${items.map((item, i) => `
+          <details class="faq-item tour-faq-item" ${i === 0 ? 'open' : ''}>
+            <summary>${item.q}</summary>
+            <div class="faq-answer"><p>${item.a}</p></div>
+          </details>
+        `).join('')}
+      </div>
+      <p class="tour-faq-more"><a href="${ROOT_PATH}faq.html">${t('tourUi.moreFaq')}</a></p>
+    </section>
+  `;
+}
+
+function renderRelatedToursSection(tourId) {
+  const relatedIds = TOUR_RELATED[tourId] || Object.keys(TOURS).filter(id => id !== tourId).slice(0, 3);
+  const cards = relatedIds
+    .filter(id => TOURS[id])
+    .map((id, i) => createTourCard(TOURS[id], i))
+    .join('');
+  if (!cards) return '';
+  return `
+    <section class="tour-related-section" aria-labelledby="tour-related-heading">
+      <div class="tour-related-header">
+        <span class="section-label">${t('tourUi.relatedLabel')}</span>
+        <h2 id="tour-related-heading">${t('tourUi.relatedTitle')}</h2>
+        <p class="section-desc">${t('tourUi.relatedDesc')}</p>
+      </div>
+      <div class="tours-grid tour-related-grid">${cards}</div>
+    </section>
+  `;
+}
+
+function renderSidebarReviewCta() {
+  return `
+    <div class="sidebar-review-cta">
+      <a href="${getGoogleReviewWriteUrl()}" class="btn btn-outline btn-block btn-sm" data-review-link="write" target="_blank" rel="noopener">${t('common.leaveReview')}</a>
+      <a href="${getGoogleBusinessProfileUrl()}" class="btn btn-outline btn-block btn-sm" data-gbp-link target="_blank" rel="noopener">${t('common.googleBusiness')}</a>
+    </div>
+  `;
+}
+
 function initAnalytics() {
   if (!GOOGLE_GA_ID) return;
   const script = document.createElement('script');
@@ -2369,6 +2646,8 @@ function applyPageMeta(meta, canonicalPath) {
     setMetaTag('name', 'twitter:site', TWITTER_HANDLE);
     setMetaTag('name', 'twitter:creator', TWITTER_HANDLE);
   }
+
+  injectSiteVerification();
 }
 
 function initBlogPostSeo(postId) {
@@ -2489,8 +2768,9 @@ function injectBusinessSchemas(skipTypes = new Set()) {
       sameAs: [
         GETYOURGUIDE_MIRISSA_URL,
         GETYOURGUIDE_SUPPLIER_URL,
-        GOOGLE_REVIEW_URL
-      ],
+        getGoogleBusinessProfileUrl(),
+        getGoogleReviewsBrowseUrl()
+      ].filter(Boolean),
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: '4.9',
@@ -3004,29 +3284,43 @@ function injectTourMeta(tour) {
     }
   });
 
+  const pageUrl = getCanonicalUrl(canonicalPath);
+  const productReviews = buildProductReviewSchemas(tour.id);
+  const galleryImages = (tour.gallery || []).map(img => `${SITE_URL}/${img.replace(/^\//, '')}`);
+
   injectJsonLd({
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: tour.name,
     description: tour.shortDesc,
-    image,
+    image: galleryImages.length ? galleryImages : [image],
     sku: tour.id,
     brand: { '@type': 'Brand', name: SITE_NAME },
-    offers: {
-      '@type': 'Offer',
-      url: getCanonicalUrl(canonicalPath),
-      priceCurrency: 'USD',
-      price: tour.price,
-      availability: 'https://schema.org/InStock',
-      validFrom: new Date().toISOString().split('T')[0]
-    },
+    offers: buildTourOfferSchema(tour, pageUrl),
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: '4.9',
       reviewCount: '500',
       bestRating: '5'
-    }
+    },
+    ...(productReviews.length ? { review: productReviews } : {})
   });
+
+  const tourFaq = TOUR_FAQ[tour.id];
+  if (tourFaq?.length) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: tourFaq.map(item => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a }
+      }))
+    });
+  }
+
+  const eventSchema = buildSeasonalEventSchema(tour);
+  if (eventSchema) injectJsonLd(eventSchema);
 
   injectJsonLd({
     '@context': 'https://schema.org',
@@ -3248,10 +3542,13 @@ function initTourDetails() {
             </ul>
             <a href="${ROOT_PATH}booking.html?tour=${tour.id}" class="btn btn-primary btn-block" style="margin-top:24px">${t('common.bookThisTour')}</a>
             <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello! I'm interested in booking: ${tour.name}`)}" class="btn btn-whatsapp btn-block" style="margin-top:12px" target="_blank" rel="noopener">${t('common.whatsappInquiry')}</a>
+            ${renderSidebarReviewCta()}
             ${renderTourGetYourGuideBlock(tour)}
           </div>
         </aside>
       </div>
+      ${renderTourFaqSection(tour.id)}
+      ${renderRelatedToursSection(tour.id)}
       <div class="tour-nav-buttons">
         <a href="${ROOT_PATH}tours.html" class="btn btn-ocean tour-nav-prev">&larr; ${t('common.allToursNav')}</a>
         ${(() => {
@@ -3282,6 +3579,8 @@ function initTourDetails() {
   }
 
   initGallery();
+  initBusinessReviewLinks();
+  initScrollAnimations();
 }
 
 function injectComboMeta(combo) {
@@ -3328,12 +3627,8 @@ function injectComboMeta(combo) {
     sku: combo.id,
     brand: { '@type': 'Brand', name: SITE_NAME },
     offers: {
-      '@type': 'Offer',
-      url: getCanonicalUrl(canonicalPath),
-      priceCurrency: 'USD',
-      price: combo.price,
-      availability: 'https://schema.org/InStock',
-      validFrom: new Date().toISOString().split('T')[0]
+      ...buildTourOfferSchema({ id: combo.id, price: combo.price }, getCanonicalUrl(canonicalPath)),
+      description: `Bundle price — save $${combo.originalPrice - combo.price} vs booking separately`
     },
     aggregateRating: {
       '@type': 'AggregateRating',
@@ -4054,6 +4349,16 @@ function initBlogPost() {
       <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hello!%20I%20read%20your%20blog%20and%20would%20like%20to%20book%20a%20tour." class="btn btn-whatsapp btn-block btn-sm" target="_blank" rel="noopener">${t('common.chatWhatsApp')}</a>
     </div>
   `;
+}
+
+function injectFooterReviewLinks() {
+  document.querySelectorAll('.footer-actions').forEach(actions => {
+    if (actions.querySelector('[data-review-link="write"]')) return;
+    actions.insertAdjacentHTML('beforeend', `
+      <a href="${getGoogleReviewWriteUrl()}" class="btn btn-outline btn-sm" data-review-link="write" target="_blank" rel="noopener">${t('common.leaveReview')}</a>
+      <a href="${getGoogleBusinessProfileUrl()}" class="btn btn-outline btn-sm" data-gbp-link target="_blank" rel="noopener">${t('common.googleBusiness')}</a>
+    `);
+  });
 }
 
 function injectFooterBlogLink() {

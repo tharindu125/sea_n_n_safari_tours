@@ -4797,6 +4797,74 @@ body.mobile-menu-open .hamburger {
   display: inline;
 }
 
+.tour-faq-section {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.tour-faq-section h2 {
+  margin-bottom: 8px;
+}
+
+.tour-faq-intro {
+  color: var(--text-muted, #5a6b73);
+  margin-bottom: 24px;
+  max-width: 640px;
+}
+
+.tour-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tour-faq-more {
+  margin-top: 20px;
+}
+
+.tour-faq-more a {
+  color: var(--ocean, #0d4f6e);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.tour-faq-more a:hover {
+  text-decoration: underline;
+}
+
+.tour-related-section {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.tour-related-header {
+  margin-bottom: 32px;
+}
+
+.tour-related-grid {
+  margin-top: 0;
+}
+
+.sidebar-review-cta {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-review-cta .btn-outline {
+  border-color: rgba(13, 79, 110, 0.25);
+  color: var(--ocean, #0d4f6e);
+}
+
+.footer-actions {
+  flex-wrap: wrap;
+}
+
 .tour-sidebar {
   position: sticky;
   top: 100px;
