@@ -1470,23 +1470,35 @@ function injectNavExtras() {
   });
 
   const mobileNav = document.querySelector('.mobile-nav');
-  if (mobileNav && !mobileNav.querySelector('.nav-extra-link')) {
+  if (mobileNav) {
     const ctaBtn = mobileNav.querySelector('.btn.btn-primary');
 
-    const galleryLink = document.createElement('a');
-    galleryLink.href = galleryHref;
-    galleryLink.className = 'nav-link nav-extra-link';
-    galleryLink.innerHTML = `${NAV_ICON_GALLERY}<span data-i18n="nav.gallery">Gallery</span>`;
-    if (currentPath === 'gallery.html') galleryLink.classList.add('active');
+    if (!mobileNav.querySelector('.nav-extra-link-blog')) {
+      const blogLink = document.createElement('a');
+      blogLink.href = blogHref;
+      blogLink.className = 'nav-link nav-extra-link nav-extra-link-blog';
+      blogLink.innerHTML = `${NAV_ICON_BLOG}<span data-i18n="nav.blog">Blog</span>`;
+      if (currentPath === 'blog.html') blogLink.classList.add('active');
+      mobileNav.insertBefore(blogLink, ctaBtn);
+    }
 
-    const faqLink = document.createElement('a');
-    faqLink.href = faqHref;
-    faqLink.className = 'nav-link nav-extra-link';
-    faqLink.innerHTML = `${NAV_ICON_FAQ}<span data-i18n="nav.faq">FAQ</span>`;
-    if (currentPath === 'faq.html') faqLink.classList.add('active');
+    if (!mobileNav.querySelector('.nav-extra-link-gallery')) {
+      const galleryLink = document.createElement('a');
+      galleryLink.href = galleryHref;
+      galleryLink.className = 'nav-link nav-extra-link nav-extra-link-gallery';
+      galleryLink.innerHTML = `${NAV_ICON_GALLERY}<span data-i18n="nav.gallery">Gallery</span>`;
+      if (currentPath === 'gallery.html') galleryLink.classList.add('active');
+      mobileNav.insertBefore(galleryLink, ctaBtn);
+    }
 
-    mobileNav.insertBefore(galleryLink, ctaBtn);
-    mobileNav.insertBefore(faqLink, galleryLink);
+    if (!mobileNav.querySelector('.nav-extra-link-faq')) {
+      const faqLink = document.createElement('a');
+      faqLink.href = faqHref;
+      faqLink.className = 'nav-link nav-extra-link nav-extra-link-faq';
+      faqLink.innerHTML = `${NAV_ICON_FAQ}<span data-i18n="nav.faq">FAQ</span>`;
+      if (currentPath === 'faq.html') faqLink.classList.add('active');
+      mobileNav.insertBefore(faqLink, ctaBtn);
+    }
   }
 }
 

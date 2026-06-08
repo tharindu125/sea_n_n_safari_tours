@@ -27,7 +27,7 @@ const posts = [
       <h2>Why Early-Morning Departures Matter</h2>
       <p>Our whale watching cruises depart around <strong>6:30–7:00 AM</strong> from Mirissa Harbor. Early mornings offer calmer water, cooler temperatures, and the best chance of spotting whales before wind picks up. You'll also enjoy a peaceful sunrise cruise — one of the highlights guests remember most.</p>
 
-      <div class="blog-tip-box"><strong>Local Tip</strong>Book at least one day ahead during peak season (December–February). Morning slots fill quickly, especially around Christmas and New Year.</div>
+      <div class="blog-tip-box"><strong>Local Tip</strong><p>Book at least one day ahead during peak season (December–February). Morning slots fill quickly, especially around Christmas and New Year.</p></div>
 
       <h2>What You Can See</h2>
       <p>On a typical 3–4 hour Mirissa whale watching tour, guests often encounter:</p>
@@ -69,7 +69,7 @@ const posts = [
       <h2>What\'s Included</h2>
       <p>Every turtle snorkeling tour includes mask and fins, in-water guide, safety briefing, light snacks, bottled water, and free pickup within the Mirissa area. Sessions run approximately 1.5 hours with flexible morning and afternoon time slots.</p>
 
-      <div class="blog-tip-box"><strong>Responsible Snorkeling</strong>We never chase or touch turtles. Our guides follow ethical practices so turtles behave naturally — giving you respectful, close-up encounters.</div>
+      <div class="blog-tip-box"><strong>Responsible Snorkeling</strong><p>We never chase or touch turtles. Our guides follow ethical practices so turtles behave naturally — giving you respectful, close-up encounters.</p></div>
 
       <h2>Book Turtle Snorkeling in Mirissa</h2>
       <p>From just $25 per person, our <a href="../tours/turtle-snorkeling.html">Turtle Snorkeling tour</a> is the perfect half-day ocean adventure. <a href="../booking.html">Reserve your spot</a> or contact us via WhatsApp.</p>
@@ -136,7 +136,7 @@ const posts = [
       <h2>Best Time to Visit</h2>
       <p>The dry season (November–April) is best for whale watching and calm seas. The southwest monsoon (May–October) brings more rain but fewer crowds and lush green landscapes.</p>
 
-      <div class="blog-tip-box"><strong>Food Tip</strong>Try fresh seafood at Mirissa beach restaurants — grilled fish, prawn curry, and king coconut are local favourites.</div>
+      <div class="blog-tip-box"><strong>Food Tip</strong><p>Try fresh seafood at Mirissa beach restaurants — grilled fish, prawn curry, and king coconut are local favourites.</p></div>
 
       <h2>About Sea &amp; Safari Tours</h2>
       <p>We're Mirissa locals with 5+ years of experience running ocean and wildlife tours. <a href="../about.html">Learn more about us</a> or <a href="../contact.html">get in touch</a> for personalised trip advice.</p>
@@ -290,11 +290,10 @@ function shell(post) {
       <h1>${post.title}</h1>
       <p class="blog-article-lead">${post.lead}</p>
     </div>
+    <div class="container blog-article-cover">
+      <img src="${post.image}" alt="${post.title}" width="1200" height="630" loading="eager">
+    </div>
   </header>
-
-  <div class="container blog-article-cover">
-    <img src="${post.image}" alt="${post.title}" width="1200" height="630" loading="eager">
-  </div>
 
   <div class="container blog-article-layout">
     <article class="blog-article-body">
