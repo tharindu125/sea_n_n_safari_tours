@@ -328,6 +328,23 @@
     };
   }
 
+  function getBlogPost(postId, basePost) {
+    const pack = window.SST_BLOG_I18N?.[postId];
+    const tr = pack?.[currentLang] || pack?.[DEFAULT_LANG];
+    if (!tr) return basePost;
+    return {
+      ...basePost,
+      title: tr.title || basePost.title,
+      description: tr.description || basePost.description,
+      excerpt: tr.excerpt || basePost.excerpt,
+      lead: tr.lead || basePost.lead,
+      categoryLabel: tr.categoryLabel || basePost.categoryLabel,
+      readTime: tr.readTime || basePost.readTime,
+      tourLabel: tr.tourLabel || basePost.tourLabel,
+      content: tr.content || basePost.content
+    };
+  }
+
   function getCombo(comboId, baseCombo) {
     const tr = getNested(window.SST_TRANSLATIONS?.[currentLang], `combos.${comboId}`);
     if (!tr || currentLang === DEFAULT_LANG) return baseCombo;
@@ -445,6 +462,7 @@
     applyTranslations,
     getTour,
     getCombo,
+    getBlogPost,
     getFaqItems,
     SUPPORTED,
     LANG_META,

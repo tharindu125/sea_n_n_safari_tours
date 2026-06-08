@@ -86,6 +86,33 @@ window.SST_TRANSLATIONS = {
       'kayak-cooking': { name: 'River Kayak + Cooking Class', badge: 'Culture & Nature' },
       'whale-kayak': { name: 'Whale & Dolphin Watching + River Kayak', badge: 'Land & Sea' },
       'whale-crocodile': { name: 'Whale & Dolphin Watching + Crocodile Watching', badge: 'Wildlife Combo' }
+    },
+    blog: {
+      pageTitle: 'Mirissa Travel Blog | Whale Watching Tips & Sri Lanka Guides | Sea & Safari Tours',
+      pageDescription: 'Expert guides on Mirissa whale watching seasons, turtle snorkeling, south coast travel, packing tips & ethical ocean tours in Sri Lanka.',
+      breadcrumb: 'Travel Blog',
+      heroTitle: 'Mirissa Travel Blog',
+      heroSubtitle: 'Guides, tips & stories from Sri Lanka\'s southern coast — written by local ocean adventure experts',
+      intro: 'Planning whale watching, snorkeling, or a full Mirissa itinerary? Browse our articles for seasonal advice, packing lists, and insider tips — then <a href="booking.html">book your tour</a> with free hotel pickup.',
+      searchPlaceholder: 'Search articles...',
+      searchLabel: 'Search articles',
+      latestArticles: 'Latest Articles',
+      readArticle: 'Read article',
+      empty: 'No articles match your search. Try another keyword or category.',
+      planTrip: 'Plan Your Trip',
+      ctaTitle: 'Ready to Experience Mirissa?',
+      ctaDesc: 'From blue whale cruises to river kayaking — book directly with local experts. Instant WhatsApp confirmation & free pickup.',
+      relatedArticles: 'Related Articles',
+      readyExplore: 'Ready to Explore?',
+      readyExploreDesc: 'Book your Mirissa adventure with free hotel pickup and expert local guides.',
+      allArticles: '← All Articles',
+      categories: {
+        all: 'All Articles',
+        'whale-watching': 'Whale Watching',
+        snorkeling: 'Snorkeling',
+        'travel-tips': 'Travel Tips',
+        wildlife: 'Wildlife'
+      }
     }
   },
 
@@ -214,6 +241,33 @@ window.SST_TRANSLATIONS = {
         desc: 'Ozeanriesen am Morgen und Krokodil-Flusssafari am Nachmittag — zwei unvergessliche Wildtiererlebnisse.',
         tours: ['Wal- & Delfinbeobachtung', 'Krokodilbeobachtung'],
         waText: 'Hallo! Ich möchte das Kombi-Paket Walbeobachtung + Krokodilbeobachtung buchen.'
+      }
+    },
+    blog: {
+      pageTitle: 'Mirissa Reiseblog | Walbeobachtung & Sri Lanka Guides | Sea & Safari Tours',
+      pageDescription: 'Expertenrat zu Walbeobachtung in Mirissa, Schildkröten-Schnorcheln, Südküsten-Reisen, Packlisten & ethischen Ozeantouren in Sri Lanka.',
+      breadcrumb: 'Reiseblog',
+      heroTitle: 'Mirissa Reiseblog',
+      heroSubtitle: 'Guides, Tipps & Geschichten von Sri Lankas Südküste — von lokalen Ozean-Experten',
+      intro: 'Planen Sie Walbeobachtung, Schnorcheln oder eine komplette Mirissa-Reise? Stöbern Sie in unseren Artikeln mit Saison-Tipps, Packlisten und Insiderwissen — dann <a href="booking.html">buchen Sie Ihre Tour</a> mit kostenloser Hotelabholung.',
+      searchPlaceholder: 'Artikel suchen...',
+      searchLabel: 'Artikel suchen',
+      latestArticles: 'Neueste Artikel',
+      readArticle: 'Artikel lesen',
+      empty: 'Keine Artikel entsprechen Ihrer Suche. Versuchen Sie ein anderes Stichwort oder eine andere Kategorie.',
+      planTrip: 'Reise planen',
+      ctaTitle: 'Bereit für Mirissa?',
+      ctaDesc: 'Von Blauwal-Kreuzfahrten bis Flusskajak — direkt bei lokalen Experten buchen. Sofortige WhatsApp-Bestätigung & kostenlose Abholung.',
+      relatedArticles: 'Verwandte Artikel',
+      readyExplore: 'Bereit zu entdecken?',
+      readyExploreDesc: 'Buchen Sie Ihr Mirissa-Abenteuer mit kostenloser Hotelabholung und erfahrenen lokalen Guides.',
+      allArticles: '← Alle Artikel',
+      categories: {
+        all: 'Alle Artikel',
+        'whale-watching': 'Walbeobachtung',
+        snorkeling: 'Schnorcheln',
+        'travel-tips': 'Reisetipps',
+        wildlife: 'Wildtierwelt'
       }
     },
     faq: [
@@ -378,6 +432,33 @@ window.SST_TRANSLATIONS = {
         desc: 'Géants de l\'océan le matin et safari crocodiles l\'après-midi — deux expériences animalières inoubliables.',
         tours: ['Observation baleines & dauphins', 'Observation des crocodiles'],
         waText: 'Bonjour ! Je souhaite réserver le combo Observation baleines + Crocodiles.'
+      }
+    },
+    blog: {
+      pageTitle: 'Blog voyage Mirissa | Conseils baleines & guides Sri Lanka | Sea & Safari Tours',
+      pageDescription: 'Guides experts sur la saison des baleines à Mirissa, snorkeling tortues, voyage côte sud, listes de bagages & tours océaniques éthiques au Sri Lanka.',
+      breadcrumb: 'Blog voyage',
+      heroTitle: 'Blog voyage Mirissa',
+      heroSubtitle: 'Guides, conseils & récits de la côte sud du Sri Lanka — par des experts locaux de l\'océan',
+      intro: 'Vous planifiez une observation des baleines, du snorkeling ou un séjour complet à Mirissa ? Parcourez nos articles pour des conseils saisonniers, des listes de bagages et des astuces locales — puis <a href="booking.html">réservez votre circuit</a> avec prise en charge gratuite à l\'hôtel.',
+      searchPlaceholder: 'Rechercher des articles...',
+      searchLabel: 'Rechercher des articles',
+      latestArticles: 'Derniers articles',
+      readArticle: 'Lire l\'article',
+      empty: 'Aucun article ne correspond à votre recherche. Essayez un autre mot-clé ou une autre catégorie.',
+      planTrip: 'Planifier votre voyage',
+      ctaTitle: 'Prêt à découvrir Mirissa ?',
+      ctaDesc: 'Des croisières baleines au kayak fluvial — réservez directement avec des experts locaux. Confirmation WhatsApp instantanée & prise en charge gratuite.',
+      relatedArticles: 'Articles connexes',
+      readyExplore: 'Prêt à explorer ?',
+      readyExploreDesc: 'Réservez votre aventure à Mirissa avec prise en charge gratuite et guides locaux experts.',
+      allArticles: '← Tous les articles',
+      categories: {
+        all: 'Tous les articles',
+        'whale-watching': 'Observation des baleines',
+        snorkeling: 'Snorkeling',
+        'travel-tips': 'Conseils voyage',
+        wildlife: 'Faune sauvage'
       }
     },
     faq: [

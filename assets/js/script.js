@@ -345,6 +345,17 @@ function getLocalizedTour(tourId) {
   return window.I18n?.getTour(tourId, tour) ?? tour;
 }
 
+function getLocalizedBlogPost(post) {
+  if (!post) return post;
+  return window.I18n?.getBlogPost(post.id, post) ?? post;
+}
+
+function getBlogCategoryLabel(categoryId) {
+  const key = `blog.categories.${categoryId}`;
+  const label = t(key);
+  return label !== key ? label : categoryId;
+}
+
 function restoreMobileNavIcons() {
   document.querySelectorAll('.mobile-nav a.nav-link:not(.nav-sub):not(.nav-extra-link)').forEach(link => {
     const icon = link.querySelector('.mobile-nav-icon');
@@ -361,7 +372,22 @@ function refreshPageContent() {
   if (document.querySelector('.tours-grid[data-render="featured"]')) renderFeaturedTours();
   if (document.querySelector('[data-render="combos"]')) renderComboPackages();
   if (document.getElementById('faq-accordion')) initFAQPage();
-  if (document.getElementById('blog-grid')) initBlogPage();
+  if (document.getElementById('blog-grid')) {
+    initBlogPage();
+    const blogTitle = t('blog.pageTitle');
+    const blogDesc = t('blog.pageDescription');
+    if (blogTitle !== 'blog.pageTitle') {
+      applyPageMeta({
+        ...PAGE_SEO['blog.html'],
+        title: blogTitle,
+        description: blogDesc
+      }, '/blog.html');
+    }
+  }
+  if (document.body.dataset.blogPost) {
+    initBlogArticlePage();
+    initBlogPostSeo(document.body.dataset.blogPost);
+  }
   if (document.getElementById('blog-related')) initBlogPost();
   if (document.getElementById('tour-detail-content')) initTourDetails();
   if (document.getElementById('booking-form')) refreshBookingFormTours();
@@ -1069,7 +1095,22 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('booking-form')) initBookingForm();
   if (document.getElementById('payment-form')) initPaymentPage();
   if (document.getElementById('contact-form')) initContactForm();
-  if (document.getElementById('blog-grid')) initBlogPage();
+  if (document.getElementById('blog-grid')) {
+    initBlogPage();
+    const blogTitle = t('blog.pageTitle');
+    const blogDesc = t('blog.pageDescription');
+    if (blogTitle !== 'blog.pageTitle') {
+      applyPageMeta({
+        ...PAGE_SEO['blog.html'],
+        title: blogTitle,
+        description: blogDesc
+      }, '/blog.html');
+    }
+  }
+  if (document.body.dataset.blogPost) {
+    initBlogArticlePage();
+    initBlogPostSeo(document.body.dataset.blogPost);
+  }
   if (document.getElementById('blog-related')) initBlogPost();
 
   injectFooterBlogLink();
@@ -1079,6 +1120,8 @@ document.addEventListener('DOMContentLoaded', () => {
     restoreMobileNavIcons();
     window.I18n.applyTranslations();
   }
+
+  if (document.body.dataset.blogPost) initBlogArticlePage();
 
   initHeaderLayout();
 });
@@ -1933,24 +1976,24 @@ function applyPageMeta(meta, canonicalPath) {
 }
 
 function initBlogPostSeo(postId) {
-  const post = BLOG_POSTS.find(p => p.id === postId);
-  if (!post) return;
+  const base = BLOG_POSTS.find(p => p.id === postId);
+  if (!base) return;
 
+  const post = getLocalizedBlogPost(base);
   const path = `/blog/${post.id}.html`;
-  const image = `${SITE_URL}/${post.image.replace(/^\//, '')}`;
-  const description = document.querySelector('meta[name="description"]')?.getAttribute('content') || post.excerpt;
+  const image = `${SITE_URL}/${base.image.replace(/^\//, '')}`;
   const title = `${post.title} | Sea & Safari Tours Mirissa Blog`;
 
   applyPageMeta({
     title,
-    description,
+    description: post.description || post.excerpt,
     keywords: `${post.categoryLabel}, mirissa travel guide, sri lanka tours, ${post.title.toLowerCase()}`,
     image,
     imageAlt: post.title,
     path,
     type: 'article',
-    publishedTime: `${post.date}T08:00:00+05:30`,
-    modifiedTime: `${post.date}T08:00:00+05:30`,
+    publishedTime: `${base.date}T08:00:00+05:30`,
+    modifiedTime: `${base.date}T08:00:00+05:30`,
     section: post.categoryLabel
   }, path);
 
@@ -3175,33 +3218,87 @@ function initPaymentPage() {
 }
 
 function formatBlogDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  const lang = window.I18n?.getLang() || 'en';
+  const locale = lang === 'de' ? 'de-DE' : lang === 'fr' ? 'fr-FR' : 'en-GB';
+  return new Date(dateStr).toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function buildBlogArticleNav() {
+  return `
+      <nav class="blog-article-nav">
+        <a href="${ROOT_PATH}blog.html" class="btn btn-ocean btn-sm">${t('blog.allArticles')}</a>
+        <a href="${ROOT_PATH}booking.html" class="btn btn-primary btn-sm">${t('common.bookTour')}</a>
+      </nav>
+  `;
 }
 
 function buildBlogCard(post, options = {}) {
   const { featured = false, delay = 0 } = options;
+  const localized = getLocalizedBlogPost(post);
   const href = `${BLOG_PATH}${post.id}.html`;
   return `
-    <article class="blog-card${featured ? ' blog-card-featured' : ''} fade-in" data-category="${post.category}" data-title="${post.title.toLowerCase()}" style="transition-delay:${delay}s">
+    <article class="blog-card${featured ? ' blog-card-featured' : ''} fade-in" data-category="${post.category}" data-title="${localized.title.toLowerCase()}" data-excerpt="${localized.excerpt.toLowerCase()}" style="transition-delay:${delay}s">
       <a href="${href}" class="blog-card-image" tabindex="-1" aria-hidden="true">
-        <img src="${resolveImg(post.image)}" alt="${post.title}" loading="lazy">
-        <span class="blog-card-category">${post.categoryLabel}</span>
+        <img src="${resolveImg(post.image)}" alt="${localized.title}" loading="lazy">
+        <span class="blog-card-category">${localized.categoryLabel}</span>
       </a>
       <div class="blog-card-body">
         <div class="blog-card-meta">
           <time datetime="${post.date}">${formatBlogDate(post.date)}</time>
           <span class="blog-card-dot" aria-hidden="true"></span>
-          <span>${post.readTime}</span>
+          <span>${localized.readTime}</span>
         </div>
-        <h3 class="blog-card-title"><a href="${href}">${post.title}</a></h3>
-        <p class="blog-card-excerpt">${post.excerpt}</p>
+        <h3 class="blog-card-title"><a href="${href}">${localized.title}</a></h3>
+        <p class="blog-card-excerpt">${localized.excerpt}</p>
         <div class="blog-card-footer">
-          <a href="${href}" class="blog-read-link">Read article <span class="link-arrow" aria-hidden="true">&rarr;</span></a>
-          ${post.tourLink ? `<a href="${ROOT_PATH}${post.tourLink}" class="blog-tour-link">${post.tourLabel}</a>` : ''}
+          <a href="${href}" class="blog-read-link">${t('blog.readArticle')} <span class="link-arrow" aria-hidden="true">&rarr;</span></a>
+          ${post.tourLink ? `<a href="${ROOT_PATH}${post.tourLink}" class="blog-tour-link">${localized.tourLabel}</a>` : ''}
         </div>
       </div>
     </article>
   `;
+}
+
+function initBlogArticlePage() {
+  const postId = document.body.dataset.blogPost;
+  if (!postId) return;
+
+  const base = BLOG_POSTS.find(p => p.id === postId);
+  if (!base) return;
+
+  const post = getLocalizedBlogPost(base);
+  const heroTitle = document.querySelector('.blog-article-hero h1');
+  const heroLead = document.querySelector('.blog-article-lead');
+  const heroCategory = document.querySelector('.blog-article-category');
+  const breadcrumbSpan = document.querySelector('.blog-article-hero .breadcrumb > span:last-child');
+  const body = document.querySelector('.blog-article-body');
+
+  if (heroTitle) heroTitle.textContent = post.title;
+  if (heroLead) heroLead.textContent = post.lead || post.excerpt;
+  if (heroCategory) heroCategory.textContent = post.categoryLabel;
+  if (breadcrumbSpan) breadcrumbSpan.textContent = post.title;
+
+  const metaTime = document.querySelector('.blog-article-meta time');
+  if (metaTime) metaTime.textContent = formatBlogDate(base.date);
+
+  const readTimeSpan = document.querySelector('.blog-article-meta time')?.nextElementSibling;
+  if (readTimeSpan) readTimeSpan.textContent = post.readTime;
+
+  if (body && post.content) {
+    body.innerHTML = `${post.content.trim()}${buildBlogArticleNav()}`;
+  }
+
+  window.I18n?.applyTranslations();
+
+  const suffix = window.I18n?.getLang() === 'de'
+    ? ' | Sea & Safari Tours Mirissa Blog'
+    : window.I18n?.getLang() === 'fr'
+      ? ' | Blog Sea & Safari Tours Mirissa'
+      : ' | Sea & Safari Tours Mirissa Blog';
+  document.title = `${post.title}${suffix}`;
+
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && post.description) metaDesc.setAttribute('content', post.description);
 }
 
 function initBlogPage() {
@@ -3225,11 +3322,8 @@ function initBlogPage() {
 
   renderGrid(rest);
 
-  if (filtersEl) {
-    filtersEl.innerHTML = BLOG_CATEGORIES.map((cat, i) => `
-      <button type="button" class="blog-filter${i === 0 ? ' active' : ''}" data-filter="${cat.id}">${cat.label}</button>
-    `).join('');
-
+  if (filtersEl && !filtersEl.dataset.bound) {
+    filtersEl.dataset.bound = '1';
     filtersEl.addEventListener('click', e => {
       const btn = e.target.closest('.blog-filter');
       if (!btn) return;
@@ -3239,13 +3333,20 @@ function initBlogPage() {
     });
   }
 
+  if (filtersEl) {
+    filtersEl.innerHTML = BLOG_CATEGORIES.map((cat, i) => `
+      <button type="button" class="blog-filter${i === 0 ? ' active' : ''}" data-filter="${cat.id}">${getBlogCategoryLabel(cat.id)}</button>
+    `).join('');
+  }
+
   function applyFilters() {
     const active = filtersEl?.querySelector('.blog-filter.active')?.dataset.filter || 'all';
     const query = (searchInput?.value || '').trim().toLowerCase();
     const filtered = BLOG_POSTS.filter(post => {
       if (post.featured && featured) return false;
       if (active !== 'all' && post.category !== active) return false;
-      if (query && !post.title.toLowerCase().includes(query) && !post.excerpt.toLowerCase().includes(query)) return false;
+      const localized = getLocalizedBlogPost(post);
+      if (query && !localized.title.toLowerCase().includes(query) && !localized.excerpt.toLowerCase().includes(query)) return false;
       return true;
     });
     renderGrid(filtered);
@@ -3253,28 +3354,39 @@ function initBlogPage() {
     if (empty) empty.hidden = filtered.length > 0;
   }
 
-  searchInput?.addEventListener('input', applyFilters);
+  if (searchInput && !searchInput.dataset.bound) {
+    searchInput.dataset.bound = '1';
+    searchInput.addEventListener('input', applyFilters);
+  }
 
-  injectJsonLd({
-    '@context': 'https://schema.org',
-    '@type': 'Blog',
-    name: 'Sea & Safari Tours Mirissa Travel Blog',
-    description: 'Travel guides, whale watching tips, and Mirissa adventure articles from Sea & Safari Tours.',
-    url: `${SITE_URL}/blog.html`,
-    publisher: {
-      '@type': 'Organization',
-      name: SITE_NAME,
-      logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/images/logo.png` }
-    },
-    blogPost: BLOG_POSTS.map(post => ({
-      '@type': 'BlogPosting',
-      headline: post.title,
-      description: post.excerpt,
-      datePublished: post.date,
-      url: `${SITE_URL}/blog/${post.id}.html`,
-      image: `${SITE_URL}/${post.image.replace(/^\//, '')}`
-    }))
-  });
+  applyFilters();
+
+  if (!grid.dataset.schemaInjected) {
+    grid.dataset.schemaInjected = '1';
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: 'Sea & Safari Tours Mirissa Travel Blog',
+      description: 'Travel guides, whale watching tips, and Mirissa adventure articles from Sea & Safari Tours.',
+      url: `${SITE_URL}/blog.html`,
+      publisher: {
+        '@type': 'Organization',
+        name: SITE_NAME,
+        logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/images/logo.png` }
+      },
+      blogPost: BLOG_POSTS.map(post => {
+        const localized = getLocalizedBlogPost(post);
+        return {
+          '@type': 'BlogPosting',
+          headline: localized.title,
+          description: localized.excerpt,
+          datePublished: post.date,
+          url: `${SITE_URL}/blog/${post.id}.html`,
+          image: `${SITE_URL}/${post.image.replace(/^\//, '')}`
+        };
+      })
+    });
+  }
 }
 
 function initBlogPost() {
@@ -3285,23 +3397,26 @@ function initBlogPost() {
   const related = BLOG_POSTS.filter(p => p.id !== postId).slice(0, 3);
   container.innerHTML = `
     <div class="blog-sidebar-card">
-      <h3>Related Articles</h3>
+      <h3>${t('blog.relatedArticles')}</h3>
       <ul class="blog-related-list">
-        ${related.map(post => `
+        ${related.map(post => {
+          const localized = getLocalizedBlogPost(post);
+          return `
           <li>
             <a href="${BLOG_PATH}${post.id}.html">
-              <span class="blog-related-title">${post.title}</span>
+              <span class="blog-related-title">${localized.title}</span>
               <span class="blog-related-meta">${formatBlogDate(post.date)}</span>
             </a>
           </li>
-        `).join('')}
+        `;
+        }).join('')}
       </ul>
     </div>
     <div class="blog-sidebar-card blog-sidebar-cta">
-      <h3>Ready to Explore?</h3>
-      <p>Book your Mirissa adventure with free hotel pickup and expert local guides.</p>
-      <a href="${ROOT_PATH}booking.html" class="btn btn-primary btn-block btn-sm">Book a Tour</a>
-      <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hello!%20I%20read%20your%20blog%20and%20would%20like%20to%20book%20a%20tour." class="btn btn-whatsapp btn-block btn-sm" target="_blank" rel="noopener">WhatsApp Us</a>
+      <h3>${t('blog.readyExplore')}</h3>
+      <p>${t('blog.readyExploreDesc')}</p>
+      <a href="${ROOT_PATH}booking.html" class="btn btn-primary btn-block btn-sm">${t('common.bookTour')}</a>
+      <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hello!%20I%20read%20your%20blog%20and%20would%20like%20to%20book%20a%20tour." class="btn btn-whatsapp btn-block btn-sm" target="_blank" rel="noopener">${t('common.chatWhatsApp')}</a>
     </div>
   `;
 }
