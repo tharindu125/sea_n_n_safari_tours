@@ -159,10 +159,26 @@ function escapeXml(value) {
     .replace(/'/g, '&apos;');
 }
 
+function extractAirportShuttlePage() {
+  return {
+    page: `${siteUrl}/airport-shuttle.html`,
+    images: [
+      'assets/images/airport-shuttle/aircraft_landing_sky.jpg',
+      'assets/images/airport-shuttle/private_airport_transfer_vehicle.jpg',
+      'assets/images/airport-shuttle/colombo_airport_arrivals.jpg'
+    ].map(src => ({
+      loc: `${siteUrl}/${src}`,
+      title: 'Sea & Safari Tours — Colombo Airport (CMB) to Mirissa shuttle',
+      caption: src.includes('aircraft') ? 'Aircraft arrival for international travelers' : 'Private AC shuttle vehicle Mirissa transfer'
+    }))
+  };
+}
+
 const pages = [
   ...extractTourPages(),
   ...extractComboPages(),
-  extractGalleryPage()
+  extractGalleryPage(),
+  extractAirportShuttlePage()
 ];
 
 const outPath = path.join(root, 'sitemap-images.xml');

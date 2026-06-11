@@ -18,9 +18,9 @@ const WHALE_BLUE_IMG_02 = `${SITE}/assets/images/whale-dolphin/mirissa_whale_wat
 const PAGES = {
   'index.html': {
     title: 'Sea & Safari Tours | Mirissa Whale Watching & Ocean Adventures Sri Lanka',
-    description: 'Join Sea & Safari Tours for unforgettable ocean adventures — whale watching, turtle snorkeling, scuba diving, river kayak, fishing & wildlife tours in Mirissa. Expert guides, free hotel pickup, 4.9★ rated.',
-    keywords: 'Sea & Safari Tours, Mirissa whale watching, Mirissa snorkeling, whale watching Mirissa, scuba diving Mirissa, turtle snorkeling Mirissa, river kayak Mirissa, crocodile safari Mirissa, deep sea fishing Mirissa, Sri Lanka tours, things to do in Mirissa, Mirissa ocean adventures, cooking class Mirissa, dolphin watching Mirissa',
-    dcSubject: 'Whale Watching, Turtle Snorkeling, Scuba Diving, River Kayak, Crocodile Safari, Deep Sea Fishing, Cooking Class, Ocean Adventures, Mirissa Tours',
+    description: 'Join Sea & Safari Tours for unforgettable ocean adventures — whale watching, turtle snorkeling, scuba diving, river kayak, fishing & wildlife tours in Mirissa. Airport shuttle from Colombo (CMB). Expert guides, free hotel pickup, 4.9★ rated.',
+    keywords: 'Sea & Safari Tours, Mirissa whale watching, Mirissa snorkeling, whale watching Mirissa, scuba diving Mirissa, turtle snorkeling Mirissa, river kayak Mirissa, crocodile safari Mirissa, deep sea fishing Mirissa, Sri Lanka tours, things to do in Mirissa, Mirissa ocean adventures, cooking class Mirissa, dolphin watching Mirissa, colombo airport to mirissa transfer, airport shuttle mirissa',
+    dcSubject: 'Whale Watching, Turtle Snorkeling, Scuba Diving, River Kayak, Crocodile Safari, Deep Sea Fishing, Cooking Class, Ocean Adventures, Mirissa Tours, Airport Shuttle',
     image: WHALE_BLUE_IMG,
     ogDescription: 'Premium whale watching, snorkeling, diving and wildlife tours in Mirissa, Sri Lanka. Expert guides, free hotel pickup. Book via WhatsApp.',
     twitterTitle: 'Sea & Safari Tours | Mirissa Whale Watching',
@@ -36,8 +36,8 @@ const PAGES = {
   },
   'booking.html': {
     title: 'Book a Tour Online | Sea & Safari Tours Mirissa',
-    description: 'Reserve your Mirissa whale watching or snorkeling tour online. Choose your tour, date & guests — instant WhatsApp confirmation & free hotel pickup.',
-    keywords: 'book mirissa tour, whale watching booking, mirissa tour reservation',
+    description: 'Reserve your Mirissa whale watching or snorkeling tour online. Need an airport transfer? We also offer CMB → Mirissa shuttle for international travelers. Instant WhatsApp confirmation & free hotel pickup.',
+    keywords: 'book mirissa tour, whale watching booking, mirissa tour reservation, colombo airport shuttle mirissa, cmb to mirissa transfer',
     image: `${SITE}/assets/images/logo.png`,
     path: '/booking.html'
   },
@@ -65,8 +65,8 @@ const PAGES = {
   },
   'faq.html': {
     title: 'FAQ | Mirissa Tours Booking & Whale Watching | Sea & Safari Tours',
-    description: 'Frequently asked questions about Mirissa whale watching, booking, safety, payment, cancellation policy, and what to bring on your tour.',
-    keywords: 'mirissa whale watching faq, mirissa tour questions, sri lanka tour booking help',
+    description: 'Frequently asked questions about Mirissa whale watching, booking, airport transfers from Colombo (CMB), safety, payment, cancellation policy, and what to bring on your tour.',
+    keywords: 'mirissa whale watching faq, mirissa tour questions, sri lanka tour booking help, colombo airport to mirissa transfer faq, airport shuttle mirissa',
     image: `${SITE}/assets/images/logo.png`,
     path: '/faq.html'
   },
@@ -92,6 +92,14 @@ const PAGES = {
     dcSubject: 'Mirissa Combo Packages, Tour Bundles, Whale Watching Packages',
     image: WHALE_BLUE_IMG,
     path: '/combos.html'
+  },
+  'airport-shuttle.html': {
+    title: 'Airport Shuttle Mirissa | Colombo Airport (CMB) Transfers | Sea & Safari Tours',
+    description: 'Private airport shuttle for international travelers — Colombo Bandaranaike Airport (CMB) to Mirissa and return. English-speaking driver, AC vehicle, meet & greet. From $85/vehicle. Book via WhatsApp.',
+    keywords: 'colombo airport to mirissa transfer, cmb airport shuttle mirissa, mirissa airport pickup, sri lanka airport transfer foreigners, bandaranaike airport mirissa taxi',
+    dcSubject: 'Airport Transfer, Colombo Airport Shuttle, Mirissa Transfer, CMB to Mirissa',
+    image: `${SITE}/assets/images/airport-shuttle/aircraft_landing_sky.jpg`,
+    path: '/airport-shuttle.html'
   },
   'tour-details.html': {
     title: 'Tour Details | Sea & Safari Tours',

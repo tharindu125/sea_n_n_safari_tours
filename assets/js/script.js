@@ -33,6 +33,12 @@ const GETYOURGUIDE_PRODUCT_BADGE = 'https://gyg.me/pQw3KK9K';
 const OFFICE_HOURS = { start: 6, end: 20 };
 const WHALE_BLUE_IMG = 'assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale.png';
 const WHALE_BLUE_IMG_02 = 'assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale_02.png';
+const AIRPORT_SHUTTLE_IMG = 'assets/images/airport-shuttle/aircraft_landing_sky.jpg';
+const AIRPORT_SHUTTLE_IMAGES = [
+  'assets/images/airport-shuttle/aircraft_landing_sky.jpg',
+  'assets/images/airport-shuttle/private_airport_transfer_vehicle.jpg',
+  'assets/images/airport-shuttle/colombo_airport_arrivals.jpg'
+];
 
 const WHALE_VIDEOS = [
   {
@@ -86,9 +92,9 @@ const SEO_DEFAULTS = {
 const PAGE_SEO = {
   'index.html': {
     title: 'Sea & Safari Tours | Mirissa Whale Watching & Ocean Adventures Sri Lanka',
-    description: 'Join Sea & Safari Tours for unforgettable ocean adventures — whale watching, turtle snorkeling, scuba diving, river kayak, fishing & wildlife tours in Mirissa. Expert guides, free hotel pickup, 4.9★ rated.',
-    keywords: 'Sea & Safari Tours, Mirissa whale watching, Mirissa snorkeling, whale watching Mirissa, scuba diving Mirissa, turtle snorkeling Mirissa, river kayak Mirissa, crocodile safari Mirissa, deep sea fishing Mirissa, Sri Lanka tours, things to do in Mirissa, Mirissa ocean adventures, cooking class Mirissa, dolphin watching Mirissa',
-    dcSubject: 'Whale Watching, Turtle Snorkeling, Scuba Diving, River Kayak, Crocodile Safari, Deep Sea Fishing, Cooking Class, Ocean Adventures, Mirissa Tours',
+    description: 'Join Sea & Safari Tours for unforgettable ocean adventures — whale watching, turtle snorkeling, scuba diving, river kayak, fishing & wildlife tours in Mirissa. Airport shuttle from Colombo (CMB). Expert guides, free hotel pickup, 4.9★ rated.',
+    keywords: 'Sea & Safari Tours, Mirissa whale watching, Mirissa snorkeling, whale watching Mirissa, scuba diving Mirissa, turtle snorkeling Mirissa, river kayak Mirissa, crocodile safari Mirissa, deep sea fishing Mirissa, Sri Lanka tours, things to do in Mirissa, Mirissa ocean adventures, cooking class Mirissa, dolphin watching Mirissa, colombo airport to mirissa transfer, airport shuttle mirissa',
+    dcSubject: 'Whale Watching, Turtle Snorkeling, Scuba Diving, River Kayak, Crocodile Safari, Deep Sea Fishing, Cooking Class, Ocean Adventures, Mirissa Tours, Airport Shuttle',
     image: `${SITE_URL}/${WHALE_BLUE_IMG}`,
     path: '/'
   },
@@ -101,8 +107,8 @@ const PAGE_SEO = {
   },
   'booking.html': {
     title: 'Book a Tour Online | Sea & Safari Tours Mirissa',
-    description: 'Reserve your Mirissa whale watching or snorkeling tour online. Choose your tour, date & guests — instant WhatsApp confirmation & free hotel pickup.',
-    keywords: 'book mirissa tour, whale watching booking, mirissa tour reservation',
+    description: 'Reserve your Mirissa whale watching or snorkeling tour online. Need an airport transfer? We also offer CMB → Mirissa shuttle for international travelers. Instant WhatsApp confirmation & free hotel pickup.',
+    keywords: 'book mirissa tour, whale watching booking, mirissa tour reservation, colombo airport shuttle mirissa, cmb to mirissa transfer',
     image: `${SITE_URL}/assets/images/logo.png`,
     path: '/booking.html'
   },
@@ -130,8 +136,8 @@ const PAGE_SEO = {
   },
   'faq.html': {
     title: 'FAQ | Mirissa Tours Booking & Whale Watching | Sea & Safari Tours',
-    description: 'Frequently asked questions about Mirissa whale watching, booking, safety, payment, cancellation policy, and what to bring on your tour.',
-    keywords: 'mirissa whale watching faq, mirissa tour questions, sri lanka tour booking help',
+    description: 'Frequently asked questions about Mirissa whale watching, booking, airport transfers from Colombo (CMB), safety, payment, cancellation policy, and what to bring on your tour.',
+    keywords: 'mirissa whale watching faq, mirissa tour questions, sri lanka tour booking help, colombo airport to mirissa transfer faq, airport shuttle mirissa',
     image: `${SITE_URL}/assets/images/logo.png`,
     path: '/faq.html'
   },
@@ -173,8 +179,31 @@ const PAGE_SEO = {
     image: `${SITE_URL}/assets/images/logo.png`,
     path: '/404.html',
     robots: 'noindex, follow'
+  },
+  'airport-shuttle.html': {
+    title: 'Airport Shuttle Mirissa | Colombo Airport (CMB) Transfers | Sea & Safari Tours',
+    description: 'Private airport shuttle for international travelers — Colombo Bandaranaike Airport (CMB) to Mirissa and return. English-speaking driver, AC vehicle, meet & greet. From $85/vehicle. Book via WhatsApp.',
+    keywords: 'colombo airport to mirissa transfer, cmb airport shuttle mirissa, mirissa airport pickup, sri lanka airport transfer foreigners, bandaranaike airport mirissa taxi, airport shuttle sri lanka tourists',
+    dcSubject: 'Airport Transfer, Colombo Airport Shuttle, Mirissa Transfer, CMB to Mirissa, International Travelers',
+    image: `${SITE_URL}/${AIRPORT_SHUTTLE_IMG}`,
+    imageAlt: 'Aircraft and private shuttle — Colombo Airport (CMB) to Mirissa transfer',
+    path: '/airport-shuttle.html'
   }
 };
+
+const AIRPORT_SHUTTLE = {
+  priceFrom: 85,
+  maxGuests: 4,
+  durationHours: '3.5–4',
+  waTextEn: 'Hello Sea & Safari Tours! I need an airport shuttle for international travelers. Route: Colombo Airport (CMB) to Mirissa. Date: [your date]. Passengers: [number]. Flight number: [if available]. Thank you!'
+};
+
+const AIRPORT_SHUTTLE_FAQ = [
+  { q: 'Do you offer airport shuttle for foreigners arriving in Sri Lanka?', a: 'Yes. We provide private airport transfers between Colombo Bandaranaike International Airport (CMB) and Mirissa — ideal for international travelers. Message us on WhatsApp with your flight details.' },
+  { q: 'How long is the drive from Colombo Airport to Mirissa?', a: 'The journey typically takes 3.5 to 4 hours depending on traffic and your exact hotel location. We use the southern expressway when possible for a comfortable ride.' },
+  { q: 'Can I book an airport transfer together with my tours?', a: 'Absolutely. Many guests book their CMB → Mirissa arrival transfer, Mirissa tours, and return airport shuttle in one WhatsApp message. We confirm everything for you.' },
+  { q: 'Will someone meet me at the airport?', a: 'Yes. Your driver meets you at the arrivals area with a name board, assists with luggage, and drives you directly to your Mirissa hotel in an air-conditioned private vehicle.' }
+];
 
 const TOUR_SEO = {
   'whale-dolphin': 'mirissa whale watching, blue whale sri lanka, dolphin watching mirissa, whale watching tour mirissa, whale watching price mirissa',
@@ -554,6 +583,15 @@ const FAQ_ITEMS = [
       { q: 'How quickly will you confirm my booking?', a: 'We usually reply within 1 hour during office hours (6:00 AM – 8:00 PM). For early-morning whale tours, we recommend booking at least one day ahead.' },
       { q: 'Can I book a private tour?', a: 'Yes! Most tours are available as private experiences. Message us on WhatsApp with your group size and preferred date for a custom quote.' },
       { q: 'Do you offer hotel pickup?', a: 'Free pickup and drop-off is included for most tours in the Mirissa area. Let us know your hotel name when booking.' }
+    ]
+  },
+  {
+    category: 'Airport Transfers',
+    questions: [
+      { q: 'Do you offer airport shuttle for foreigners arriving in Sri Lanka?', a: 'Yes. We provide private airport transfers between Colombo Bandaranaike International Airport (CMB) and Mirissa — ideal for international travelers. <a href="airport-shuttle.html">View airport shuttle details</a> or message us on WhatsApp with your flight details.' },
+      { q: 'How long is the drive from Colombo Airport to Mirissa?', a: 'The journey typically takes 3.5 to 4 hours depending on traffic and your exact hotel location. We use the southern expressway when possible for a comfortable ride.' },
+      { q: 'Can I book an airport transfer together with my tours?', a: 'Absolutely. Many guests book their CMB → Mirissa arrival transfer, Mirissa tours, and return airport shuttle in one message. We will confirm everything via WhatsApp.' },
+      { q: 'Will someone meet me at the airport?', a: 'Yes. Your driver meets you at the arrivals area with a name board, assists with luggage, and drives you directly to your Mirissa hotel in an air-conditioned private vehicle.' }
     ]
   },
   {
@@ -1087,6 +1125,11 @@ function refreshPageContent() {
   if (document.getElementById('combo-detail-content')) initComboDetails();
   initBusinessReviewLinks();
   if (document.getElementById('booking-form')) refreshBookingFormTours();
+  if (document.getElementById('airport-shuttle-faq')) {
+    const faqHost = document.getElementById('airport-shuttle-faq');
+    faqHost.innerHTML = renderAirportShuttleFaqSection();
+  }
+  if (document.querySelector('[data-shuttle-wa], [data-shuttle-price], .booking-shuttle-banner')) refreshAirportShuttleUi();
   const carousel = document.querySelector('.hero-carousel');
   if (carousel?._heroRefresh) carousel._heroRefresh();
 }
@@ -1955,6 +1998,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('tour-detail-content')) initTourDetails();
   if (document.getElementById('combo-detail-content')) initComboDetails();
   if (document.getElementById('booking-form')) initBookingForm();
+  if (document.body.dataset.page === 'airport-shuttle') initAirportShuttlePage();
+  if (document.querySelector('[data-shuttle-wa], [data-shuttle-price]')) refreshAirportShuttleUi();
   if (document.getElementById('payment-form')) initPaymentPage();
   if (document.getElementById('contact-form')) initContactForm();
   if (document.getElementById('blog-grid')) {
@@ -2347,12 +2392,177 @@ const NAV_ICON_FAQ = '<svg class="nav-pill-svg" viewBox="0 0 24 24" width="18" h
 const NAV_ICON_GALLERY = '<svg class="nav-pill-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.75" fill="currentColor"/><path d="M21 15l-5-5L5 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
 
 const NAV_ICON_BLOG = '<svg class="nav-pill-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" d="M6 4h12v16H6z"/><path fill="none" stroke="currentColor" stroke-width="2" d="M9 8h6M9 12h6M9 16h4"/></svg>';
+const NAV_ICON_SHUTTLE = '<svg class="nav-pill-svg" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>';
+
+function getAirportShuttleWaUrl() {
+  const msg = t('shuttle.waDefault');
+  const text = msg !== 'shuttle.waDefault' ? msg : AIRPORT_SHUTTLE.waTextEn;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+}
+
+function refreshAirportShuttleUi() {
+  document.querySelectorAll('[data-shuttle-wa]').forEach(el => {
+    el.href = getAirportShuttleWaUrl();
+  });
+  document.querySelectorAll('[data-shuttle-price]').forEach(el => {
+    const label = t('shuttle.priceFrom', { price: AIRPORT_SHUTTLE.priceFrom });
+    if (label !== 'shuttle.priceFrom') el.textContent = label;
+  });
+  document.querySelectorAll('[data-shuttle-duration]').forEach(el => {
+    const label = t('shuttle.routeDuration', { hours: AIRPORT_SHUTTLE.durationHours });
+    if (label !== 'shuttle.routeDuration') el.textContent = label;
+  });
+}
+
+function injectBookingShuttleBanner() {
+  const container = document.querySelector('.booking-layout')?.parentElement;
+  if (!container || container.querySelector('.booking-shuttle-banner')) return;
+  const banner = document.createElement('aside');
+  banner.className = 'booking-shuttle-banner fade-in';
+  banner.innerHTML = `
+    <div class="booking-shuttle-banner-icon" aria-hidden="true">✈</div>
+    <div class="booking-shuttle-banner-text">
+      <strong data-i18n="shuttle.bookingBanner">${t('shuttle.bookingBanner')}</strong>
+      <p data-i18n="shuttle.bookingBannerDesc">${t('shuttle.bookingBannerDesc')}</p>
+    </div>
+    <a href="${ROOT_PATH}airport-shuttle.html" class="btn btn-ocean btn-sm" data-i18n="shuttle.bookingBannerCta">${t('shuttle.bookingBannerCta')}</a>
+  `;
+  container.insertBefore(banner, container.firstElementChild);
+}
+
+function initAirportShuttlePage() {
+  injectAirportShuttleMeta();
+  refreshAirportShuttleUi();
+  const faqHost = document.getElementById('airport-shuttle-faq');
+  if (faqHost) {
+    faqHost.innerHTML = renderAirportShuttleFaqSection();
+  }
+  initScrollAnimations();
+}
+
+function renderAirportShuttleFaqSection() {
+  return `
+    <section class="tour-faq-section" aria-labelledby="shuttle-faq-heading">
+      <h2 id="shuttle-faq-heading">${t('shuttle.faqTitle')}</h2>
+      <p class="tour-faq-intro">${t('shuttle.faqIntro')}</p>
+      <div class="tour-faq-list">
+        ${AIRPORT_SHUTTLE_FAQ.map((item, i) => `
+          <details class="faq-item tour-faq-item" ${i === 0 ? 'open' : ''}>
+            <summary>${item.q}</summary>
+            <div class="faq-answer"><p>${item.a}</p></div>
+          </details>
+        `).join('')}
+      </div>
+      <p class="tour-faq-more"><a href="${ROOT_PATH}faq.html">${t('tourUi.moreFaq')}</a></p>
+    </section>
+  `;
+}
+
+function injectAirportShuttleMeta() {
+  const pageMeta = PAGE_SEO['airport-shuttle.html'];
+  if (!pageMeta) return;
+
+  const canonicalPath = '/airport-shuttle.html';
+  const pageUrl = getCanonicalUrl(canonicalPath);
+  const images = AIRPORT_SHUTTLE_IMAGES.map(src => `${SITE_URL}/${src.replace(/^\//, '')}`);
+  const primaryImage = images[0];
+  const staticTypes = getStaticJsonLdTypes();
+
+  injectBusinessSchemas(staticTypes);
+
+  applyPageMeta({
+    ...pageMeta,
+    image: primaryImage,
+    imageAlt: pageMeta.imageAlt || 'Airport shuttle from Colombo (CMB) to Mirissa',
+    type: 'website'
+  }, canonicalPath);
+
+  if (!staticTypes.has('WebPage')) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: pageMeta.title,
+      description: pageMeta.description,
+      url: pageUrl,
+      inLanguage: 'en',
+      isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: SITE_URL }
+    });
+  }
+
+  if (!staticTypes.has('BreadcrumbList')) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: 'Airport Shuttle', item: pageUrl }
+      ]
+    });
+  }
+
+  if (!staticTypes.has('Service')) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Airport Shuttle — Colombo (CMB) to Mirissa',
+      description: pageMeta.description,
+      url: pageUrl,
+      image: images,
+      serviceType: 'Airport Transfer',
+      audience: {
+        '@type': 'Audience',
+        audienceType: 'International travelers',
+        geographicArea: { '@type': 'Country', name: 'Sri Lanka' }
+      },
+      provider: {
+        '@type': 'TravelAgency',
+        name: SITE_NAME,
+        url: SITE_URL,
+        telephone: '+94787097430',
+        email: COMPANY_EMAIL
+      },
+      areaServed: [
+        { '@type': 'Airport', name: 'Bandaranaike International Airport', iataCode: 'CMB' },
+        { '@type': 'City', name: 'Mirissa' }
+      ],
+      offers: {
+        '@type': 'Offer',
+        url: pageUrl,
+        priceCurrency: 'USD',
+        price: String(AIRPORT_SHUTTLE.priceFrom),
+        priceValidUntil: getOfferPriceValidUntil(),
+        availability: 'https://schema.org/InStock',
+        description: `Private AC vehicle — up to ${AIRPORT_SHUTTLE.maxGuests} guests`,
+        seller: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL }
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        reviewCount: '500',
+        bestRating: '5'
+      }
+    });
+  }
+
+  if (!staticTypes.has('FAQPage')) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: AIRPORT_SHUTTLE_FAQ.map(item => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a }
+      }))
+    });
+  }
+}
 
 function injectNavExtras() {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   const faqHref = `${ROOT_PATH}faq.html`;
   const galleryHref = `${ROOT_PATH}gallery.html`;
   const blogHref = `${ROOT_PATH}blog.html`;
+  const shuttleHref = `${ROOT_PATH}airport-shuttle.html`;
 
   document.querySelectorAll('header .nav').forEach(nav => {
     if (nav.querySelector('.nav-extra')) return;
@@ -2360,6 +2570,10 @@ function injectNavExtras() {
     const extra = document.createElement('div');
     extra.className = 'nav-extra';
     extra.innerHTML = `
+      <a href="${shuttleHref}" class="nav-pill nav-pill-shuttle${currentPath === 'airport-shuttle.html' ? ' active' : ''}">
+        ${NAV_ICON_SHUTTLE}
+        <span data-i18n="nav.airportShuttle">Airport Shuttle</span>
+      </a>
       <a href="${blogHref}" class="nav-pill nav-pill-blog${currentPath === 'blog.html' ? ' active' : ''}">
         ${NAV_ICON_BLOG}
         <span data-i18n="nav.blog">Blog</span>
@@ -2379,6 +2593,15 @@ function injectNavExtras() {
   const mobileNav = document.querySelector('.mobile-nav');
   if (mobileNav) {
     const ctaBtn = mobileNav.querySelector('.btn.btn-primary');
+
+    if (!mobileNav.querySelector('.nav-extra-link-shuttle')) {
+      const shuttleLink = document.createElement('a');
+      shuttleLink.href = shuttleHref;
+      shuttleLink.className = 'nav-link nav-extra-link nav-extra-link-shuttle';
+      shuttleLink.innerHTML = `${NAV_ICON_SHUTTLE}<span data-i18n="nav.airportShuttle">Airport Shuttle</span>`;
+      if (currentPath === 'airport-shuttle.html') shuttleLink.classList.add('active');
+      mobileNav.insertBefore(shuttleLink, ctaBtn);
+    }
 
     if (!mobileNav.querySelector('.nav-extra-link-blog')) {
       const blogLink = document.createElement('a');
@@ -3153,6 +3376,10 @@ function initSeo() {
 
   if (blogPostId) {
     initBlogPostSeo(blogPostId);
+    return;
+  }
+
+  if (page === 'airport-shuttle.html') {
     return;
   }
 
@@ -4410,6 +4637,7 @@ function refreshBookingFormTours() {
 }
 
 function initBookingForm() {
+  injectBookingShuttleBanner();
   const form = document.getElementById('booking-form');
   const tourSelect = document.getElementById('tour-select');
   const guestsInput = document.getElementById('guests');
@@ -4899,6 +5127,18 @@ function injectFooterBlogLink() {
     if (!heading || heading.textContent.trim().toLowerCase() !== 'explore') return;
     const ul = col.querySelector('ul');
     if (!ul) return;
+
+    if (!ul.querySelector('a[href*="airport-shuttle.html"]')) {
+      const shuttleLi = document.createElement('li');
+      const shuttleA = document.createElement('a');
+      shuttleA.href = `${ROOT_PATH}airport-shuttle.html`;
+      shuttleA.setAttribute('data-i18n', 'nav.airportShuttle');
+      shuttleA.textContent = 'Airport Shuttle';
+      shuttleLi.appendChild(shuttleA);
+      const comboLink = ul.querySelector('a[href*="combos.html"]');
+      if (comboLink?.parentElement) comboLink.parentElement.after(shuttleLi);
+      else ul.appendChild(shuttleLi);
+    }
 
     if (!ul.querySelector('a[href*="combos.html"]')) {
       const comboLi = document.createElement('li');

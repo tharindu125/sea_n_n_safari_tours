@@ -332,7 +332,7 @@ window.SST_BLOG_I18N = {
 
       <h2>Getting to Mirissa</h2>
       <ul>
-        <li><strong>From Colombo Airport (CMB)</strong> — 3–4 hours by private car or taxi</li>
+        <li><strong>From Colombo Airport (CMB)</strong> — 3–4 hours by private car or taxi. <a href="../airport-shuttle.html">Book our airport shuttle</a> for international travelers.</li>
         <li><strong>By train</strong> — Take the coastal line to Weligama, then a 15-minute tuk-tuk to Mirissa</li>
         <li><strong>From Galle</strong> — 45 minutes south by car or bus</li>
         <li><strong>From Ella</strong> — 4–5 hours through scenic hill country (popular route)</li>
@@ -363,7 +363,7 @@ window.SST_BLOG_I18N = {
 
       <h2>Anreise nach Mirissa</h2>
       <ul>
-        <li><strong>Vom Flughafen Colombo (CMB)</strong> — 3–4 Stunden mit Privatwagen oder Taxi</li>
+        <li><strong>Vom Flughafen Colombo (CMB)</strong> — 3–4 Stunden mit Privatwagen oder Taxi. <a href="../airport-shuttle.html">Flughafentransfer buchen</a> für internationale Reisende.</li>
         <li><strong>Mit dem Zug</strong> — Küstenlinie bis Weligama, dann 15 Minuten Tuk-Tuk nach Mirissa</li>
         <li><strong>Von Galle</strong> — 45 Minuten südwärts mit Auto oder Bus</li>
         <li><strong>Von Ella</strong> — 4–5 Stunden durch malerisches Hügelland (beliebte Route)</li>
@@ -394,7 +394,7 @@ window.SST_BLOG_I18N = {
 
       <h2>Comment se rendre à Mirissa</h2>
       <ul>
-        <li><strong>Depuis l'aéroport de Colombo (CMB)</strong> — 3 à 4 heures en voiture privée ou taxi</li>
+        <li><strong>Depuis l'aéroport de Colombo (CMB)</strong> — 3 à 4 heures en voiture privée ou taxi. <a href="../airport-shuttle.html">Réserver notre navette aéroport</a> pour les voyageurs internationaux.</li>
         <li><strong>En train</strong> — Ligne côtière jusqu'à Weligama, puis 15 minutes en tuk-tuk jusqu'à Mirissa</li>
         <li><strong>Depuis Galle</strong> — 45 minutes vers le sud en voiture ou bus</li>
         <li><strong>Depuis Ella</strong> — 4 à 5 heures à travers les collines pittoresques (itinéraire populaire)</li>

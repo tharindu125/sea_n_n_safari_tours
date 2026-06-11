@@ -243,7 +243,7 @@ const posts = [
 
       <h2>Getting to Mirissa</h2>
       <ul>
-        <li><strong>From Colombo Airport (CMB)</strong> — 3–4 hours by private car or taxi</li>
+        <li><strong>From Colombo Airport (CMB)</strong> — 3–4 hours by private car or taxi. <a href="../airport-shuttle.html">Book our airport shuttle</a> for international travelers.</li>
         <li><strong>By train</strong> — Take the coastal line to Weligama, then a 15-minute tuk-tuk to Mirissa</li>
         <li><strong>From Galle</strong> — 45 minutes south by car or bus</li>
         <li><strong>From Ella</strong> — 4–5 hours through scenic hill country (popular route)</li>

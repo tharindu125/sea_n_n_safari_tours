@@ -650,4 +650,22 @@
       <image:caption>Cooking Class - Traditional rustic kitchen setting</image:caption>
     </image:image>
   </url>
+  <url>
+    <loc>https://www.ceylonseasafaritours.com/airport-shuttle.html</loc>
+    <image:image>
+      <image:loc>https://www.ceylonseasafaritours.com/assets/images/airport-shuttle/aircraft_landing_sky.jpg</image:loc>
+      <image:title>Sea &amp; Safari Tours — Colombo Airport (CMB) to Mirissa shuttle</image:title>
+      <image:caption>Aircraft arrival for international travelers</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ceylonseasafaritours.com/assets/images/airport-shuttle/private_airport_transfer_vehicle.jpg</image:loc>
+      <image:title>Sea &amp; Safari Tours — Colombo Airport (CMB) to Mirissa shuttle</image:title>
+      <image:caption>Private AC shuttle vehicle Mirissa transfer</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.ceylonseasafaritours.com/assets/images/airport-shuttle/colombo_airport_arrivals.jpg</image:loc>
+      <image:title>Sea &amp; Safari Tours — Colombo Airport (CMB) to Mirissa shuttle</image:title>
+      <image:caption>Private AC shuttle vehicle Mirissa transfer</image:caption>
+    </image:image>
+  </url>
 </urlset>
