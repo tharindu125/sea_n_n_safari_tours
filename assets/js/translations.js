@@ -17,7 +17,8 @@ window.SST_TRANSLATIONS = {
       save: 'Save', alsoOnGyg: 'Also available on GetYourGuide', viewAllTours: 'View All 8 Tours',
       from: 'From', fullyInsured: 'Fully insured', expertGuides: 'Expert local guides',
       smallGroup: 'Small group experience', bookThisTour: 'Book This Tour', whatsappInquiry: 'WhatsApp Inquiry',
-      allToursNav: 'All Tours', nextTour: 'Next Tour', tourNotFound: 'Tour not found'
+      allToursNav: 'All Tours', nextTour: 'Next Tour', tourNotFound: 'Tour not found',
+      playVideo: 'Play video'
     },
     footer: {
       tagline: 'Premium whale watching, snorkeling, diving & wildlife adventures in Mirissa — trusted local guides and easy booking.',
@@ -64,7 +65,13 @@ window.SST_TRANSLATIONS = {
       privateGroups: 'Private Groups', privateGroupsDesc: 'Small group and private tour options for a personal, comfortable experience.',
       easyBooking: 'Easy WhatsApp Booking', easyBookingDesc: 'Book instantly via WhatsApp — fast confirmations, no hassle, friendly support.',
       whaleFeature: 'Blue whales, sperm whales & dolphins', turtleFeature: '100% sighting guarantee',
-      kayakFeature: 'Mangrove & rainforest adventures', cookingFeature: 'Authentic Sri Lankan cuisine'
+      kayakFeature: 'Mangrove & rainforest adventures', cookingFeature: 'Authentic Sri Lankan cuisine',
+      videoLabel: 'See It Live', videoTitle: 'Whale Watching in Mirissa',
+      videoDesc: 'Real footage from our morning cruises — blue whales, dolphins, and the open Indian Ocean.',
+      videoCta: 'Book Whale Watching Tour',
+      video1Title: 'Blue whale encounter', video1Caption: 'Morning cruise footage off Mirissa Harbor',
+      video2Title: 'Ocean safari highlights', video2Caption: 'Whales and dolphins in their natural habitat',
+      video3Title: 'Whale watching cruise', video3Caption: 'Guests enjoying a Mirissa ocean safari experience'
     },
     tourUi: {
       highlights: 'Highlights', aboutTour: 'About This Tour', itinerary: 'Itinerary',
@@ -74,7 +81,12 @@ window.SST_TRANSLATIONS = {
       packages: 'Packages', package: 'Package', slots: 'Slots',
       faqTitle: 'Frequently Asked Questions', faqIntro: 'Quick answers about this tour. For general booking questions, see our full FAQ.',
       moreFaq: 'View all FAQs →',
-      relatedLabel: 'You May Also Like', relatedTitle: 'Related Tours', relatedDesc: 'Popular Mirissa adventures that pair well with this experience.'
+      relatedLabel: 'You May Also Like', relatedTitle: 'Related Tours', relatedDesc: 'Popular Mirissa adventures that pair well with this experience.',
+      videoGallery: 'Tour Videos', videoGalleryIntro: 'Watch real moments from this tour — then book your seat on the next cruise.'
+    },
+    gallery: {
+      videoLabel: 'Videos', videoTitle: 'Whale Watching in Action',
+      videoDesc: 'Real guest footage from our Mirissa whale watching cruises.'
     },
     comboUi: {
       viewPackage: 'View Package',
@@ -86,7 +98,12 @@ window.SST_TRANSLATIONS = {
       pageTitle: 'Mirissa Combo Packages',
       pageSubtitle: 'Bundle two tours and save — free hotel pickup on every combo package.',
       breadcrumb: 'Combo Packages',
-      viewAllCombos: 'View All Combo Packages'
+      viewAllCombos: 'View All Combo Packages',
+      faqTitle: 'Combo Package FAQ',
+      faqIntro: 'Common questions about this bundled tour package.',
+      relatedLabel: 'More Packages',
+      relatedTitle: 'You Might Also Like',
+      relatedDesc: 'Save more with another Mirissa combo package.'
     },
     tours: {
       'whale-dolphin': { name: 'Whale & Dolphin Watching' },
@@ -152,7 +169,8 @@ window.SST_TRANSLATIONS = {
       save: 'Sparen', alsoOnGyg: 'Auch auf GetYourGuide verfügbar', viewAllTours: 'Alle 8 Touren anzeigen',
       from: 'Ab', fullyInsured: 'Voll versichert', expertGuides: 'Erfahrene lokale Guides',
       smallGroup: 'Kleine Gruppe', bookThisTour: 'Diese Tour buchen', whatsappInquiry: 'WhatsApp-Anfrage',
-      allToursNav: 'Alle Touren', nextTour: 'Nächste Tour', tourNotFound: 'Tour nicht gefunden'
+      allToursNav: 'Alle Touren', nextTour: 'Nächste Tour', tourNotFound: 'Tour nicht gefunden',
+      playVideo: 'Video abspielen'
     },
     footer: {
       tagline: 'Premium Walbeobachtung, Schnorcheln, Tauchen & Wildtierabenteuer in Mirissa — vertrauenswürdige lokale Guides und einfache Buchung.',
@@ -199,7 +217,13 @@ window.SST_TRANSLATIONS = {
       privateGroups: 'Private Gruppen', privateGroupsDesc: 'Kleine Gruppen und private Touren für ein persönliches, komfortables Erlebnis.',
       easyBooking: 'Einfache WhatsApp-Buchung', easyBookingDesc: 'Sofort per WhatsApp buchen — schnelle Bestätigungen, kein Stress, freundlicher Support.',
       whaleFeature: 'Blaue Wale, Pottwale & Delfine', turtleFeature: '100% Sichtungsgarantie',
-      kayakFeature: 'Mangroven- & Regenwaldabenteuer', cookingFeature: 'Authentische srilankische Küche'
+      kayakFeature: 'Mangroven- & Regenwaldabenteuer', cookingFeature: 'Authentische srilankische Küche',
+      videoLabel: 'Live erleben', videoTitle: 'Walbeobachtung in Mirissa',
+      videoDesc: 'Echte Aufnahmen von unseren Morgenkreuzfahrten — Blauwale, Delfine und der offene Indische Ozean.',
+      videoCta: 'Walbeobachtung buchen',
+      video1Title: 'Begegnung mit dem Blauwal', video1Caption: 'Morgenkreuzfahrt ab Mirissa Harbor',
+      video2Title: 'Highlights der Ozeansafari', video2Caption: 'Wale und Delfine in ihrem natürlichen Lebensraum',
+      video3Title: 'Walbeobachtungskreuzfahrt', video3Caption: 'Gäste genießen eine Ozeansafari in Mirissa'
     },
     tourUi: {
       highlights: 'Highlights', aboutTour: 'Über diese Tour', itinerary: 'Reiseverlauf',
@@ -209,7 +233,12 @@ window.SST_TRANSLATIONS = {
       packages: 'Pakete', package: 'Paket', slots: 'Zeitfenster',
       faqTitle: 'Häufig gestellte Fragen', faqIntro: 'Kurze Antworten zu dieser Tour. Allgemeine Buchungsfragen finden Sie in unseren FAQs.',
       moreFaq: 'Alle FAQs ansehen →',
-      relatedLabel: 'Das könnte Ihnen auch gefallen', relatedTitle: 'Ähnliche Touren', relatedDesc: 'Beliebte Mirissa-Abenteuer, die gut zu dieser Erfahrung passen.'
+      relatedLabel: 'Das könnte Ihnen auch gefallen', relatedTitle: 'Ähnliche Touren', relatedDesc: 'Beliebte Mirissa-Abenteuer, die gut zu dieser Erfahrung passen.',
+      videoGallery: 'Tour-Videos', videoGalleryIntro: 'Sehen Sie echte Momente von dieser Tour — und buchen Sie dann Ihren Platz auf der nächsten Kreuzfahrt.'
+    },
+    gallery: {
+      videoLabel: 'Videos', videoTitle: 'Walbeobachtung in Aktion',
+      videoDesc: 'Echte Gästeaufnahmen von unseren Mirissa-Walbeobachtungstouren.'
     },
     comboUi: {
       viewPackage: 'Paket ansehen',
@@ -221,7 +250,12 @@ window.SST_TRANSLATIONS = {
       pageTitle: 'Mirissa Kombi-Pakete',
       pageSubtitle: 'Zwei Touren bündeln und sparen — kostenlose Hotelabholung bei jedem Kombi-Paket.',
       breadcrumb: 'Kombi-Pakete',
-      viewAllCombos: 'Alle Kombi-Pakete anzeigen'
+      viewAllCombos: 'Alle Kombi-Pakete anzeigen',
+      faqTitle: 'FAQ zum Kombi-Paket',
+      faqIntro: 'Häufige Fragen zu diesem gebündelten Tourpaket.',
+      relatedLabel: 'Weitere Pakete',
+      relatedTitle: 'Das könnte Ihnen auch gefallen',
+      relatedDesc: 'Sparen Sie mehr mit einem weiteren Mirissa-Kombi-Paket.'
     },
     tours: {
       'whale-dolphin': {
@@ -372,7 +406,8 @@ window.SST_TRANSLATIONS = {
       save: 'Économisez', alsoOnGyg: 'Également disponible sur GetYourGuide', viewAllTours: 'Voir les 8 circuits',
       from: 'À partir de', fullyInsured: 'Entièrement assuré', expertGuides: 'Guides locaux experts',
       smallGroup: 'Petit groupe', bookThisTour: 'Réserver ce circuit', whatsappInquiry: 'Demande WhatsApp',
-      allToursNav: 'Tous les circuits', nextTour: 'Circuit suivant', tourNotFound: 'Circuit introuvable'
+      allToursNav: 'Tous les circuits', nextTour: 'Circuit suivant', tourNotFound: 'Circuit introuvable',
+      playVideo: 'Lire la vidéo'
     },
     footer: {
       tagline: 'Observation des baleines, snorkeling, plongée et aventures animalières premium à Mirissa — guides locaux de confiance et réservation facile.',
@@ -419,7 +454,13 @@ window.SST_TRANSLATIONS = {
       privateGroups: 'Groupes privés', privateGroupsDesc: 'Options petit groupe et circuit privé pour une expérience personnelle et confortable.',
       easyBooking: 'Réservation WhatsApp facile', easyBookingDesc: 'Réservez instantanément via WhatsApp — confirmations rapides, sans tracas, support amical.',
       whaleFeature: 'Baleines bleues, cachalots et dauphins', turtleFeature: 'Garantie d\'observation 100%',
-      kayakFeature: 'Aventures mangrove et forêt tropicale', cookingFeature: 'Cuisine sri-lankaise authentique'
+      kayakFeature: 'Aventures mangrove et forêt tropicale', cookingFeature: 'Cuisine sri-lankaise authentique',
+      videoLabel: 'Voir en direct', videoTitle: 'Observation des baleines à Mirissa',
+      videoDesc: 'Images réelles de nos croisières matinales — baleines bleues, dauphins et océan Indien.',
+      videoCta: 'Réserver l\'observation des baleines',
+      video1Title: 'Rencontre avec une baleine bleue', video1Caption: 'Croisière matinale au large de Mirissa',
+      video2Title: 'Moments forts du safari océanique', video2Caption: 'Baleines et dauphins dans leur habitat naturel',
+      video3Title: 'Croisière d\'observation des baleines', video3Caption: 'Voyageurs profitant d\'un safari océanique à Mirissa'
     },
     tourUi: {
       highlights: 'Points forts', aboutTour: 'À propos de ce circuit', itinerary: 'Itinéraire',
@@ -429,7 +470,12 @@ window.SST_TRANSLATIONS = {
       packages: 'Forfaits', package: 'Forfait', slots: 'Créneaux',
       faqTitle: 'Questions fréquentes', faqIntro: 'Réponses rapides sur ce circuit. Pour les questions générales de réservation, consultez notre FAQ complète.',
       moreFaq: 'Voir toutes les FAQ →',
-      relatedLabel: 'Vous aimerez aussi', relatedTitle: 'Circuits associés', relatedDesc: 'Aventures populaires à Mirissa qui complètent bien cette expérience.'
+      relatedLabel: 'Vous aimerez aussi', relatedTitle: 'Circuits associés', relatedDesc: 'Aventures populaires à Mirissa qui complètent bien cette expérience.',
+      videoGallery: 'Vidéos du circuit', videoGalleryIntro: 'Regardez de vrais moments de ce circuit — puis réservez votre place sur la prochaine croisière.'
+    },
+    gallery: {
+      videoLabel: 'Vidéos', videoTitle: 'Observation des baleines en action',
+      videoDesc: 'Images réelles de nos croisières d\'observation des baleines à Mirissa.'
     },
     comboUi: {
       viewPackage: 'Voir le forfait',
@@ -441,7 +487,12 @@ window.SST_TRANSLATIONS = {
       pageTitle: 'Forfaits combo Mirissa',
       pageSubtitle: 'Combinez deux circuits et économisez — prise en charge hôtel gratuite sur chaque forfait.',
       breadcrumb: 'Forfaits combo',
-      viewAllCombos: 'Voir tous les forfaits combo'
+      viewAllCombos: 'Voir tous les forfaits combo',
+      faqTitle: 'FAQ du forfait combo',
+      faqIntro: 'Questions fréquentes sur ce forfait combiné.',
+      relatedLabel: 'Autres forfaits',
+      relatedTitle: 'Vous pourriez aussi aimer',
+      relatedDesc: 'Économisez davantage avec un autre forfait combo à Mirissa.'
     },
     tours: {
       'whale-dolphin': {

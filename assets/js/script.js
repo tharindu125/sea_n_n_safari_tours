@@ -31,6 +31,26 @@ const GETYOURGUIDE_BADGES = [
 ];
 const GETYOURGUIDE_PRODUCT_BADGE = 'https://gyg.me/pQw3KK9K';
 const OFFICE_HOURS = { start: 6, end: 20 };
+const WHALE_BLUE_IMG = 'assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale.png';
+const WHALE_BLUE_IMG_02 = 'assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale_02.png';
+
+const WHALE_VIDEOS = [
+  {
+    src: 'assets/videos/whale-dolphin/mirissa_whale_watching_tour_01.mp4',
+    titleKey: 'home.video1Title',
+    captionKey: 'home.video1Caption'
+  },
+  {
+    src: 'assets/videos/whale-dolphin/mirissa_whale_watching_tour_02.mp4',
+    titleKey: 'home.video2Title',
+    captionKey: 'home.video2Caption'
+  },
+  {
+    src: 'assets/videos/whale-dolphin/mirissa_whale_watching_tour_03.mp4',
+    titleKey: 'home.video3Title',
+    captionKey: 'home.video3Caption'
+  }
+];
 
 const SEO_DEFAULTS = {
   author: 'Sea & Safari Tours',
@@ -69,14 +89,14 @@ const PAGE_SEO = {
     description: 'Join Sea & Safari Tours for unforgettable ocean adventures — whale watching, turtle snorkeling, scuba diving, river kayak, fishing & wildlife tours in Mirissa. Expert guides, free hotel pickup, 4.9★ rated.',
     keywords: 'Sea & Safari Tours, Mirissa whale watching, Mirissa snorkeling, whale watching Mirissa, scuba diving Mirissa, turtle snorkeling Mirissa, river kayak Mirissa, crocodile safari Mirissa, deep sea fishing Mirissa, Sri Lanka tours, things to do in Mirissa, Mirissa ocean adventures, cooking class Mirissa, dolphin watching Mirissa',
     dcSubject: 'Whale Watching, Turtle Snorkeling, Scuba Diving, River Kayak, Crocodile Safari, Deep Sea Fishing, Cooking Class, Ocean Adventures, Mirissa Tours',
-    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
+    image: `${SITE_URL}/${WHALE_BLUE_IMG}`,
     path: '/'
   },
   'tours.html': {
     title: 'All Tours in Mirissa | Whale Watching, Snorkeling & Safari | Sea & Safari Tours',
     description: 'Browse 8 Mirissa ocean and wildlife tours — whale watching from $45, turtle snorkeling, river kayak, scuba diving, cooking class & combo packages.',
     keywords: 'mirissa tours, sri lanka adventure tours, whale watching mirissa, snorkeling mirissa, river kayak sri lanka',
-    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png`,
+    image: `${SITE_URL}/${WHALE_BLUE_IMG}`,
     path: '/tours.html'
   },
   'booking.html': {
@@ -98,7 +118,7 @@ const PAGE_SEO = {
     title: 'About Us | Mirissa Tour Company | Sea & Safari Tours',
     description: 'Mirissa\'s trusted marine adventure company — 5+ years experience, 10,000+ happy travelers, expert local guides & ethical wildlife tours.',
     keywords: 'sea safari tours mirissa, about mirissa tour company, sri lanka tour operator',
-    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_tour-boat.png`,
+    image: `${SITE_URL}/${WHALE_BLUE_IMG}`,
     path: '/about.html'
   },
   'contact.html': {
@@ -119,7 +139,7 @@ const PAGE_SEO = {
     title: 'Photo Gallery | Mirissa Whale Watching & Tours | Sea & Safari Tours',
     description: 'Real guest photos from Mirissa whale watching, turtle snorkeling, river kayaking, scuba diving, and Sri Lankan cooking class tours.',
     keywords: 'mirissa tour photos, whale watching pictures, mirissa snorkeling gallery',
-    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_boat-guests-1.png`,
+    image: `${SITE_URL}/${WHALE_BLUE_IMG_02}`,
     path: '/gallery.html'
   },
   'blog.html': {
@@ -127,7 +147,7 @@ const PAGE_SEO = {
     description: 'Expert guides on Mirissa whale watching seasons, turtle snorkeling, south coast travel, packing tips & ethical ocean tours in Sri Lanka.',
     keywords: 'mirissa blog, whale watching tips mirissa, things to do mirissa, sri lanka travel guide, mirissa travel blog',
     dcSubject: 'Mirissa Travel Blog, Whale Watching Guides, Sri Lanka Tourism',
-    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
+    image: `${SITE_URL}/${WHALE_BLUE_IMG}`,
     path: '/blog.html'
   },
   'combos.html': {
@@ -135,7 +155,7 @@ const PAGE_SEO = {
     description: 'Save on Mirissa combo packages — whale watching + turtle snorkeling, river kayak + cooking class & more. Bundled tours from $50/person with free hotel pickup.',
     keywords: 'mirissa combo packages, whale watching turtle snorkeling combo, mirissa tour bundles, sri lanka package tours mirissa',
     dcSubject: 'Mirissa Combo Packages, Tour Bundles, Whale Watching Packages',
-    image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png`,
+    image: `${SITE_URL}/${WHALE_BLUE_IMG}`,
     path: '/combos.html'
   },
   'tour-details.html': {
@@ -145,6 +165,14 @@ const PAGE_SEO = {
     image: `${SITE_URL}/assets/images/logo.png`,
     path: '/tour-details.html',
     robots: 'noindex, nofollow'
+  },
+  '404.html': {
+    title: 'Page Not Found | Sea & Safari Tours Mirissa',
+    description: 'The page you requested could not be found. Browse Mirissa whale watching tours, combo packages, and ocean adventures with Sea & Safari Tours.',
+    keywords: 'sea safari tours mirissa, mirissa tours',
+    image: `${SITE_URL}/assets/images/logo.png`,
+    path: '/404.html',
+    robots: 'noindex, follow'
   }
 };
 
@@ -201,7 +229,7 @@ const COMBO_PACKAGES = [
       'Bottled water and light snacks',
       'Experienced English-speaking guides'
     ],
-    image: 'assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png',
+    image: WHALE_BLUE_IMG,
     waText: 'Hello! I would like to book the Whale & Dolphin Watching + Turtle Snorkeling combo.',
     getYourGuide: {
       url: 'https://www.getyourguide.com/kamburugamuwa-l257091/mirissa-blue-whale-watching-turtle-snorkeling-combo-tour-t1201886/',
@@ -476,6 +504,48 @@ const TOUR_FAQ = {
   ]
 };
 
+const COMBO_RELATED = {
+  'whale-turtle': ['whale-kayak', 'turtle-kayak', 'whale-crocodile'],
+  'kayak-cooking': ['turtle-kayak', 'whale-kayak', 'turtle-crocodile'],
+  'whale-kayak': ['whale-turtle', 'whale-crocodile', 'kayak-cooking'],
+  'whale-crocodile': ['whale-turtle', 'whale-kayak', 'turtle-crocodile'],
+  'turtle-kayak': ['whale-turtle', 'kayak-cooking', 'turtle-crocodile'],
+  'turtle-crocodile': ['turtle-kayak', 'whale-turtle', 'whale-crocodile']
+};
+
+const COMBO_FAQ = {
+  'whale-turtle': [
+    { q: 'How long is the whale and turtle combo day?', a: 'The full-day package runs approximately 6 hours — morning whale cruise (3–4 hrs) plus afternoon turtle snorkeling (1.5 hrs), with a break in between.' },
+    { q: 'Is hotel pickup included for both tours?', a: 'Yes. Free pickup and drop-off in the Mirissa area is included for the entire combo — one booking covers both experiences.' },
+    { q: 'Can I book this combo during whale season only?', a: 'Whale watching is best November–April, but turtle snorkeling runs year-round. Contact us on WhatsApp and we can advise the best dates for your visit.' }
+  ],
+  'kayak-cooking': [
+    { q: 'Do I need kayaking experience for this combo?', a: 'No. The river kayak tour is beginner-friendly with a guide and safety briefing. The cooking class is suitable for all skill levels.' },
+    { q: 'What is included in the $50 combo price?', a: 'River kayak equipment, guide, cooking class ingredients, shared meal, and free Mirissa hotel pickup — save $5 vs booking separately.' },
+    { q: 'How are the two activities scheduled?', a: 'Kayaking is typically in the morning, followed by the cooking class late morning or midday. Exact times are confirmed when you book.' }
+  ],
+  'whale-kayak': [
+    { q: 'Is this combo physically demanding?', a: 'The whale cruise is relaxed onboard viewing. Kayaking is calm and beginner-friendly. A short break is included between the two activities.' },
+    { q: 'What should I bring for both tours?', a: 'Sunscreen, hat, camera, and a change of clothes for kayaking. Life jackets are provided for both the boat and kayak portions.' },
+    { q: 'How much do I save with this package?', a: 'The bundled price is $65/person — a $5 saving compared to booking whale watching ($45) and river kayak ($25) separately.' }
+  ],
+  'whale-crocodile': [
+    { q: 'How far is the crocodile safari from Mirissa?', a: 'The Nilwala River safari near Matara is about 30 minutes from Mirissa. Transfers between the whale cruise and river safari are arranged for you.' },
+    { q: 'Is this combo suitable for families?', a: 'Yes. Both the whale cruise and crocodile boat safari are suitable for all ages with adult supervision. Life jackets are available.' },
+    { q: 'What wildlife might we see?', a: 'Morning: blue whales, dolphins, and sea turtles. Afternoon: saltwater crocodiles, kingfishers, monkeys, and river birds on the Nilwala River.' }
+  ],
+  'turtle-kayak': [
+    { q: 'Can beginners do both activities?', a: 'Absolutely. Turtle snorkeling includes in-water guidance and a 100% turtle sighting guarantee. Kayaking uses calm, shallow waterways ideal for first-timers.' },
+    { q: 'How long is the total experience?', a: 'About 3.5 hours combined — 1.5 hours turtle snorkeling plus 1.5 hours river kayaking, with transfers between locations.' },
+    { q: 'Is equipment provided?', a: 'Yes. Snorkeling mask and fins, kayak, paddle, life jacket, and guides are all included in the combo price.' }
+  ],
+  'turtle-crocodile': [
+    { q: 'What makes this combo unique?', a: 'It pairs ocean turtle snorkeling in Mirissa with a crocodile river safari on the Nilwala — two completely different ecosystems in one half-day package.' },
+    { q: 'Is lunch included?', a: 'Light snacks and water are included on each tour. Let us know if you need a lunch stop — we can suggest options between activities.' },
+    { q: 'How do I book the combo?', a: 'Message us on WhatsApp with your preferred date and group size, or use our online booking form. We confirm within 1 hour during office hours.' }
+  ]
+};
+
 const FAQ_ITEMS = [
   {
     category: 'Booking',
@@ -540,7 +610,7 @@ const BLOG_POSTS = [
     categoryLabel: 'Whale Watching',
     date: '2026-05-12',
     readTime: '6 min read',
-    image: 'assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png',
+    image: WHALE_BLUE_IMG,
     featured: true,
     tourLink: 'tours/whale-dolphin.html',
     tourLabel: 'Whale Watching Tour'
@@ -608,6 +678,352 @@ const BLOG_POSTS = [
 ];
 function resolveImg(src) { return src.startsWith('http') ? src : IMG_PATH + src; }
 
+function resolveVideo(src) { return src.startsWith('http') ? src : IMG_PATH + src; }
+
+function getVideoText(video, field) {
+  const key = video[`${field}Key`];
+  if (key) {
+    const text = t(key);
+    if (text !== key) return text;
+  }
+  return video[field] || '';
+}
+
+function renderVideoCard(video, index = 0) {
+  const title = getVideoText(video, 'title');
+  const caption = getVideoText(video, 'caption');
+  const posterAttr = video.poster ? ` poster="${resolveImg(video.poster)}"` : '';
+  const videoSrc = resolveVideo(video.src);
+  return `
+    <article class="video-card fade-in" style="transition-delay:${index * 0.08}s" data-video-src="${videoSrc}" data-video-title="${title.replace(/"/g, '&quot;')}">
+      <div class="video-player-wrap">
+        <video
+          class="video-player"
+          playsinline
+          controls
+          preload="metadata"${posterAttr}
+          aria-label="${title}"
+        >
+          <source src="${videoSrc}" type="video/mp4">
+        </video>
+        <button type="button" class="video-play-btn" aria-label="${t('common.playVideo')}: ${title}">
+          <span class="video-play-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="video-card-body">
+        ${title ? `<h3 class="video-card-title">${title}</h3>` : ''}
+        ${caption ? `<p class="video-card-caption">${caption}</p>` : ''}
+      </div>
+    </article>
+  `;
+}
+
+function renderVideosShowcase(videos, { label, title, desc, ctaHref, ctaText, compact = false } = {}) {
+  if (!videos?.length) return '';
+  const cards = videos.map((video, i) => renderVideoCard(video, i)).join('');
+  const cta = ctaHref && ctaText
+    ? `<p class="video-showcase-cta fade-in"><a href="${ctaHref}" class="btn btn-primary">${ctaText}</a></p>`
+    : '';
+  return `
+    <div class="video-showcase${compact ? ' video-showcase-compact' : ''}">
+      ${label || title || desc ? `
+      <div class="section-header fade-in">
+        ${label ? `<span class="section-label">${label}</span>` : ''}
+        ${title ? `<h2 class="section-title">${title}</h2>` : ''}
+        ${desc ? `<p class="section-desc">${desc}</p>` : ''}
+      </div>` : ''}
+      <div class="video-grid">${cards}</div>
+      ${cta}
+    </div>
+  `;
+}
+
+function isMobileVideoLayout() {
+  return window.matchMedia('(max-width: 768px)').matches;
+}
+
+function ensureVideoLightbox() {
+  let lightbox = document.querySelector('.video-lightbox');
+  if (lightbox) return lightbox;
+
+  lightbox = document.createElement('div');
+  lightbox.className = 'video-lightbox';
+  lightbox.innerHTML = `
+    <button type="button" class="video-lightbox-close" aria-label="Close">&times;</button>
+    <div class="video-lightbox-stage">
+      <video class="video-lightbox-player" playsinline controls preload="auto"></video>
+      <p class="video-lightbox-caption"></p>
+    </div>
+  `;
+  document.body.appendChild(lightbox);
+
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) closeVideoLightbox();
+  });
+  lightbox.querySelector('.video-lightbox-close').addEventListener('click', closeVideoLightbox);
+
+  if (!window.__videoLightboxKeyBound) {
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeVideoLightbox();
+    });
+    window.__videoLightboxKeyBound = true;
+  }
+
+  return lightbox;
+}
+
+function openVideoLightbox(src, title, caption) {
+  const lightbox = ensureVideoLightbox();
+  const player = lightbox.querySelector('.video-lightbox-player');
+  const captionEl = lightbox.querySelector('.video-lightbox-caption');
+
+  document.querySelectorAll('.video-card video').forEach(video => {
+    video.pause();
+    video.currentTime = 0;
+  });
+
+  player.src = src;
+  player.load();
+  if (captionEl) {
+    captionEl.textContent = [title, caption].filter(Boolean).join(' — ');
+    captionEl.hidden = !captionEl.textContent;
+  }
+
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  player.play().catch(() => {});
+}
+
+function closeVideoLightbox() {
+  const lightbox = document.querySelector('.video-lightbox');
+  if (!lightbox?.classList.contains('active')) return;
+
+  const player = lightbox.querySelector('.video-lightbox-player');
+  player.pause();
+  player.removeAttribute('src');
+  player.load();
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function openVideoCardLightbox(card) {
+  const video = card.querySelector('video');
+  const src = card.dataset.videoSrc || video?.querySelector('source')?.src || video?.src;
+  if (!src) return;
+  const title = card.dataset.videoTitle || video?.getAttribute('aria-label') || '';
+  const caption = card.querySelector('.video-card-caption')?.textContent?.trim() || '';
+  openVideoLightbox(src, title, caption);
+}
+
+function initVideoPlayers(root = document) {
+  const mobile = isMobileVideoLayout();
+
+  root.querySelectorAll('.video-card').forEach(card => {
+    const video = card.querySelector('video');
+    const playBtn = card.querySelector('.video-play-btn');
+    if (!video || !playBtn) return;
+
+    if (mobile) {
+      video.removeAttribute('controls');
+    } else {
+      video.setAttribute('controls', '');
+    }
+
+    const showPlay = () => {
+      playBtn.hidden = false;
+      card.classList.remove('is-playing');
+    };
+    const hidePlay = () => {
+      playBtn.hidden = true;
+      card.classList.add('is-playing');
+    };
+
+    const onPreviewActivate = e => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (mobile) {
+        openVideoCardLightbox(card);
+        return;
+      }
+      document.querySelectorAll('.video-card video').forEach(v => {
+        if (v !== video && !v.paused) v.pause();
+      });
+      if (video.readyState < 2) video.load();
+      video.play().catch(() => showPlay());
+      hidePlay();
+    };
+
+    playBtn.replaceWith(playBtn.cloneNode(true));
+    const freshPlayBtn = card.querySelector('.video-play-btn');
+    freshPlayBtn.addEventListener('click', onPreviewActivate);
+
+    if (mobile) {
+      card.querySelector('.video-player-wrap')?.addEventListener('click', onPreviewActivate);
+      card.classList.add('video-card-mobile');
+      showPlay();
+      return;
+    }
+
+    video.addEventListener('play', hidePlay);
+    video.addEventListener('pause', () => {
+      if (video.ended || video.currentTime === 0) showPlay();
+    });
+    video.addEventListener('ended', showPlay);
+  });
+}
+
+function initHomeVideos() {
+  const el = document.getElementById('home-videos');
+  if (!el) return;
+  el.innerHTML = renderVideosShowcase(WHALE_VIDEOS, {
+    label: t('home.videoLabel'),
+    title: t('home.videoTitle'),
+    desc: t('home.videoDesc'),
+    ctaHref: `${TOURS_PATH}whale-dolphin.html`,
+    ctaText: t('home.videoCta')
+  });
+  initVideoPlayers(el);
+  initScrollAnimations();
+  injectWhaleVideosSchema(getCanonicalUrl('/'), WHALE_VIDEOS, { name: 'Mirissa Whale Watching', shortDesc: t('home.videoDesc') });
+}
+
+function initGalleryVideos() {
+  const el = document.getElementById('gallery-videos');
+  if (!el) return;
+  el.innerHTML = renderVideosShowcase(WHALE_VIDEOS, {
+    label: t('gallery.videoLabel'),
+    title: t('gallery.videoTitle'),
+    desc: t('gallery.videoDesc'),
+    ctaHref: `${TOURS_PATH}whale-dolphin.html`,
+    ctaText: t('home.videoCta')
+  });
+  initVideoPlayers(el);
+  initScrollAnimations();
+  injectWhaleVideosSchema(getCanonicalUrl('/gallery.html'), WHALE_VIDEOS, { name: 'Mirissa Whale Watching Gallery', shortDesc: t('gallery.videoDesc') });
+}
+
+function renderTourVideosSection(tour) {
+  if (!tour.videos?.length) return '';
+  return `
+    <section class="tour-videos-section" aria-labelledby="tour-videos-heading">
+      <h2 id="tour-videos-heading">${t('tourUi.videoGallery')}</h2>
+      <p class="tour-videos-intro">${t('tourUi.videoGalleryIntro')}</p>
+      <div class="video-grid video-grid-tour">
+        ${tour.videos.map((video, i) => renderVideoCard(video, i)).join('')}
+      </div>
+    </section>
+  `;
+}
+
+function injectTourVideoSchema(tour) {
+  if (!tour.videos?.length) return;
+  const pageUrl = getCanonicalUrl(`/tours/${tour.id}.html`);
+  injectWhaleVideosSchema(pageUrl, tour.videos, tour);
+}
+
+function injectWhaleVideosSchema(pageUrl, videos = WHALE_VIDEOS, context = {}) {
+  if (!videos?.length) return;
+  videos.forEach(video => {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      name: getVideoText(video, 'title') || context.name || 'Mirissa whale watching tour video',
+      description: getVideoText(video, 'caption') || context.shortDesc || 'Whale watching cruise footage from Mirissa, Sri Lanka',
+      thumbnailUrl: `${SITE_URL}/${(video.poster || context.heroImage || context.image || WHALE_BLUE_IMG).replace(/^\//, '')}`,
+      contentUrl: `${SITE_URL}/${video.src.replace(/^\//, '')}`,
+      uploadDate: '2026-06-01',
+      embedUrl: pageUrl,
+      publisher: { '@type': 'Organization', name: SITE_NAME, logo: { '@type': 'ImageObject', url: `${SITE_URL}/assets/images/logo.png` } }
+    });
+  });
+}
+
+function buildComboReviewSchemas(combo) {
+  const tourIds = combo.tourIds || [];
+  return SITE_REVIEWS.filter(r => tourIds.includes(r.tourId)).map(r => ({
+    '@type': 'Review',
+    reviewRating: { '@type': 'Rating', ratingValue: String(r.rating), bestRating: '5' },
+    author: { '@type': 'Person', name: r.author },
+    reviewBody: r.body,
+    datePublished: r.date
+  }));
+}
+
+function renderComboFaqSection(comboId) {
+  const items = COMBO_FAQ[comboId];
+  if (!items?.length) return '';
+  return `
+    <section class="tour-faq-section" aria-labelledby="combo-faq-heading">
+      <h2 id="combo-faq-heading">${t('comboUi.faqTitle')}</h2>
+      <p class="tour-faq-intro">${t('comboUi.faqIntro')}</p>
+      <div class="tour-faq-list">
+        ${items.map((item, i) => `
+          <details class="faq-item tour-faq-item" ${i === 0 ? 'open' : ''}>
+            <summary>${item.q}</summary>
+            <div class="faq-answer"><p>${item.a}</p></div>
+          </details>
+        `).join('')}
+      </div>
+      <p class="tour-faq-more"><a href="${ROOT_PATH}faq.html">${t('tourUi.moreFaq')}</a></p>
+    </section>
+  `;
+}
+
+function createComboCard(combo, index) {
+  const localized = getLocalizedCombo(combo.id);
+  const savings = combo.originalPrice - combo.price;
+  return `
+    <article class="combo-card fade-in" style="transition-delay:${index * 0.08}s">
+      <div class="combo-card-image">
+        <a href="${COMBOS_PATH}${combo.id}.html"><img src="${resolveImg(localized.image)}" alt="${localized.name} package" loading="lazy"></a>
+        <span class="combo-badge">${localized.badge}</span>
+      </div>
+      <div class="combo-card-body">
+        <h3><a href="${COMBOS_PATH}${combo.id}.html">${localized.name}</a></h3>
+        <p class="combo-desc">${localized.desc}</p>
+        <div class="combo-pricing">
+          <span class="combo-price">$${localized.price}</span>
+          <span class="combo-save">${t('common.save')} $${savings}</span>
+        </div>
+        <a href="${COMBOS_PATH}${combo.id}.html" class="btn btn-ocean btn-sm">${t('comboUi.viewPackage')}</a>
+      </div>
+    </article>
+  `;
+}
+
+function renderRelatedCombosSection(comboId) {
+  const relatedIds = COMBO_RELATED[comboId] || COMBO_PACKAGES.map(c => c.id).filter(id => id !== comboId).slice(0, 3);
+  const cards = relatedIds
+    .map(id => COMBO_PACKAGES.find(c => c.id === id))
+    .filter(Boolean)
+    .map((combo, i) => createComboCard(combo, i))
+    .join('');
+  if (!cards) return '';
+  return `
+    <section class="tour-related-section" aria-labelledby="combo-related-heading">
+      <div class="tour-related-header">
+        <span class="section-label">${t('comboUi.relatedLabel')}</span>
+        <h2 id="combo-related-heading">${t('comboUi.relatedTitle')}</h2>
+        <p class="section-desc">${t('comboUi.relatedDesc')}</p>
+      </div>
+      <div class="combo-grid tour-related-grid">${cards}</div>
+    </section>
+  `;
+}
+
+function renderWhaleVideosSection() {
+  if (!WHALE_VIDEOS?.length) return '';
+  return `
+    <section class="tour-videos-section" aria-labelledby="combo-videos-heading">
+      <h2 id="combo-videos-heading">${t('tourUi.videoGallery')}</h2>
+      <p class="tour-videos-intro">${t('tourUi.videoGalleryIntro')}</p>
+      <div class="video-grid video-grid-tour">
+        ${WHALE_VIDEOS.map((video, i) => renderVideoCard(video, i)).join('')}
+      </div>
+    </section>
+  `;
+}
+
 function t(key, vars) {
   return window.I18n?.t(key, vars) ?? key;
 }
@@ -665,6 +1081,8 @@ function refreshPageContent() {
     initBlogPostSeo(document.body.dataset.blogPost);
   }
   if (document.getElementById('blog-related')) initBlogPost();
+  if (document.getElementById('home-videos')) initHomeVideos();
+  if (document.getElementById('gallery-videos')) initGalleryVideos();
   if (document.getElementById('tour-detail-content')) initTourDetails();
   if (document.getElementById('combo-detail-content')) initComboDetails();
   initBusinessReviewLinks();
@@ -891,9 +1309,11 @@ const TOURS = {
     shortDesc: 'Spot blue whales, sperm whales, turtles and dolphins on a 3–4 hour early-morning cruise from Mirissa Harbor.',
     price: 45,
     duration: '3–4 Hours',
-    image: 'assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png',
-    heroImage: 'assets/images/whale-dolphin/mirissa_whale_watching_collage.png',
+    image: WHALE_BLUE_IMG,
+    heroImage: WHALE_BLUE_IMG,
     gallery: [
+      WHALE_BLUE_IMG,
+      WHALE_BLUE_IMG_02,
       'assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png',
       'assets/images/whale-dolphin/mirissa_whale_watching_dolphins-surface.png',
       'assets/images/whale-dolphin/mirissa_whale_watching_dolphins-aerial.png',
@@ -905,6 +1325,8 @@ const TOURS = {
       'assets/images/whale-dolphin/mirissa_whale_watching_collage.png'
     ],
     galleryAlt: [
+      'Mirissa whale watching tour — blue whale surfacing near the boat in Sri Lanka',
+      'Mirissa whale watching tour — close blue whale encounter on an Indian Ocean cruise',
       'Mirissa whale watching — blue whale breaching in the Indian Ocean',
       'Mirissa whale watching — dolphins swimming alongside the tour boat',
       'Mirissa whale watching — aerial view of dolphins near Mirissa coast',
@@ -937,7 +1359,8 @@ const TOURS = {
       url: 'https://www.getyourguide.com/mirissa-l97533/mirissa-whale-watching-tours-with-blue-whales-dolphins-t1177026/',
       badge: GETYOURGUIDE_PRODUCT_BADGE,
       title: 'Mirissa: Whale Watching Cruise With Blue Whales & Dolphins'
-    }
+    },
+    videos: WHALE_VIDEOS
   },
   'turtle-snorkeling': {
     id: 'turtle-snorkeling',
@@ -1527,6 +1950,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('[data-render="combos"]')) renderComboPackages();
   if (document.getElementById('faq-accordion')) initFAQPage();
   if (document.getElementById('site-gallery')) initSiteGallery();
+  if (document.getElementById('home-videos')) initHomeVideos();
+  if (document.getElementById('gallery-videos')) initGalleryVideos();
   if (document.getElementById('tour-detail-content')) initTourDetails();
   if (document.getElementById('combo-detail-content')) initComboDetails();
   if (document.getElementById('booking-form')) initBookingForm();
@@ -2618,6 +3043,16 @@ function applyPageMeta(meta, canonicalPath) {
   sitemap.title = 'Sitemap';
   sitemap.href = `${SITE_URL}/sitemap.xml`;
 
+  let imageSitemap = document.querySelector('link[rel="sitemap"][title="Image Sitemap"]');
+  if (!imageSitemap) {
+    imageSitemap = document.createElement('link');
+    imageSitemap.rel = 'sitemap';
+    imageSitemap.title = 'Image Sitemap';
+    document.head.appendChild(imageSitemap);
+  }
+  imageSitemap.type = 'application/xml';
+  imageSitemap.href = `${SITE_URL}/sitemap-images.xml`;
+
   setMetaTag('property', 'og:type', meta.type || 'website');
   setMetaTag('property', 'og:site_name', SITE_NAME);
   setMetaTag('property', 'og:locale', SITE_LOCALE);
@@ -2745,7 +3180,7 @@ function injectBusinessSchemas(skipTypes = new Set()) {
       alternateName: SITE_ALTERNATE_NAME,
       url: SITE_URL,
       logo: `${SITE_URL}/assets/images/logo.png`,
-      image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
+      image: `${SITE_URL}/${WHALE_BLUE_IMG}`,
       telephone: '+94787097430',
       email: COMPANY_EMAIL,
       address: {
@@ -2834,7 +3269,26 @@ function initGlobalStructuredData(page) {
       alternateName: SITE_ALTERNATE_NAME,
       url: SITE_URL,
       inLanguage: 'en',
-      publisher: { '@type': 'Organization', name: SITE_NAME, logo: `${SITE_URL}/assets/images/logo.png` }
+      publisher: { '@type': 'Organization', name: SITE_NAME, logo: `${SITE_URL}/assets/images/logo.png` },
+      potentialAction: {
+        '@type': 'ReserveAction',
+        target: `${SITE_URL}/booking.html`,
+        name: 'Book a Mirissa Tour'
+      }
+    });
+  }
+
+  if (page === 'index.html') {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Featured Mirissa Tours',
+      itemListElement: Object.values(TOURS).slice(0, 4).map((tour, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: tour.name,
+        url: `${SITE_URL}/tours/${tour.id}.html`
+      }))
     });
   }
 
@@ -2849,6 +3303,49 @@ function initGlobalStructuredData(page) {
         name: tour.name,
         url: `${SITE_URL}/tours/${tour.id}.html`
       }))
+    });
+  }
+
+  if (page === 'combos.html') {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Mirissa Combo Tour Packages',
+      itemListElement: COMBO_PACKAGES.map((combo, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: combo.name,
+        url: `${SITE_URL}/combos/${combo.id}.html`
+      }))
+    });
+  }
+
+  if (page === 'blog.html') {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Mirissa Travel Blog',
+      itemListElement: BLOG_POSTS.map((post, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: post.title,
+        url: `${SITE_URL}/blog/${post.id}.html`
+      }))
+    });
+  }
+
+  if (page === 'booking.html') {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: pageMeta?.title || 'Book a Tour Online',
+      url: pageUrl,
+      description: pageMeta?.description,
+      potentialAction: {
+        '@type': 'ReserveAction',
+        target: `${SITE_URL}/booking.html`,
+        name: 'Book a Mirissa Tour Online'
+      }
     });
   }
 
@@ -3353,6 +3850,8 @@ function injectTourMeta(tour) {
       { '@type': 'ListItem', position: 3, name: tour.name, item: getCanonicalUrl(canonicalPath) }
     ]
   });
+
+  injectTourVideoSchema(tour);
 }
 
 function initStickyTourBar(tour) {
@@ -3526,6 +4025,7 @@ function initTourDetails() {
               </div>
             `).join('')}
           </div>
+          ${renderTourVideosSection(tour)}
         </div>
         <aside class="tour-sidebar">
           <div class="booking-sidebar-card">
@@ -3579,6 +4079,8 @@ function initTourDetails() {
   }
 
   initGallery();
+  const tourContent = document.getElementById('tour-detail-content');
+  if (tourContent) initVideoPlayers(tourContent);
   initBusinessReviewLinks();
   initScrollAnimations();
 }
@@ -3618,6 +4120,9 @@ function injectComboMeta(combo) {
     }
   });
 
+  const pageUrl = getCanonicalUrl(canonicalPath);
+  const comboReviews = buildComboReviewSchemas(combo);
+
   injectJsonLd({
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -3627,7 +4132,7 @@ function injectComboMeta(combo) {
     sku: combo.id,
     brand: { '@type': 'Brand', name: SITE_NAME },
     offers: {
-      ...buildTourOfferSchema({ id: combo.id, price: combo.price }, getCanonicalUrl(canonicalPath)),
+      ...buildTourOfferSchema({ id: combo.id, price: combo.price }, pageUrl),
       description: `Bundle price — save $${combo.originalPrice - combo.price} vs booking separately`
     },
     aggregateRating: {
@@ -3635,8 +4140,26 @@ function injectComboMeta(combo) {
       ratingValue: '4.9',
       reviewCount: '500',
       bestRating: '5'
-    }
+    },
+    ...(comboReviews.length ? { review: comboReviews } : {})
   });
+
+  const comboFaq = COMBO_FAQ[combo.id];
+  if (comboFaq?.length) {
+    injectJsonLd({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: comboFaq.map(item => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a }
+      }))
+    });
+  }
+
+  if (combo.tourIds?.includes('whale-dolphin')) {
+    injectWhaleVideosSchema(pageUrl, WHALE_VIDEOS, { name: combo.name, shortDesc: combo.desc, image: combo.image });
+  }
 
   if (combo.itinerary?.length) {
     injectJsonLd({
@@ -3755,6 +4278,7 @@ function initComboDetails() {
           <h2>${t('tourUi.included')}</h2>
           <ul class="included-list">${combo.included.map(item => `<li>${item}</li>`).join('')}</ul>
           ` : ''}
+          ${(combo.tourIds || []).includes('whale-dolphin') ? renderWhaleVideosSection() : ''}
         </div>
         <aside class="tour-sidebar">
           <div class="booking-sidebar-card">
@@ -3771,10 +4295,13 @@ function initComboDetails() {
             </ul>
             <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(combo.waText)}" class="btn btn-whatsapp btn-block" style="margin-top:24px" target="_blank" rel="noopener">${t('common.bookViaWhatsApp')}</a>
             <a href="${ROOT_PATH}booking.html" class="btn btn-primary btn-block" style="margin-top:12px">${t('common.onlineBooking')}</a>
+            ${renderSidebarReviewCta()}
             ${renderGygBlock(combo.getYourGuide)}
           </div>
         </aside>
       </div>
+      ${renderComboFaqSection(combo.id)}
+      ${renderRelatedCombosSection(combo.id)}
       <div class="tour-nav-buttons">
         <a href="${ROOT_PATH}combos.html" class="btn btn-ocean tour-nav-prev">&larr; ${t('comboUi.allCombos')}</a>
         ${(() => {
@@ -3803,6 +4330,11 @@ function initComboDetails() {
       <span><span class="tour-meta-icon tour-meta-icon-pin" aria-hidden="true"></span> ${combo.location || SITE_LOCATION}</span>
     `;
   }
+
+  const comboContent = document.getElementById('combo-detail-content');
+  if (comboContent) initVideoPlayers(comboContent);
+  initBusinessReviewLinks();
+  initScrollAnimations();
 }
 
 function initGallery() {

@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /payment.html
 Disallow: /tour-details.html
+Disallow: /404.html
 
 Sitemap: https://www.ceylonseasafaritours.com/sitemap.xml
 Sitemap: https://www.ceylonseasafaritours.com/sitemap-images.xml

@@ -31,7 +31,7 @@ const combos = [
     price: 65,
     originalPrice: 70,
     duration: 'Full Day (~6 hours)',
-    image: 'assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png',
+    image: 'assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale.png',
     keywords: 'mirissa whale and turtle combo, whale watching turtle snorkeling package mirissa, mirissa combo tour, blue whale snorkeling bundle sri lanka'
   },
   {
@@ -90,7 +90,7 @@ const combosListing = {
   title: 'Mirissa Combo Packages | Whale Watching & Tour Bundles | Sea & Safari Tours',
   description: 'Save on Mirissa combo packages — whale watching + turtle snorkeling, river kayak + cooking class & more. Bundled tours from $50/person with free hotel pickup.',
   keywords: 'mirissa combo packages, whale watching turtle snorkeling combo, mirissa tour bundles, sri lanka package tours mirissa',
-  image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png`,
+  image: `${SITE_URL}/assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale.png`,
   path: '/combos.html'
 };
 
@@ -406,7 +406,7 @@ ${buildHead({
 <body>
 ${headerBlock('')}
 
-  <section class="page-hero" style="background-image:url('assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png')">
+  <section class="page-hero" style="background-image:url('assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale.png')">
     <div class="page-hero-overlay"></div>
     <div class="container page-hero-content">
       <nav class="breadcrumb"><a href="index.html" data-i18n="nav.home">Home</a> / <span data-i18n="comboUi.breadcrumb">Combo Packages</span></nav>

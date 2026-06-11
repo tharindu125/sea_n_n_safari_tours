@@ -3,6 +3,7 @@ const path = require('path');
 
 const root = path.join(__dirname, '..');
 const SITE = 'https://www.ceylonseasafaritours.com';
+const PRICE_VALID_UNTIL = '2026-12-31';
 
 const tourTitles = {
   'whale-dolphin.html': 'Whale & Dolphin Watching',
@@ -20,7 +21,7 @@ const tourProducts = {
     name: 'Whale & Dolphin Watching',
     price: 45,
     desc: 'Spot blue whales, sperm whales, turtles and dolphins on a 3–4 hour early-morning cruise from Mirissa Harbor.',
-    image: '/assets/images/whale-dolphin/mirissa_whale_watching_collage.png'
+    image: '/assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale.png'
   },
   'turtle-snorkeling.html': {
     name: 'Turtle Snorkeling',
@@ -85,7 +86,15 @@ function productJsonLd(fileName) {
       "url": "${SITE}/tours/${fileName}",
       "priceCurrency": "USD",
       "price": "${tour.price}",
-      "availability": "https://schema.org/InStock"
+      "priceValidUntil": "${PRICE_VALID_UNTIL}",
+      "availability": "https://schema.org/InStock",
+      "seller": { "@type": "Organization", "name": "Sea & Safari Tours", "url": "${SITE}/" }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "500",
+      "bestRating": "5"
     }
   }
   </script>`;

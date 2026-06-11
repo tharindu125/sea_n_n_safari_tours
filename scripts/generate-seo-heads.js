@@ -12,13 +12,16 @@ const SITE_NAME = 'Sea & Safari Tours';
 const DC_DATE = '2026-05-27';
 const COPYRIGHT = '© 2026 Sea & Safari Tours';
 
+const WHALE_BLUE_IMG = `${SITE}/assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale.png`;
+const WHALE_BLUE_IMG_02 = `${SITE}/assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale_02.png`;
+
 const PAGES = {
   'index.html': {
     title: 'Sea & Safari Tours | Mirissa Whale Watching & Ocean Adventures Sri Lanka',
     description: 'Join Sea & Safari Tours for unforgettable ocean adventures — whale watching, turtle snorkeling, scuba diving, river kayak, fishing & wildlife tours in Mirissa. Expert guides, free hotel pickup, 4.9★ rated.',
     keywords: 'Sea & Safari Tours, Mirissa whale watching, Mirissa snorkeling, whale watching Mirissa, scuba diving Mirissa, turtle snorkeling Mirissa, river kayak Mirissa, crocodile safari Mirissa, deep sea fishing Mirissa, Sri Lanka tours, things to do in Mirissa, Mirissa ocean adventures, cooking class Mirissa, dolphin watching Mirissa',
     dcSubject: 'Whale Watching, Turtle Snorkeling, Scuba Diving, River Kayak, Crocodile Safari, Deep Sea Fishing, Cooking Class, Ocean Adventures, Mirissa Tours',
-    image: `${SITE}/assets/images/whale-dolphin/mirissa_whale_watching_collage.png`,
+    image: WHALE_BLUE_IMG,
     ogDescription: 'Premium whale watching, snorkeling, diving and wildlife tours in Mirissa, Sri Lanka. Expert guides, free hotel pickup. Book via WhatsApp.',
     twitterTitle: 'Sea & Safari Tours | Mirissa Whale Watching',
     path: '/',
@@ -28,7 +31,7 @@ const PAGES = {
     title: 'All Tours in Mirissa | Whale Watching, Snorkeling & Safari | Sea & Safari Tours',
     description: 'Browse 8 Mirissa ocean and wildlife tours — whale watching from $45, turtle snorkeling, river kayak, scuba diving, cooking class & combo packages.',
     keywords: 'mirissa tours, sri lanka adventure tours, whale watching mirissa, snorkeling mirissa, river kayak sri lanka',
-    image: `${SITE}/assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png`,
+    image: WHALE_BLUE_IMG,
     path: '/tours.html'
   },
   'booking.html': {
@@ -50,7 +53,7 @@ const PAGES = {
     title: 'About Us | Mirissa Tour Company | Sea & Safari Tours',
     description: "Mirissa's trusted marine adventure company — 5+ years experience, 10,000+ happy travelers, expert local guides & ethical wildlife tours.",
     keywords: 'sea safari tours mirissa, about mirissa tour company, sri lanka tour operator',
-    image: `${SITE}/assets/images/whale-dolphin/mirissa_whale_watching_tour-boat.png`,
+    image: WHALE_BLUE_IMG,
     path: '/about.html'
   },
   'contact.html': {
@@ -71,8 +74,24 @@ const PAGES = {
     title: 'Photo Gallery | Mirissa Whale Watching & Tours | Sea & Safari Tours',
     description: 'Real guest photos from Mirissa whale watching, turtle snorkeling, river kayaking, scuba diving, and Sri Lankan cooking class tours.',
     keywords: 'mirissa tour photos, whale watching pictures, mirissa snorkeling gallery',
-    image: `${SITE}/assets/images/whale-dolphin/mirissa_whale_watching_boat-guests-1.png`,
+    image: WHALE_BLUE_IMG_02,
     path: '/gallery.html'
+  },
+  'blog.html': {
+    title: 'Mirissa Travel Blog | Whale Watching Tips & Sri Lanka Guides | Sea & Safari Tours',
+    description: 'Expert guides on Mirissa whale watching seasons, turtle snorkeling, south coast travel, packing tips & ethical ocean tours in Sri Lanka.',
+    keywords: 'mirissa blog, whale watching tips mirissa, things to do mirissa, sri lanka travel guide, mirissa travel blog',
+    dcSubject: 'Mirissa Travel Blog, Whale Watching Guides, Sri Lanka Tourism',
+    image: WHALE_BLUE_IMG,
+    path: '/blog.html'
+  },
+  'combos.html': {
+    title: 'Mirissa Combo Packages | Whale Watching & Tour Bundles | Sea & Safari Tours',
+    description: 'Save on Mirissa combo packages — whale watching + turtle snorkeling, river kayak + cooking class & more. Bundled tours from $50/person with free hotel pickup.',
+    keywords: 'mirissa combo packages, whale watching turtle snorkeling combo, mirissa tour bundles, sri lanka package tours mirissa',
+    dcSubject: 'Mirissa Combo Packages, Tour Bundles, Whale Watching Packages',
+    image: WHALE_BLUE_IMG,
+    path: '/combos.html'
   },
   'tour-details.html': {
     title: 'Tour Details | Sea & Safari Tours',
@@ -85,7 +104,7 @@ const PAGES = {
 };
 
 const TOURS = [
-  { id: 'whale-dolphin', name: 'Whale & Dolphin Watching', price: 45, duration: '3–4 Hours', shortDesc: 'Spot blue whales, sperm whales, turtles and dolphins on a 3–4 hour early-morning cruise from Mirissa Harbor.', keywords: 'mirissa whale watching, blue whale sri lanka, dolphin watching mirissa, whale watching tour mirissa, whale watching price mirissa', heroImage: 'assets/images/whale-dolphin/mirissa_whale_watching_collage.png' },
+  { id: 'whale-dolphin', name: 'Whale & Dolphin Watching', price: 45, duration: '3–4 Hours', shortDesc: 'Spot blue whales, sperm whales, turtles and dolphins on a 3–4 hour early-morning cruise from Mirissa Harbor.', keywords: 'mirissa whale watching, blue whale sri lanka, dolphin watching mirissa, whale watching tour mirissa, whale watching price mirissa', heroImage: 'assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale.png' },
   { id: 'turtle-snorkeling', name: 'Turtle Snorkeling', price: 25, duration: '1.5 Hours', shortDesc: "Swim alongside sea turtles with a 100% sighting guarantee. 1.5 hours of guided snorkeling in Mirissa's calm reef waters.", keywords: 'turtle snorkeling mirissa, mirissa snorkeling, sea turtle tour sri lanka, snorkeling mirissa beach', heroImage: 'assets/images/turtle-snorkeling/mirissa_turtle_snorkeling_group-dive.png' },
   { id: 'crocodile-safari', name: 'Crocodile Watching', price: 30, duration: '2 Hours', shortDesc: 'Cruise the Nilwala River through lush mangroves and spot crocodiles, kingfishers, monkeys, and vibrant wildlife in Matara.', keywords: 'crocodile watching sri lanka, nilwala river safari, matara crocodile tour, mirissa crocodile watching', heroImage: 'assets/images/crocodile-safari/crocodile_watching_close-up.png' },
   { id: 'river-kayak', name: 'River Kayak Tours', price: 25, duration: '1.5 Hours', shortDesc: 'Glide through calm waterways surrounded by lush greenery and spot water monitors, kingfishers, herons, and monkeys.', keywords: 'river kayak mirissa, mangrove kayaking sri lanka, mirissa kayak tour, river safari mirissa', heroImage: 'assets/images/river-kayak/mirissa_kayak_mangrove-roots.png' },
@@ -238,6 +257,7 @@ ${jsonLd.join('\n')}
   <link rel="alternate" hreflang="en" href="${url}">
   <link rel="alternate" hreflang="x-default" href="${url}">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="${SITE}/sitemap.xml">
+  <link rel="sitemap" type="application/xml" title="Image Sitemap" href="${SITE}/sitemap-images.xml">
 
   <!-- Geo -->
   <meta name="geo.region" content="LK-3">

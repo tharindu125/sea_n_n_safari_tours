@@ -25,36 +25,68 @@ function extractBlock(name) {
   return '';
 }
 
+function resolveAssetPath(token) {
+  const trimmed = token.trim().replace(/,$/, '');
+  const quoted = trimmed.match(/^'([^']+)'$/);
+  if (quoted) return quoted[1];
+  const named = trimmed.match(/^([A-Z][A-Z0-9_]*)$/);
+  if (named) {
+    const m = script.match(new RegExp(`const ${named[1]} = '([^']+)'`));
+    if (m) return m[1];
+  }
+  return null;
+}
+
+function extractTourBlock(tourId, source) {
+  const re = new RegExp(`'${tourId}':\\s*\\{`);
+  const start = source.search(re);
+  if (start === -1) return '';
+  let depth = 0;
+  let began = false;
+  for (let i = start; i < source.length; i += 1) {
+    if (source[i] === '{') {
+      depth += 1;
+      began = true;
+    } else if (source[i] === '}') {
+      depth -= 1;
+      if (began && depth === 0) return source.slice(start, i + 1);
+    }
+  }
+  return '';
+}
+
 function extractTourPages() {
-  const block = extractBlock('TOURS');
-  const pages = [];
-  const tourRe = /'([a-z-]+)':\s*\{[^]*?gallery:\s*\[([^]*?)\]/g;
-  let match;
-  while ((match = tourRe.exec(block)) !== null) {
-    const id = match[1];
-    const galleryBlock = match[2];
-    const images = [...galleryBlock.matchAll(/'([^']+\.(?:png|jpg|jpeg|webp))'/gi)].map(m => m[1]);
-    const heroMatch = block.slice(match.index).match(/heroImage:\s*'([^']+)'/);
-    const imageMatch = block.slice(match.index).match(/image:\s*'([^']+)'/);
-    const altMatch = block.slice(match.index).match(/galleryAlt:\s*\[([^]*?)\]/);
+  const toursBlock = extractBlock('TOURS');
+  const ids = [...toursBlock.matchAll(/'([a-z-]+)':\s*\{/g)].map(m => m[1]);
+  return ids.map(id => {
+    const block = extractTourBlock(id, toursBlock);
+    const galleryMatch = block.match(/gallery:\s*\[([\s\S]*?)\]/);
+    const galleryTokens = galleryMatch
+      ? galleryMatch[1].split('\n').flatMap(line => line.split(','))
+      : [];
+    const galleryImages = galleryTokens.map(resolveAssetPath).filter(Boolean);
+    const heroMatch = block.match(/heroImage:\s*(?:'([^']+)'|([A-Z][A-Z0-9_]*))/);
+    const imageMatch = block.match(/^\s*image:\s*(?:'([^']+)'|([A-Z][A-Z0-9_]*))/m);
+    const heroPath = heroMatch
+      ? (heroMatch[1] || resolveAssetPath(heroMatch[2]))
+      : null;
+    const cardPath = imageMatch
+      ? (imageMatch[1] || resolveAssetPath(imageMatch[2]))
+      : null;
+    const altMatch = block.match(/galleryAlt:\s*\[([\s\S]*?)\]/);
     const alts = altMatch
       ? [...altMatch[1].matchAll(/'([^']*)'/g)].map(m => m[1])
       : [];
-    const allImages = [...new Set([
-      ...(heroMatch ? [heroMatch[1]] : []),
-      ...(imageMatch ? [imageMatch[1]] : []),
-      ...images
-    ])];
-    pages.push({
+    const allImages = [...new Set([heroPath, cardPath, ...galleryImages].filter(Boolean))];
+    return {
       page: `${siteUrl}/tours/${id}.html`,
       images: allImages.map((src, idx) => ({
         loc: `${siteUrl}/${src.replace(/^\//, '')}`,
         title: alts[idx] || `Sea & Safari Tours — ${id.replace(/-/g, ' ')} photo ${idx + 1}`,
         caption: alts[idx] || undefined
       }))
-    });
-  }
-  return pages;
+    };
+  });
 }
 
 function extractComboPages() {
@@ -62,13 +94,15 @@ function extractComboPages() {
   const end = script.indexOf('];', start);
   const block = script.slice(start, end);
   const pages = [];
-  const comboRe = /\{\s*id:\s*'([^']+)'[^]*?image:\s*'([^']+)'/g;
+  const comboRe = /\{\s*id:\s*'([^']+)'[\s\S]*?image:\s*(?:'([^']+)'|([A-Z][A-Z0-9_]*))/g;
   let match;
   while ((match = comboRe.exec(block)) !== null) {
+    const src = match[2] || resolveAssetPath(match[3]);
+    if (!src) continue;
     pages.push({
       page: `${siteUrl}/combos/${match[1]}.html`,
       images: [{
-        loc: `${siteUrl}/${match[2].replace(/^\//, '')}`,
+        loc: `${siteUrl}/${src.replace(/^\//, '')}`,
         title: `Sea & Safari Tours — ${match[1].replace(/-/g, ' ')} combo package`
       }]
     });

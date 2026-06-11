@@ -130,7 +130,7 @@ const posts = [
     category: 'Whale Watching',
     date: '2026-05-12',
     readTime: '6 min read',
-    image: '../assets/images/whale-dolphin/mirissa_whale_watching_whale-breach.png',
+    image: '../assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale.png',
     lead: 'Mirissa is one of the world\'s best places to see blue whales in the wild. Here\'s exactly when to visit, what to expect, and how to maximise your chances of an unforgettable ocean encounter.',
     content: `
       <p>Mirissa sits on Sri Lanka's southern coast, where the continental shelf drops sharply into the deep Indian Ocean — creating ideal habitat for blue whales, sperm whales, dolphins, and sea turtles. Understanding the seasons and daily conditions helps you plan the perfect whale watching trip.</p>
