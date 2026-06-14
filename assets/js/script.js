@@ -11,7 +11,7 @@ const SITE_LOCATION_SHORT = 'Mirissa';
 const SITE_LOCALE = 'en_US';
 /** Fill in values from Google Analytics, Search Console, Bing Webmaster Tools & Google Business Profile */
 const SEO_CONFIG = {
-  ga4Id: '', // e.g. G-XXXXXXXXXX
+  ga4Id: 'G-BHSB4E2ZJV',
   googleSiteVerification: '', // meta content from Search Console
   bingSiteVerification: '', // meta content from Bing Webmaster Tools (msvalidate.01)
   googleBusinessProfileUrl: '', // e.g. https://maps.app.goo.gl/... or Google Maps place URL
@@ -3142,6 +3142,7 @@ function renderSidebarReviewCta() {
 
 function initAnalytics() {
   if (!GOOGLE_GA_ID) return;
+  if (document.querySelector(`script[src*="googletagmanager.com/gtag/js?id=${GOOGLE_GA_ID}"]`)) return;
   const script = document.createElement('script');
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_GA_ID}`;

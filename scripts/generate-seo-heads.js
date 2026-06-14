@@ -11,6 +11,18 @@ const SITE = 'https://www.ceylonseasafaritours.com';
 const SITE_NAME = 'Sea & Safari Tours';
 const DC_DATE = '2026-05-27';
 const COPYRIGHT = '© 2026 Sea & Safari Tours';
+const GA4_ID = 'G-BHSB4E2ZJV';
+
+const GA4_SNIPPET = `  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=${GA4_ID}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '${GA4_ID}');
+  </script>
+`;
 
 const WHALE_BLUE_IMG = `${SITE}/assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale.png`;
 const WHALE_BLUE_IMG_02 = `${SITE}/assets/images/whale-dolphin/mirissa_whale_watching_tour_blue_whale_02.png`;
@@ -240,6 +252,7 @@ function buildHead(meta, assetPrefix) {
   }
 
   return `<head>
+${GA4_SNIPPET}
   <!-- Main -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
