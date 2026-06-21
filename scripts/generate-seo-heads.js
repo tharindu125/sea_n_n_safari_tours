@@ -107,7 +107,7 @@ const PAGES = {
   },
   'airport-shuttle.html': {
     title: 'Airport Shuttle Mirissa | Colombo Airport (CMB) Transfers | Sea & Safari Tours',
-    description: 'Private airport shuttle for international travelers — Colombo Bandaranaike Airport (CMB) to Mirissa and return. English-speaking driver, AC vehicle, meet & greet. From $85/vehicle. Book via WhatsApp.',
+    description: 'Private airport shuttle for international travelers — Colombo Bandaranaike Airport (CMB) to Mirissa and return. English-speaking driver, AC vehicle, meet & greet. Book via WhatsApp.',
     keywords: 'colombo airport to mirissa transfer, cmb airport shuttle mirissa, mirissa airport pickup, sri lanka airport transfer foreigners, bandaranaike airport mirissa taxi',
     dcSubject: 'Airport Transfer, Colombo Airport Shuttle, Mirissa Transfer, CMB to Mirissa',
     image: `${SITE}/assets/images/airport-shuttle/aircraft_landing_sky.jpg`,

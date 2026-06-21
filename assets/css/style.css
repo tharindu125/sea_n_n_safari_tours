@@ -6086,33 +6086,87 @@ body.mobile-menu-open .hamburger {
 
 .footer-social {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .footer-social-btn {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
   color: rgba(255, 255, 255, 0.85);
-  transition: background var(--transition), border-color var(--transition), color var(--transition), transform 0.2s ease;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s ease;
 }
 
-.footer-social-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: var(--white);
+.footer-social-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-social-btn:hover svg {
+  transform: scale(1.08);
+}
+
+.footer-social-btn--whatsapp {
+  color: #25d366;
+  border-color: rgba(37, 211, 102, 0.35);
+}
+
+.footer-social-btn--whatsapp:hover {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: rgba(37, 211, 102, 0.55);
+  color: #3de87a;
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.12);
 }
 
-.footer-social-btn:first-child:hover {
-  background: rgba(37, 211, 102, 0.2);
-  border-color: rgba(37, 211, 102, 0.45);
-  color: #5dffa8;
+.footer-social-btn--email {
+  color: var(--sunset-warm);
+  border-color: rgba(244, 140, 6, 0.35);
+}
+
+.footer-social-btn--email:hover {
+  background: rgba(244, 140, 6, 0.1);
+  border-color: rgba(244, 140, 6, 0.55);
+  color: #ffb347;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(244, 140, 6, 0.12);
+}
+
+.footer-social-btn--phone {
+  color: var(--ocean-light);
+  border-color: rgba(43, 143, 173, 0.35);
+}
+
+.footer-social-btn--phone:hover {
+  background: rgba(43, 143, 173, 0.1);
+  border-color: rgba(43, 143, 173, 0.55);
+  color: #5ec4e8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(43, 143, 173, 0.12);
+}
+
+.footer-social-btn--facebook {
+  color: #1877f2;
+  border-color: rgba(24, 119, 242, 0.35);
+}
+
+.footer-social-btn--facebook:hover {
+  background: rgba(24, 119, 242, 0.1);
+  border-color: rgba(24, 119, 242, 0.55);
+  color: #4d9bff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(24, 119, 242, 0.12);
 }
 
 .footer-nav {

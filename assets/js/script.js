@@ -184,7 +184,7 @@ const PAGE_SEO = {
   },
   'airport-shuttle.html': {
     title: 'Airport Shuttle Mirissa | Colombo Airport (CMB) Transfers | Sea & Safari Tours',
-    description: 'Private airport shuttle for international travelers — Colombo Bandaranaike Airport (CMB) to Mirissa and return. English-speaking driver, AC vehicle, meet & greet. From $85/vehicle. Book via WhatsApp.',
+    description: 'Private airport shuttle for international travelers — Colombo Bandaranaike Airport (CMB) to Mirissa and return. English-speaking driver, AC vehicle, meet & greet. Book via WhatsApp.',
     keywords: 'colombo airport to mirissa transfer, cmb airport shuttle mirissa, mirissa airport pickup, sri lanka airport transfer foreigners, bandaranaike airport mirissa taxi, airport shuttle sri lanka tourists',
     dcSubject: 'Airport Transfer, Colombo Airport Shuttle, Mirissa Transfer, CMB to Mirissa, International Travelers',
     image: `${SITE_URL}/${AIRPORT_SHUTTLE_IMG}`,
@@ -194,7 +194,6 @@ const PAGE_SEO = {
 };
 
 const AIRPORT_SHUTTLE = {
-  priceFrom: 85,
   maxGuests: 4,
   durationHours: '3.5–4',
   waTextEn: 'Hello Sea & Safari Tours! I need an airport shuttle for international travelers. Route: Colombo Airport (CMB) to Mirissa. Date: [your date]. Passengers: [number]. Flight number: [if available]. Thank you!'
@@ -1126,12 +1125,14 @@ function refreshPageContent() {
   if (document.getElementById('tour-detail-content')) initTourDetails();
   if (document.getElementById('combo-detail-content')) initComboDetails();
   initBusinessReviewLinks();
+  injectFooterReviewLinks();
+  injectFacebookLinks();
   if (document.getElementById('booking-form')) refreshBookingFormTours();
   if (document.getElementById('airport-shuttle-faq')) {
     const faqHost = document.getElementById('airport-shuttle-faq');
     faqHost.innerHTML = renderAirportShuttleFaqSection();
   }
-  if (document.querySelector('[data-shuttle-wa], [data-shuttle-price], .booking-shuttle-banner')) refreshAirportShuttleUi();
+  if (document.querySelector('[data-shuttle-wa], .booking-shuttle-banner')) refreshAirportShuttleUi();
   const carousel = document.querySelector('.hero-carousel');
   if (carousel?._heroRefresh) carousel._heroRefresh();
 }
@@ -1982,6 +1983,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSeo();
   injectMirissaBranding();
   injectNavExtras();
+  injectSiteFooter();
   injectGetYourGuideBadges();
   initMobileNav();
   initHeader();
@@ -2001,7 +2003,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('combo-detail-content')) initComboDetails();
   if (document.getElementById('booking-form')) initBookingForm();
   if (document.body.dataset.page === 'airport-shuttle') initAirportShuttlePage();
-  if (document.querySelector('[data-shuttle-wa], [data-shuttle-price]')) refreshAirportShuttleUi();
+  if (document.querySelector('[data-shuttle-wa]')) refreshAirportShuttleUi();
   if (document.getElementById('payment-form')) initPaymentPage();
   if (document.getElementById('contact-form')) initContactForm();
   if (document.getElementById('blog-grid')) {
@@ -2407,10 +2409,6 @@ function refreshAirportShuttleUi() {
   document.querySelectorAll('[data-shuttle-wa]').forEach(el => {
     el.href = getAirportShuttleWaUrl();
   });
-  document.querySelectorAll('[data-shuttle-price]').forEach(el => {
-    const label = t('shuttle.priceFrom', { price: AIRPORT_SHUTTLE.priceFrom });
-    if (label !== 'shuttle.priceFrom') el.textContent = label;
-  });
   document.querySelectorAll('[data-shuttle-duration]').forEach(el => {
     const label = t('shuttle.routeDuration', { hours: AIRPORT_SHUTTLE.durationHours });
     if (label !== 'shuttle.routeDuration') el.textContent = label;
@@ -2531,11 +2529,8 @@ function injectAirportShuttleMeta() {
       offers: {
         '@type': 'Offer',
         url: pageUrl,
-        priceCurrency: 'USD',
-        price: String(AIRPORT_SHUTTLE.priceFrom),
-        priceValidUntil: getOfferPriceValidUntil(),
         availability: 'https://schema.org/InStock',
-        description: `Private AC vehicle — up to ${AIRPORT_SHUTTLE.maxGuests} guests`,
+        description: `Private AC vehicle — up to ${AIRPORT_SHUTTLE.maxGuests} guests. Contact for a quote.`,
         seller: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL }
       },
       aggregateRating: {
@@ -5116,6 +5111,106 @@ function initBlogPost() {
   `;
 }
 
+const FOOTER_WAVE_SVG = '<svg viewBox="0 0 1440 56" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,40 C320,8 640,56 960,32 C1200,14 1320,20 1440,36 L1440,56 L0,56 Z"/></svg>';
+
+const FOOTER_SOCIAL_WHATSAPP_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+
+const FOOTER_SOCIAL_EMAIL_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>';
+
+const FOOTER_SOCIAL_PHONE_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>';
+
+function buildSiteFooterHtml() {
+  const r = ROOT_PATH;
+  const img = IMG_PATH;
+  const tours = TOURS_PATH;
+  const year = new Date().getFullYear();
+  const copyright = t('footer.copyright').replace('{year}', year);
+
+  return `
+    <div class="footer-wave" aria-hidden="true">${FOOTER_WAVE_SVG}</div>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="${r}index.html" class="footer-logo">
+            <img src="${img}assets/images/logo.png" alt="${SITE_NAME}" class="logo-img" width="48" height="48">
+            <span>${SITE_NAME}</span>
+          </a>
+          <p class="footer-tagline" data-i18n="footer.tagline">${t('footer.tagline')}</p>
+          <div class="footer-actions">
+            <a href="${r}booking.html" class="btn btn-primary btn-sm" data-i18n="footer.bookTour">${t('footer.bookTour')}</a>
+            <a href="https://wa.me/${WHATSAPP_NUMBER}?text=Hello!%20I'd%20like%20to%20inquire%20about%20a%20tour." class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener" data-i18n="common.chatWhatsApp">${t('common.chatWhatsApp')}</a>
+          </div>
+          <div class="footer-social">
+            <a href="https://wa.me/${WHATSAPP_NUMBER}" class="footer-social-btn footer-social-btn--whatsapp" aria-label="${t('common.chatWhatsApp')}" target="_blank" rel="noopener">${FOOTER_SOCIAL_WHATSAPP_SVG}</a>
+            <a href="mailto:${COMPANY_EMAIL}" class="footer-social-btn footer-social-btn--email" aria-label="Send email">${FOOTER_SOCIAL_EMAIL_SVG}</a>
+            <a href="tel:+${WHATSAPP_NUMBER}" class="footer-social-btn footer-social-btn--phone" aria-label="Call us">${FOOTER_SOCIAL_PHONE_SVG}</a>
+          </div>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4 data-i18n="footer.explore">${t('footer.explore')}</h4>
+            <ul>
+              <li><a href="${r}index.html" data-i18n="nav.home">${t('nav.home')}</a></li>
+              <li><a href="${r}tours.html" data-i18n="nav.allTours">${t('nav.allTours')}</a></li>
+              <li><a href="${r}combos.html" data-i18n="nav.comboTours">${t('nav.comboTours')}</a></li>
+              <li><a href="${r}booking.html" data-i18n="nav.bookNow">${t('nav.bookNow')}</a></li>
+              <li><a href="${r}about.html" data-i18n="footer.aboutUs">${t('footer.aboutUs')}</a></li>
+              <li><a href="${r}contact.html" data-i18n="nav.contact">${t('nav.contact')}</a></li>
+              <li><a href="${r}faq.html" data-i18n="nav.faq">${t('nav.faq')}</a></li>
+              <li><a href="${r}gallery.html" data-i18n="nav.gallery">${t('nav.gallery')}</a></li>
+              <li><a href="${r}blog.html" data-i18n="nav.blog">${t('nav.blog')}</a></li>
+              <li><a href="${r}airport-shuttle.html" data-i18n="nav.airportShuttle">${t('nav.airportShuttle')}</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4 data-i18n="footer.popularTours">${t('footer.popularTours')}</h4>
+            <ul>
+              <li><a href="${tours}whale-dolphin.html">${TOURS['whale-dolphin']?.name || 'Whale Watching'}</a></li>
+              <li><a href="${tours}turtle-snorkeling.html">${TOURS['turtle-snorkeling']?.name || 'Turtle Snorkeling'}</a></li>
+              <li><a href="${tours}scuba-diving.html">${TOURS['scuba-diving']?.name || 'Scuba Diving'}</a></li>
+              <li><a href="${tours}cooking-class.html">${TOURS['cooking-class']?.name || 'Cooking Class'}</a></li>
+            </ul>
+          </div>
+          <div class="footer-col footer-col-contact">
+            <h4 data-i18n="footer.getInTouch">${t('footer.getInTouch')}</h4>
+            <ul class="footer-contact-list">
+              <li>
+                <span class="footer-contact-icon footer-icon-pin" aria-hidden="true"></span>
+                <span>Mirissa, Southern Province, Sri Lanka</span>
+              </li>
+              <li>
+                <a href="tel:+${WHATSAPP_NUMBER}">
+                  <span class="footer-contact-icon footer-icon-phone" aria-hidden="true"></span>
+                  <span>+94 78 709 7430</span>
+                </a>
+              </li>
+              <li>
+                <a href="mailto:${COMPANY_EMAIL}">
+                  <span class="footer-contact-icon footer-icon-email" aria-hidden="true"></span>
+                  <span>${COMPANY_EMAIL}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p data-i18n="footer.copyright">${copyright}</p>
+        <p class="footer-made">${SITE_LOCATION}</p>
+      </div>
+    </div>
+  `;
+}
+
+function injectSiteFooter() {
+  const footer = document.querySelector('footer.footer');
+  if (!footer) return;
+
+  const preserveContactId = footer.id === 'contact';
+  footer.innerHTML = buildSiteFooterHtml();
+  if (preserveContactId) footer.id = 'contact';
+}
+
 function injectFooterReviewLinks() {
   document.querySelectorAll('.footer-actions').forEach(actions => {
     if (actions.querySelector('[data-review-link="write"]')) return;
@@ -5130,7 +5225,7 @@ function injectFacebookLinks() {
   document.querySelectorAll('.footer-social').forEach(social => {
     if (social.querySelector('[data-facebook-link]')) return;
     social.insertAdjacentHTML('beforeend', `
-      <a href="${FACEBOOK_URL}" class="footer-social-btn" data-facebook-link aria-label="${t('common.facebook')}" target="_blank" rel="noopener noreferrer">${FACEBOOK_ICON_SVG}</a>
+      <a href="${FACEBOOK_URL}" class="footer-social-btn footer-social-btn--facebook" data-facebook-link aria-label="${t('common.facebook')}" target="_blank" rel="noopener noreferrer">${FACEBOOK_ICON_SVG}</a>
     `);
   });
 
