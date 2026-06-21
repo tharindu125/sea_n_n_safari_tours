@@ -23,6 +23,8 @@ const SITE_COPYRIGHT = `\u00A9 ${new Date().getFullYear()} Sea & Safari Tours`;
 const SITE_ALTERNATE_NAME = 'Sea Safari Tours Mirissa';
 const GOOGLE_REVIEW_URL = 'https://www.google.com/search?q=Sea+%26+Safari+Tours+Mirissa+reviews';
 const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Search?q=Sea+Safari+Tours+Mirissa';
+const FACEBOOK_URL = 'https://www.facebook.com/share/1BRVpgiRco/';
+const FACEBOOK_ICON_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>';
 const GETYOURGUIDE_SUPPLIER_URL = 'https://www.getyourguide.com/-s700688';
 const GETYOURGUIDE_MIRISSA_URL = 'https://www.getyourguide.com/en-au/mirissa-l97533/';
 const GETYOURGUIDE_BADGES = [
@@ -2022,6 +2024,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   injectFooterBlogLink();
   injectFooterReviewLinks();
+  injectFacebookLinks();
   initBusinessReviewLinks();
 
   if (window.I18n) {
@@ -3429,6 +3432,7 @@ function injectBusinessSchemas(skipTypes = new Set()) {
         name: 'Mirissa'
       },
       sameAs: [
+        FACEBOOK_URL,
         GETYOURGUIDE_MIRISSA_URL,
         GETYOURGUIDE_SUPPLIER_URL,
         getGoogleBusinessProfileUrl(),
@@ -5119,6 +5123,30 @@ function injectFooterReviewLinks() {
       <a href="${getGoogleReviewWriteUrl()}" class="btn btn-outline btn-sm" data-review-link="write" target="_blank" rel="noopener">${t('common.leaveReview')}</a>
       <a href="${getGoogleBusinessProfileUrl()}" class="btn btn-outline btn-sm" data-gbp-link target="_blank" rel="noopener">${t('common.googleBusiness')}</a>
     `);
+  });
+}
+
+function injectFacebookLinks() {
+  document.querySelectorAll('.footer-social').forEach(social => {
+    if (social.querySelector('[data-facebook-link]')) return;
+    social.insertAdjacentHTML('beforeend', `
+      <a href="${FACEBOOK_URL}" class="footer-social-btn" data-facebook-link aria-label="${t('common.facebook')}" target="_blank" rel="noopener noreferrer">${FACEBOOK_ICON_SVG}</a>
+    `);
+  });
+
+  document.querySelectorAll('.reviews-trust-actions').forEach(actions => {
+    if (actions.querySelector('[data-facebook-link]')) return;
+    const bookBtn = actions.querySelector('a[href*="booking.html"]');
+    const fbBtn = document.createElement('a');
+    fbBtn.href = FACEBOOK_URL;
+    fbBtn.className = 'btn btn-outline btn-sm';
+    fbBtn.setAttribute('data-facebook-link', '');
+    fbBtn.setAttribute('target', '_blank');
+    fbBtn.setAttribute('rel', 'noopener noreferrer');
+    fbBtn.setAttribute('data-i18n', 'common.facebook');
+    fbBtn.textContent = t('common.facebook');
+    if (bookBtn) bookBtn.before(fbBtn);
+    else actions.appendChild(fbBtn);
   });
 }
 
