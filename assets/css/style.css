@@ -6386,54 +6386,98 @@ body.mobile-menu-open .hamburger {
   flex-shrink: 0;
 }
 
-/* ========== Stats Bar – European Minimal ========== */
+/* ========== Stats Bar – Modern Tourism ========== */
 .stats-bar {
-  background: var(--white);
-  padding: 60px 0;
-  margin-top: -16px;
+  padding: 16px 0 48px;
+  margin-top: -32px;
   position: relative;
-  z-index: 3;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  z-index: 4;
+  background: transparent;
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  gap: 16px;
+  padding: 28px 32px;
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(27, 107, 138, 0.1);
+  box-shadow:
+    0 4px 24px rgba(26, 58, 74, 0.06),
+    0 20px 48px rgba(26, 58, 74, 0.08);
+  backdrop-filter: blur(12px);
 }
 
 .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  padding: 24px;
+  gap: 10px;
+  padding: 12px 8px;
   position: relative;
 }
 
 .stat-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 20%;
-  height: 60%;
-  width: 1px;
-  background: rgba(0, 0, 0, 0.08);
+  display: none;
+}
+
+.stat-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-item:hover .stat-icon {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.stat-icon--experience {
+  background: linear-gradient(135deg, rgba(212, 118, 10, 0.14), rgba(232, 146, 46, 0.08));
+  color: var(--gold);
+}
+
+.stat-icon--travelers {
+  background: linear-gradient(135deg, rgba(27, 107, 138, 0.14), rgba(43, 143, 173, 0.08));
+  color: var(--ocean-mid);
+}
+
+.stat-icon--tours {
+  background: linear-gradient(135deg, rgba(232, 93, 4, 0.12), rgba(244, 140, 6, 0.06));
+  color: var(--sunset);
+}
+
+.stat-icon--rating {
+  background: linear-gradient(135deg, rgba(212, 118, 10, 0.14), rgba(244, 140, 6, 0.08));
+  color: var(--gold-light);
 }
 
 .stat-item strong {
   display: block;
-  font-size: 2.5rem;
+  font-size: 2.15rem;
   font-family: 'Poppins', sans-serif;
-  color: var(--sunset);
-  line-height: 1;
-  margin-bottom: 10px;
   font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--sunset) 0%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .stat-item span {
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
   color: var(--text-muted);
+  line-height: 1.35;
+  max-width: 140px;
 }
 
 /* ========== Animations on scroll ========== */
@@ -6527,6 +6571,22 @@ body.mobile-menu-open .hamburger {
 
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    padding: 24px 20px;
+    gap: 12px;
+  }
+
+  .stat-item strong {
+    font-size: 1.85rem;
+  }
+
+  .stat-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+  }
+
+  .stat-item span {
+    font-size: 0.8rem;
   }
 
   .stat-item:not(:last-child)::after {
@@ -7077,6 +7137,15 @@ body.mobile-menu-open .hamburger {
     padding: 0 16px 28px;
   }
 
+  .stats-bar {
+    margin-top: 0;
+    padding: 24px 0 32px;
+  }
+
+  .stats-grid {
+    margin-inline: 12px;
+  }
+
   .hero-controls-row {
     gap: 10px;
   }
@@ -7168,8 +7237,43 @@ body.mobile-menu-open .hamburger {
     width: 100%;
   }
 
+  .stats-bar {
+    margin-top: 0;
+    padding: 20px 0 28px;
+  }
+
   .stats-grid {
     grid-template-columns: 1fr 1fr;
+    margin-inline: 10px;
+    padding: 18px 14px;
+    gap: 10px;
+    border-radius: var(--radius);
+  }
+
+  .stat-item {
+    padding: 8px 4px;
+    gap: 8px;
+  }
+
+  .stat-item strong {
+    font-size: 1.65rem;
+  }
+
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin-bottom: 0;
+  }
+
+  .stat-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stat-item span {
+    font-size: 0.72rem;
+    max-width: 110px;
   }
 
   .stat-item:not(:last-child)::after {
@@ -8036,33 +8140,54 @@ body.mobile-menu-open .hamburger {
 
 /* ========== Airport Shuttle ========== */
 .airport-shuttle-strip {
-  background: linear-gradient(90deg, var(--ocean-dark) 0%, var(--ocean-deep) 100%);
+  background: linear-gradient(135deg, var(--ocean-dark) 0%, var(--ocean-deep) 55%, #163040 100%);
   color: var(--white);
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.airport-shuttle-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 40% 100% at 0% 50%, rgba(43, 143, 173, 0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 100% at 100% 50%, rgba(212, 118, 10, 0.08) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .airport-shuttle-strip-inner {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
 .airport-shuttle-strip-icon {
-  font-size: 1.25rem;
-  line-height: 1;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--ocean-pale);
 }
 
 .airport-shuttle-strip p {
   flex: 1;
   margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: 0.95rem;
+  line-height: 1.55;
   min-width: 200px;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 400;
 }
 
 .airport-shuttle-strip-link {
@@ -8071,15 +8196,22 @@ body.mobile-menu-open .hamburger {
   font-size: 0.88rem;
   white-space: nowrap;
   text-decoration: none;
-  padding: 8px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 10px 20px;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
   border-radius: 999px;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s ease;
 }
 
 .airport-shuttle-strip-link:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.65);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .airport-shuttle-section {
